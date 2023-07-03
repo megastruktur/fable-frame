@@ -1,0 +1,143 @@
+{
+  "id": "broken-compass",
+  "name": "Broken Compass",
+  "description": "Broken Compass",
+  "fields": {
+    "character": [
+      { "name": "words-to-live-by", "type": "text" },
+      { "name": "workplace", "type": "text" },
+      { "name": "homeland", "type": "text" },
+      { "name": "heritage", "type": "text" },
+      { "name": "luck", "type": "text", "value": 10 },
+      { "name": "luck-coin", "type": "text", "value": 1 },
+      { "name": "action", "type": "skill", "value": 2 },
+      { "name": "guts", "type": "skill", "value": 2 },
+      { "name": "knowledge", "type": "skill", "value": 2 },
+      { "name": "society", "type": "skill", "value": 2 },
+      { "name": "wild", "type": "skill", "value": 2 },
+      { "name": "crime", "type": "skill", "value": 2 },
+      {
+        "data": { "parent": "action" },
+        "name": "fight",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "action" },
+        "name": "leadership",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "action" },
+        "name": "stunt",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "guts" },
+        "name": "cool",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "guts" },
+        "name": "drive",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "guts" },
+        "name": "shoot",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "knowledge" },
+        "name": "culture",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "knowledge" },
+        "name": "first-aid",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "knowledge" },
+        "name": "tech",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "society" },
+        "name": "charm",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "society" },
+        "name": "eloquence",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "society" },
+        "name": "observation",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "wild" },
+        "name": "scout",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "wild" },
+        "name": "survival",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "wild" },
+        "name": "tough",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "crime" },
+        "name": "alert",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "crime" },
+        "name": "dexterity",
+        "type": "skill",
+        "value": 1
+      },
+      {
+        "data": { "parent": "crime" },
+        "name": "stealth",
+        "type": "skill",
+        "value": 1
+      }
+    ],
+    "compendium": [
+      { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
+      { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
+      { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
+      { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
+      { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
+      { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
+      { "data": { "type": "minus" }, "name": "powerful", "type": "feel" },
+      { "data": { "type": "minus" }, "name": "powerful", "type": "feel" },
+      { "data": { "type": "minus" }, "name": "powerful", "type": "feel" },
+      { "data": { "type": "minus" }, "name": "powerful", "type": "feel" },
+      { "data": { "type": "minus" }, "name": "powerful", "type": "feel" },
+      { "data": { "type": "minus" }, "name": "powerful", "type": "feel" }
+    ]
+  }
+}
