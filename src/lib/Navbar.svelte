@@ -2,9 +2,9 @@
   // @ts-ignore
   import Icon from "svelte-icons-pack/Icon.svelte"
   import IconCharacters from 'svelte-icons-pack/fa/FaUser';
-  import IconDoorOpen from 'svelte-icons-pack/fa/FaSolidDoorOpen';
   import "../app.css";
   import { currentUser } from "./pocketbase";
+  import LogoutButton from "./LogoutButton.svelte";
 </script>
   <div class="navbar bg-base-100 w-screen">
     <div class="navbar-start">
@@ -29,7 +29,7 @@
       </button>
       {#if $currentUser}
         <p>Hello {$currentUser.username}</p>
-        <button class="btn btn-ghost btn-circle"><Icon size=25 color="white" src={IconDoorOpen}/></button>
+        <LogoutButton />
       {:else}
       <a href="/login" class="btn btn-ghost btn-circle">
         Login

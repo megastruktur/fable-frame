@@ -1,6 +1,6 @@
 <script lang="ts">
     import { currentUser, pb } from "$lib/pocketbase"
-	import { redirect } from "@sveltejs/kit";
+    import { goto } from "$app/navigation";
 
     let isLogin = true
     let isError = false
@@ -18,7 +18,7 @@
             errorText = "Please check your username and password"
         }
         if (!isError) {
-            throw redirect(303, '/')
+            goto("/")
         }
     }
 
