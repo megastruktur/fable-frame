@@ -34,7 +34,7 @@
 
             if (createdUser) {
                 console.log("User created")
-                login()
+                await login()
             }
         } catch (e) {
             console.log(e)
