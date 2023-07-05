@@ -64,9 +64,9 @@ export type CharactersRecord<Tdata = unknown> = {
 	rpgSystem: RecordIdString
 	campaign?: RecordIdString
 	avatar?: string
-	creator?: RecordIdString
+	creator: RecordIdString
 	fields: Field[]
-	hash?: string
+	hash: string
 }
 
 export type NewsRecord = {

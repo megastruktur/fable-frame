@@ -2,6 +2,7 @@ import { getRpgSystem } from "$models/rpg_system"
 import { pb } from "$lib/pocketbase"
 import type { SystemJSON, Field } from "$lib/types.d"
 import type { CharactersResponse, CharactersRecord } from "$lib/pocketbase-types.d"
+import getStringHash from "$lib/getStringHash"
 
 export async function createCharacter(data: Partial<CharactersRecord>): Promise<CharactersResponse> {
   return await pb.collection("characters").create(data)
@@ -40,6 +41,7 @@ export async function createNewCharacter(systemId: string): Promise<CharactersRe
   return await createCharacter({
     name: "New Character",
     rpgSystem: systemId,
+    hash: await getStringHash(systemData.fields.character),
     fields: systemData.fields.character
   })
 }

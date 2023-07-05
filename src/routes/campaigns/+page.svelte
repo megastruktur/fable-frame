@@ -1,3 +1,4 @@
+<!-- Campaigns Page -->
 <script lang="ts">
 	import { getAllCampaigns } from '$models/campaign';
 

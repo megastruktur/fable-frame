@@ -1,6 +1,9 @@
+<!-- Characters Page -->
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { pb } from '$lib/pocketbase';
 	import type { RpgSystemsResponse } from '$lib/pocketbase-types';
+	import { createNewCharacter } from '$models/character';
 	import { getAllRpgSystems } from '$models/rpg_system';
 	import type { PageData } from './$types';
 
@@ -9,6 +12,12 @@
 	const enabledSystemsPromise = getAllRpgSystems({ status: true });
 	function getRpgSystemImage(dbRecord: RpgSystemsResponse) {
 		return pb.files.getUrl(dbRecord, dbRecord.image, { thumb: '100x100' });
+	}
+
+	async function createAndRedirect(systemId: string) {
+		const character = await createNewCharacter(systemId);
+		console.log(character)
+		// goto('/characters/' + character.id)
 	}
 </script>
 
@@ -33,7 +42,7 @@
 						<h2 class="card-title">{rpgSystem.name}</h2>
 						<p>{rpgSystem.description}</p>
 						<div class="card-actions justify-end">
-							<button class="btn btn-primary">Create</button>
+							<button on:click={() => createAndRedirect(rpgSystem.id)} class="btn btn-primary">Create</button>
 						</div>
 					</div>
 				</div>
