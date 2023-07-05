@@ -1,6 +1,6 @@
 // import getAvailableSystems from "$lib/getAvailableSystems"
 import syncSystems from "$lib/syncSystems"
-import { getAllRpgSystems } from "$models/rpg_system.ts"
+import { getAllRpgSystems } from "$models/rpg_system"
 
 export async function load() {
     await syncSystems()

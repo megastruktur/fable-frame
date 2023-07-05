@@ -8,8 +8,8 @@ export async function createCharacter(data: Partial<CharactersRecord>): Promise<
   return await pb.collection("characters").create(data)
 }
 
-export async function getCharacter(id: string): Promise<CharactersResponse> {
-  return await pb.collection("characters").getOne(id)
+export async function getCharacter(id: string, queryParams: any = {}): Promise<CharactersResponse> {
+  return await pb.collection("characters").getOne(id, queryParams)
 }
 
 export async function updateCharacter(id: string, data: Partial<CharactersRecord>): Promise<CharactersResponse> {
@@ -41,7 +41,7 @@ export async function createNewCharacter(systemId: string): Promise<CharactersRe
   return await createCharacter({
     name: "New Character",
     rpgSystem: systemId,
-    hash: await getStringHash(systemData.fields.character),
+    hash: await getStringHash(JSON.stringify(systemData.fields.character)),
     fields: systemData.fields.character
   })
 }

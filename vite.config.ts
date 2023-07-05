@@ -7,6 +7,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			"$lib": path.resolve("./lib"),
+			"$data": path.resolve("./src/data"),
 			"$models": path.resolve("./src/models"),
 		}
 	}

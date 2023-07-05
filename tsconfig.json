@@ -13,7 +13,9 @@
 			"$lib":["./src/lib"],
 			"$lib/*":["./src/lib/*"],
 			"$models":["./src/models"],
-			"$models/*":["./src/models/*"]
+			"$models/*":["./src/models/*"],
+			"$data":["./src/data"],
+			"$data/*":["./src/data/*"]
 		}
 	},
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias

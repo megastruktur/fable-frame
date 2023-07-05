@@ -18,8 +18,8 @@ export default async function syncSystems() {
       console.log(`System ${dbSystem.identifier} is not in the list of available systems. Removing.`);
       try {
         deleteRpgSystem(dbSystem.id);
-      } catch (e: ErrorCallback) {
-        console.error(`Error removing system ${dbSystem.identifier}: ${e.message}`);
+      } catch (e) {
+        console.error(`Error removing system ${dbSystem.identifier}: ${e}`);
       }
     }
     else {

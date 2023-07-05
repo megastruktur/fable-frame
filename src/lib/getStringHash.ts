@@ -1,4 +1,4 @@
-export default async function getStringHash(string: string) {
+export default async function getStringHash(string: string): Promise<string> {
   const sourceBytes = new TextEncoder().encode(string);
   const digest = await crypto.subtle.digest("SHA-256", sourceBytes);
   const resultBytes = [...new Uint8Array(digest)];
