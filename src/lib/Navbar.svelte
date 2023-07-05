@@ -19,6 +19,7 @@
           <li><a href="/">Homepage</a></li>
           <li><a href="/news">News</a></li>
           {#if currentUser}
+            <li><a href="/characters">Characters</a></li>
             <li><a href="/campaigns">Campaigns</a></li>
           {/if}
         </ul>

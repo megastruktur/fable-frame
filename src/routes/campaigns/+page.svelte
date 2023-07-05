@@ -1,19 +1,14 @@
 <script lang="ts">
 	import { getAllCampaigns } from '$models/campaign';
 
-	let campaignsPromise = getUserCampaigns();
-
-	async function getUserCampaigns() {
-		const campaigns = await getAllCampaigns();
-		return campaigns;
-	}
+	let campaignsPromise = getAllCampaigns();
 </script>
 
 <div class="flex flex-col">
 	<h1 class="text-3xl m-auto my-3">Your Campaigns</h1>
   <div class="flex items-center justify-center">
 	{#await campaignsPromise}
-		Loading...
+		Loading your campaigns...
 	{:then campaigns}
 		{#each campaigns as campaign}
     <div class="card w-96 bg-base-100 shadow-xl image-full">

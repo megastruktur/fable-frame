@@ -27,22 +27,22 @@ export async function getAllCharactersWithSystem(): Promise<CharactersResponse[]
   return await getAllCharacters({expand: "systemId"})
 }
 
-// export async function createNewCharacter(systemId: string): Promise<CharactersResponse> {
+export async function createNewCharacter(systemId: string): Promise<CharactersResponse> {
 
-//   const rpgSystem = await getRpgSystem(systemId)
+  const rpgSystem = await getRpgSystem(systemId)
 
-//   if (!rpgSystem) {
-//     throw new Error(`No RPG system found with id ${systemId}`)
-//   }
+  if (!rpgSystem) {
+    throw new Error(`No RPG system found with id ${systemId}`)
+  }
 
-//   const systemData: SystemJSON = rpgSystem.data
+  const systemData: SystemJSON = rpgSystem.data
 
-//   return await createCharacter({
-//     name: "New Character",
-//     systemId: systemId,
-//     fields: systemData.fields.character
-//   })
-// }
+  return await createCharacter({
+    name: "New Character",
+    rpgSystem: systemId,
+    fields: systemData.fields.character
+  })
+}
 
 export async function updateCharacterFieldValue(characterId: string, fieldName: string, fieldValue: string) {
   

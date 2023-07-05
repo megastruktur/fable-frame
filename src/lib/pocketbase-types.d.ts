@@ -56,6 +56,7 @@ export type CampaignsRecord = {
 	rpgSystem: RecordIdString
 	creator: RecordIdString
 	characters?: RecordIdString[]
+	image?: string
 }
 
 export type CharactersRecord<Tdata = unknown> = {
@@ -77,9 +78,10 @@ export type RpgSystemsRecord<Tdata = unknown> = {
 	identifier: string
 	name: string
 	description?: string
-	data: null | Tdata
+	data: SystemJSON
 	status?: boolean
 	hash: string
+	image?: string
 }
 
 export type UsersRecord = {
