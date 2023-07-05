@@ -8,6 +8,7 @@ export const currentUser = writable(pb.authStore.model)
 pb.authStore.onChange((auth) => {
   console.log("AuthStore changed", auth)
   currentUser.set(pb.authStore.model)
+  document.cookie = pb.authStore.exportToCookie({ httpOnly: false })
 })
 
 pb.beforeSend = function (url, options) {
@@ -16,7 +17,7 @@ pb.beforeSend = function (url, options) {
   if (options.body !== undefined) {
     const bodyJson = JSON.parse(options.body)
 
-    if (bodyJson && !bodyJson.creator) {
+    if (bodyJson && !bodyJson.creator && pb.authStore.model !== null) {
       bodyJson.creator = pb.authStore.model.id
       options.body = JSON.stringify(bodyJson)
     }
