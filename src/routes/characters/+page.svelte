@@ -35,7 +35,7 @@
 	<div class="flex flex-col border-opacity-50 lg:w-9/12 md:w-full">
 
 		<!-- My Characters section -->
-		<div class="grid card py-3 bg-slate-700 rounded-box place-items-center">
+		<div class="grid card py-3 rounded-box place-items-center">
 			{#await getMyCharactersPromise}
 				Loading Characters
 			{:then myCharacters} 
@@ -61,7 +61,7 @@
 		<div class="divider">OR</div>
 
 		<!-- Create Character section -->
-		<div class="grid card py-3 bg-slate-700 rounded-box place-items-center">
+		<div class="grid card py-3 rounded-box place-items-center">
 			{#await enabledSystemsPromise}
 				Loading RPG Systems...
 			{:then rpgSystems}
