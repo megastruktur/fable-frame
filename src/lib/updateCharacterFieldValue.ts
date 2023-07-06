@@ -1,9 +1,8 @@
-import type { CharactersResponse } from "./pocketbase-types";
+import type { Field } from "./types";
 
 export default function updateCharacterFieldValue(character: any, fieldName: string, fieldValue: string) {
 
-  const foundIndex = character.fields.findIndex(f => f.name === fieldName);
-
+  const foundIndex = character.fields.findIndex((f: Field) => f.name === fieldName);
   // Update
   if (foundIndex) {
     character.fields[foundIndex].value = fieldValue;

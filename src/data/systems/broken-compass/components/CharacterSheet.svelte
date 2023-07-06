@@ -3,6 +3,7 @@
 	import type { CharactersResponse } from "$lib/pocketbase-types";
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
+	import { onMount } from "svelte";
   import DiamondSkill from "./DiamondSkill.svelte";
 
   let action: Field
@@ -62,7 +63,10 @@
     dexterity = getFieldFromListByName("dexterity", character.fields)
     stealth = getFieldFromListByName("stealth", character.fields)
   })
-
+  
+  function updateField(event: { detail: Field }) {
+    characterStore.setFieldValue(event.detail.name, event.detail.value)
+  }
 
   function toggleEditMode() {
     editMode.set(!$editMode)
@@ -81,7 +85,7 @@
       <!-- Action -->
       <div class="mb-3">
         <div class="flex text-2xl bg-base-100 rounded-box p-3 mb-3">
-          <DiamondSkill skill={action} name="Action"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={action} name="Action"/>
         </div>
         <div class="flex flex-col items-end text-xl">
           <DiamondSkill skill={fight} name="Fight"/>

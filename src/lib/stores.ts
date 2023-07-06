@@ -6,14 +6,15 @@ function createCharacterStore<CharactersResponse>() {
 
   const { subscribe, set, update } = writable();
 
+  function setFieldValue(fieldName: string, fieldValue: string) {
+    update((character) => {
+      return updateCharacterFieldValue(character, fieldName, fieldValue)
+    })
+  }
+
   return {
     subscribe,
-    setFieldValue: (fieldName: string, fieldValue: string) => {
-
-      update((character) => {
-        return updateCharacterFieldValue(character, fieldName, fieldValue)
-      })
-    },
+    setFieldValue,    
     set: (character: CharactersResponse) => set(character),
     reset: () => set({})
   };
