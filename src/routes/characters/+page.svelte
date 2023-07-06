@@ -7,8 +7,6 @@
 	import { getAllRpgSystems } from '$models/rpg_system';
 	import type { PageData } from './$types';
 
-	export let data: PageData;
-
 	const enabledSystemsPromise = getAllRpgSystems({ status: true });
 	const getMyCharactersPromise = getAllCharacters({
 		creator: currentUser.id,

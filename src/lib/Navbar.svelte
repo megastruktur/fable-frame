@@ -1,7 +1,6 @@
 <script>
   // @ts-ignore
   import Icon from "svelte-icons-pack/Icon.svelte"
-  import IconCharacters from 'svelte-icons-pack/fa/FaUser';
   import "../app.css";
   import { currentUser } from "./pocketbase";
   import LogoutButton from "./LogoutButton.svelte";
@@ -15,7 +14,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
         </label>
         <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-base-100 rounded-box w-52 drop-shadow shadow-xl">
           <li><a href="/">Homepage</a></li>
           <li><a href="/news">News</a></li>
           {#if $currentUser}
@@ -29,9 +28,6 @@
       <a href="/" class="btn btn-ghost normal-case text-xl">Fable Frame</a>
     </div>
     <div class="navbar-end">
-      <button class="btn btn-ghost btn-circle">
-        <Icon size=25 color="white" src={IconCharacters}/>
-      </button>
       {#if $currentUser}
         <p>Hello {$currentUser.username}</p>
         <LogoutButton />

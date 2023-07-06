@@ -1,9 +1,8 @@
 import { writable } from "svelte/store"
-import type { CharactersResponse } from "./pocketbase-types"
 import updateCharacterFieldValue from "./updateCharacterFieldValue";
 
 
-function createCharacterStore() {
+function createCharacterStore<CharactersResponse>() {
 
   const { subscribe, set, update } = writable();
 

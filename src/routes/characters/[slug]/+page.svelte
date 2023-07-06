@@ -13,6 +13,8 @@
     /* @vite-ignore */
     CharacterSheet = (await import(`../../../data/systems/${$characterStore.expand.rpgSystem.identifier}/components/CharacterSheet.svelte`)).default
   })
+
+
 </script>
 
 <div class="flex flex-col">
