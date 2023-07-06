@@ -2,7 +2,7 @@
   import { page } from "$app/stores"
 	import { getCharacter } from "$models/character";
 	import { onMount } from "svelte";
-  import { characterStore } from "$lib/stores"
+  import { characterStore, editMode } from "$lib/stores"
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -12,6 +12,8 @@
     characterName = $characterStore.name
     /* @vite-ignore */
     CharacterSheet = (await import(`../../../data/systems/${$characterStore.expand.rpgSystem.identifier}/components/CharacterSheet.svelte`)).default
+
+    editMode.set(false)
   })
 
 

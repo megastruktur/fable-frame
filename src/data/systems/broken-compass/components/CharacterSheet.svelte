@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { getFieldFromListByName } from "$lib/characterFieldsOperations";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
-  import { characterStore } from "$lib/stores"
+  import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
   import DiamondSkill from "./DiamondSkill.svelte";
-
-  let editMode = false
 
   let action: Field
   let fight: Field
@@ -66,12 +64,18 @@
   })
 
 
+  function toggleEditMode() {
+    editMode.set(!$editMode)
+  }
   
 </script>
 
 <div class="flex flex-col items-center">
+
+  <button class="btn {$editMode ? "btn-error" : "btn-neutral"}" on:click={toggleEditMode}>edit</button>
+
   <!-- Character Skills Section -->
-  <section>
+  <section class="rounded-box {$editMode ? "border border-error" : ""}">
     <div class="flex flex-col bg-base-300 rounded-box py-3 px-4 drop-shadow-xl shadow-md">
 
       <!-- Action -->

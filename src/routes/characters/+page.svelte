@@ -5,7 +5,6 @@
 	import type { CharactersResponse, RpgSystemsResponse } from '$lib/pocketbase-types';
 	import { createNewCharacter, getAllCharacters } from '$models/character';
 	import { getAllRpgSystems } from '$models/rpg_system';
-	import type { PageData } from './$types';
 
 	const enabledSystemsPromise = getAllRpgSystems({ status: true });
 	const getMyCharactersPromise = getAllCharacters({

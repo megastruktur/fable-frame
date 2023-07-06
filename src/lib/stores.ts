@@ -20,3 +20,5 @@ function createCharacterStore<CharactersResponse>() {
 }
 
 export const characterStore = createCharacterStore();
+
+export const editMode = writable(false);
