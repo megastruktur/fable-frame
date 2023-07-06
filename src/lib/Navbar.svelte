@@ -18,7 +18,7 @@
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <li><a href="/">Homepage</a></li>
           <li><a href="/news">News</a></li>
-          {#if currentUser}
+          {#if $currentUser}
             <li><a href="/characters">Characters</a></li>
             <li><a href="/campaigns">Campaigns</a></li>
           {/if}

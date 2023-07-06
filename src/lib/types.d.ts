@@ -17,10 +17,8 @@ export type SystemJSONFieldTypes = {
 }
 
 export type Field = {
-    id: string
     type: string
     name: string
-    characterId: string
     value: string
     data?: string
 }
