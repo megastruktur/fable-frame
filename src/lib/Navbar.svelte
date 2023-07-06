@@ -1,9 +1,18 @@
-<script>
+<script lang="ts">
   // @ts-ignore
   import Icon from "svelte-icons-pack/Icon.svelte"
   import "../app.css";
   import { currentUser } from "./pocketbase";
   import LogoutButton from "./LogoutButton.svelte";
+  import { theme } from "./stores";
+
+  function themeSelect(event: any) {
+    // Get data-theme attribute from clicked event
+    const themeName = event.target.getAttribute("data-theme");
+    // Set the theme
+    theme.set(themeName);
+  }
+
 </script>
   <div class="navbar bg-base-100 w-screen">
     <div class="navbar-start">
@@ -28,6 +37,19 @@
       <a href="/" class="btn btn-ghost normal-case text-xl">Fable Frame</a>
     </div>
     <div class="navbar-end">
+      
+      <details class="flex dropdown">
+        <summary class="m-1 btn">theme</summary>
+        <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+          <li><a data-theme="luxury" on:click={themeSelect}>Luxury</a></li>
+          <li><a data-theme="cupcake" on:click={themeSelect}>Cupcake</a></li>
+          <li><a data-theme="night" on:click={themeSelect}>Night</a></li>
+          <li><a data-theme="dark" on:click={themeSelect}>Dark</a></li>
+          <li><a data-theme="light" on:click={themeSelect}>Light</a></li>
+          <li><a data-theme="synthwave" on:click={themeSelect}>Synthwave</a></li>
+        </ul>
+      </details>
+
       {#if $currentUser}
         <p>Hello {$currentUser.username}</p>
         <LogoutButton />

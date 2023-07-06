@@ -6,7 +6,7 @@ export default {
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
-    themes: ["light", "dark", "night", "luxury", "synthwave"],
+    themes: ["light", "dark", "night", "luxury", "synthwave", "cupcake"],
   },
 }
 
