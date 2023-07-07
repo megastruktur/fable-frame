@@ -21,4 +21,6 @@ export type Field = {
     name: string
     value: string
     data?: string
+    icon?: string
+    description?: string
 }

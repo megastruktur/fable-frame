@@ -1,5 +1,5 @@
 {
-  "id": "broken-compass",
+  "identifier": "broken-compass",
   "name": "Broken Compass",
   "description": "Broken Compass",
   "fields": {
@@ -127,17 +127,17 @@
     ],
     "compendium": [
       { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
-      { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
-      { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
-      { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
-      { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
-      { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
-      { "data": { "type": "minus" }, "name": "powerful", "type": "feel" },
-      { "data": { "type": "minus" }, "name": "powerful", "type": "feel" },
-      { "data": { "type": "minus" }, "name": "powerful", "type": "feel" },
-      { "data": { "type": "minus" }, "name": "powerful", "type": "feel" },
-      { "data": { "type": "minus" }, "name": "powerful", "type": "feel" },
-      { "data": { "type": "minus" }, "name": "powerful", "type": "feel" }
+      { "data": { "type": "plus" }, "name": "daring", "type": "feel" },
+      { "data": { "type": "plus" }, "name": "focused", "type": "feel" },
+      { "data": { "type": "plus" }, "name": "confident", "type": "feel" },
+      { "data": { "type": "plus" }, "name": "fierce", "type": "feel" },
+      { "data": { "type": "plus" }, "name": "untouchable", "type": "feel" },
+      { "data": { "type": "minus" }, "name": "bleeding", "type": "feel" },
+      { "data": { "type": "minus" }, "name": "shocked", "type": "feel" },
+      { "data": { "type": "minus" }, "name": "dizzy", "type": "feel" },
+      { "data": { "type": "minus" }, "name": "embarrassed", "type": "feel" },
+      { "data": { "type": "minus" }, "name": "broken", "type": "feel" },
+      { "data": { "type": "minus" }, "name": "scared", "type": "feel" }
     ]
   }
 }

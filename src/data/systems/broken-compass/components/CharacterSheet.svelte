@@ -67,16 +67,10 @@
   function updateField(event: { detail: Field }) {
     characterStore.setFieldValue(event.detail.name, event.detail.value)
   }
-
-  function toggleEditMode() {
-    editMode.set(!$editMode)
-  }
   
 </script>
 
 <div class="flex flex-col items-center">
-
-  <button class="btn {$editMode ? "btn-error" : "btn-neutral"}" on:click={toggleEditMode}>edit</button>
 
   <!-- Character Skills Section -->
   <section class="rounded-box {$editMode ? "border border-error" : ""}">
