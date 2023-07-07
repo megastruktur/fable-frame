@@ -16,6 +16,36 @@ export async function updateCharacter(id: string, data: Partial<CharactersRecord
   return await pb.collection("characters").update(id, data)
 }
 
+
+/**
+ * Reduce the number of updates hashing Character Data.
+ * @param id 
+ * @param data 
+ * @returns 
+ */
+export async function updateCharacterWithHash(id: string, data: Partial<CharactersRecord>): Promise<CharactersResponse> {
+
+  const character = await getCharacter(id, {
+    fields: "name, campaign, avatar, fields",
+  })
+
+  const dataToHash = {
+    name: data.name || "",
+    campaign: data.campaign || "",
+    avatar: data.avatar || "",
+    fields: data.fields || "",
+  }
+  const hashedData = await getStringHash(JSON.stringify(dataToHash))
+
+  if (!character.hash || character.hash !== hashedData) {
+    return await pb.collection("characters").update(id, {...dataToHash , hash: hashedData })
+  }
+  else {
+    throw new Error(`No changes in user ${id} data`)
+  }
+
+}
+
 export async function deleteCharacter(id: string) {
   await pb.collection("characters").delete(id)
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores"
-	import { getCharacter, updateCharacter } from "$models/character";
+	import { getCharacter, updateCharacterWithHash } from "$models/character";
 	import { onMount } from "svelte";
   import { characterStore, editMode } from "$lib/stores"
 
@@ -25,7 +25,13 @@
     if ($characterStore && $characterStore.id) {
       console.log(`Updating character ${$characterStore.id} with values:`)
       console.log($characterStore)
-      await updateCharacter($characterStore.id, $characterStore)
+
+      try {
+        await updateCharacterWithHash($characterStore.id, $characterStore)
+      }
+      catch (e) {
+        console.error(e)
+      }
     }
   }
 
