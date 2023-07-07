@@ -41,12 +41,12 @@
       <details class="flex dropdown">
         <summary class="m-1 btn">theme</summary>
         <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-          <li><a data-theme="luxury" on:click={themeSelect}>Luxury</a></li>
-          <li><a data-theme="cupcake" on:click={themeSelect}>Cupcake</a></li>
-          <li><a data-theme="night" on:click={themeSelect}>Night</a></li>
-          <li><a data-theme="dark" on:click={themeSelect}>Dark</a></li>
-          <li><a data-theme="light" on:click={themeSelect}>Light</a></li>
-          <li><a data-theme="synthwave" on:click={themeSelect}>Synthwave</a></li>
+          <li><a href="/" data-theme="luxury" on:click|preventDefault={themeSelect}>Luxury</a></li>
+          <li><a href="/" data-theme="cupcake" on:click|preventDefault={themeSelect}>Cupcake</a></li>
+          <li><a href="/" data-theme="night" on:click|preventDefault={themeSelect}>Night</a></li>
+          <li><a href="/" data-theme="dark" on:click|preventDefault={themeSelect}>Dark</a></li>
+          <li><a href="/" data-theme="light" on:click|preventDefault={themeSelect}>Light</a></li>
+          <li><a href="/" data-theme="synthwave" on:click|preventDefault={themeSelect}>Synthwave</a></li>
         </ul>
       </details>
 

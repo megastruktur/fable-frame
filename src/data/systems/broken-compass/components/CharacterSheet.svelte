@@ -88,69 +88,69 @@
           <DiamondSkill on:fieldUpdate={updateField} skill={action} name="Action"/>
         </div>
         <div class="flex flex-col items-end text-xl">
-          <DiamondSkill skill={fight} name="Fight"/>
-          <DiamondSkill skill={leadership} name="Leadership"/>
-          <DiamondSkill skill={stunt} name="Stunt"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={fight} name="Fight"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={leadership} name="Leadership"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={stunt} name="Stunt"/>
         </div>
       </div>
   
       <!-- Guts -->
       <div class="mb-3">
         <div class="flex text-2xl bg-base-100 rounded-box p-3 mb-3">
-          <DiamondSkill skill={guts} name="Guts"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={guts} name="Guts"/>
         </div>
         <div class="flex flex-col items-end text-xl">
-          <DiamondSkill skill={cool} name="Cool"/>
-          <DiamondSkill skill={drive} name="Drive"/>
-          <DiamondSkill skill={shoot} name="Shoot"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={cool} name="Cool"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={drive} name="Drive"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={shoot} name="Shoot"/>
         </div>
       </div>
   
       <!-- Knowledge -->
       <div class="mb-3">
         <div class="flex text-2xl bg-base-100 rounded-box p-3 mb-3">
-          <DiamondSkill skill={knowledge} name="Knowledge"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={knowledge} name="Knowledge"/>
         </div>
         <div class="flex flex-col items-end text-xl">
-          <DiamondSkill skill={culture} name="Culture"/>
-          <DiamondSkill skill={first_aid} name="First Aid"/>
-          <DiamondSkill skill={tech} name="Tech"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={culture} name="Culture"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={first_aid} name="First Aid"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={tech} name="Tech"/>
         </div>
       </div>
   
       <!-- Society -->
       <div class="mb-3">
         <div class="flex text-2xl bg-base-100 rounded-box p-3 mb-3">
-          <DiamondSkill skill={society} name="Society"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={society} name="Society"/>
         </div>
         <div class="flex flex-col items-end text-xl">
-          <DiamondSkill skill={charm} name="Charm"/>
-          <DiamondSkill skill={eloquence} name="Eloquence"/>
-          <DiamondSkill skill={observation} name="Observation"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={charm} name="Charm"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={eloquence} name="Eloquence"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={observation} name="Observation"/>
         </div>
       </div>
   
       <!-- Wild -->
       <div class="mb-3">
         <div class="flex text-2xl bg-base-100 rounded-box p-3 mb-3">
-          <DiamondSkill skill={wild} name="Wild"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={wild} name="Wild"/>
         </div>
         <div class="flex flex-col items-end text-xl">
-          <DiamondSkill skill={scout} name="Scout"/>
-          <DiamondSkill skill={survival} name="Survival"/>
-          <DiamondSkill skill={tough} name="Tough"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={scout} name="Scout"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={survival} name="Survival"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={tough} name="Tough"/>
         </div>
       </div>
   
       <!-- Crime -->
       <div class="mb-3">
         <div class="flex text-2xl bg-base-100 rounded-box p-3 mb-3">
-          <DiamondSkill skill={crime} name="Crime"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={crime} name="Crime"/>
         </div>
         <div class="flex flex-col items-end text-xl">
-          <DiamondSkill skill={alertF} name="Alert"/>
-          <DiamondSkill skill={dexterity} name="Dexterity"/>
-          <DiamondSkill skill={stealth} name="Stealth"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={alertF} name="Alert"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={dexterity} name="Dexterity"/>
+          <DiamondSkill on:fieldUpdate={updateField} skill={stealth} name="Stealth"/>
         </div>
       </div>
     </div>
