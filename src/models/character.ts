@@ -23,25 +23,40 @@ export async function updateCharacter(id: string, data: Partial<CharactersRecord
  * @param data 
  * @returns 
  */
-export async function updateCharacterWithHash(id: string, data: Partial<CharactersRecord>): Promise<CharactersResponse> {
+export async function updateCharacterWithHash(id: string, data: Partial<CharactersRecord>): Promise<void> {
 
-  const character = await getCharacter(id, {
-    fields: "name, campaign, avatar, fields",
-  })
+  let character
 
-  const dataToHash = {
-    name: data.name || "",
-    campaign: data.campaign || "",
-    avatar: data.avatar || "",
-    fields: data.fields || "",
+  try {
+    character = await getCharacter(id, {
+      fields: "name, campaign, avatar, fields, hash",
+    })
+  } catch (error) {
+    console.log(error)
   }
-  const hashedData = await getStringHash(JSON.stringify(dataToHash))
 
-  if (!character.hash || character.hash !== hashedData) {
-    return await pb.collection("characters").update(id, {...dataToHash , hash: hashedData })
-  }
-  else {
-    throw new Error(`No changes in user ${id} data`)
+  if (character) {
+    const dataToHash = {
+      name: data.name || "",
+      campaign: data.campaign || "",
+      avatar: data.avatar || "",
+      fields: data.fields || "",
+    }
+
+    const hashedData = await getStringHash(JSON.stringify(dataToHash))
+
+    if (!character.hash || character.hash !== hashedData) {
+
+      console.log([character.hash, hashedData])
+
+      console.log(`Updating character ${id} with values:`)
+      console.log(dataToHash)
+
+      await pb.collection("characters").update(id, {...dataToHash , hash: hashedData })
+    }
+    else {
+      console.log(`No changes in user ${id} data`)
+    }
   }
 
 }
@@ -76,11 +91,6 @@ export async function createNewCharacter(systemId: string): Promise<CharactersRe
   })
 }
 
-export async function updateCharacterFieldValue(characterId: string, fieldName: string, fieldValue: string) {
-  
-  console.log(`Updating character ${characterId} with field ${fieldName} to ${fieldValue}`)
-}
-
 export function getCharacterField(character: CharactersResponse, fieldName: string): Field {
   const field = character.fields.find((field: Field) => field.name === fieldName)
   if (field) {
@@ -91,8 +101,6 @@ export function getCharacterField(character: CharactersResponse, fieldName: stri
       name: fieldName,
       type: "text",
       value: "",
-      id: "",
-      characterId: character.id
     }
   }
 }

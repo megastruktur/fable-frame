@@ -39,6 +39,7 @@
 	"dependencies": {
 		"pocketbase": "^0.15.2",
 		"pocketbase-typegen": "^1.1.11",
+		"svelte-french-toast": "^1.1.0",
 		"svelte-icons-pack": "^2.1.0"
 	}
 }

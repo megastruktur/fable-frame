@@ -23,9 +23,6 @@
 
   async function saveCharacter() {
     if ($characterStore && $characterStore.id) {
-      console.log(`Updating character ${$characterStore.id} with values:`)
-      console.log($characterStore)
-
       try {
         await updateCharacterWithHash($characterStore.id, $characterStore)
       }
