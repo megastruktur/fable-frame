@@ -14,3 +14,7 @@ export function getFieldFromListByName(name: string, fields: Field[]): Field {
     }
   }
 }
+
+export function getFieldsByType(type: string, fields: Field[]): Field[] {
+  return fields.filter(field => field.type === type);
+}

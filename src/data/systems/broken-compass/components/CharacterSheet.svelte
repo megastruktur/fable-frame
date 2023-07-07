@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { getFieldFromListByName } from "$lib/characterFieldsOperations";
+	import { getFieldFromListByName, getFieldsByType } from "$lib/characterFieldsOperations";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
-	import { onMount } from "svelte";
   import DiamondSkill from "./DiamondSkill.svelte";
+
+  let activeTab: string = "skill"
 
   let action: Field
   let fight: Field
@@ -30,6 +31,8 @@
   let alertF: Field
   let dexterity: Field
   let stealth: Field
+
+  let feelings: Field[]
   
   characterStore.subscribe((character: CharactersResponse) => {
 
@@ -62,18 +65,43 @@
     alertF = getFieldFromListByName("alert", character.fields)
     dexterity = getFieldFromListByName("dexterity", character.fields)
     stealth = getFieldFromListByName("stealth", character.fields)
+
+    feelings = getFieldsByType("feel", character.fields)
   })
   
   function updateField(event: { detail: Field }) {
     characterStore.setFieldValue(event.detail.name, event.detail.value)
+  }
+
+  function setActiveTab(tab: string) {
+    activeTab = tab
   }
   
 </script>
 
 <div class="flex flex-col items-center">
 
-  <!-- Character Skills Section -->
-  <section class="rounded-box {$editMode ? "border border-error" : ""}">
+  <div class="tabs tabs-boxed">
+    <a
+      href="/"
+      class="tab {activeTab === "skill" ? "tab-active" : ""}"
+      on:click|preventDefault={() => setActiveTab("skill")}
+      >Skills</a>
+    <a
+      href="/"
+      class="tab {activeTab === "feel" ? "tab-active" : ""}"
+      on:click|preventDefault={() => setActiveTab("feel")}
+      >Feelings</a>
+    <a
+      href="/"
+      class="tab {activeTab === "inventory" ? "tab-active" : ""}"
+      on:click|preventDefault={() => setActiveTab("inventory")}
+      >Inventory</a>
+  </div>
+
+  <!-- Skills -->
+  <section
+    class="rounded-box {$editMode ? "border border-error" : ""} {activeTab !== "skill" ? "hidden" : ""}">
     <div class="flex flex-col bg-base-300 rounded-box py-3 px-4 drop-shadow-xl shadow-md">
 
       <!-- Action -->
@@ -149,5 +177,16 @@
       </div>
     </div>
 
+  </section>
+
+  <!-- Feelings -->
+  <section
+    class="rounded-box {$editMode ? "border border-error" : ""} {activeTab !== "feel" ? "hidden" : ""}">
+
+    <div class="flex flex-col bg-base-300 rounded-box py-3 px-4 drop-shadow-xl shadow-md">
+    {#each feelings as feel}
+      <button type="button" class="btn {feel.data.type === "plus" ? "btn-accent" : "btn-error"}">{feel.name}</button>
+    {/each}
+    </div>
   </section>
 </div>
