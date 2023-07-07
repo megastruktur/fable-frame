@@ -3,7 +3,7 @@
   import "../app.css";
   import { theme } from "$lib/stores"
   import { onMount } from "svelte";
-  import toast, {Toaster} from "svelte-french-toast";
+  import {Toaster} from "svelte-french-toast";
 
 </script>
 

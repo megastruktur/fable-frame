@@ -5,6 +5,7 @@
 	import { onMount } from "svelte";
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
+  import toast from "svelte-french-toast";
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -64,7 +65,8 @@
       const field = JSON.parse(json)
       try {
         characterStore.addField(field)
-        console.log(`Field added: ${field.name}`)
+        toast.success(`Field added: ${field.name}`)
+        console.log(`Field "${field.name}" added`)
       }
       catch (e) {
         console.error(e)
