@@ -5,7 +5,7 @@ export default function updateCharacterFieldValue(character: CharactersResponse,
 
   const foundIndex = character.fields.findIndex((f: Field) => f.name === fieldName);
   // Update
-  if (foundIndex) {
+  if (foundIndex !== -1) {
     character.fields[foundIndex].value = fieldValue;
     return character
   }

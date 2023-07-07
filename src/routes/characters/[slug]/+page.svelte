@@ -50,6 +50,28 @@
     editMode.set(!$editMode)
   }
 
+  function compendiumDragStart(event: DragEvent, item: Field) {
+    if (event.dataTransfer) {
+      event.dataTransfer.setData('text/plain', JSON.stringify(item))
+    }
+  }
+
+  function comendiumDrop(event: DragEvent) {
+    event.preventDefault();
+
+    if (event.dataTransfer) {
+      const json = event.dataTransfer.getData("text/plain")
+      const field = JSON.parse(json)
+      try {
+        characterStore.addField(field)
+        console.log(`Field added: ${field.name}`)
+      }
+      catch (e) {
+        console.error(e)
+      }
+    }
+  }
+
 
 </script>
 
@@ -62,17 +84,27 @@
     <button class="btn {$editMode ? "btn-error" : "btn-neutral"}" on:click={toggleEditMode}>edit</button>
   </div>
 
-  <svelte:component this={CharacterSheet} />
+  <!-- Character Sheet -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <div>
+    <svelte:component this={CharacterSheet} />
+  </div>
 
   <!-- Compendium drawer -->
   <div class="drawer drawer-end">
     <input id="compendium-drawer" type="checkbox" class="drawer-toggle" />
-    <div class="drawer-content z-20">
-      <!-- Page content here -->
-    </div> 
     <div class="drawer-side">
-      <label for="compendium-drawer" class="drawer-overlay"></label>
-      <ul class="menu p-4 w-80 h-full bg-base-200 text-base-content">
+      <label
+        for="compendium-drawer"
+        class="drawer-overlay"
+        on:dragenter={() => console.log("Drag Enter")}
+        on:drop={event => comendiumDrop(event)}
+        on:dragover={(ev) => { ev.preventDefault() }}
+        ></label>
+
+      <ul
+        class="menu p-4 w-80 h-full bg-base-200 text-base-content"
+      >
         {#each Object.entries(compendiumFields) as [fieldType, fields]}
         <div class="collapse bg-base-200">
           <input type="checkbox" /> 
@@ -82,7 +114,12 @@
           <div class="flex w-60 flex-wrap collapse-content justify-between">
             <!-- {console.log(fields)} -->
             {#each fields as field}
-              <button type="button"class="flex btn btn-ghost">{field.name}</button>
+              <button
+                type="button"
+                class="flex btn btn-ghost"
+                draggable={true}
+                on:dragstart={event => compendiumDragStart(event, field)}
+              >{field.name}</button>
             {/each}
           </div>
         </div>
