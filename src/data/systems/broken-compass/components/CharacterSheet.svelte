@@ -1,9 +1,31 @@
 <script lang="ts">
+  import { onDestroy } from 'svelte'
+  import MediaQuery, { createMediaStore } from 'svelte-media-queries'
 	import { getFieldFromListByName, getFieldsByType } from "$lib/characterFieldsOperations";
+	import fieldDragStart from "$lib/fieldDragStart";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
   import DiamondSkill from "./DiamondSkill.svelte";
+
+  const query = {
+    "mobile": "(max-width: 480px)",
+    "tablet": "(min-width: 480px) and (max-width: 768px)",
+    "largeTablet": "(min-width: 768px) and (max-width: 1200px)",
+    "desktop": "(min-width: 1200px)",
+    "other": [
+      "(min-width: 1200px)",
+      "(max-height: 900px)"
+    ],
+    "themes": {
+      "dark": "(prefers-color-scheme: dark)",
+      "light": "(prefers-color-scheme: light)"
+    }
+  } //  
+
+  const matches = createMediaStore(query) //The type of the store will completely repeat the query
+  
+  onDestroy(() => matches.destroy()) //Stop events for calculation
 
   let activeTab: string = "skill"
 
@@ -33,6 +55,8 @@
   let stealth: Field
 
   let feelings: Field[]
+
+  let fieldRemove: boolean = false
   
   characterStore.subscribe((character: CharactersResponse) => {
 
@@ -79,8 +103,10 @@
   
 </script>
 
-<div class="flex flex-col items-center">
+<MediaQuery query='(max-width: 1200px)' let:matches>
+<div class="flex {matches ? "flex-col items-center" : "justify-center"}">
 
+  {#if matches}
   <div class="tabs tabs-boxed">
     <a
       href="/"
@@ -98,10 +124,11 @@
       on:click|preventDefault={() => setActiveTab("inventory")}
       >Inventory</a>
   </div>
+  {/if}
 
   <!-- Skills -->
   <section
-    class="rounded-box {$editMode ? "border border-error" : ""} {activeTab !== "skill" ? "hidden" : ""}">
+    class="rounded-box {$editMode ? "border border-error" : ""} {matches && activeTab !== "skill" ? "hidden" : ""}">
     <div class="flex flex-col bg-base-300 rounded-box py-3 px-4 drop-shadow-xl shadow-md">
 
       <!-- Action -->
@@ -181,12 +208,21 @@
 
   <!-- Feelings -->
   <section
-    class="rounded-box {$editMode ? "border border-error" : ""} {activeTab !== "feel" ? "hidden" : ""}">
+    role="figure"
+    class="rounded-box {$editMode ? "border border-error" : ""} {matches && activeTab !== "feel" ? "hidden" : ""}"
+    on:dragover={() => fieldRemove = false}>
 
     <div class="flex flex-col bg-base-300 rounded-box py-3 px-4 drop-shadow-xl shadow-md">
     {#each feelings as feel}
-      <button type="button" class="btn {feel.data.type === "plus" ? "btn-accent" : "btn-error"}">{feel.name}</button>
+      <button
+        type="button"
+        class="btn {feel.data.type === "plus" ? "btn-accent" : "btn-error"}"
+        draggable="true"
+        on:dragstart={event => fieldDragStart(event, feel)}
+        on:dragend={event => fieldDragEnd(event, feel)}
+        >{feel.name}</button>
     {/each}
     </div>
   </section>
 </div>
+</MediaQuery>

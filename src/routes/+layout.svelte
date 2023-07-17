@@ -7,7 +7,7 @@
 
 </script>
 
-<div data-theme="{$theme}" class="w-screen h-screen bg-base-200 text-base-content shadow-lg">
+<div data-theme="{$theme}" class="bg-base-200 text-base-content shadow-lg">
   <Toaster />
   <div class="">
 

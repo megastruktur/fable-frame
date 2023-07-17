@@ -6,6 +6,7 @@
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
   import toast from "svelte-french-toast";
+  import fieldDragStart from "$lib/fieldDragStart"
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -49,12 +50,6 @@
 
   function toggleEditMode() {
     editMode.set(!$editMode)
-  }
-
-  function compendiumDragStart(event: DragEvent, item: Field) {
-    if (event.dataTransfer) {
-      event.dataTransfer.setData('text/plain', JSON.stringify(item))
-    }
   }
 
   function comendiumDrop(event: DragEvent) {
@@ -120,7 +115,7 @@
                 type="button"
                 class="flex btn btn-ghost"
                 draggable={true}
-                on:dragstart={event => compendiumDragStart(event, field)}
+                on:dragstart={event => fieldDragStart(event, field)}
               >{field.name}</button>
             {/each}
           </div>
