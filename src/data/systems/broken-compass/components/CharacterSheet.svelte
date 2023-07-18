@@ -136,7 +136,7 @@
 
   <!-- Skills -->
   <section
-    class="rounded-box {$editMode ? "border border-error" : ""} {matches && activeTab !== "skill" ? "hidden" : ""}">
+    class="mx-3 rounded-box {$editMode ? "border border-error" : ""} {matches && activeTab !== "skill" ? "hidden" : ""}">
     <div class="flex flex-col bg-base-300 rounded-box py-3 px-4 drop-shadow-xl shadow-md">
 
       <!-- Action -->
@@ -218,7 +218,7 @@
   <!-- Feelings -->
   <section
     role="figure"
-    class="rounded-box {$editMode ? "border border-error" : ""} {matches && activeTab !== "feel" ? "hidden" : ""}"
+    class="mx-3 rounded-box {$editMode ? "border border-error" : ""} {matches && activeTab !== "feel" ? "hidden" : ""}"
     on:dragover={() => fieldRemove = false}>
 
     <div class="flex flex-col bg-base-300 rounded-box py-3 px-4 drop-shadow-xl shadow-md">
@@ -239,7 +239,7 @@
   <!-- General -->
   <section
     role="figure"
-    class="rounded-box {$editMode ? "border border-error" : ""} {matches && activeTab !== "general" ? "hidden" : ""}"
+    class="mx-3 rounded-box {$editMode ? "border border-error" : ""} {matches && activeTab !== "general" ? "hidden" : ""}"
     on:dragover={() => fieldRemove = false}>
 
     <div class="flex flex-col bg-base-300 rounded-box py-3 px-4 drop-shadow-xl shadow-md">
