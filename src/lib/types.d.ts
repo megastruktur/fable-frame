@@ -31,7 +31,7 @@ export type Field = {
   label?: string
   group?: string
   value: string
-  data?: string
+  data?: object
   icon?: string
   description?: string
 }

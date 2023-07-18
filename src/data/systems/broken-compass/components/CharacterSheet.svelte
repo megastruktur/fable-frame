@@ -7,7 +7,6 @@
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
   import DiamondSkill from "./DiamondSkill.svelte";
-	import Field from '$lib/components/FieldRender.svelte';
 	import FieldRender from '$lib/components/FieldRender.svelte';
 
   const query = {
@@ -228,7 +227,7 @@
     {#each feelings as feel}
       <button
         type="button"
-        class="btn {feel.data.type === "plus" ? "btn-accent" : "btn-error"}"
+        class="btn {feel.data?.type === "plus" ? "btn-accent" : "btn-error"}"
         draggable="true"
         on:dragstart={event => fieldDragStart(event, feel)}
         on:dragend={event => fieldDragEnd(event, feel)}

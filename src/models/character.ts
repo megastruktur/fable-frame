@@ -1,6 +1,6 @@
 import { getRpgSystem } from "$models/rpg_system"
 import { pb } from "$lib/pocketbase"
-import { type SystemJSON, type Field } from "$lib/types.d"
+import type { SystemJSON, Field } from "$lib/types.d"
 import type { CharactersResponse, CharactersRecord } from "$lib/pocketbase-types.d"
 import getStringHash from "$lib/getStringHash"
 import { v4 as uuidv4 } from 'uuid'
