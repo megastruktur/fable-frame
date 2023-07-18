@@ -1,143 +1,314 @@
 {
-  "identifier": "broken-compass",
-  "name": "Broken Compass",
-  "description": "Broken Compass",
-  "fields": {
-    "character": [
-      { "name": "words-to-live-by", "type": "text" },
-      { "name": "workplace", "type": "text" },
-      { "name": "homeland", "type": "text" },
-      { "name": "heritage", "type": "text" },
-      { "name": "luck", "type": "text", "value": 10 },
-      { "name": "luck-coin", "type": "text", "value": 1 },
-      { "name": "action", "type": "skill", "value": 2 },
-      { "name": "guts", "type": "skill", "value": 2 },
-      { "name": "knowledge", "type": "skill", "value": 2 },
-      { "name": "society", "type": "skill", "value": 2 },
-      { "name": "wild", "type": "skill", "value": 2 },
-      { "name": "crime", "type": "skill", "value": 2 },
-      {
-        "data": { "parent": "action" },
-        "name": "fight",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "action" },
-        "name": "leadership",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "action" },
-        "name": "stunt",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "guts" },
-        "name": "cool",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "guts" },
-        "name": "drive",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "guts" },
-        "name": "shoot",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "knowledge" },
-        "name": "culture",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "knowledge" },
-        "name": "first-aid",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "knowledge" },
-        "name": "tech",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "society" },
-        "name": "charm",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "society" },
-        "name": "eloquence",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "society" },
-        "name": "observation",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "wild" },
-        "name": "scout",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "wild" },
-        "name": "survival",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "wild" },
-        "name": "tough",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "crime" },
-        "name": "alert",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "crime" },
-        "name": "dexterity",
-        "type": "skill",
-        "value": 1
-      },
-      {
-        "data": { "parent": "crime" },
-        "name": "stealth",
-        "type": "skill",
-        "value": 1
-      }
-    ],
-    "compendium": [
-      { "data": { "type": "plus" }, "name": "powerful", "type": "feel" },
-      { "data": { "type": "plus" }, "name": "daring", "type": "feel" },
-      { "data": { "type": "plus" }, "name": "focused", "type": "feel" },
-      { "data": { "type": "plus" }, "name": "confident", "type": "feel" },
-      { "data": { "type": "plus" }, "name": "fierce", "type": "feel" },
-      { "data": { "type": "plus" }, "name": "untouchable", "type": "feel" },
-      { "data": { "type": "minus" }, "name": "bleeding", "type": "feel" },
-      { "data": { "type": "minus" }, "name": "shocked", "type": "feel" },
-      { "data": { "type": "minus" }, "name": "dizzy", "type": "feel" },
-      { "data": { "type": "minus" }, "name": "embarrassed", "type": "feel" },
-      { "data": { "type": "minus" }, "name": "broken", "type": "feel" },
-      { "data": { "type": "minus" }, "name": "scared", "type": "feel" }
-    ]
-  }
+	"identifier": "broken-compass",
+	"name": "Broken Compass",
+	"label": "Broken Compass",
+	"description": "Broken Compass",
+	"fields": {
+		"character": [
+			{
+				"name": "words-to-live-by",
+				"label": "words-to-live-by",
+				"type": "text"
+			},
+			{
+				"name": "workplace",
+				"label": "workplace",
+				"type": "text"
+			},
+			{
+				"name": "homeland",
+				"label": "homeland",
+				"type": "text"
+			},
+			{
+				"name": "heritage",
+				"label": "heritage",
+				"type": "text"
+			},
+			{
+				"name": "luck",
+				"label": "luck",
+				"type": "counter-min-max",
+				"value": "++++++++++"
+			},
+			{
+				"name": "luck-coin",
+				"label": "luck-coin",
+				"type": "text",
+				"value": "+--"
+			},
+			{
+				"name": "action",
+				"label": "action",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "++-"
+			},
+			{
+				"name": "guts",
+				"label": "guts",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "++-"
+			},
+			{
+				"name": "knowledge",
+				"label": "knowledge",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "++-"
+			},
+			{
+				"name": "society",
+				"label": "society",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "++-"
+			},
+			{
+				"name": "wild",
+				"label": "wild",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "++-"
+			},
+			{
+				"name": "crime",
+				"label": "crime",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "++-"
+			},
+			{
+				"data": { "parent": "action" },
+				"name": "fight",
+				"label": "fight",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "action" },
+				"name": "leadership",
+				"label": "leadership",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "action" },
+				"name": "stunt",
+				"label": "stunt",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "guts" },
+				"name": "cool",
+				"label": "cool",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "guts" },
+				"name": "drive",
+				"label": "drive",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "guts" },
+				"name": "shoot",
+				"label": "shoot",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "knowledge" },
+				"name": "culture",
+				"label": "culture",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "knowledge" },
+				"name": "first-aid",
+				"label": "first-aid",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "knowledge" },
+				"name": "tech",
+				"label": "tech",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "society" },
+				"name": "charm",
+				"label": "charm",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "society" },
+				"name": "eloquence",
+				"label": "eloquence",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "society" },
+				"name": "observation",
+				"label": "observation",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "wild" },
+				"name": "scout",
+				"label": "scout",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "wild" },
+				"name": "survival",
+				"label": "survival",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "wild" },
+				"name": "tough",
+				"label": "tough",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "crime" },
+				"name": "alert",
+				"label": "alert",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "crime" },
+				"name": "dexterity",
+				"label": "dexterity",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			},
+			{
+				"data": { "parent": "crime" },
+				"name": "stealth",
+				"label": "stealth",
+				"group": "skill",
+				"type": "counter-min-max",
+				"value": "+--"
+			}
+		],
+		"compendium": [
+			{
+				"data": { "type": "plus" },
+				"name": "powerful",
+				"group": "feel",
+				"label": "powerful",
+				"type": "tag"
+			},
+			{
+				"data": { "type": "plus" },
+				"name": "daring",
+				"group": "feel",
+				"label": "daring",
+				"type": "tag"
+			},
+			{
+				"data": { "type": "plus" },
+				"name": "focused",
+				"group": "feel",
+				"label": "focused",
+				"type": "tag"
+			},
+			{
+				"data": { "type": "plus" },
+				"name": "confident",
+				"group": "feel",
+				"label": "confident",
+				"type": "tag"
+			},
+			{
+				"data": { "type": "plus" },
+				"name": "fierce",
+				"group": "feel",
+				"label": "fierce",
+				"type": "tag"
+			},
+			{
+				"data": { "type": "plus" },
+				"name": "untouchable",
+				"group": "feel",
+				"label": "untouchable",
+				"type": "tag"
+			},
+			{
+				"data": { "type": "minus" },
+				"name": "bleeding",
+				"group": "feel",
+				"label": "bleeding",
+				"type": "tag"
+			},
+			{
+				"data": { "type": "minus" },
+				"name": "shocked",
+				"group": "feel",
+				"label": "shocked",
+				"type": "tag"
+			},
+			{
+				"data": { "type": "minus" },
+				"name": "dizzy",
+				"group": "feel",
+				"label": "dizzy",
+				"type": "tag"
+			},
+			{
+				"data": { "type": "minus" },
+				"name": "embarrassed",
+				"group": "feel",
+				"label": "embarrassed",
+				"type": "tag"
+			},
+			{
+				"data": { "type": "minus" },
+				"name": "broken",
+				"group": "feel",
+				"label": "broken",
+				"type": "tag"
+			},
+			{
+				"data": { "type": "minus" },
+				"name": "scared",
+				"group": "feel",
+				"label": "scared",
+				"type": "tag"
+			}
+		]
+	}
 }

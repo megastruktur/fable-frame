@@ -1,8 +1,9 @@
 import { getRpgSystem } from "$models/rpg_system"
 import { pb } from "$lib/pocketbase"
-import type { SystemJSON, Field } from "$lib/types.d"
+import { type SystemJSON, type Field, FieldType } from "$lib/types.d"
 import type { CharactersResponse, CharactersRecord } from "$lib/pocketbase-types.d"
 import getStringHash from "$lib/getStringHash"
+import { v4 as uuidv4 } from 'uuid'
 
 export async function createCharacter(data: Partial<CharactersRecord>): Promise<CharactersResponse> {
   return await pb.collection("characters").create(data)
@@ -83,23 +84,28 @@ export async function createNewCharacter(systemId: string): Promise<CharactersRe
 
   const systemData: SystemJSON = rpgSystem.data
 
+  const fieldList: Array<Field> = systemData.fields.character.map(field => {
+    return {...field, id: uuidv4() }
+  });
+
   return await createCharacter({
     name: "New Character",
     rpgSystem: systemId,
-    hash: await getStringHash(JSON.stringify(systemData.fields.character)),
-    fields: systemData.fields.character
+    hash: await getStringHash(JSON.stringify(fieldList)),
+    fields: fieldList
   })
 }
 
-export function getCharacterField(character: CharactersResponse, fieldName: string): Field {
-  const field = character.fields.find((field: Field) => field.name === fieldName)
+export function getCharacterField(character: CharactersResponse, fieldId: string): Field {
+  const field = character.fields.find((field: Field) => field.id === fieldId)
   if (field) {
     return field
   }
   else {
     return {
-      name: fieldName,
-      type: "text",
+      id: uuidv4(),
+      name: "New Field",
+      type: FieldType.Text,
       value: "",
     }
   }

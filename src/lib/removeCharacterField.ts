@@ -1,9 +1,10 @@
 import type { CharactersResponse } from "./pocketbase-types";
 import type { Field } from "./types";
 
-export default function removeCharacterField(character: CharactersResponse, field: Field) {
+export default function removeCharacterField(character: CharactersResponse, field: Field): CharactersResponse {
 
-  character.fields.push(field)
-  return character
+  // Remove an item from character.fields Array comparing by id
+  character.fields = character.fields.filter(item => item.id!== field.id);
 
+  return character;
 }

@@ -1,10 +1,9 @@
 <script lang="ts">
   // @ts-ignore
   import Icon from "svelte-icons-pack/Icon.svelte"
-  import "../app.css";
-  import { currentUser } from "./pocketbase";
-  import LogoutButton from "./LogoutButton.svelte";
-  import { theme } from "./stores";
+  import { currentUser } from "$lib/pocketbase"
+  import LogoutButton from "$lib/components/LogoutButton.svelte"
+  import { theme } from "$lib/stores";
 
   function themeSelect(event: any) {
     // Get data-theme attribute from clicked event

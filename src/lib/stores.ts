@@ -9,9 +9,9 @@ function createCharacterStore() {
 
   const { subscribe, set, update } = writable<CharactersResponse>();
 
-  function setFieldValue(fieldName: string, fieldValue: string) {
+  function setFieldValue(fieldId: string, fieldValue: string) {
     update((character) => {
-      return updateCharacterFieldValue(character, fieldName, fieldValue)
+      return updateCharacterFieldValue(character, fieldId, fieldValue)
     })
   }
 

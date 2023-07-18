@@ -1,9 +1,9 @@
 import type { CharactersResponse } from "./pocketbase-types";
 import type { Field } from "./types";
 
-export default function updateCharacterFieldValue(character: CharactersResponse, fieldName: string, fieldValue: string) {
+export default function updateCharacterFieldValue(character: CharactersResponse, fieldId: string, fieldValue: string) {
 
-  const foundIndex = character.fields.findIndex((f: Field) => f.name === fieldName);
+  const foundIndex = character.fields.findIndex((f: Field) => f.id === fieldId);
   // Update
   if (foundIndex !== -1) {
     character.fields[foundIndex].value = fieldValue;
@@ -11,7 +11,7 @@ export default function updateCharacterFieldValue(character: CharactersResponse,
   }
   // Create
   else {
-    throw new Error(`Field ${fieldName} not found in character`)
+    throw new Error(`Field ${fieldId} not found in character`)
   }
 
 }

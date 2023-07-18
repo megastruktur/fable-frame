@@ -9,17 +9,48 @@
   import { createEventDispatcher } from "svelte"
 
   export let skill: Field
-  export let name: string
 
   const dispatch = createEventDispatcher()
 
   function skillIncrement() {
-    skill.value += 1
+
+    let value: string = "";
+    let incremented = false;
+    for (let i = 0; i < skill.value.length; i++) {
+
+      if (skill.value.charAt(i) === "-" && !incremented) {
+        value += "+"
+        incremented = true
+      }
+      else {
+        value += skill.value.charAt(i)
+      }
+    }
+
+    skill.value = value
+
     dispatch("fieldUpdate", skill)
   }
 
   function skillDecrement() {
-    skill.value -= 1
+
+    let value: string = "";
+    let decremented = false;
+
+    for (let i = (skill.value.length - 1); i >= 0; i--) {
+
+      if (skill.value.charAt(i) === "+" && !decremented) {
+        value = "-" + value
+        decremented = true
+      }
+      else {
+        value = skill.value.charAt(i) + value
+      }
+    }
+
+    skill.value = value
+
+
     dispatch("fieldUpdate", skill)
   }
 
@@ -29,13 +60,14 @@
   {#if $editMode}
     <button type="button" on:click={skillDecrement} class="btn btn-circle btn-xs mr-3">-</button>
   {/if}
-  <div class="flex mr-3">{name}</div>
+  <div class="flex mr-3">{skill.label}</div>
   <div class="flex">
-    {#each Array(skill.value) as _, i}
-      <Icon color="white" src={DiamondFilled} />
-    {/each}
-    {#each Array(3 - parseInt(skill.value)) as _, i}
-      <Icon color="gray" src={DiamondLine} />
+    {#each Array(skill.value.length) as _, i}
+      {#if skill.value.charAt(i) === "+"}
+        <Icon color="white" src={DiamondFilled} />
+      {:else}
+        <Icon color="gray" src={DiamondLine} />
+      {/if}
     {/each}
   </div>
   {#if $editMode}
