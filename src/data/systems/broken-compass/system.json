@@ -8,34 +8,40 @@
 			{
 				"name": "words-to-live-by",
 				"label": "words-to-live-by",
+        "group": "general",
 				"type": "text"
 			},
 			{
 				"name": "workplace",
 				"label": "workplace",
+        "group": "general",
 				"type": "text"
 			},
 			{
 				"name": "homeland",
 				"label": "homeland",
+        "group": "general",
 				"type": "text"
 			},
 			{
 				"name": "heritage",
 				"label": "heritage",
+        "group": "general",
 				"type": "text"
 			},
 			{
 				"name": "luck",
 				"label": "luck",
 				"type": "counter-min-max",
+        "group": "general",
 				"value": "++++++++++"
 			},
 			{
 				"name": "luck-coin",
 				"label": "luck-coin",
-				"type": "text",
-				"value": "+--"
+				"type": "counter",
+        "group": "general",
+				"value": "+"
 			},
 			{
 				"name": "action",

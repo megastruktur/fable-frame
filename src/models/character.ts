@@ -1,6 +1,6 @@
 import { getRpgSystem } from "$models/rpg_system"
 import { pb } from "$lib/pocketbase"
-import { type SystemJSON, type Field, FieldType } from "$lib/types.d"
+import { type SystemJSON, type Field } from "$lib/types.d"
 import type { CharactersResponse, CharactersRecord } from "$lib/pocketbase-types.d"
 import getStringHash from "$lib/getStringHash"
 import { v4 as uuidv4 } from 'uuid'
@@ -105,7 +105,7 @@ export function getCharacterField(character: CharactersResponse, fieldId: string
     return {
       id: uuidv4(),
       name: "New Field",
-      type: FieldType.Text,
+      type: "text",
       value: "",
     }
   }

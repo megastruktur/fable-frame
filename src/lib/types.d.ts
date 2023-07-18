@@ -16,9 +16,17 @@ export type SystemJSONFieldTypes = {
   compendium: Field[]
 }
 
+/**
+ * General field types are:
+ * - text
+ * - tag
+ * - counter-min-max
+ * - counter
+ */
+
 export type Field = {
   id: string // generally better I use the Unique ID.
-  type: FieldType // render type
+  type: string // render type
   name: string
   label?: string
   group?: string
@@ -26,11 +34,4 @@ export type Field = {
   data?: string
   icon?: string
   description?: string
-}
-
-export enum FieldType {
-  Text = "text",
-  Counter = "counter",
-  CounterMinMax = "counter-min-max",
-  Tag = "tag",
 }

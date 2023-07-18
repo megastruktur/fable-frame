@@ -1,4 +1,4 @@
-import { FieldType, type Field } from "./types.d";
+import type { Field } from "./types.d";
 
 export function getFieldFromListByName(name: string, fields: Field[]): Field {
   const returnedField = fields.find(field => field.name === name);
@@ -8,8 +8,9 @@ export function getFieldFromListByName(name: string, fields: Field[]): Field {
   }
   else {
     return {
+      id: "",
       name: name,
-      type: FieldType.Text,
+      type: "text",
       value: ""
     }
   }

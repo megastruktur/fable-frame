@@ -7,6 +7,8 @@
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
   import DiamondSkill from "./DiamondSkill.svelte";
+	import Field from '$lib/components/FieldRender.svelte';
+	import FieldRender from '$lib/components/FieldRender.svelte';
 
   const query = {
     "mobile": "(max-width: 480px)",
@@ -55,6 +57,7 @@
   let stealth: Field
 
   let feelings: Field[]
+  let generals: Field[]
 
   let fieldRemove: boolean = false
   
@@ -91,6 +94,7 @@
     stealth = getFieldFromListByName("stealth", character.fields)
 
     feelings = getFieldsByGroup("feel", character.fields)
+    generals = getFieldsByGroup("general", character.fields)
   })
   
   function updateField(event: { detail: Field }) {
@@ -118,6 +122,11 @@
       class="tab {activeTab === "feel" ? "tab-active" : ""}"
       on:click|preventDefault={() => setActiveTab("feel")}
       >Feelings</a>
+    <a
+      href="/"
+      class="tab {activeTab === "feel" ? "tab-active" : ""}"
+      on:click|preventDefault={() => setActiveTab("general")}
+      >General</a>
     <a
       href="/"
       class="tab {activeTab === "inventory" ? "tab-active" : ""}"
@@ -225,6 +234,21 @@
         on:dragend={event => fieldDragEnd(event, feel)}
         >{feel.name}</button>
     {/each}
+    </div>
+  </section>
+
+  <!-- General -->
+  <section
+    role="figure"
+    class="rounded-box {$editMode ? "border border-error" : ""} {matches && activeTab !== "general" ? "hidden" : ""}"
+    on:dragover={() => fieldRemove = false}>
+
+    <div class="flex flex-col bg-base-300 rounded-box py-3 px-4 drop-shadow-xl shadow-md">
+
+    <h2 class="flex text-3xl justify-center">General</h2>
+      {#each generals as general}
+      <FieldRender field={general} />
+      {/each}
     </div>
   </section>
 </div>
