@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { popup, type PopupSettings } from "@skeletonlabs/skeleton";
+	import { popup, Stepper, type PopupSettings, Step } from "@skeletonlabs/skeleton";
   import Icon from "svelte-icons-pack/Icon.svelte"
   import BsPlus from "svelte-icons-pack/bs/BsPlus"
 	import FieldCreate from "./FieldCreate.svelte";
@@ -8,11 +8,22 @@
 
   export let group: string;
   export let type: string = "";
+
+  $: field = {
+    id: "",
+    type: type,
+    name: "",
+    label: "",
+    group: group,
+    value: "",
+    description: ""
+  }
   
   const openCircle: PopupSettings = {
     event: 'click',
     target: 'circlePopup',
-    placement: 'top'
+    placement: 'bottom',
+    closeQuery: '.will-close',
   }
 
 
@@ -27,29 +38,25 @@
   // @todo Get list of all Compendium Items with Group and Type from all Compendiums
   // If type is empty - list ONLY default types like Text, Tag, Counter and Etc.
 
-  // When accepted - set the field.group to group allow edit
-  //  label
-  //  name
-  //  value
-
-
-  // export type Field = {
-  //   id: string // generally better I use the Unique ID.
-  //   type: string // render type
-  //   name: string
-  //   label?: string
-  //   group?: string
-  //   value: string
-  //   data?: object
-  //   icon?: string
-  //   description?: string
-  // }
-
+  function createComplete() {
+    characterStore.addField(field)
+    console.log(field)
+  }
 </script>
 
 <div class="card p-4 variant-filled-neutral-900/90" data-popup="circlePopup">
-	<p>Add Field</p>
-  <FieldCreate type="text" on:fieldAdd={fieldAdd} /> 
+  
+  <Stepper buttonComplete="will-close" on:complete={createComplete}>
+    <Step>
+      <svelte:fragment slot="header">Field</svelte:fragment>
+      Compendium Types
+      Custom Types
+    </Step>
+    <Step>
+      <svelte:fragment slot="header">Data</svelte:fragment>
+      <FieldCreate type="text" bind:field={field} /> 
+    </Step>
+  </Stepper>
 
 	<div class="arrow variant-filled-neutral-900/90" />
 </div>
