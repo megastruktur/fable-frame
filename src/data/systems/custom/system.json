@@ -1,0 +1,9 @@
+{
+	"identifier": "custom",
+	"name": "Custom System",
+	"description": "Start from scratch and add fields manually",
+	"fields": {
+		"character": [],
+		"compendium": []
+	}
+}

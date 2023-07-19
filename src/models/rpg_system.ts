@@ -24,3 +24,7 @@ export async function getAllRpgSystems(queryParams = {}): Promise<RpgSystemsResp
 export async function getActiveRpgSystems(): Promise<RpgSystemsResponse[]> {
   return await getAllRpgSystems({filter: `status = true`})
 }
+
+export function getRpgSystemImage(rpgSystem: RpgSystemsResponse) {
+  return pb.files.getUrl(rpgSystem, rpgSystem.image, { thumb: '100x100' });
+}

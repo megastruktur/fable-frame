@@ -74,7 +74,7 @@ export async function getAllCharactersWithSystem(): Promise<CharactersResponse[]
   return await getAllCharacters({expand: "systemId"})
 }
 
-export async function createNewCharacter(systemId: string): Promise<CharactersResponse> {
+export async function createNewCharacter(systemId: string, name = "New Character"): Promise<CharactersResponse> {
 
   const rpgSystem = await getRpgSystem(systemId)
 
@@ -89,7 +89,7 @@ export async function createNewCharacter(systemId: string): Promise<CharactersRe
   });
 
   return await createCharacter({
-    name: "New Character",
+    name: name,
     rpgSystem: systemId,
     hash: await getStringHash(JSON.stringify(fieldList)),
     fields: fieldList

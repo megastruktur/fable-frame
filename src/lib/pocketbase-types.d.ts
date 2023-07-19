@@ -65,7 +65,7 @@ export type CharactersRecord<Tdata = unknown> = {
 	campaign?: RecordIdString
 	avatar?: string
 	creator: RecordIdString
-	fields: Field[]
+	fields?: Field[]
 	hash: string
 }
 
