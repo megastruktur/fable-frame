@@ -11,6 +11,9 @@ export default defineConfig({
 			"$models": path.resolve("./src/models"),
 		}
 	},
+	preview: {
+    port: 3006,
+  },
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	}
