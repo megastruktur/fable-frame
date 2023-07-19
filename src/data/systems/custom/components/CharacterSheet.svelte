@@ -28,40 +28,11 @@
   
   onDestroy(() => matches.destroy()) //Stop events for calculation
 
-  let activeTab: string = "skill"
-
-  let action: Field
-  let fight: Field
-  let leadership: Field
-  let stunt: Field
-  let guts: Field
-  let cool: Field
-  let drive: Field
-  let shoot: Field
-  let knowledge: Field
-  let culture: Field
-  let first_aid: Field
-  let tech: Field
-  let society: Field
-  let charm: Field
-  let eloquence: Field
-  let observation: Field
-  let wild: Field
-  let scout: Field
-  let survival: Field
-  let tough: Field
-  let crime: Field
-  let alertF: Field
-  let dexterity: Field
-  let stealth: Field
-
-  let feelings: Field[]
-  let generals: Field[]
-
-  let fieldRemove: boolean = false
+  let activeTab: string = "general"
+  let generals: Field[] = []
   
   characterStore.subscribe((character: CharactersResponse) => {
-    // load fields here
+    generals = getFieldsByGroup("general", character.fields)
   })
   
   function updateField(event: { detail: Field }) {
@@ -84,7 +55,12 @@
   <section
     class="mx-3 {matches && activeTab !== "skill" ? "hidden" : ""}">
     <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
-      <p>My character fields here!</p>
+      {#each generals as field}
+        <FieldRender field={field} />
+      {/each}
+      {#if $editMode}
+      <CircleAdd group="general" type="text" />
+      {/if}
     </div>
   </section>
 </div>
