@@ -5,7 +5,6 @@
 	import { onMount } from "svelte";
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
-  import { drawerStore, toastStore } from '@skeletonlabs/skeleton';
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -18,19 +17,21 @@
     $characterStore = (await getCharacter($page.params.slug, {expand: "rpgSystem"}))
 
     characterName = $characterStore.name
-    /* @vite-ignore */
-    CharacterSheet = (await import(`../../../data/systems/${$characterStore.expand.rpgSystem.identifier}/components/CharacterSheet.svelte`)).default
 
-    const compendiumFieldsRaw = $characterStore.expand.rpgSystem.data.fields.compendium
+    if ($characterStore.expand.rpgSystem) {
+      CharacterSheet = (await import(`../../../data/systems/${$characterStore.expand.rpgSystem.identifier}/components/CharacterSheet.svelte`)).default
 
-    compendiumFieldsRaw.map((field: Field) => {
-      if (!compendiumFields[field.type]) {
-        compendiumFields[field.type] = []
-      }
-      compendiumFields[field.type].push(field)
-    })
+      const compendiumFieldsRaw = $characterStore.expand.rpgSystem.data.fields.compendium
 
-    editMode.set(false)
+      compendiumFieldsRaw.map((field: Field) => {
+        if (!compendiumFields[field.type]) {
+          compendiumFields[field.type] = []
+        }
+        compendiumFields[field.type].push(field)
+      })
+
+      editMode.set(false)
+    }
   })
 
 
@@ -66,6 +67,8 @@
   <!-- Character Sheet -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="mt-4">
-    <svelte:component this={CharacterSheet} />
+    {#if CharacterSheet}
+      <svelte:component this={CharacterSheet} />
+    {/if}
   </div>
 </div>
