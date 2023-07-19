@@ -118,3 +118,9 @@ export function getCharacterAvatar(character: CharactersResponse) {
     return ""
   }
 }
+
+export function getCharacterFieldGroups(character: CharactersResponse) {
+  // every character.field has a group attribute. Create a distinct list of all groups.
+  const fieldGroups = character.fields.map((field: Field) => field.group)
+  return [...new Set(fieldGroups)]
+}

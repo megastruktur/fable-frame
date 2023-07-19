@@ -8,6 +8,8 @@
 	import type { Field } from "$lib/types";
 	import FieldRender from '$lib/components/FieldRender.svelte';
 	import CircleAdd from '$lib/components/CircleAdd.svelte';
+	import { getCharacterFieldGroups } from '$models/character';
+	import CharacterSheetTab from '$lib/components/CharacterSheetTab.svelte';
 
   const query = {
     "mobile": "(max-width: 480px)",
@@ -29,15 +31,19 @@
   onDestroy(() => matches.destroy()) //Stop events for calculation
 
   let activeTab: string = "general"
-  let generals: Field[] = []
+  // let tabs: Map<string, Field[]> = new Map()
+  let tabs: { [key: string]: Field[] } = {general: []}
   
   characterStore.subscribe((character: CharactersResponse) => {
-    generals = getFieldsByGroup("general", character.fields)
+
+    const fieldGroups = getCharacterFieldGroups(character)
+
+    fieldGroups.map((fieldGroup) => {
+      if (fieldGroup) {
+        tabs[fieldGroup] = getFieldsByGroup(fieldGroup, character.fields)
+      }
+    })
   })
-  
-  function updateField(event: { detail: Field }) {
-    characterStore.setFieldValue(event.detail.id, event.detail.value)
-  }
 
   function setActiveTab(tab: string) {
     activeTab = tab
@@ -51,17 +57,8 @@
   {#if matches}
   {/if}
 
-  <!-- Skills -->
-  <section
-    class="mx-3 {matches && activeTab !== "skill" ? "hidden" : ""}">
-    <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
-      {#each generals as field}
-        <FieldRender field={field} />
-      {/each}
-      {#if $editMode}
-      <CircleAdd group="general" type="text" />
-      {/if}
-    </div>
-  </section>
+  {#each Object.keys(tabs) as tabName}
+    <CharacterSheetTab fields={[...tabs[tabName]]} {tabName} {activeTab} {matches} />
+  {/each}
 </div>
 </MediaQuery>

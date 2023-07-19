@@ -3,13 +3,13 @@
   import Icon from "svelte-icons-pack/Icon.svelte"
   import BsPlus from "svelte-icons-pack/bs/BsPlus"
 	import FieldCreate from "./FieldCreate.svelte";
-	import type { Field } from "$lib/types";
 	import { characterStore } from "$lib/stores";
 
   export let group: string;
-  export let type: string = "";
+  export let type: string;
 
-  $: field = {
+
+  let field = {
     id: "",
     type: type,
     name: "",
@@ -21,18 +21,10 @@
   
   const openCircle: PopupSettings = {
     event: 'click',
-    target: 'circlePopup',
+    target: `circlePopup-${group}`,
     placement: 'bottom',
     closeQuery: '.will-close',
   }
-
-
-  function fieldAdd(e: CustomEvent<any>): void {
-    e.preventDefault()
-    const newField: Field = {...e.detail.field, id: ""}
-    characterStore.addField(newField)
-  }
-
 
   // Get list of all Compendium Items with Group and Type from the System Compendium
   // @todo Get list of all Compendium Items with Group and Type from all Compendiums
@@ -44,7 +36,7 @@
   }
 </script>
 
-<div class="card p-4 variant-filled-neutral-900/90" data-popup="circlePopup">
+<div class="card p-4 variant-filled-neutral-900/90" data-popup="circlePopup-{group}">
   
   <Stepper buttonComplete="will-close" on:complete={createComplete}>
     <Step>
@@ -54,7 +46,7 @@
     </Step>
     <Step>
       <svelte:fragment slot="header">Data</svelte:fragment>
-      <FieldCreate type="text" bind:field={field} /> 
+      <FieldCreate bind:field={field} /> 
     </Step>
   </Stepper>
 
