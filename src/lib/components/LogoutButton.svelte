@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { goto } from "$app/navigation";
   import { pb } from "$lib/pocketbase"
   import Icon from "svelte-icons-pack/Icon.svelte"
@@ -11,6 +11,4 @@
 </script>
 
 
-<button class="btn btn-ghost btn-circle" on:click={logout}>
-  <Icon size=25 color="white" src={IconDoorOpen}/>
-</button>
+<a href="/" class="btn variant-filled" on:click|preventDefault={logout}>Logout</a>

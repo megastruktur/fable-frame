@@ -12,16 +12,13 @@
 		Loading your campaigns...
 	{:then campaigns}
 		{#each campaigns as campaign}
-    <div class="card w-96 bg-base-100 shadow-xl image-full">
-      <figure><img src="/images/fantasy-background-campaign.jpg" alt="{campaign.name}" /></figure>
-      <div class="card-body">
-        <h2 class="card-title">{campaign.name}</h2>
-        <p>{campaign.description}</p>
-        <div class="card-actions justify-end">
-          <a href="/campaigns/{campaign.id}" class="btn btn-primary">View</a>
-        </div>
+    <a href="/campaigns/{campaign.id}" class="card w-96 shadow-xl card-hover">
+      <header><img src="/images/fantasy-background-campaign.jpg" alt="{campaign.name}" /></header>
+      <div class="p-4 space-y-4">
+        <h3 class="h3">{campaign.name}</h3>
+        <article>{campaign.description}</article>
       </div>
-    </div>
+    </a>
 		{/each}
 	{/await}
   </div>

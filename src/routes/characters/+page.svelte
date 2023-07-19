@@ -28,56 +28,56 @@
 	}
 </script>
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col">
+
 	<h1 class="text-3xl m-auto my-3">Your Characters</h1>
+	<hr />
+	<br />
 
-	<div class="flex flex-col border-opacity-50 lg:w-9/12 md:w-full">
+	<!-- My Characters section -->
+	<div class="flex items-center justify-center">
+		{#await getMyCharactersPromise}
+			Loading Characters
+		{:then myCharacters} 
+			{#each myCharacters as character}
 
-		<!-- My Characters section -->
-		<div class="grid card py-3 rounded-box place-items-center">
-			{#await getMyCharactersPromise}
-				Loading Characters
-			{:then myCharacters} 
-				{#each myCharacters as character}
-
-				<a
-					href="/characters/{character.id}"
-					class="card w-52 bg-base-100 shadow-xl image-full"
-					>
-					<figure>
-						{#if character.avatar}
-						<img src={getCharacterAvatar(character)} alt={character.name} />
-						{/if}
-					</figure>
-					<div class="card-body">
-						<h2 class="card-title">{character.name}</h2>
-						<p>{character.expand.rpgSystem.name}</p>
-					</div>
-				</a>
-				{/each}
-			{/await}
-		</div>
-		<div class="divider">OR</div>
-
-		<!-- Create Character section -->
-		<div class="grid card py-3 rounded-box place-items-center">
-			{#await enabledSystemsPromise}
-				Loading RPG Systems...
-			{:then rpgSystems}
-				{#each rpgSystems as rpgSystem}
-	
-				<div class="card w-52 bg-base-100 shadow-xl image-full">
-					<figure><img src={getRpgSystemImage(rpgSystem)} alt={rpgSystem.name} /></figure>
-					<div class="card-body">
-						<h2 class="card-title">{rpgSystem.name}</h2>
-						<p>{rpgSystem.description}</p>
-						<div class="card-actions justify-end">
-							<button on:click={() => createAndRedirect(rpgSystem.id)} class="btn btn-primary">Create</button>
-						</div>
-					</div>
+			<a href="/characters/{character.id}"
+				class="card w-52 card-hover shadow-xl">
+				<header>
+					{#if character.avatar}
+					<img src={getCharacterAvatar(character)} alt={character.name} />
+					{/if}
+				</header>
+				<div class="p-4 space-y-4">
+					<h3 class="h3">{character.name}</h3>
+					<article>{character.expand.rpgSystem.name}</article>
 				</div>
-				{/each}
-			{/await}
-		</div>
+			</a>
+			{/each}
+		{/await}
+	</div>
+
+	<div class="flex items-center justify-center">
+		<div class="divider">OR</div>
+	</div>
+
+	<!-- Create Character section -->
+	<div class="flex items-center justify-center">
+		{#await enabledSystemsPromise}
+			Loading RPG Systems...
+		{:then rpgSystems}
+			{#each rpgSystems as rpgSystem}
+
+			<button type="button" on:click={() => createAndRedirect(rpgSystem.id)} class="card w-52 card-hover">
+				<header>
+					<img class="" src={getRpgSystemImage(rpgSystem)} alt={rpgSystem.name} />
+				</header>
+				<div class="p-4 space-y-4">
+					<h3 class="h3">{rpgSystem.name}</h3>
+					<article>{rpgSystem.description}</article>
+				</div>
+			</button>
+			{/each}
+		{/await}
 	</div>
 </div>

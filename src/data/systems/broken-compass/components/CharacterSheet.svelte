@@ -8,6 +8,7 @@
 	import type { Field } from "$lib/types";
   import DiamondSkill from "./DiamondSkill.svelte";
 	import FieldRender from '$lib/components/FieldRender.svelte';
+	import CircleAdd from '$lib/components/CircleAdd.svelte';
 
   const query = {
     "mobile": "(max-width: 480px)",
@@ -136,80 +137,80 @@
 
   <!-- Skills -->
   <section
-    class="mx-3 rounded-box {$editMode ? "border border-error" : ""} {matches && activeTab !== "skill" ? "hidden" : ""}">
-    <div class="flex flex-col bg-base-300 rounded-box py-3 px-4 drop-shadow-xl shadow-md">
+    class="mx-3 {matches && activeTab !== "skill" ? "hidden" : ""}">
+    <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
 
       <!-- Action -->
       <div class="mb-3">
-        <h2 class="flex text-3xl justify-center">Skills</h2>
-        <div class="flex text-2xl bg-base-100 rounded-box p-3 mb-3">
+        <h2 class="flex text-3xl justify-center h2">Skills</h2>
+        <h3 class="h3 flex bg-base-100 p-3 mb-3">
           <DiamondSkill on:fieldUpdate={updateField} skill={action} />
-        </div>
-        <div class="flex flex-col items-end text-xl">
+        </h3>
+        <h4 class="h4 flex flex-col items-end">
           <DiamondSkill on:fieldUpdate={updateField} skill={fight} />
           <DiamondSkill on:fieldUpdate={updateField} skill={leadership} />
           <DiamondSkill on:fieldUpdate={updateField} skill={stunt} />
-        </div>
+        </h4>
       </div>
   
       <!-- Guts -->
       <div class="mb-3">
-        <div class="flex text-2xl bg-base-100 rounded-box p-3 mb-3">
+        <h3 class="h3 flex bg-base-100 p-3 mb-3">
           <DiamondSkill on:fieldUpdate={updateField} skill={guts} />
-        </div>
-        <div class="flex flex-col items-end text-xl">
+        </h3>
+        <h4 class="h4 flex flex-col items-end">
           <DiamondSkill on:fieldUpdate={updateField} skill={cool} />
           <DiamondSkill on:fieldUpdate={updateField} skill={drive} />
           <DiamondSkill on:fieldUpdate={updateField} skill={shoot} />
-        </div>
+        </h4>
       </div>
   
       <!-- Knowledge -->
       <div class="mb-3">
-        <div class="flex text-2xl bg-base-100 rounded-box p-3 mb-3">
+        <h3 class="h3 flex bg-base-100 p-3 mb-3">
           <DiamondSkill on:fieldUpdate={updateField} skill={knowledge} />
-        </div>
-        <div class="flex flex-col items-end text-xl">
+        </h3>
+        <h4 class="h4 flex flex-col items-end">
           <DiamondSkill on:fieldUpdate={updateField} skill={culture} />
           <DiamondSkill on:fieldUpdate={updateField} skill={first_aid} />
           <DiamondSkill on:fieldUpdate={updateField} skill={tech} />
-        </div>
+        </h4>
       </div>
   
       <!-- Society -->
       <div class="mb-3">
-        <div class="flex text-2xl bg-base-100 rounded-box p-3 mb-3">
+        <h3 class="h3 flex bg-base-100 p-3 mb-3">
           <DiamondSkill on:fieldUpdate={updateField} skill={society} />
-        </div>
-        <div class="flex flex-col items-end text-xl">
+        </h3>
+        <h4 class="h4 flex flex-col items-end">
           <DiamondSkill on:fieldUpdate={updateField} skill={charm} />
           <DiamondSkill on:fieldUpdate={updateField} skill={eloquence} />
           <DiamondSkill on:fieldUpdate={updateField} skill={observation} />
-        </div>
+        </h4>
       </div>
   
       <!-- Wild -->
       <div class="mb-3">
-        <div class="flex text-2xl bg-base-100 rounded-box p-3 mb-3">
+        <h3 class="h3 flex bg-base-100 p-3 mb-3">
           <DiamondSkill on:fieldUpdate={updateField} skill={wild} />
-        </div>
-        <div class="flex flex-col items-end text-xl">
+        </h3>
+        <h4 class="h4 flex flex-col items-end">
           <DiamondSkill on:fieldUpdate={updateField} skill={scout} />
           <DiamondSkill on:fieldUpdate={updateField} skill={survival} />
           <DiamondSkill on:fieldUpdate={updateField} skill={tough} />
-        </div>
+        </h4>
       </div>
   
       <!-- Crime -->
       <div class="mb-3">
-        <div class="flex text-2xl bg-base-100 rounded-box p-3 mb-3">
+        <h3 class="h3 flex bg-base-100 p-3 mb-3">
           <DiamondSkill on:fieldUpdate={updateField} skill={crime} />
-        </div>
-        <div class="flex flex-col items-end text-xl">
+        </h3>
+        <h4 class="h4 flex flex-col items-end">
           <DiamondSkill on:fieldUpdate={updateField} skill={alertF} />
           <DiamondSkill on:fieldUpdate={updateField} skill={dexterity} />
           <DiamondSkill on:fieldUpdate={updateField} skill={stealth} />
-        </div>
+        </h4>
       </div>
     </div>
 
@@ -218,33 +219,33 @@
   <!-- Feelings -->
   <section
     role="figure"
-    class="mx-3 rounded-box {$editMode ? "border border-error" : ""} {matches && activeTab !== "feel" ? "hidden" : ""}"
+    class="mx-3 {matches && activeTab !== "feel" ? "hidden" : ""}"
     on:dragover={() => fieldRemove = false}>
 
-    <div class="flex flex-col bg-base-300 rounded-box py-3 px-4 drop-shadow-xl shadow-md">
+    <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
 
-    <h2 class="flex text-3xl justify-center">I Feel</h2>
+    <h2 class="flex text-3xl justify-center h2">I Feel</h2>
     {#each feelings as feel}
       <button
         type="button"
         class="btn {feel.data?.type === "plus" ? "btn-accent" : "btn-error"}"
         draggable="true"
         on:dragstart={event => fieldDragStart(event, feel)}
-        on:dragend={event => fieldDragEnd(event, feel)}
         >{feel.name}</button>
     {/each}
+    <CircleAdd group="feel" type="tag" />
     </div>
   </section>
 
   <!-- General -->
   <section
     role="figure"
-    class="mx-3 rounded-box {$editMode ? "border border-error" : ""} {matches && activeTab !== "general" ? "hidden" : ""}"
+    class="mx-3 {matches && activeTab !== "general" ? "hidden" : ""}"
     on:dragover={() => fieldRemove = false}>
 
-    <div class="flex flex-col bg-base-300 rounded-box py-3 px-4 drop-shadow-xl shadow-md">
+    <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
 
-    <h2 class="flex text-3xl justify-center">General</h2>
+    <h2 class="flex text-3xl justify-center h2">General</h2>
       {#each generals as general}
       <FieldRender field={general} />
       {/each}

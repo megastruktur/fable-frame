@@ -58,7 +58,7 @@
 
 <div class="flex items-center">
   {#if $editMode}
-    <button type="button" on:click={skillDecrement} class="btn btn-circle btn-xs mr-3">-</button>
+    <button type="button" on:click={skillDecrement} class="btn-icon btn-icon-sm variant-filled mr-1">-</button>
   {/if}
   <div class="flex mr-3">{skill.label}</div>
   <div class="flex">
@@ -71,6 +71,6 @@
     {/each}
   </div>
   {#if $editMode}
-    <button type="button" on:click={skillIncrement} class="btn btn-circle btn-xs ml-3">+</button>
+    <button type="button" on:click={skillIncrement} class="btn-icon btn-icon-sm variant-filled ml-1">+</button>
   {/if}
 </div>

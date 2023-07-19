@@ -18,3 +18,5 @@
 {#if field.type === "counter"}
   <FieldRenderCounter field={field} on:fieldUpdate={updateField} />
 {/if}
+
+<!-- For Tag it is remove the tag -->

@@ -5,8 +5,9 @@
 	import { onMount } from "svelte";
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
-  import toast from "svelte-french-toast";
   import fieldDragStart from "$lib/fieldDragStart"
+  import { Drawer, Toast, drawerStore, toastStore } from '@skeletonlabs/skeleton';
+  import type { ToastSettings } from '@skeletonlabs/skeleton';
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -60,7 +61,10 @@
       const field = JSON.parse(json)
       try {
         characterStore.addField(field)
-        toast.success(`Field added: ${field.name}`)
+        const t: ToastSettings = {
+          message: `Field added: ${field.name}`,
+        };
+        toastStore.trigger(t);
         console.log(`Field "${field.name}" added`)
       }
       catch (e) {
@@ -73,12 +77,14 @@
 </script>
 
 <div class="flex flex-col">
-	<h1 class="text-3xl m-auto my-3">{characterName}</h1>
+	<h1 class="h1 text-3xl m-auto my-3">{characterName}</h1>
 
+  <hr />
+  <br />
 
   <div class="flex items-center justify-center">
-    <label for="compendium-drawer" class="drawer-button btn btn-accent">Open compendium</label>
-    <button class="btn {$editMode ? "btn-error" : "btn-neutral"}" on:click={toggleEditMode}>edit</button>
+    <button class="btn variant-outline-primary" on:click={() => drawerStore.open()}>Open compendium</button>
+    <button class="btn {$editMode ? "variant-filled-error" : "variant-filled-secondary"}" on:click={toggleEditMode}>edit</button>
   </div>
 
   <!-- Character Sheet -->
@@ -88,40 +94,37 @@
   </div>
 
   <!-- Compendium drawer -->
-  <div class="drawer drawer-end">
-    <input id="compendium-drawer" type="checkbox" class="drawer-toggle" />
-    <div class="drawer-side">
-      <label
-        for="compendium-drawer"
-        class="drawer-overlay"
-        on:dragenter={() => console.log("Drag Enter")}
-        on:drop={event => comendiumDrop(event)}
-        on:dragover={(ev) => { ev.preventDefault() }}
-        ></label>
+  <Drawer>
+    <!-- <label
+      for="compendium-drawer"
+      class="drawer-overlay"
+      on:dragenter={() => console.log("Drag Enter")}
+      on:drop={event => comendiumDrop(event)}
+      on:dragover={(ev) => { ev.preventDefault() }}
+      ></label> -->
 
-      <ul
-        class="menu p-4 w-80 h-full bg-base-200 text-base-content"
-      >
-        {#each Object.entries(compendiumFields) as [fieldType, fields]}
-        <div class="collapse bg-base-200">
-          <input type="checkbox" /> 
-          <div class="collapse-title text-xl font-medium">
-            {fieldType}
-          </div>
-          <div class="flex w-60 flex-wrap collapse-content justify-between">
-            <!-- {console.log(fields)} -->
-            {#each fields as field}
-              <button
-                type="button"
-                class="flex btn btn-ghost"
-                draggable={true}
-                on:dragstart={event => fieldDragStart(event, field)}
-              >{field.name}</button>
-            {/each}
-          </div>
+    <ul
+      class="menu p-4 w-80 h-full bg-base-200 text-base-content"
+    >
+      {#each Object.entries(compendiumFields) as [fieldType, fields]}
+      <div class="collapse bg-base-200">
+        <input type="checkbox" /> 
+        <div class="collapse-title text-xl font-medium">
+          {fieldType}
         </div>
-        {/each}
-      </ul>
-    </div>
-  </div>
+        <div class="flex w-60 flex-wrap collapse-content justify-between">
+          <!-- {console.log(fields)} -->
+          {#each fields as field}
+            <button
+              type="button"
+              class="flex btn btn-ghost"
+              draggable={true}
+              on:dragstart={event => fieldDragStart(event, field)}
+            >{field.name}</button>
+          {/each}
+        </div>
+      </div>
+      {/each}
+    </ul>
+  </Drawer>
 </div>
