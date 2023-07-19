@@ -110,3 +110,11 @@ export function getCharacterField(character: CharactersResponse, fieldId: string
     }
   }
 }
+
+export function getCharacterAvatar(character: CharactersResponse) {
+  if (character.avatar)
+    return pb.files.getUrl(character, character.avatar, { thumb: '100x100' })
+  else {
+    return ""
+  }
+}

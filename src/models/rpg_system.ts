@@ -26,5 +26,9 @@ export async function getActiveRpgSystems(): Promise<RpgSystemsResponse[]> {
 }
 
 export function getRpgSystemImage(rpgSystem: RpgSystemsResponse) {
-  return pb.files.getUrl(rpgSystem, rpgSystem.image, { thumb: '100x100' });
+  if (rpgSystem.image) {
+    return pb.files.getUrl(rpgSystem, rpgSystem.image, { thumb: '100x100' });
+  } else {
+    return "";
+  }
 }
