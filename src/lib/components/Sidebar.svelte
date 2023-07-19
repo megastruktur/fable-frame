@@ -13,7 +13,7 @@
 		<li><a class="btn variant-filled-success" href="/characters/create">Create Character</a></li>
 		<li><LogoutButton /></li>
 		{:else}
-			<li><a href="/login">Login</a></li>
+			<li><a class="btn variant-filled-success" href="/login">Login</a></li>
 		{/if}
 	</ul>
 </nav>
