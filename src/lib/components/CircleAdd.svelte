@@ -18,6 +18,10 @@
     value: "",
     description: ""
   }
+
+  // Select proper type.
+  let selected = type
+  $: field.type = selected
   
   const openCircle: PopupSettings = {
     event: 'click',
@@ -32,7 +36,7 @@
 
   function createComplete() {
     characterStore.addField(field)
-    console.log(field)
+    console.log(`Added field ${field.name} to character ${$characterStore.name}`)
   }
 </script>
 
@@ -41,8 +45,11 @@
   <Stepper buttonComplete="will-close" on:complete={createComplete}>
     <Step>
       <svelte:fragment slot="header">Field</svelte:fragment>
-      Compendium Types
-      Custom Types
+      <select bind:value={selected} class="select">
+        <option value="text">Text</option>
+        <option value="counter">Counter</option>
+        <option value="tag">Tag</option>
+      </select>
     </Step>
     <Step>
       <svelte:fragment slot="header">Data</svelte:fragment>

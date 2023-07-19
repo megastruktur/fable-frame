@@ -2,6 +2,7 @@
 	import { characterStore } from "$lib/stores";
 	import type { Field } from "$lib/types.d";
 	import FieldRenderCounter from "./field-renders/FieldRenderCounter.svelte";
+	import FieldRenderTag from "./field-renders/FieldRenderTag.svelte";
 	import FieldRenderText from "./field-renders/FieldRenderText.svelte";
 
   export let field: Field
@@ -17,6 +18,9 @@
 {/if}
 {#if field.type === "counter"}
   <FieldRenderCounter field={field} on:fieldUpdate={updateField} />
+{/if}
+{#if field.type === "tag"}
+  <FieldRenderTag field={field} on:fieldUpdate={updateField} />
 {/if}
 
 <!-- For Tag it is remove the tag -->

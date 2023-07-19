@@ -20,7 +20,7 @@
 	<svelte:fragment slot="header">
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<strong class="text-xl uppercase">Fable Frame</strong>
+				<strong class="text-xl uppercase">Fable Frame (WIP)</strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 			</svelte:fragment>

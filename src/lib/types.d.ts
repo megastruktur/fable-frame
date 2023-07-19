@@ -22,12 +22,13 @@ export type SystemJSONFieldTypes = {
  * - tag
  * - counter-min-max
  * - counter
+ * - tab
  */
 
 export type Field = {
   id: string // generally better I use the Unique ID.
   type: string // render type
-  name: string
+  name: string // name can help rendering particular fields in template
   label?: string
   group?: string
   value: string
