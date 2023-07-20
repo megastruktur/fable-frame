@@ -4,9 +4,10 @@
 
   export let rpgSystem: RpgSystemsResponse
   export let selected: boolean = false
+  export let classes: string = ""
 </script>
 
-<button class="card w-52 card-hover {selected === true ? "border border-primary-50" : ""}" on:click>
+<button class="{classes} card w-52 card-hover {selected === true ? "border border-primary-50" : ""}" on:click>
   <header>
     {#if rpgSystem.image}
     <img class="" src={getRpgSystemImage(rpgSystem)} alt={rpgSystem.name} />

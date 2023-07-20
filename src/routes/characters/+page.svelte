@@ -16,7 +16,7 @@
 	<br />
 
 	<!-- My Characters section -->
-	<div class="flex items-center justify-center">
+	<div class="flex items-center justify-center flex-wrap">
 		{#await getMyCharactersPromise}
 			<ProgressRadial value={undefined} />
 		{:then myCharacters} 

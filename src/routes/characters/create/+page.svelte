@@ -22,23 +22,28 @@ import type { RpgSystemsResponse } from "$lib/pocketbase-types";
 	<hr />
   <div>
     <Stepper on:complete={createAndRedirect}>
+      <!-- Select name -->
       <Step stepTerm="Pick a name" locked={!characterName}>
         <svelte:fragment slot="header">Pick a name</svelte:fragment>
         <input class="input" type="text"
         bind:value={characterName} placeholder="Input"
         name="name" />
       </Step>
+      <!-- Select System -->
       <Step stepTerm="Select RPG System" locked={!selectedSystem}>
         <svelte:fragment slot="header">Select the System or start from scratch</svelte:fragment>
         {#await getAllRpgSystems({ status: true })}
           <ProgressRadial value={undefined} />
-        {:then rpgSystems} 
-          {#each rpgSystems as rpgSystem}
-          {@const selected = selectedSystem && selectedSystem.id === rpgSystem.id}
-          <RpgSystemCard {selected} rpgSystem={rpgSystem} on:click={() => selectedSystem = rpgSystem} />
-          {/each}
+        {:then rpgSystems}
+          <div class="flex justify-around flex-wrap">
+            {#each rpgSystems as rpgSystem}
+            {@const selected = selectedSystem && selectedSystem.id === rpgSystem.id}
+            <RpgSystemCard classes="mb-3" {selected} rpgSystem={rpgSystem} on:click={() => selectedSystem = rpgSystem} />
+            {/each}
+          </div>
         {/await}
       </Step>
+      <!-- Confirm -->
       <Step stepTerm="Confirm" locked={!characterName && !selectedSystem}>
         <svelte:fragment slot="header">Verify your selection</svelte:fragment>
         <h4 class="h4"><span class="text-primary-400">{characterName}</span> with <span class="text-primary-400">{selectedSystem.name}</span></h4>

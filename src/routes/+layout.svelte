@@ -47,5 +47,7 @@
 		</AppBar>
 	</svelte:fragment>
 	<!-- Page Route Content -->
-	<slot />
+	<div class="px-4">
+		<slot />
+	</div>
 </AppShell>
