@@ -1,12 +1,17 @@
 <script lang="ts">
 	import { popup, Stepper, type PopupSettings, Step } from "@skeletonlabs/skeleton";
-  import Icon from "svelte-icons-pack/Icon.svelte"
   import BsPlus from "svelte-icons-pack/bs/BsPlus"
 	import FieldCreate from "./FieldCreate.svelte";
 	import { characterStore } from "$lib/stores";
 
+  import BsTextCenter from "svelte-icons-pack/bs/BsTextCenter";
+  import BsThreeDots from "svelte-icons-pack/bs/BsThreeDots";
+  import BsHash from "svelte-icons-pack/bs/BsHash";
+	import CircleAddFieldTypeButton from "./CircleAddFieldTypeButton.svelte";
+	import Icon from "svelte-icons-pack";
+
   export let group: string;
-  export let type: string;
+  export let type: string = "";
 
 
   let field = {
@@ -20,9 +25,10 @@
   }
 
   // Select proper type.
-  let selected = type
-  $: field.type = selected
-  
+  $: {
+    field.type = type
+  }
+
   const openCircle: PopupSettings = {
     event: 'click',
     target: `circlePopup-${group}`,
@@ -38,6 +44,25 @@
     characterStore.addField(field)
     console.log(`Added field ${field.name} to character ${$characterStore.name}`)
   }
+
+  const fieldTypes: {[type: string]: any} = {
+    text: {
+      name: "Text",
+      icon: BsTextCenter,
+      description: "A text field"
+    },
+    tag: {
+      name: "Tag",
+      icon: BsHash,
+      description: "A tag field. The Value will be displayed on character sheet without the label."
+    },
+    counter: {
+      name: "Counter",
+      icon: BsThreeDots,
+      description: "To use it set the value to +++ where each + represents max count."
+    }
+  }
+
 </script>
 
 <div class="card p-4 variant-filled-neutral-900/90" data-popup="circlePopup-{group}">
@@ -45,11 +70,20 @@
   <Stepper buttonComplete="will-close" on:complete={createComplete}>
     <Step>
       <svelte:fragment slot="header">Field</svelte:fragment>
-      <select bind:value={selected} class="select">
-        <option value="text">Text</option>
-        <option value="counter">Counter</option>
-        <option value="tag">Tag</option>
-      </select>
+
+      <div class="flex flex-wrap justify-around">
+        {#each Object.entries(fieldTypes) as [fieldType, fieldData]}
+          <CircleAddFieldTypeButton bind:selectedType={type} type={fieldType} icon={fieldData.icon} />
+        {/each}
+      </div>
+
+      <!-- Field description goes here -->
+      <div>
+        {#if type}
+        {fieldTypes[type].description}
+        {/if}
+      </div>
+
     </Step>
     <Step>
       <svelte:fragment slot="header">Data</svelte:fragment>

@@ -19,7 +19,7 @@
     <FieldRender field={field} />
   {/each}
   {#if $editMode}
-  <CircleAdd group={tabName} type="text" />
+  <CircleAdd group={tabName} />
   {/if}
 </div>
 </section>
