@@ -10,7 +10,7 @@
   }
 </script>
 
-<button class="mb-3 {field.icon !== undefined && field.icon !== "" ? "btn-icon btn-icon-base" : "btn btn-base"} {selectedField.name === field.name ? "variant-filled-secondary" : "variant-filled"}" on:click={selectField}>
+<button class="m-1 {field.icon !== undefined && field.icon !== "" ? "btn-icon btn-icon-base" : "btn btn-base"} {selectedField.name === field.name ? "variant-filled-secondary" : "variant-filled"}" on:click={selectField}>
 
   {#if field.icon !== undefined && field.icon!== ""}
     <Icon src={field.icon} />
