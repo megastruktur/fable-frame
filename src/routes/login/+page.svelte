@@ -52,6 +52,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Fable Frame - Login</title>
+    <meta name="description" content="Log In or Register">
+</svelte:head>
 
 <div class="flex flex-col justify-center items-center">
 
