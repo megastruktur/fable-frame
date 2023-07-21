@@ -11,6 +11,10 @@
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import Sidebar from '$lib/components/Sidebar.svelte';
 	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
+
+	import Icon from "svelte-icons-pack";
+	import BsGithub from "svelte-icons-pack/bs/BsGithub";
+	import BsEnvelope from "svelte-icons-pack/bs/BsEnvelope";
 	
 	const drawerSettings: DrawerSettings = {
 		id: 'navbar',
@@ -43,11 +47,13 @@
 				<strong class="text-xl uppercase">Fable Frame (WIP)</strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
+				<a href="mailto:astrtomortis@gmail.com" class="btn"><Icon src={BsEnvelope} /></a>
+				<a href="https://github.com/megastruktur/fable-frame" class="btn"><Icon src={BsGithub} /></a>
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
 	<!-- Page Route Content -->
-	<div class="px-4">
+	<div class="px-4 h-full">
 		<slot />
 	</div>
 </AppShell>
