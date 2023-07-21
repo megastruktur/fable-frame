@@ -60,7 +60,7 @@
   {#if $editMode}
     <button type="button" on:click={skillDecrement} class="btn-icon btn-icon-sm variant-filled mr-1">-</button>
   {/if}
-  <div class="flex mr-3">{skill.label}</div>
+  <div class="flex mr-3 uppercase">{skill.label}</div>
   <div class="flex">
     {#each Array(skill.value.length) as _, i}
       {#if skill.value.charAt(i) === "+"}

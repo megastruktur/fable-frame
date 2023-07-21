@@ -13,6 +13,11 @@
   export let group: string;
   export let type: string = "";
 
+  // Which compendium to use.
+  // Set empty if no compendium.
+  export let compendium: string = "";
+  export let compendiumGroup: string = "";
+
 
   let field = {
     id: "",
