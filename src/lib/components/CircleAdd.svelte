@@ -1,14 +1,8 @@
 <script lang="ts">
-	import { popup, Stepper, type PopupSettings, Step } from "@skeletonlabs/skeleton";
-  import BsPlus from "svelte-icons-pack/bs/BsPlus"
-	import FieldCreate from "./FieldCreate.svelte";
-	import { characterStore } from "$lib/stores";
-
-  import BsTextCenter from "svelte-icons-pack/bs/BsTextCenter";
-  import BsThreeDots from "svelte-icons-pack/bs/BsThreeDots";
-  import BsHash from "svelte-icons-pack/bs/BsHash";
-	import CircleAddFieldTypeButton from "./CircleAddFieldTypeButton.svelte";
+	import { modalStore, type ModalSettings, type ModalComponent, Modal } from "@skeletonlabs/skeleton";
 	import Icon from "svelte-icons-pack";
+	import BsPlus from "svelte-icons-pack/bs/BsPlus";
+	import CircleAddModal from "$lib/components/CircleAddModal.svelte";
 
   export let group: string;
   export let type: string = "";
@@ -18,88 +12,30 @@
   export let compendium: string = "";
   export let compendiumGroup: string = "";
 
-
-  let field = {
-    id: "",
-    type: type,
-    name: "",
-    label: "",
-    group: group,
-    value: "",
-    description: ""
-  }
-
-  // Select proper type.
-  $: {
-    field.type = type
-  }
-
-  const openCircle: PopupSettings = {
-    event: 'click',
-    target: `circlePopup-${group}`,
-    placement: 'bottom',
-    closeQuery: '.will-close',
-  }
-
-  // Get list of all Compendium Items with Group and Type from the System Compendium
-  // @todo Get list of all Compendium Items with Group and Type from all Compendiums
-  // If type is empty - list ONLY default types like Text, Tag, Counter and Etc.
-
-  function createComplete() {
-    characterStore.addField(field)
-    console.log(`Added field ${field.name} to character ${$characterStore.name}`)
-  }
-
-  const fieldTypes: {[type: string]: any} = {
-    text: {
-      name: "Text",
-      icon: BsTextCenter,
-      description: "A text field"
+  const modal: ModalSettings = {
+    type: 'component',
+    // Pass the component registry key as a string:
+    component: {
+      // Pass a reference to your custom component
+      ref: CircleAddModal,
+      // Add the component properties as key/value pairs
+      props: {
+        group,
+        type,
+        compendium,
+        compendiumGroup
+      },
+      // Provide a template literal for the default component slot
+      slot: '<p>Loading...</p>'
     },
-    tag: {
-      name: "Tag",
-      icon: BsHash,
-      description: "A tag field. The Value will be displayed on character sheet without the label."
-    },
-    counter: {
-      name: "Counter",
-      icon: BsThreeDots,
-      description: "To use it set the value to +++ where each + represents max count."
-    }
-  }
+  };
 
+  async function openModal() {
+    modalStore.trigger(modal)
+  }
 </script>
 
-<div class="card p-4 variant-filled-neutral-900/90" data-popup="circlePopup-{group}">
-  
-  <Stepper buttonComplete="will-close" on:complete={createComplete}>
-    <Step>
-      <svelte:fragment slot="header">Field</svelte:fragment>
-
-      <div class="flex flex-wrap justify-around">
-        {#each Object.entries(fieldTypes) as [fieldType, fieldData]}
-          <CircleAddFieldTypeButton bind:selectedType={type} type={fieldType} icon={fieldData.icon} />
-        {/each}
-      </div>
-
-      <!-- Field description goes here -->
-      <div>
-        {#if type}
-        {fieldTypes[type].description}
-        {/if}
-      </div>
-
-    </Step>
-    <Step>
-      <svelte:fragment slot="header">Data</svelte:fragment>
-      <FieldCreate bind:field={field} /> 
-    </Step>
-  </Stepper>
-
-	<div class="arrow variant-filled-neutral-900/90" />
-</div>
-
-<button class="btn btn-circle" use:popup={openCircle} >
+<button class="btn btn-circle" on:click={openModal}>
   <Icon size="40" color="" src={BsPlus} />
 </button>
 

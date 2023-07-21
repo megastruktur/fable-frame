@@ -234,7 +234,7 @@
         on:dragstart={event => fieldDragStart(event, feel)}
         >{feel.name}</button>
     {/each}
-    <CircleAdd group="feel" type="tag" />
+    <CircleAdd group="feel" type="tag" compendium="broken-compass" compendiumGroup="feel" />
     </div>
   </section>
 
@@ -263,7 +263,7 @@
       {#each inventory as item}
       <FieldRender field={item} />
       {/each}
-      <CircleAdd group="inventory" type="text" compendium="broken-compass" compendiumGroup="feel" />
+      <CircleAdd group="inventory" type="text" />
     </div>
   </section>
 </div>

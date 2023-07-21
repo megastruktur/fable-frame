@@ -1,7 +1,8 @@
 <script lang='ts'>
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
-	import { storePopup, type DrawerSettings } from '@skeletonlabs/skeleton';
-	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
+  import { size } from '@floating-ui/dom';
+	import { storePopup, type DrawerSettings, type ModalComponent, Modal } from '@skeletonlabs/skeleton';
+	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow, size });
 	// The ordering of these imports is critical to your app working properly
 	import '@skeletonlabs/skeleton/themes/theme-crimson.css';
 	// If you have source.organizeImports set to true in VSCode, then it will auto change this ordering
@@ -15,12 +16,17 @@
 	import Icon from "svelte-icons-pack";
 	import BsGithub from "svelte-icons-pack/bs/BsGithub";
 	import BsEnvelope from "svelte-icons-pack/bs/BsEnvelope";
+	import CircleAddModal from '$lib/components/CircleAddModal.svelte';
 	
 	const drawerSettings: DrawerSettings = {
 		id: 'navbar',
 		width: 'w-[170px]',
 	};
+
+
 </script>
+
+<Modal />
 
 <Drawer>
 	<h2 class="h2 p-4">Navigation</h2>
