@@ -1,6 +1,8 @@
 <script lang="ts">
     import { currentUser, pb } from "$lib/pocketbase"
     import { goto } from "$app/navigation";
+    import Icon from "svelte-icons-pack";
+    import BsGoogle from "svelte-icons-pack/bs/BsGoogle";
 
     let isLogin = true
     let isError = false
@@ -39,6 +41,14 @@
         } catch (e) {
             console.log(e)
         }
+    }
+
+    async function googleLogin() {
+  
+        // "logout" the last authenticated model
+        pb.authStore.clear();
+
+        const authData = await pb.collection('users').authWithOAuth2({ provider: 'google' });
     }
 </script>
 
@@ -89,5 +99,7 @@
                 </div>
             </form>
         </div>
+
+        <button class="btn variant-filled" on:click={googleLogin}><Icon src={BsGoogle} /></button>
     {/if}
 </div>
