@@ -263,7 +263,7 @@
       {#each inventory as item}
       <FieldRender field={item} />
       {/each}
-      <CircleAdd group="inventory" type="text" />
+      <CircleAdd group="inventory" type="text" compendium="broken-compass" compendiumGroup="inventory" />
     </div>
   </section>
 </div>
