@@ -1,11 +1,20 @@
 <script lang="ts">
+	import type { Field } from "$lib/types";
   import Icon from "svelte-icons-pack/Icon.svelte"
 
-  export let selectedType: string
-  export let type: string
-  export let icon: any
+  export let selectedField: Field
+  export let field: Field
+
+  function selectField() {
+    selectedField = field
+  }
 </script>
 
-<button class="btn-icon btn-icon-base {selectedType === type ? "variant-filled-secondary" : "variant-filled"}" on:click={() => selectedType = type}>
-  <Icon src={icon} />
+<button class="m-1 {field.icon !== undefined && field.icon !== "" ? "btn-icon btn-icon-base" : "btn btn-base"} {selectedField.name === field.name ? "variant-filled-secondary" : "variant-filled"}" on:click={selectField}>
+
+  {#if field.icon !== undefined && field.icon!== ""}
+    <Icon src={field.icon} />
+  {:else}
+    {field.label}
+  {/if}
 </button>

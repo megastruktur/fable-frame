@@ -7,25 +7,25 @@
 		"character": [
 			{
 				"name": "words-to-live-by",
-				"label": "words-to-live-by",
+				"label": "Words to Live By",
         "group": "general",
 				"type": "text"
 			},
 			{
 				"name": "workplace",
-				"label": "workplace",
+				"label": "Workplace",
         "group": "general",
 				"type": "text"
 			},
 			{
 				"name": "homeland",
-				"label": "homeland",
+				"label": "Homeland",
         "group": "general",
 				"type": "text"
 			},
 			{
 				"name": "heritage",
-				"label": "heritage",
+				"label": "Heritage",
         "group": "general",
 				"type": "text"
 			},

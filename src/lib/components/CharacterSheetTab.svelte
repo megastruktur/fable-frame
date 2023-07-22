@@ -14,7 +14,7 @@
 
 
 <section class="mx-3 {matches && activeTab !== tabName ? "hidden" : ""}">
-<div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
+<div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md lg:w-80 w-72">
   {#each fields as field}
     <FieldRender field={field} />
   {/each}

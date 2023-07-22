@@ -9,6 +9,10 @@ export async function getRpgSystem(id: string): Promise<RpgSystemsResponse> {
   return await pb.collection("rpg_systems").getOne(id)
 }
 
+export async function getRpgSystemByIdentifier(identifier: string): Promise<RpgSystemsResponse> {
+  return await pb.collection("rpg_systems").getFirstListItem(`identifier="${identifier}"`)
+}
+
 export async function updateRpgSystem(id: string, data: Partial<RpgSystemsRecord>): Promise<RpgSystemsResponse> {
   return await pb.collection("rpg_systems").update(id, data)
 }

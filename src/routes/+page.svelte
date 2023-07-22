@@ -1,41 +1,16 @@
-<!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
+<svelte:head>
+    <title>Fable Frame - an online TTRPG Character Sheet storage</title>
+		<meta name="description" content="Fable Frame is a simple project that allows you to create Tabletop RPG Character sheets online and use them during your game.">
+</svelte:head>
 
 <div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-10 text-center flex flex-col items-center">
+	<div class="space-y-10 text-center flex flex-col items-center ">
 		<h2 class="h2">Welcome to Fable Frame!</h2>
+		<p>
+			Fable Frame is a simple project that allows you to create <span class="text-primary-400">Tabletop RPG Character sheets</span> online and use them during your game.
+		</p>
+		<p>
+			This is currently a <span class="text-primary-400">Work In Progress</span>. If you are interested - please follow up on <a class="btn variant-filled" href="https://github.com/megastruktur/fable-frame">Github</a>
+		</p>
 	</div>
 </div>
-
-<style lang="postcss">
-	figure {
-		@apply flex relative flex-col;
-	}
-	figure svg,
-	.img-bg {
-		@apply w-64 h-64 md:w-80 md:h-80;
-	}
-	.img-bg {
-		@apply absolute z-[-1] rounded-full blur-[50px] transition-all;
-		animation: pulse 5s cubic-bezier(0, 0, 0, 0.5) infinite,
-			glow 5s linear infinite;
-	}
-	@keyframes glow {
-		0% {
-			@apply bg-primary-400/50;
-		}
-		33% {
-			@apply bg-secondary-400/50;
-		}
-		66% {
-			@apply bg-tertiary-400/50;
-		}
-		100% {
-			@apply bg-primary-400/50;
-		}
-	}
-	@keyframes pulse {
-		50% {
-			transform: scale(1.5);
-		}
-	}
-</style>

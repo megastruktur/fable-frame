@@ -58,6 +58,7 @@
 
   let feelings: Field[]
   let generals: Field[]
+  let inventory: Field[]
 
   let fieldRemove: boolean = false
   
@@ -95,6 +96,7 @@
 
     feelings = getFieldsByGroup("feel", character.fields)
     generals = getFieldsByGroup("general", character.fields)
+    inventory = getFieldsByGroup("inventory", character.fields)
   })
   
   function updateField(event: { detail: Field }) {
@@ -111,25 +113,25 @@
 <div class="flex {matches ? "flex-col items-center" : "justify-center"}">
 
   {#if matches}
-  <div class="tabs tabs-boxed">
+  <div class="tabs tabs-boxed w-72">
     <a
       href="/"
-      class="tab {activeTab === "skill" ? "tab-active" : ""}"
+      class="tab p-1 {activeTab === "skill" ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
       on:click|preventDefault={() => setActiveTab("skill")}
       >Skills</a>
     <a
       href="/"
-      class="tab {activeTab === "feel" ? "tab-active" : ""}"
+      class="tab p-1 {activeTab === "feel" ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
       on:click|preventDefault={() => setActiveTab("feel")}
       >Feelings</a>
     <a
       href="/"
-      class="tab {activeTab === "feel" ? "tab-active" : ""}"
+      class="tab p-1 {activeTab === "general" ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
       on:click|preventDefault={() => setActiveTab("general")}
       >General</a>
     <a
       href="/"
-      class="tab {activeTab === "inventory" ? "tab-active" : ""}"
+      class="tab p-1 {activeTab === "inventory" ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
       on:click|preventDefault={() => setActiveTab("inventory")}
       >Inventory</a>
   </div>
@@ -138,79 +140,79 @@
   <!-- Skills -->
   <section
     class="mx-3 {matches && activeTab !== "skill" ? "hidden" : ""}">
-    <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
+    <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md lg:w-80 w-72">
 
       <!-- Action -->
       <div class="mb-3">
         <h2 class="flex text-3xl justify-center h2">Skills</h2>
-        <h3 class="h3 flex bg-base-100 p-3 mb-3">
+        <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
           <DiamondSkill on:fieldUpdate={updateField} skill={action} />
         </h3>
-        <h4 class="h4 flex flex-col items-end">
+        <h5 class="h5 flex flex-col items-end">
           <DiamondSkill on:fieldUpdate={updateField} skill={fight} />
           <DiamondSkill on:fieldUpdate={updateField} skill={leadership} />
           <DiamondSkill on:fieldUpdate={updateField} skill={stunt} />
-        </h4>
+        </h5>
       </div>
   
       <!-- Guts -->
       <div class="mb-3">
-        <h3 class="h3 flex bg-base-100 p-3 mb-3">
+        <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
           <DiamondSkill on:fieldUpdate={updateField} skill={guts} />
         </h3>
-        <h4 class="h4 flex flex-col items-end">
+        <h5 class="h5 flex flex-col items-end">
           <DiamondSkill on:fieldUpdate={updateField} skill={cool} />
           <DiamondSkill on:fieldUpdate={updateField} skill={drive} />
           <DiamondSkill on:fieldUpdate={updateField} skill={shoot} />
-        </h4>
+        </h5>
       </div>
   
       <!-- Knowledge -->
       <div class="mb-3">
-        <h3 class="h3 flex bg-base-100 p-3 mb-3">
+        <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
           <DiamondSkill on:fieldUpdate={updateField} skill={knowledge} />
         </h3>
-        <h4 class="h4 flex flex-col items-end">
+        <h5 class="h5 flex flex-col items-end">
           <DiamondSkill on:fieldUpdate={updateField} skill={culture} />
           <DiamondSkill on:fieldUpdate={updateField} skill={first_aid} />
           <DiamondSkill on:fieldUpdate={updateField} skill={tech} />
-        </h4>
+        </h5>
       </div>
   
       <!-- Society -->
       <div class="mb-3">
-        <h3 class="h3 flex bg-base-100 p-3 mb-3">
+        <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
           <DiamondSkill on:fieldUpdate={updateField} skill={society} />
         </h3>
-        <h4 class="h4 flex flex-col items-end">
+        <h5 class="h5 flex flex-col items-end">
           <DiamondSkill on:fieldUpdate={updateField} skill={charm} />
           <DiamondSkill on:fieldUpdate={updateField} skill={eloquence} />
           <DiamondSkill on:fieldUpdate={updateField} skill={observation} />
-        </h4>
+        </h5>
       </div>
   
       <!-- Wild -->
       <div class="mb-3">
-        <h3 class="h3 flex bg-base-100 p-3 mb-3">
+        <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
           <DiamondSkill on:fieldUpdate={updateField} skill={wild} />
         </h3>
-        <h4 class="h4 flex flex-col items-end">
+        <h5 class="h5 flex flex-col items-end">
           <DiamondSkill on:fieldUpdate={updateField} skill={scout} />
           <DiamondSkill on:fieldUpdate={updateField} skill={survival} />
           <DiamondSkill on:fieldUpdate={updateField} skill={tough} />
-        </h4>
+        </h5>
       </div>
   
       <!-- Crime -->
       <div class="mb-3">
-        <h3 class="h3 flex bg-base-100 p-3 mb-3">
+        <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
           <DiamondSkill on:fieldUpdate={updateField} skill={crime} />
         </h3>
-        <h4 class="h4 flex flex-col items-end">
+        <h5 class="h5 flex flex-col items-end">
           <DiamondSkill on:fieldUpdate={updateField} skill={alertF} />
           <DiamondSkill on:fieldUpdate={updateField} skill={dexterity} />
           <DiamondSkill on:fieldUpdate={updateField} skill={stealth} />
-        </h4>
+        </h5>
       </div>
     </div>
 
@@ -219,8 +221,7 @@
   <!-- Feelings -->
   <section
     role="figure"
-    class="mx-3 {matches && activeTab !== "feel" ? "hidden" : ""}"
-    on:dragover={() => fieldRemove = false}>
+    class="mx-3 {matches && activeTab !== "feel" ? "hidden" : ""} lg:w-80 w-72">
 
     <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
 
@@ -233,22 +234,36 @@
         on:dragstart={event => fieldDragStart(event, feel)}
         >{feel.name}</button>
     {/each}
-    <CircleAdd group="feel" type="tag" />
+    <CircleAdd group="feel" type="tag" compendium="broken-compass" compendiumGroup="feel" />
     </div>
   </section>
 
   <!-- General -->
   <section
     role="figure"
-    class="mx-3 {matches && activeTab !== "general" ? "hidden" : ""}"
-    on:dragover={() => fieldRemove = false}>
+    class="mx-3 {matches && activeTab !== "general" ? "hidden" : ""}">
 
-    <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
+    <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md lg:w-80 w-72">
 
     <h2 class="flex text-3xl justify-center h2">General</h2>
       {#each generals as general}
       <FieldRender field={general} />
       {/each}
+    </div>
+  </section>
+
+  <!-- Inventory -->
+  <section
+    role="figure"
+    class="mx-3 {matches && activeTab !== "inventory" ? "hidden" : ""}">
+
+    <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md lg:w-80 w-72">
+
+    <h2 class="flex text-3xl justify-center h2">Inventory</h2>
+      {#each inventory as item}
+      <FieldRender field={item} />
+      {/each}
+      <CircleAdd group="inventory" type="text" compendium="broken-compass" compendiumGroup="inventory" />
     </div>
   </section>
 </div>
