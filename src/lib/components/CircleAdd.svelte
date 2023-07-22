@@ -12,25 +12,24 @@
   export let compendium: string = "";
   export let compendiumGroup: string = "";
 
-  const modal: ModalSettings = {
-    type: 'component',
-    // Pass the component registry key as a string:
-    component: {
-      // Pass a reference to your custom component
-      ref: CircleAddModal,
-      // Add the component properties as key/value pairs
-      props: {
-        group,
-        type,
-        compendium,
-        compendiumGroup
-      },
-      // Provide a template literal for the default component slot
-      slot: '<p>Loading...</p>'
-    },
-  };
-
   async function openModal() {
+
+    const modal: ModalSettings = {
+      type: 'component',
+      // Pass the component registry key as a string:
+      component: {
+        // Pass a reference to your custom component
+        ref: CircleAddModal,
+        // Add the component properties as key/value pairs
+        props: {
+          group,
+          type,
+          compendium,
+          compendiumGroup
+        },
+      },
+    };
+
     modalStore.trigger(modal)
   }
 </script>
