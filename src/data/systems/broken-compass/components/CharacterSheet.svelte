@@ -9,6 +9,7 @@
   import DiamondSkill from "./DiamondSkill.svelte";
 	import FieldRender from '$lib/components/FieldRender.svelte';
 	import CircleAdd from '$lib/components/CircleAdd.svelte';
+	import FieldRenderTag from '$lib/components/field-renders/FieldRenderTag.svelte';
 
   const query = {
     "mobile": "(max-width: 480px)",
@@ -60,8 +61,6 @@
   let generals: Field[]
   let inventory: Field[]
 
-  let fieldRemove: boolean = false
-  
   characterStore.subscribe((character: CharactersResponse) => {
 
     action = getFieldFromListByName("action", character.fields)
@@ -140,7 +139,7 @@
   <!-- Skills -->
   <section
     class="mx-3 {matches && activeTab !== "skill" ? "hidden" : ""}">
-    <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md lg:w-80 w-72">
+    <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
 
       <!-- Action -->
       <div class="mb-3">
@@ -226,14 +225,11 @@
     <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
 
     <h2 class="flex text-3xl justify-center h2">I Feel</h2>
-    {#each feelings as feel}
-      <button
-        type="button"
-        class="btn {feel.data?.type === "plus" ? "btn-accent" : "btn-error"}"
-        draggable="true"
-        on:dragstart={event => fieldDragStart(event, feel)}
-        >{feel.name}</button>
-    {/each}
+    <div class="flex flex-wrap">
+      {#each feelings as feel}
+        <FieldRender editable={false} classes={feel.data?.type === "plus" ? "variant-filled-success" : "variant-filled-error"} field={feel} renderAs="tag"/>
+      {/each}
+    </div>
     <CircleAdd group="feel" type="tag" compendium="broken-compass" compendiumGroup="feel" />
     </div>
   </section>

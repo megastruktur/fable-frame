@@ -9,6 +9,8 @@
   import { createEventDispatcher } from "svelte"
 
   export let field: Field
+  export let classes: string = ""
+  export let editable: boolean = true
 
   const dispatch = createEventDispatcher()
 
@@ -56,8 +58,8 @@
 
 </script>
 
-<div class="flex items-center">
-  {#if $editMode}
+<div class="{classes} flex items-center">
+  {#if editable && $editMode}
     <button type="button" on:click={fieldDecrement} class="btn-icon btn-icon-sm variant-filled mr-1">-</button>
   {/if}
   <p class="flex mr-3 text-xl">{field.label}</p>
@@ -70,7 +72,7 @@
       {/if}
     {/each}
   </div>
-  {#if $editMode}
+  {#if editable && $editMode}
     <button type="button" on:click={fieldIncrement} class="btn-icon btn-icon-sm variant-filled ml-1">+</button>
   {/if}
 </div>
