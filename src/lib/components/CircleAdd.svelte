@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { modalStore, type ModalSettings, type ModalComponent, Modal } from "@skeletonlabs/skeleton";
+	import { modalStore, type ModalSettings} from "@skeletonlabs/skeleton";
 	import Icon from "svelte-icons-pack";
 	import BsPlus from "svelte-icons-pack/bs/BsPlus";
 	import CircleAddModal from "$lib/components/CircleAddModal.svelte";
+	import { editMode } from "$lib/stores";
 
   export let group: string;
   export let type: string = "";
@@ -34,7 +35,9 @@
   }
 </script>
 
+{#if $editMode}
 <button class="btn btn-circle" on:click={openModal}>
   <Icon size="40" color="" src={BsPlus} />
 </button>
+{/if}
 

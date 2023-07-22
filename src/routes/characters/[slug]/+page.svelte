@@ -35,7 +35,7 @@
   })
 
 
-  $: $characterStore, saveCharacter()
+  $: $characterStore
 
   async function saveCharacter() {
     if ($characterStore && $characterStore.id) {
@@ -48,8 +48,21 @@
     }
   }
 
-  function toggleEditMode() {
+  
+  async function toggleEditMode() {
+
+    // If toggling from edit mode to non-edit - save the character
+    if ($editMode) {
+      console.log(`Resetting character, loading from DB`)
+      $characterStore = (await getCharacter($page.params.slug, {expand: "rpgSystem"}))
+    }
+
     editMode.set(!$editMode)
+  }
+
+  function saveChanges() {
+    saveCharacter()
+    editMode.set(false)
   }
 
 
@@ -61,7 +74,11 @@
   <hr />
 
   <div class="flex items-center justify-center mt-4">
-    <button class="btn {$editMode ? "variant-filled-error" : "variant-filled-secondary"}" on:click={toggleEditMode}>edit</button>
+    <button class="btn uppercase {$editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{$editMode ? "cancel" : "edit"}</button>
+    <!-- cancel edit button -->
+    {#if $editMode}
+      <button class="btn uppercase variant-filled-success ml-3" on:click={saveChanges}>save</button>
+    {/if}
   </div>
 
   <!-- Character Sheet -->
