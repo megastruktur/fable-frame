@@ -8,6 +8,7 @@
   import BsHash from "svelte-icons-pack/bs/BsHash";
 	import CircleAddFieldTypeButton from "./CircleAddFieldTypeButton.svelte";
 	import { getCompendiumItems } from "$lib/getCompendiumItems";
+	import { onMount } from "svelte";
 
   export let group: string;
   export let type: string = "";
@@ -16,6 +17,9 @@
   // Set empty if no compendium.
   export let compendium: string = "";
   export let compendiumGroup: string = "";
+
+  // Modal parent.
+  export let parent: any;
 
   let field = {
     id: "",
@@ -26,6 +30,11 @@
     value: "",
     description: ""
   }
+
+  onMount(() => {
+    console.log({parent})
+    console.log(`Opening modal for group ${group}`)
+  })
 
   // Get list of all Compendium Items with Group and Type from the System Compendium
   // @todo Get list of all Compendium Items with Group and Type from all Compendiums
@@ -55,6 +64,7 @@
       name: "text",
       type: "text",
       label: "Text",
+      group: group,
       icon: BsTextCenter,
       description: "A text field"
     },
@@ -62,6 +72,7 @@
       name: "tag",
       type: "tag",
       label: "Tag",
+      group: group,
       icon: BsHash,
       description: "A tag field. The Value will be displayed on character sheet without the label."
     },
@@ -69,6 +80,7 @@
       name: "counter",
       type: "counter",
       label: "Counter",
+      group: group,
       icon: BsThreeDots,
       description: "To use it set the value to +++ where each + represents max count."
     }

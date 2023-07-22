@@ -37,7 +37,10 @@ function createCharacterStore() {
       created: "",
       updated: "",
       collectionId: "",
-      collectionName: Collections.Characters
+      collectionName: Collections.Characters,
+      expand: {
+        rpgSystem: undefined
+      }
     })
   };
 }
@@ -45,5 +48,3 @@ function createCharacterStore() {
 export const characterStore = createCharacterStore();
 
 export const editMode = writable(false);
-
-export const theme = writable("luxury");
