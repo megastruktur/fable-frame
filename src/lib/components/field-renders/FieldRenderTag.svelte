@@ -12,7 +12,7 @@
 
 </script>
 
-<div class="{classes} {!$editMode ? "chip m-1" : ""}" on:click on:keyup>
+<div class="{classes} {!$editMode || !editable ? "chip m-1" : ""}" on:click on:keyup>
   {#if editable && $editMode}
     <input class="input" type="text" bind:value={field.label} on:focusout={() => {dispatch("fieldUpdate", field)}} />
   {:else}
