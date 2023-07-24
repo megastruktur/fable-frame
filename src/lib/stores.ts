@@ -20,6 +20,13 @@ function createCharacterStore() {
     })
   }
 
+  function rename(name: string) {
+    update((character) => {
+      character.name = name
+      return character
+    })
+  }
+
   function addField(field: Field) {
     update((character) => {
       console.log(`Adding field ${field.name} to character ${character.name}`)
@@ -37,6 +44,7 @@ function createCharacterStore() {
   return {
     subscribe,
     setFieldValue,    
+    rename,    
     setField,    
     addField,    
     removeField,    

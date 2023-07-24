@@ -6,8 +6,12 @@
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
 
+  // Icons
   import Icon from "svelte-icons-pack"
   import BsTrash from "svelte-icons-pack/bs/BsTrash"
+  import BsPencil from "svelte-icons-pack/bs/BsPencil";
+  import FaSolidSkull from "svelte-icons-pack/fa/FaSolidSkull";
+
 	import { modalStore, type ModalSettings, type ToastSettings, toastStore } from "@skeletonlabs/skeleton";
 	import { goto } from "$app/navigation";
 
@@ -93,16 +97,22 @@
     editMode.set(false)
   }
 
+  function characterRename() {
+    characterStore.rename(characterName)
+  }
+
 
 </script>
 
 <div class="flex flex-col">
-	<h1 class="h1 text-3xl m-auto my-3">
-    <span>{characterName}</span>
+	<h1 class="h1 text-3xl m-auto my-3 flex">
     {#if $editMode}
-    <button class="btn-icon btn-icon-m variant-filled-error" on:click={deleteCharacterPrompt}>
-      <Icon src={BsTrash} />
-    </button>
+      <input type="text" class="input" bind:value={characterName} on:focusout={characterRename}/>
+    {:else}
+      <span>{characterName}</span>
+    {/if}
+    {#if $editMode}
+    <button class="btn-icon btn-icon-m variant-filled-error mx-3" on:click={deleteCharacterPrompt}><Icon src={FaSolidSkull} /></button>
     {/if}
   </h1>
 
