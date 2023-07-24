@@ -1,7 +1,7 @@
 import { writable } from "svelte/store"
 import { Collections, type CharactersResponse } from "./pocketbase-types.d";
 import type { Field } from "./types";
-import { addCharacterField, removeCharacterField, updateCharacterFieldValue } from "$lib/characterFieldsOperations";
+import { addCharacterField, removeCharacterField, updateCharacterField, updateCharacterFieldValue } from "$lib/characterFieldsOperations";
 
 
 function createCharacterStore() {
@@ -11,6 +11,12 @@ function createCharacterStore() {
   function setFieldValue(fieldId: string, fieldValue: string) {
     update((character) => {
       return updateCharacterFieldValue(character, fieldId, fieldValue)
+    })
+  }
+
+  function setField(field: Field) {
+    update((character) => {
+      return updateCharacterField(character, field)
     })
   }
 
@@ -31,6 +37,7 @@ function createCharacterStore() {
   return {
     subscribe,
     setFieldValue,    
+    setField,    
     addField,    
     removeField,    
     set: (character: CharactersResponse) => set(character),
