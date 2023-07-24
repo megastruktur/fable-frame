@@ -64,6 +64,7 @@ export async function updateCharacterWithHash(id: string, data: Partial<Characte
 
 export async function deleteCharacter(id: string) {
   await pb.collection("characters").delete(id)
+  console.log(`Deleted character ${id}`)
 }
 
 export async function getAllCharacters(queryParams: any = {}): Promise<CharactersResponse[]> {

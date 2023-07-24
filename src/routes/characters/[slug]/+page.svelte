@@ -1,10 +1,15 @@
 <!-- All Characters -->
 <script lang="ts">
   import { page } from "$app/stores"
-	import { getCharacter, updateCharacterWithHash } from "$models/character";
+	import { deleteCharacter, getCharacter, updateCharacterWithHash } from "$models/character";
 	import { onMount } from "svelte";
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
+
+  import Icon from "svelte-icons-pack"
+  import BsTrash from "svelte-icons-pack/bs/BsTrash"
+	import { modalStore, type ModalSettings, type ToastSettings, toastStore } from "@skeletonlabs/skeleton";
+	import { goto } from "$app/navigation";
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -36,6 +41,29 @@
 
 
   $: $characterStore
+
+  function deleteCharacterPrompt() {
+
+    const modal: ModalSettings = {
+        type: 'confirm',
+        title: 'Please Confirm',
+        body: `Are you sure you want to remove character <span class="text-red-800">${characterName}</span>? This action cannot be undone.`,
+        response: async (r: boolean) => {
+          if (r === true) {
+            await deleteCharacter($characterStore.id)
+
+            const t: ToastSettings = {
+              message: `Character <span class="text-red-800">${characterName}</span> has been removed`,
+              timeout: 5000
+            };
+            toastStore.trigger(t);
+
+            goto("/characters")
+          }
+        }
+      };
+      modalStore.trigger(modal);
+  }
 
   async function saveCharacter() {
     if ($characterStore && $characterStore.id) {
@@ -69,7 +97,14 @@
 </script>
 
 <div class="flex flex-col">
-	<h1 class="h1 text-3xl m-auto my-3">{characterName}</h1>
+	<h1 class="h1 text-3xl m-auto my-3">
+    <span>{characterName}</span>
+    {#if $editMode}
+    <button class="btn-icon btn-icon-m variant-filled-error" on:click={deleteCharacterPrompt}>
+      <Icon src={BsTrash} />
+    </button>
+    {/if}
+  </h1>
 
   <hr />
 

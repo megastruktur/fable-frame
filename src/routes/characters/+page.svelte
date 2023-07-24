@@ -2,7 +2,7 @@
 <script lang="ts">
 	import CharacterCard from '$lib/components/CharacterCard.svelte';
 	import { getAllCharacters } from '$models/character';
-	import { ProgressRadial } from '@skeletonlabs/skeleton';
+	import { ProgressRadial, type ToastSettings } from '@skeletonlabs/skeleton';
 
 	const getMyCharactersPromise = getAllCharacters({
 		expand: 'rpgSystem'
