@@ -13,13 +13,14 @@ export function getFieldFromListByName(name: string, fields: Field[]): Field {
       id: "",
       name: name,
       type: "text",
-      value: ""
+      value: "",
+      weight: 1
     }
   }
 }
 
 export function getFieldsByGroup(group: string, fields: Field[]): Field[] {
-  return fields.filter(field => field.group === group);
+  return fields.filter(field => field.group === group).sort((a, b) => {return a.weight - b.weight});
 }
 
 
@@ -29,6 +30,7 @@ export function addCharacterField(character: CharactersResponse, field: Field): 
   if (!field.id) {
     field.id = uuidv4()
   }
+  field.weight = 1
 
   character.fields.push(field)
   return character
@@ -55,7 +57,8 @@ export function getCharacterFieldByName(character: CharactersResponse, fieldName
       id: "",
       name: fieldName,
       type: "text",
-      value: ""
+      value: "",
+      weight: 1
     };
   }
 }
@@ -71,6 +74,22 @@ export function updateCharacterFieldValue(character: CharactersResponse, fieldId
   // Create
   else {
     throw new Error(`Field ${fieldId} not found in character`)
+  }
+
+}
+
+
+export function updateCharacterField(character: CharactersResponse, field: Field) {
+
+  const foundIndex = character.fields.findIndex((f: Field) => f.id === field.id);
+  // Update
+  if (foundIndex !== -1) {
+    character.fields[foundIndex] = field;
+    return character
+  }
+  // Create
+  else {
+    throw new Error(`Field ${field.id} not found in character`)
   }
 
 }

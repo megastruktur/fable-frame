@@ -28,11 +28,11 @@
     label: "",
     group: group,
     value: "",
-    description: ""
+    description: "",
+    weight: 1
   }
 
   onMount(() => {
-    console.log({parent})
     console.log(`Opening modal for group ${group}`)
   })
 
@@ -54,9 +54,11 @@
       label: "",
       group: group,
       value: "",
-      description: ""
+      description: "",
+      weight: 1
     }
     modalStore.close();
+    modalStore.clear();
   }
 
   const fieldTypes: {[type: string]: any} = {
@@ -66,7 +68,8 @@
       label: "Text",
       group: group,
       icon: BsTextCenter,
-      description: "A text field"
+      description: "A text field",
+      weight: 1
     },
     tag: {
       name: "tag",
@@ -74,7 +77,8 @@
       label: "Tag",
       group: group,
       icon: BsHash,
-      description: "A tag field. The Value will be displayed on character sheet without the label."
+      description: "A tag field. The Value will be displayed on character sheet without the label.",
+      weight: 1
     },
     counter: {
       name: "counter",
@@ -82,7 +86,8 @@
       label: "Counter",
       group: group,
       icon: BsThreeDots,
-      description: "To use it set the value to +++ where each + represents max count."
+      description: "To use it set the value to +++ where each + represents max count.",
+      weight: 1
     }
   }
 </script>
@@ -129,3 +134,4 @@
     </Step>
   </Stepper>
 </div>
+<slot />

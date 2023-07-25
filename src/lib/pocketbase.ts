@@ -16,12 +16,17 @@ pb.beforeSend = function (url, options) {
 
   // Add Creator field when making a request.
   if (options.body !== undefined) {
-    const bodyJson = JSON.parse(options.body)
 
-    if (bodyJson && !bodyJson.creator && pb.authStore.model !== null) {
-      bodyJson.creator = pb.authStore.model.id
-      options.body = JSON.stringify(bodyJson)
-    }
+    try {
+      const bodyJson = JSON.parse(options.body)
+
+      if (bodyJson && !bodyJson.creator && pb.authStore.model !== null) {
+        bodyJson.creator = pb.authStore.model.id
+        options.body = JSON.stringify(bodyJson)
+      }
+    } catch (e) {
+      console.log("Not a JSON object")
+    } 
   }
 
   return { url, options };

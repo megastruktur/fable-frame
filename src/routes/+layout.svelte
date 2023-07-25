@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
   import { size } from '@floating-ui/dom';
-	import { storePopup, type DrawerSettings, type ModalComponent, Modal } from '@skeletonlabs/skeleton';
+	import { storePopup, type DrawerSettings, Modal, Toast } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow, size });
 	// The ordering of these imports is critical to your app working properly
 	import '@skeletonlabs/skeleton/themes/theme-crimson.css';
@@ -16,7 +16,6 @@
 	import Icon from "svelte-icons-pack";
 	import BsGithub from "svelte-icons-pack/bs/BsGithub";
 	import BsEnvelope from "svelte-icons-pack/bs/BsEnvelope";
-	import CircleAddModal from '$lib/components/CircleAddModal.svelte';
 	
 	const drawerSettings: DrawerSettings = {
 		id: 'navbar',
@@ -26,6 +25,7 @@
 
 </script>
 
+<Toast />
 <Modal />
 
 <Drawer>
@@ -50,7 +50,7 @@
 							</svg>
 					</span>
 				</button>
-				<strong class="text-xl uppercase">Fable Frame (WIP)</strong>
+				<strong class="text-xl uppercase">Fable Frame (WIP) <span class="text-xs text-red-800">v0.1.1</span></strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<a href="mailto:astrtomortis@gmail.com" class="btn"><Icon src={BsEnvelope} /></a>

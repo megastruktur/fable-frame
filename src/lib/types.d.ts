@@ -35,4 +35,5 @@ export type Field = {
   data?: object
   icon?: string
   description?: string
+  weight: number
 }

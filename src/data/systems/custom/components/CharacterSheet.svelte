@@ -1,13 +1,10 @@
 <script lang="ts">
   import { onDestroy } from 'svelte'
   import MediaQuery, { createMediaStore } from 'svelte-media-queries'
-	import { getFieldFromListByName, getFieldsByGroup } from "$lib/characterFieldsOperations";
-	import fieldDragStart from "$lib/fieldDragStart";
+	import { getFieldsByGroup } from "$lib/characterFieldsOperations";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
-  import { characterStore, editMode } from "$lib/stores"
+  import { characterStore } from "$lib/stores"
 	import type { Field } from "$lib/types";
-	import FieldRender from '$lib/components/FieldRender.svelte';
-	import CircleAdd from '$lib/components/CircleAdd.svelte';
 	import { getCharacterFieldGroups } from '$models/character';
 	import CharacterSheetTab from '$lib/components/CharacterSheetTab.svelte';
 
@@ -53,9 +50,6 @@
 
 <MediaQuery query='(max-width: 1200px)' let:matches>
 <div class="flex {matches ? "flex-col items-center" : "justify-center"}">
-
-  {#if matches}
-  {/if}
 
   {#each Object.keys(tabs) as tabName}
     <CharacterSheetTab fields={[...tabs[tabName]]} {tabName} {activeTab} {matches} />

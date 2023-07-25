@@ -14,6 +14,8 @@
   export let compendiumGroup: string = "";
 
   async function openModal() {
+    
+    modalStore.clear();
 
     const modal: ModalSettings = {
       type: 'component',
