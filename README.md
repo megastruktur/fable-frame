@@ -2,19 +2,19 @@
 
 ## Screenshots
 #### Characters List
-<img src="screenshots/CharactersList.png" alt="drawing" width="400"/>
+![Example Screenshot](screenshots/CharactersList.png)
 
 #### Broken Compass Character Sheet (WIP)
-<img src="screenshots/BCCharSheetWIP.png" alt="drawing" width="400"/>
+![Example Screenshot](screenshots/BCCharSheetWIP.png)
 
 #### Avatar Edit, character rename and delete:
-<img src="screenshots/CharacterAvatar.png" alt="drawing" width="400"/>
+![Example Screenshot](screenshots/CharacterAvatar.png)
 
 #### Add Fields modal WIP
-<img src="screenshots/AddFieldsModal.png" alt="drawing" width="400"/>
+![Example Screenshot](screenshots/AddFieldsModal.png)
 
 #### Counter Num field type example
-<img src="screenshots/CounterNumField.png" alt="drawing" width="400"/>
+![Example Screenshot](screenshots/CounterNumField.png)
 
 ## Tools and Frameworks
 - Pocketbase (https://pocketbase.io)
