@@ -108,13 +108,22 @@ export function getCharacterField(character: CharactersResponse, fieldId: string
       name: "New Field",
       type: "text",
       value: "",
+      weight: 1,
     }
+  }
+}
+
+export function getCharacterAvatarThumb(character: CharactersResponse) {
+  if (character.avatar)
+    return pb.files.getUrl(character, character.avatar, { thumb: '100x100' })
+  else {
+    return ""
   }
 }
 
 export function getCharacterAvatar(character: CharactersResponse) {
   if (character.avatar)
-    return pb.files.getUrl(character, character.avatar, { thumb: '100x100' })
+    return pb.files.getUrl(character, character.avatar)
   else {
     return ""
   }
@@ -124,4 +133,8 @@ export function getCharacterFieldGroups(character: CharactersResponse) {
   // every character.field has a group attribute. Create a distinct list of all groups.
   const fieldGroups = character.fields.map((field: Field) => field.group)
   return [...new Set(fieldGroups)]
+}
+
+export async function characterUpdateAvatar(characterId: string, avatarMultipart: any): Promise<CharactersResponse> {
+  return await pb.collection("characters").update(characterId, avatarMultipart);
 }

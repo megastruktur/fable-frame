@@ -33,7 +33,6 @@
   }
 
   onMount(() => {
-    console.log({parent})
     console.log(`Opening modal for group ${group}`)
   })
 
@@ -135,3 +134,4 @@
     </Step>
   </Stepper>
 </div>
+<slot />

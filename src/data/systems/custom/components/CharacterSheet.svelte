@@ -51,9 +51,6 @@
 <MediaQuery query='(max-width: 1200px)' let:matches>
 <div class="flex {matches ? "flex-col items-center" : "justify-center"}">
 
-  {#if matches}
-  {/if}
-
   {#each Object.keys(tabs) as tabName}
     <CharacterSheetTab fields={[...tabs[tabName]]} {tabName} {activeTab} {matches} />
   {/each}

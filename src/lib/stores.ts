@@ -41,13 +41,21 @@ function createCharacterStore() {
     })
   }
 
+  function setAvatar(avatar: string) {
+    update((character) => {
+      character.avatar = avatar
+      return character
+    })
+  }
+
   return {
     subscribe,
-    setFieldValue,    
-    rename,    
-    setField,    
-    addField,    
-    removeField,    
+    setFieldValue,
+    rename,
+    setField,
+    addField,
+    removeField,
+    setAvatar,
     set: (character: CharactersResponse) => set(character),
     reset: () => set({
       name: "",
