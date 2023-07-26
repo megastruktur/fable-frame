@@ -1,3 +1,6 @@
+### 0.1.3
+- UI/UX: Transition animations
+
 ### 0.1.2
 - Functionality: adds Counter Num field type
 - Functionality: adds Clone Character functionality
