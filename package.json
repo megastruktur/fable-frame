@@ -42,6 +42,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@vercel/analytics": "^1.0.1",
 		"pocketbase": "^0.15.2",
 		"pocketbase-typegen": "^1.1.11",
 		"svelte-icons-pack": "^2.1.0",
