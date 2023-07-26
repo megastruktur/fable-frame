@@ -16,12 +16,15 @@
 	import Icon from "svelte-icons-pack";
 	import BsGithub from "svelte-icons-pack/bs/BsGithub";
 	import BsEnvelope from "svelte-icons-pack/bs/BsEnvelope";
+
+	import { fade } from "svelte/transition"
 	
 	const drawerSettings: DrawerSettings = {
 		id: 'navbar',
 		width: 'w-[170px]',
 	};
 
+	export let data
 
 </script>
 
@@ -59,7 +62,12 @@
 		</AppBar>
 	</svelte:fragment>
 	<!-- Page Route Content -->
-	<div class="px-4 h-full">
+	{#key data.pathname}
+	<div class="px-4 h-full page-content"
+		in:fade={{ duration: 300, delay: 300 }}
+		out:fade={{ duration: 300 }}
+		>
 		<slot />
 	</div>
+	{/key}
 </AppShell>

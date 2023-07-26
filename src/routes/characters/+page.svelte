@@ -6,7 +6,7 @@
 	import { ProgressRadial, type PopupSettings, popup, modalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import { flip } from 'svelte/animate';
-	import { crossfade } from 'svelte/transition';
+	import { crossfade, fade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 
 	const charOperationsMenu: PopupSettings = {
@@ -82,7 +82,7 @@
 
 </script>
 
-<div class="flex flex-col">
+<div class="flex flex-col" transition:fade>
 
 	<h1 class="text-3xl m-auto my-3">Your Characters</h1>
 	<hr />
