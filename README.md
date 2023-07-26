@@ -26,3 +26,4 @@ This is currently a **Work In Progress**. If you are interested - please follow 
 - Pocketbase (https://pocketbase.io)
 - Sveltekit (https://kit.svelte.dev)
 - Skeleton (https://www.skeleton.dev)
+- Vercel (https://vercel.com)
