@@ -138,3 +138,25 @@ export function getCharacterFieldGroups(character: CharactersResponse) {
 export async function characterUpdateAvatar(characterId: string, avatarMultipart: any): Promise<CharactersResponse> {
   return await pb.collection("characters").update(characterId, avatarMultipart);
 }
+
+export async function cloneCharacter(characterId: string) {
+
+  const characterToClone = await getCharacter(characterId)
+  const newCharacter = JSON.parse(JSON.stringify(characterToClone))
+  // remove the Id to create a new one and avatar as it requires reuploading
+  newCharacter["name"] = newCharacter["name"] + " (Clone)"
+  delete(newCharacter["id"])
+  delete(newCharacter["avatar"])
+  return await createCharacter(newCharacter)
+}
+
+export function subscribeCharacterOperations() {
+  pb.collection("characters").subscribe("*", async (e) => {
+    console.log(e)
+    console.log("New character created")
+  });
+}
+
+export function unsubscribeCharacterOperations() {
+  pb.collection("characters").unsubscribe("*");
+}

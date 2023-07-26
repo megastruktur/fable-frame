@@ -2,14 +2,12 @@
   import { onDestroy } from 'svelte'
   import MediaQuery, { createMediaStore } from 'svelte-media-queries'
 	import { getFieldFromListByName, getFieldsByGroup } from "$lib/characterFieldsOperations";
-	import fieldDragStart from "$lib/fieldDragStart";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
   import DiamondSkill from "./DiamondSkill.svelte";
-	import FieldRender from '$lib/components/FieldRender.svelte';
+	import FieldRender from '$lib/components/field-renders/FieldRender.svelte';
 	import CircleAdd from '$lib/components/CircleAdd.svelte';
-	import FieldRenderTag from '$lib/components/field-renders/FieldRenderTag.svelte';
 
   const query = {
     "mobile": "(max-width: 480px)",

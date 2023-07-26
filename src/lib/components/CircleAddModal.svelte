@@ -6,6 +6,8 @@
   import BsTextCenter from "svelte-icons-pack/bs/BsTextCenter";
   import BsThreeDots from "svelte-icons-pack/bs/BsThreeDots";
   import BsHash from "svelte-icons-pack/bs/BsHash";
+  import Bs123 from "svelte-icons-pack/bs/Bs123";
+
 	import CircleAddFieldTypeButton from "./CircleAddFieldTypeButton.svelte";
 	import { getCompendiumItems } from "$lib/getCompendiumItems";
 	import { onMount } from "svelte";
@@ -88,11 +90,20 @@
       icon: BsThreeDots,
       description: "To use it set the value to +++ where each + represents max count.",
       weight: 1
+    },
+    counterNum: {
+      name: "counterNum",
+      type: "counterNum",
+      label: "Counter Num",
+      group: group,
+      icon: Bs123,
+      description: "DnD Skill as example",
+      weight: 1
     }
   }
 </script>
 
-<div class="card p-4 bg-neutral-900/90">
+<div class="card p-4 bg-neutral-900/90 w-modal-slim">
   
   <Stepper buttonComplete="will-close" on:complete={createComplete}>
     <Step>

@@ -10,10 +10,11 @@
   import Icon from "svelte-icons-pack"
   import FaSolidSkull from "svelte-icons-pack/fa/FaSolidSkull";
 
-	import { modalStore, type ModalSettings, type ToastSettings, toastStore } from "@skeletonlabs/skeleton";
+	import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton";
 	import { goto } from "$app/navigation";
 	import CharacterAvatar from "$lib/components/CharacterAvatar.svelte";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
+	import toastShow from "$lib/toastShow";
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -52,23 +53,17 @@
     }
   })
 
-  $: $characterStore
-
   function deleteCharacterPrompt() {
 
     const modal: ModalSettings = {
         type: 'confirm',
         title: 'Please Confirm',
-        body: `Are you sure you want to remove character <span class="text-red-800">${characterName}</span>? This action cannot be undone.`,
+        body: `Are you sure you want to remove character <span class="text-error-900">${characterName}</span>? This action cannot be undone.`,
         response: async (r: boolean) => {
           if (r === true) {
             await deleteCharacter($characterStore.id)
 
-            const t: ToastSettings = {
-              message: `Character <span class="text-red-800">${characterName}</span> has been removed`,
-              timeout: 5000
-            };
-            toastStore.trigger(t);
+            toastShow(`Character <span class="text-error-900">${characterName}</span> has been removed`)
 
             goto("/characters")
           }

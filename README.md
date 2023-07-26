@@ -1,11 +1,26 @@
 # Fable Frame!
 
+### Demo: https://fable-frame.online
+
+Fable Frame is a simple project that allows you to create Tabletop RPG Character sheets online and use them during your game.
+
+This is currently a **Work In Progress**. If you are interested - please follow up.
+
 ## Screenshots
-![Example Screenshot](screenshots/2023-07-21_19-52.png)
-![Example Screenshot](screenshots/2023-07-19_18-28.png)
-![Example Screenshot](screenshots/2023-07-21_19-54.png)
+#### Characters List
+![Example Screenshot](screenshots/CharactersList.png)
+
+#### Broken Compass Character Sheet (WIP)
+![Example Screenshot](screenshots/BCCharSheetWIP.png)
+
 #### Avatar Edit, character rename and delete:
-![Example Screenshot](screenshots/2023-07-25_15-02.png)
+![Example Screenshot](screenshots/CharacterAvatar.png)
+
+#### Add Fields modal WIP
+![Example Screenshot](screenshots/AddFieldsModal.png)
+
+#### Counter Num field type example
+![Example Screenshot](screenshots/CounterNumField.png)
 
 ## Tools and Frameworks
 - Pocketbase (https://pocketbase.io)

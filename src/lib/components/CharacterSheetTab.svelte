@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { characterStore, editMode } from "$lib/stores";
-	import FieldRender from '$lib/components/FieldRender.svelte';
+	import FieldRender from '$lib/components/field-renders/FieldRender.svelte';
 	import CircleAdd from '$lib/components/CircleAdd.svelte';
 	import type { Field } from "$lib/types";
 	import type { ObjectType, QueryArray } from "svelte-media-queries/components/MediaQuery.types";
@@ -47,13 +47,16 @@
 <section class="mx-3 {matches && activeTab !== tabName ? "hidden" : ""}">
 <div
   class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md lg:w-80 w-72">
+  <h2 class="h2 text-center mb-3">{tabName}</h2>
+  <hr />
   <!-- Draggable section -->
   <div
+    class="mt-3"
     use:dndzone={options}
     on:consider={handleDndConsider} on:finalize={handleDndFinalize}
     >
     {#each fields as field(field.id)}
-    <div class="flex items-center justify-between mb-3" animate:flip="{{duration: flipDurationMs}}">
+    <div class="flex items-center mb-3" animate:flip="{{duration: flipDurationMs}}">
       <FieldRender field={field} />
       {#if $editMode}
       <button class="btn-icon btn-icon-sm">
