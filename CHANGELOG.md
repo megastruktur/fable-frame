@@ -1,3 +1,5 @@
+### 0.1.4
+- Feature: Vercel analytics
 ### 0.1.3
 - UI/UX: Transition animations
 

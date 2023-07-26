@@ -1,4 +1,6 @@
 <script lang='ts'>
+	import { dev } from "$app/environment"
+	import { inject } from "@vercel/analytics"
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
   import { size } from '@floating-ui/dom';
 	import { storePopup, type DrawerSettings, Modal, Toast } from '@skeletonlabs/skeleton';
@@ -23,6 +25,9 @@
 		id: 'navbar',
 		width: 'w-[170px]',
 	};
+
+	// Inject the Analytics functionality
+	inject({ mode: dev ? 'development' : 'production' });
 
 	export let data
 
@@ -53,7 +58,7 @@
 							</svg>
 					</span>
 				</button>
-				<strong class="text-xl uppercase">Fable Frame (WIP) <span class="text-xs text-red-800">v0.1.3</span></strong>
+				<strong class="text-xl uppercase">Fable Frame (WIP) <span class="text-xs text-red-800">v0.1.4</span></strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<a href="mailto:astrtomortis@gmail.com" class="btn"><Icon src={BsEnvelope} /></a>
