@@ -16,12 +16,15 @@
 	import Icon from "svelte-icons-pack";
 	import BsGithub from "svelte-icons-pack/bs/BsGithub";
 	import BsEnvelope from "svelte-icons-pack/bs/BsEnvelope";
+
+	import { fade } from "svelte/transition"
 	
 	const drawerSettings: DrawerSettings = {
 		id: 'navbar',
 		width: 'w-[170px]',
 	};
 
+	export let data
 
 </script>
 
@@ -50,7 +53,7 @@
 							</svg>
 					</span>
 				</button>
-				<strong class="text-xl uppercase">Fable Frame (WIP) <span class="text-xs text-red-800">v0.1.2</span></strong>
+				<strong class="text-xl uppercase">Fable Frame (WIP) <span class="text-xs text-red-800">v0.1.3</span></strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<a href="mailto:astrtomortis@gmail.com" class="btn"><Icon src={BsEnvelope} /></a>
@@ -59,7 +62,12 @@
 		</AppBar>
 	</svelte:fragment>
 	<!-- Page Route Content -->
-	<div class="px-4 h-full">
+	{#key data.pathname}
+	<div class="px-4 h-full page-content"
+		in:fade={{ duration: 300, delay: 300 }}
+		out:fade={{ duration: 300 }}
+		>
 		<slot />
 	</div>
+	{/key}
 </AppShell>

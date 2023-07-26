@@ -16,6 +16,8 @@
 	import type { CharactersResponse } from "$lib/pocketbase-types";
 	import toastShow from "$lib/toastShow";
 
+  import { fade } from "svelte/transition"
+
   let CharacterSheet: any
   let characterName: string = ""
   let compendiumFields: {
@@ -107,7 +109,12 @@
 
 </script>
 
-<div class="flex flex-col items-center my-3">
+{#key $editMode}
+<div 
+  in:fade={{ duration: 300, delay: 300 }}
+  out:fade={{ duration: 300 }}
+  class="flex flex-col items-center my-3"
+  >
   <CharacterAvatar characterId={characterId} avatarUrl={characterAvatarUrl} />
 	<h1 class="h1 text-3xl m-auto my-3 flex">
     {#if $editMode}
@@ -138,3 +145,4 @@
     {/if}
   </div>
 </div>
+{/key}
