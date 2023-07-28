@@ -5,7 +5,7 @@
 	import CircleAddModal from "$lib/components/CircleAddModal.svelte";
 	import { editMode } from "$lib/stores";
 
-  export let group: string;
+  export let group: string = "general";
   export let type: string = "";
 
   // Which compendium to use.

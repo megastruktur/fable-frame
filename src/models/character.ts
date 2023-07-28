@@ -135,6 +135,10 @@ export function getCharacterFieldGroups(character: CharactersResponse) {
   return [...new Set(fieldGroups)]
 }
 
+export function getCharacterTabs(character: CharactersResponse) {
+  return character.fields.filter((field: Field) => field.type === "tab")
+}
+
 export async function characterUpdateAvatar(characterId: string, avatarMultipart: any): Promise<CharactersResponse> {
   return await pb.collection("characters").update(characterId, avatarMultipart);
 }

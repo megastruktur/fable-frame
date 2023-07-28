@@ -105,7 +105,7 @@
 
 <div class="card p-4 bg-neutral-900/90 w-modal-slim">
   
-  <Stepper buttonComplete="will-close" on:complete={createComplete}>
+  <Stepper start={field.type === "tab" ? 1 : 0} buttonComplete="will-close" on:complete={createComplete}>
     <Step>
       <svelte:fragment slot="header">Field</svelte:fragment>
       
@@ -140,7 +140,7 @@
 
     </Step>
     <Step>
-      <svelte:fragment slot="header">Data</svelte:fragment>
+      <svelte:fragment slot="header">Create {field.type}</svelte:fragment>
       <FieldCreate bind:field={field} /> 
     </Step>
   </Stepper>

@@ -3,7 +3,13 @@
 	"name": "Custom System",
 	"description": "Start from scratch and add fields manually",
 	"fields": {
-		"character": [],
+		"character": [
+			{
+				"name": "general",
+				"label": "General",
+				"type": "tab"
+			}
+		],
 		"compendium": []
 	}
 }

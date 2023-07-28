@@ -11,8 +11,8 @@
   import BsGrid3x3GapFill from "svelte-icons-pack/bs/BsGrid3x3GapFill";
 
   export let fields: Field[]
-  export let tabName: string
-  export let activeTab: string
+  export let tab: Field
+  export let activeTabName: string
   // matches the media queries:
   export let matches: boolean | QueryArray | ObjectType<any> = true
 
@@ -44,10 +44,10 @@
 </script>
 
 
-<section class="mx-3 {matches && activeTab !== tabName ? "hidden" : ""}">
+<section class="mx-3 {matches && activeTabName !== tab.label ? "hidden" : ""}">
 <div
   class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md lg:w-80 w-72">
-  <h2 class="h2 text-center mb-3">{tabName}</h2>
+  <h2 class="h2 text-center mb-3">{tab.label}</h2>
   <hr />
   <!-- Draggable section -->
   <div
@@ -67,7 +67,7 @@
     {/each}
   </div>
   {#if $editMode}
-  <CircleAdd group={tabName} />
+  <CircleAdd group={tab.name} />
   {/if}
 </div>
 </section>
