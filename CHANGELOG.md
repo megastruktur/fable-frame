@@ -1,3 +1,7 @@
+### 0.1.5
+- Feature: Tabs operations (add/remove)
+- Feature: Errors showing WIP
+
 ### 0.1.4
 - Feature: Vercel analytics
 ### 0.1.3
