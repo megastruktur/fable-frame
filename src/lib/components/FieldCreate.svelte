@@ -18,12 +18,17 @@ console.log({field})
   <!-- <input class="hidden input mb-2" type="text" placeholder="Name" bind:value={field.name} /> -->
   
 
+  <!-- Tab should have a name -->
+  {#if field.type === "tab"}
+    <input class="input mb-2" type="text" placeholder="Name (unique)" bind:value={field.name} />
+  {/if}
   <!-- Do not show for Tag as it is controlled by value -->
   {#if field.type !== "tag"}
     <input required class="input mb-2" type="text" placeholder="Label" bind:value={field.label} />
   {/if}
-
-  <input class="input mb-2" type="text" placeholder="Tab (group)" bind:value={field.group} />
-  <input class="input mb-2" type="text" placeholder="Value (if any)" bind:value={field.value} />
+  <!-- Omit value for Tab type -->
+  {#if field.type !== "tab"}
+    <input class="input mb-2" type="text" placeholder="Value (if any)" bind:value={field.value} />
+  {/if}
   <input class="input mb-2" type="text" placeholder="Description" bind:value={field.description} />
 </div>

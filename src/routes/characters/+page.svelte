@@ -1,7 +1,7 @@
 <!-- Characters Page -->
 <script lang="ts">
 	import type { CharactersResponse } from '$lib/pocketbase-types';
-	import toastShow from '$lib/toastShow';
+	import { toastShow } from '$lib/toast';
 	import { cloneCharacter, deleteCharacter, getAllCharacters, getCharacterAvatar } from '$models/character';
 	import { ProgressRadial, type PopupSettings, popup, modalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
