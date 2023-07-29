@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onDestroy } from 'svelte'
   import MediaQuery, { createMediaStore } from 'svelte-media-queries'
-	import { getFieldsByGroup } from "$lib/characterFieldsOperations";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
   import { characterStore, editMode } from "$lib/stores"
 	import type { Field } from "$lib/types";
-	import { getCharacterFieldGroups, getCharacterTabs } from '$models/character';
+	import { getCharacterTabs } from '$models/character';
 	import CharacterSheetTab from '$lib/components/CharacterSheetTab.svelte';
 	import CircleAdd from '$lib/components/CircleAdd.svelte';
+
 
   const query = {
     "mobile": "(max-width: 480px)",
@@ -57,19 +57,27 @@
       }
     })
   })
-  console.log(tabsContent)
-
-  function setActiveTab(tab: string) {
-    activeTabName = tab
-  }
   
 </script>
 
 <MediaQuery query='(max-width: 1200px)' let:matches>
+
+{#if matches}
+<div class="tabs tabs-boxed w-72">
+  {#each tabs as tab}
+  <a
+    href="/"
+    class="tab p-1 {tab.name === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
+    on:click|preventDefault={() => activeTabName = tab.name}
+    >{tab.label}</a>
+  {/each}
+</div>
+{/if}
+
 <div class="flex {matches ? "flex-col items-center" : "justify-center"}">
 
   {#each tabs as tab}
-    <CharacterSheetTab {tab} fields={[...tabsContent[tab.name]]} {activeTabName} {matches} />
+    <CharacterSheetTab {tab} fields={[...tabsContent[tab.name]]} bind:activeTabName={activeTabName} {matches} />
   {/each}
 
   {#if $editMode}

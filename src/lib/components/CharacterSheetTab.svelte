@@ -2,7 +2,7 @@
 	import { characterStore, editMode } from "$lib/stores";
 	import FieldRender from '$lib/components/field-renders/FieldRender.svelte';
 	import CircleAdd from '$lib/components/CircleAdd.svelte';
-	import type { Field } from "$lib/types";
+	import type { Field, FieldError } from "$lib/types";
 	import type { ObjectType, QueryArray } from "svelte-media-queries/components/MediaQuery.types";
   import {dndzone} from "svelte-dnd-action"
   import {flip} from "svelte/animate"
@@ -22,9 +22,10 @@
   $: options = {
     items: fields,
     flipDurationMs: flipDurationMs,
-    dragDisabled: !$editMode
+    dragDisabled: !$editMode,
   }
 
+  // Reorder fields
   function handleDndConsider(e: any) {
     fields = e.detail.items
   }
@@ -41,13 +42,27 @@
     console.log("Fields reordered")
   }
 
+  function removeTab() {
+    characterStore.removeField(tab)
+  }
+
 </script>
 
 
-<section class="mx-3 {matches && activeTabName !== tab.label ? "hidden" : ""}">
+<section class="mx-3 relative {matches && activeTabName !== tab.name ? "hidden" : ""}">
+{#if $editMode}
+  <button type="button"
+    class="btn-icon btn-icon-sm variant-filled-error absolute -top-3 -right-3 z-10" on:click={removeTab}>✕</button>
+{/if}
 <div
   class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md lg:w-80 w-72">
-  <h2 class="h2 text-center mb-3">{tab.label}</h2>
+  <h2 class="h2 text-center mb-3">
+    {#if $editMode}
+    <input type="text" class="input" bind:value={tab.label} />
+    {:else}
+    <span>{tab.label}</span>
+    {/if}
+  </h2>
   <hr />
   <!-- Draggable section -->
   <div

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Stepper, Step, ProgressRadial, modalStore } from "@skeletonlabs/skeleton";
 	import FieldCreate from "./FieldCreate.svelte";
-	import { characterStore } from "$lib/stores";
+	import { characterStore, fieldErrors } from "$lib/stores";
 
   import BsTextCenter from "svelte-icons-pack/bs/BsTextCenter";
   import BsThreeDots from "svelte-icons-pack/bs/BsThreeDots";
@@ -11,6 +11,8 @@
 	import CircleAddFieldTypeButton from "./CircleAddFieldTypeButton.svelte";
 	import { getCompendiumItems } from "$lib/getCompendiumItems";
 	import { onMount } from "svelte";
+	import { getCharacterFieldByName } from "$lib/characterFieldsOperations";
+	import type { FieldError } from "$lib/types";
 
   export let group: string;
   export let type: string = "";
@@ -22,6 +24,8 @@
 
   // Modal parent.
   export let parent: any;
+
+  let validationFailed: boolean = true
 
   let field = {
     id: "",
@@ -43,6 +47,12 @@
   // If type is empty - list ONLY default types like Text, Tag, Counter and Etc.
 
   function createComplete() {
+
+    validateField()
+    
+    if (validationFailed) {
+      return
+    }
 
     characterStore.addField(field)
 
@@ -101,6 +111,17 @@
       weight: 1
     }
   }
+
+function validateField() {
+
+  validationFailed = false
+  // If field name is not unique
+  if (getCharacterFieldByName($characterStore, field.name).id !== "") {
+    validationFailed = true
+    fieldErrors.addError("This field name is already taken")
+  }
+}
+
 </script>
 
 <div class="card p-4 bg-neutral-900/90 w-modal-slim">

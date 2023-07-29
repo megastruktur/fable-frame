@@ -2,9 +2,9 @@
 <script lang="ts">
   import { page } from "$app/stores"
 	import { deleteCharacter, getCharacter, getCharacterAvatar, updateCharacterWithHash } from "$models/character";
-	import { onMount } from "svelte";
-  import { characterStore, editMode } from "$lib/stores"
-	import type { Field } from "$lib/types";
+	import { onMount, onDestroy } from "svelte";
+  import { characterStore, fieldErrors, editMode } from "$lib/stores"
+	import type { Field, FieldError } from "$lib/types";
 
   // Icons
   import Icon from "svelte-icons-pack"
@@ -14,7 +14,7 @@
 	import { goto } from "$app/navigation";
 	import CharacterAvatar from "$lib/components/CharacterAvatar.svelte";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
-	import toastShow from "$lib/toastShow";
+	import { toastShow, toastShowError } from "$lib/toast";
 
   import { fade } from "svelte/transition"
 
@@ -52,6 +52,20 @@
   characterStore.subscribe((character: CharactersResponse) => {
     if ($characterStore !== undefined) {
       characterAvatarUrl = getCharacterAvatar($characterStore)
+    }
+  })
+
+  // Show errors.
+  fieldErrors.subscribe((errors: FieldError[]) => {
+    
+    if (errors.length > 0) {
+      errors.forEach((fieldError: FieldError) => {
+        let message = `${fieldError.fieldId !== "" ? "Field " + fieldError.fieldId + ": " : ""}` + fieldError.message
+        toastShowError(message)
+      })
+
+      // Reset the store after showing errors.
+      fieldErrors.reset()
     }
   })
 
@@ -105,6 +119,11 @@
   function characterRename() {
     characterStore.rename(characterName)
   }
+
+  // Reset error handler.
+  onDestroy(() => {
+    fieldErrors.reset()
+  })
 
 
 </script>

@@ -38,7 +38,7 @@
 </script>
 
 {#if $editMode}
-<button class="btn btn-circle" on:click={openModal}>
+<button class="btn btn-circle hover:bg-surface-800" on:click={openModal}>
   <Icon size="40" color="" src={BsPlus} />
 </button>
 {/if}
