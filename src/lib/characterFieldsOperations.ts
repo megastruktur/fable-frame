@@ -1,4 +1,4 @@
-import type { Field } from "./types.d";
+import type { Field, FieldError } from "./types.d";
 import type { CharactersResponse } from "./pocketbase-types";
 import { v4 as uuidv4 } from 'uuid'
 
@@ -60,6 +60,24 @@ export function getCharacterFieldByName(character: CharactersResponse, fieldName
       value: "",
       weight: 1
     };
+  }
+}
+
+export function getCharacterFieldsByName(character: CharactersResponse, fieldName: string): Field[] {
+  
+  const fields = character.fields.filter(f => f.name === fieldName);
+
+  if (fields !== undefined) {
+    return fields;
+  }
+  else {
+    return [{
+      id: "",
+      name: fieldName,
+      type: "text",
+      value: "",
+      weight: 1
+    }];
   }
 }
 

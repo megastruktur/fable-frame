@@ -33,7 +33,6 @@
 
 </script>
 
-<Toast />
 <Modal />
 
 <Drawer>
@@ -76,3 +75,5 @@
 	</div>
 	{/key}
 </AppShell>
+
+<Toast />

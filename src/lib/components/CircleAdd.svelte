@@ -5,7 +5,7 @@
 	import CircleAddModal from "$lib/components/CircleAddModal.svelte";
 	import { editMode } from "$lib/stores";
 
-  export let group: string;
+  export let group: string = "general";
   export let type: string = "";
 
   // Which compendium to use.
@@ -38,7 +38,7 @@
 </script>
 
 {#if $editMode}
-<button class="btn btn-circle" on:click={openModal}>
+<button class="btn btn-circle hover:bg-surface-800" on:click={openModal}>
   <Icon size="40" color="" src={BsPlus} />
 </button>
 {/if}

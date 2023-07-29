@@ -37,3 +37,8 @@ export type Field = {
   description?: string
   weight: number
 }
+
+type FieldError = {
+  fieldId?: string,
+  message: string
+}
