@@ -7,12 +7,12 @@
   import BsThreeDots from "svelte-icons-pack/bs/BsThreeDots";
   import BsHash from "svelte-icons-pack/bs/BsHash";
   import Bs123 from "svelte-icons-pack/bs/Bs123";
+  import BsFileMinus from "svelte-icons-pack/bs/BsFileMinus";
 
 	import CircleAddFieldTypeButton from "./CircleAddFieldTypeButton.svelte";
 	import { getCompendiumItems } from "$lib/getCompendiumItems";
 	import { onMount } from "svelte";
 	import { getCharacterFieldByName } from "$lib/characterFieldsOperations";
-	import type { FieldError } from "$lib/types";
 
   export let group: string;
   export let type: string = "";
@@ -48,6 +48,12 @@
 
   function createComplete() {
 
+    // Sanitize name. Make sure to rename the built in ones
+    //  as the validation won't allow duplicate names.
+    if (field.name === "" || field.name === field.type) {
+      field.name = field.label.toLocaleLowerCase().replace(/\s/g, '-')
+    }
+    
     validateField()
     
     if (validationFailed) {
@@ -108,6 +114,15 @@
       group: group,
       icon: Bs123,
       description: "DnD Skill as example",
+      weight: 1
+    },
+    section: {
+      name: "section",
+      type: "section",
+      label: "Section",
+      group: group,
+      icon: BsFileMinus,
+      description: "Section title within tab",
       weight: 1
     }
   }

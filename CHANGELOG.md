@@ -1,3 +1,9 @@
+### 0.1.6
+- Feature: Field Section
+- Bugfix: sorting fix
+- Bugfix: Add multiple fields
+- Feature: BC Inventory to Tab
+
 ### 0.1.5
 - Feature: Tabs operations (add/remove)
 - Feature: Errors showing WIP

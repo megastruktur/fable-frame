@@ -2,7 +2,7 @@
 	import { modalStore, type ModalSettings} from "@skeletonlabs/skeleton";
 	import Icon from "svelte-icons-pack";
 	import BsPlus from "svelte-icons-pack/bs/BsPlus";
-	import CircleAddModal from "$lib/components/CircleAddModal.svelte";
+	import CircleAddModal from "./CircleAddModal.svelte";
 	import { editMode } from "$lib/stores";
 
   export let group: string = "general";

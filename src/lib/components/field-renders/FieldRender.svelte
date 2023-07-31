@@ -5,6 +5,7 @@
 	import FieldRenderCounterNum from "./FieldRenderCounterNum.svelte";
 	import FieldRenderTag from "./FieldRenderTag.svelte";
 	import FieldRenderText from "./FieldRenderText.svelte";
+	import FieldRenderSection from "./FieldRenderSection.svelte";
 
   export let field: Field
   export let renderAs: string = field.type
@@ -35,6 +36,9 @@
 {/if}
 {#if renderAs === "tag"}
   <FieldRenderTag {editable} {classes} field={field} on:fieldUpdate={updateField} />
+{/if}
+{#if renderAs === "section"}
+  <FieldRenderSection {editable} {classes} field={field} on:fieldUpdate={updateField} />
 {/if}
 
 <!-- For Tag it is remove the tag -->
