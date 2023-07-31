@@ -22,8 +22,8 @@ console.log({field})
   {#if field.type === "tab"}
     <input class="input mb-2" type="text" placeholder="Name (unique)" bind:value={field.name} />
   {/if}
-  <!-- Do not show for Tag as it is controlled by value -->
-  {#if field.type !== "tag"}
+  <!-- Do not show for Tag and Section as it is controlled by value -->
+  {#if field.type !== "tag" && field.type !== "section"}
     <input required class="input mb-2" type="text" placeholder="Label" bind:value={field.label} />
   {/if}
   <!-- Omit value for Tab type -->

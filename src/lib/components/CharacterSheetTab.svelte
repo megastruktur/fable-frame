@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { characterStore, editMode } from "$lib/stores";
 	import FieldRender from '$lib/components/field-renders/FieldRender.svelte';
-	import CircleAdd from '$lib/components/CircleAdd.svelte';
+	import CircleAdd from '$lib/components/circle-add/CircleAdd.svelte';
 	import type { Field, FieldError } from "$lib/types";
 	import type { ObjectType, QueryArray } from "svelte-media-queries/components/MediaQuery.types";
   import {dndzone} from "svelte-dnd-action"
@@ -39,6 +39,7 @@
     })
     fields = e.detail.items
 
+    console.log({fields})
     console.log("Fields reordered")
   }
 

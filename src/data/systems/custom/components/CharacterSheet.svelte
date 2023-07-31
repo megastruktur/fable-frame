@@ -6,7 +6,7 @@
 	import type { Field } from "$lib/types";
 	import { getCharacterTabs } from '$models/character';
 	import CharacterSheetTab from '$lib/components/CharacterSheetTab.svelte';
-	import CircleAdd from '$lib/components/CircleAdd.svelte';
+	import CircleAdd from '$lib/components/circle-add/CircleAdd.svelte';
 
 
   const query = {
@@ -77,7 +77,7 @@
 <div class="flex {matches ? "flex-col items-center" : "justify-center"}">
 
   {#each tabs as tab}
-    <CharacterSheetTab {tab} fields={[...tabsContent[tab.name]]} bind:activeTabName={activeTabName} {matches} />
+    <CharacterSheetTab {tab} fields={[...tabsContent[tab.name].sort((a, b) => {return a.weight - b.weight})]} bind:activeTabName={activeTabName} {matches} />
   {/each}
 
   {#if $editMode}

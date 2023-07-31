@@ -7,7 +7,7 @@
 	import type { Field } from "$lib/types";
   import DiamondSkill from "./DiamondSkill.svelte";
 	import FieldRender from '$lib/components/field-renders/FieldRender.svelte';
-	import CircleAdd from '$lib/components/CircleAdd.svelte';
+	import CircleAdd from '$lib/components/circle-add/CircleAdd.svelte';
 
   const query = {
     "mobile": "(max-width: 480px)",
