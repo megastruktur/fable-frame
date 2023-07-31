@@ -48,6 +48,12 @@
 
   function createComplete() {
 
+    // Sanitize name. Make sure to rename the built in ones
+    //  as the validation won't allow duplicate names.
+    if (field.name === "" || field.name === field.type) {
+      field.name = field.label.toLocaleLowerCase().replace(/\s/g, '-')
+    }
+    
     validateField()
     
     if (validationFailed) {

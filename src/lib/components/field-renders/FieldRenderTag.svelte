@@ -14,8 +14,8 @@
 
 <div class="{classes} {!$editMode || !editable ? "chip m-1" : ""}" on:click on:keyup>
   {#if editable && $editMode}
-    <input class="input" type="text" bind:value={field.value} on:focusout={() => {dispatch("fieldUpdate", field)}} />
+    <input class="input" type="text" bind:value={field.label} on:focusout={() => {dispatch("fieldUpdate", field)}} />
   {:else}
-    <h4 class="h4">{field.value ?? ""}</h4>
+    <h4 class="h4">{field.label ?? ""}</h4>
   {/if}
 </div>

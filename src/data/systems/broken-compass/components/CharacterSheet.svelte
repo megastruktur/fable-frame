@@ -8,6 +8,7 @@
   import DiamondSkill from "./DiamondSkill.svelte";
 	import FieldRender from '$lib/components/field-renders/FieldRender.svelte';
 	import CircleAdd from '$lib/components/circle-add/CircleAdd.svelte';
+	import CharacterSheetTab from '$lib/components/CharacterSheetTab.svelte';
 
   const query = {
     "mobile": "(max-width: 480px)",
@@ -59,6 +60,8 @@
   let generals: Field[]
   let inventory: Field[]
 
+  let inventoryTab: Field
+
   characterStore.subscribe((character: CharactersResponse) => {
 
     action = getFieldFromListByName("action", character.fields)
@@ -94,6 +97,15 @@
     feelings = getFieldsByGroup("feel", character.fields)
     generals = getFieldsByGroup("general", character.fields)
     inventory = getFieldsByGroup("inventory", character.fields)
+
+    inventoryTab = {
+      id: "inventory",
+      type: "tab",
+      value: "",
+      weight: 0,
+      name: "inventory",
+      label: "Inventory",
+    }
   })
   
   function updateField(event: { detail: Field }) {
@@ -247,18 +259,6 @@
   </section>
 
   <!-- Inventory -->
-  <section
-    role="figure"
-    class="mx-3 {matches && activeTab !== "inventory" ? "hidden" : ""}">
-
-    <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md lg:w-80 w-72">
-
-    <h2 class="flex text-3xl justify-center h2">Inventory</h2>
-      {#each inventory as item}
-      <FieldRender field={item} />
-      {/each}
-      <CircleAdd group="inventory" type="text" compendium="broken-compass" compendiumGroup="inventory" />
-    </div>
-  </section>
+  <CharacterSheetTab tab={inventoryTab} fields={[...inventory.sort((a, b) => {return a.weight - b.weight})]} bind:activeTabName={activeTab} {matches} />
 </div>
 </MediaQuery>
