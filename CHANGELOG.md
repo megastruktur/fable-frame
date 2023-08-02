@@ -1,3 +1,6 @@
+### 0.1.7
+- Feature: Adds logo
+
 ### 0.1.6
 - Feature: Field Section
 - Bugfix: sorting fix
