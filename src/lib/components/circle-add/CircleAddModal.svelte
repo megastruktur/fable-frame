@@ -8,6 +8,7 @@
   import BsHash from "svelte-icons-pack/bs/BsHash";
   import Bs123 from "svelte-icons-pack/bs/Bs123";
   import BsFileMinus from "svelte-icons-pack/bs/BsFileMinus";
+  import BsTable from "svelte-icons-pack/bs/BsTable";
 
 	import CircleAddFieldTypeButton from "./CircleAddFieldTypeButton.svelte";
 	import { getCompendiumItems } from "$lib/getCompendiumItems";
@@ -124,7 +125,16 @@
       icon: BsFileMinus,
       description: "Section title within tab",
       weight: 1
-    }
+    },
+    datatable: {
+      name: "datatable",
+      type: "datatable",
+      label: "Table",
+      group: group,
+      icon: BsTable,
+      description: "Section title within tab",
+      weight: 1
+    },
   }
 
 function validateField() {

@@ -9,7 +9,10 @@
 </script>
 
 <nav class="list-nav p-4">
-	<ul>
+	<h2 class="h2 p-4">Navigation</h2>
+	<hr />
+
+	<ul class="mt-3">
 		<li><a on:click={drawerClose} href="/">Homepage</a></li>
 
 		{#if $currentUser}

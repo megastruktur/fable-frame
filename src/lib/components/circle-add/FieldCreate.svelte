@@ -25,7 +25,12 @@ console.log({field})
   <input required class="input mb-2" type="text" placeholder="Label" bind:value={field.label} />
   <!-- Omit value for Tab type -->
   {#if field.type !== "tab" && field.type !== "tag" && field.type !== "section"}
-    <input class="input mb-2" type="text" placeholder="Value (if any)" bind:value={field.value} />
+
+    {#if field.type === "datatable"}
+      <textarea class="textarea mb-2" placeholder="Value (if any)" bind:value={field.value} />
+    {:else}
+      <input class="input mb-2" type="text" placeholder="Value (if any)" bind:value={field.value} />
+    {/if}
   {/if}
   <input class="input mb-2" type="text" placeholder="Description" bind:value={field.description} />
 </div>
