@@ -7,6 +7,7 @@
 	import { getCharacterTabs } from '$models/character';
 	import CharacterSheetTab from '$lib/components/CharacterSheetTab.svelte';
 	import CircleAdd from '$lib/components/circle-add/CircleAdd.svelte';
+	import StatsTab from './StatsTab.svelte';
 
 
   const query = {
@@ -25,6 +26,7 @@
   } //  
 
   const matches = createMediaStore(query) //The type of the store will completely repeat the query
+  
 
   let activeTabName: string = "general"
   // let tabs: Map<string, Field[]> = new Map()
@@ -39,6 +41,8 @@
     tabs.forEach((tab: Field) => {
       tabsContent[tab.name] = []
     })
+
+    console.log(character)
 
     character.fields.forEach((field: Field) => {
       if (field.group && field.type !== "tab") {
@@ -57,9 +61,9 @@
   })
 
   onDestroy(() => {
-    matches.destroy()
+    matches.destroy() //Stop events for calculation
     unsubscribeCharacterStore()
-  }) //Stop events for calculation
+  })
   
 </script>
 
@@ -77,10 +81,15 @@
 </div>
 {/if}
 
-<div class="flex {matches ? "flex-col items-center" : "justify-center"}">
+<div class="flex {matches ? "flex-col items-center" : "justify-center flex-wrap"}">
 
   {#each tabs as tab}
-    <CharacterSheetTab {tab} fields={[...tabsContent[tab.name].sort((a, b) => {return a.weight - b.weight})]} bind:activeTabName={activeTabName} {matches} />
+    {#if tab.name === "statsnsaves"}
+      <StatsTab {tab} fields={[...tabsContent[tab.name]]} bind:activeTabName={activeTabName} {matches} />
+    {:else}
+
+      <CharacterSheetTab {tab} fields={[...tabsContent[tab.name].sort((a, b) => {return a.weight - b.weight})]} bind:activeTabName={activeTabName} {matches} />
+    {/if}
   {/each}
 
   {#if $editMode}

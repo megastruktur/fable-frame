@@ -1,0 +1,348 @@
+{
+	"identifier": "dnd",
+	"name": "DnD 5e",
+	"description": "Dungeons and Dragons 5e",
+	"fields": {
+		"character": [
+			{
+				"name": "statsnsaves",
+				"label": "Stats & Saves",
+				"type": "tab"
+			},
+			{
+				"name": "skills",
+				"label": "Skills",
+				"type": "tab"
+			},
+			{
+				"name": "combat",
+				"label": "Combat",
+				"type": "tab"
+			},
+			{
+				"name": "abilities",
+				"label": "Abilities",
+				"type": "tab"
+			},
+			{
+				"name": "spells",
+				"label": "Spells",
+				"type": "tab"
+			},
+			{
+				"name": "inventory",
+				"label": "Inventory",
+				"type": "tab"
+			},
+			{
+				"name": "strength",
+				"label": "Str",
+				"group": "statsnsaves",
+				"type": "counterNum"
+			},
+			{
+				"name": "strengthSave",
+				"label": "Str Save",
+				"group": "statsnsaves",
+				"type": "counterNum"
+			},
+			{
+				"name": "dexterity",
+				"label": "Dex",
+				"group": "statsnsaves",
+				"type": "counterNum"
+			},
+			{
+				"name": "dexteritySave",
+				"label": "Dex Save",
+				"group": "statsnsaves",
+				"type": "counterNum"
+			},
+			{
+				"name": "constitution",
+				"label": "Con",
+				"group": "statsnsaves",
+				"type": "counterNum"
+			},
+			{
+				"name": "constitutionSave",
+				"label": "Con Save",
+				"group": "statsnsaves",
+				"type": "counterNum"
+			},
+			{
+				"name": "intelligence",
+				"label": "Int",
+				"group": "statsnsaves",
+				"type": "counterNum"
+			},
+			{
+				"name": "intelligenceSave",
+				"label": "Int Save",
+				"group": "statsnsaves",
+				"type": "counterNum"
+			},
+			{
+				"name": "wisdom",
+				"label": "Wis",
+				"group": "statsnsaves",
+				"type": "counterNum"
+			},
+			{
+				"name": "wisdomSave",
+				"label": "Wis Save",
+				"group": "statsnsaves",
+				"type": "counterNum"
+			},
+			{
+				"name": "charisma",
+				"label": "Cha",
+				"group": "statsnsaves",
+				"type": "counterNum"
+			},
+			{
+				"name": "charismaSave",
+				"label": "Cha Save",
+				"group": "statsnsaves",
+				"type": "counterNum"
+			},
+			{
+				"name": "class",
+				"label": "Class",
+				"group": "general",
+				"type": "tag"
+			},
+			{
+				"name": "gold",
+				"label": "Gold",
+				"group": "general",
+				"type": "counterNum"
+			},
+			{
+				"name": "level",
+				"label": "Level",
+				"group": "general",
+				"type": "counterNum"
+			},
+			{
+				"name": "hp",
+				"label": "HP",
+				"group": "combat",
+				"type": "counterNum"
+			},
+			{
+				"name": "hpMax",
+				"label": "HP Max",
+				"group": "combat",
+				"type": "counterNum"
+			},
+			{
+				"name": "ac",
+				"label": "AC",
+				"group": "combat",
+				"type": "counterNum"
+			},
+			{
+				"name": "initiative",
+				"label": "Initiative",
+				"group": "combat",
+				"type": "counterNum"
+			},
+			{
+				"name": "weapons",
+				"label": "Weapons",
+        "group": "combat",
+        "type": "datatable",
+				"value": "bonus|crit|dmg|name"
+			},
+			{
+				"name": "general",
+				"label": "General",
+				"type": "tab"
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "1122d04a-9180-4a48-ba12-8ed9a8a27212",
+				"label": "Acrobatics (Dex)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "dbcfdfdf-dc0b-4169-af3a-3a63e7699a09",
+				"label": "Animal Handling (Wis)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "3bda1e5b-786a-41ca-ab91-5669f681c371",
+				"label": "Arcana (Int)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "4bc9170b-536c-4d03-a2a8-c3d8f5139c6c",
+				"label": "Athletics (Str)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "25b1f423-e91e-4f4b-aff1-b2e8a8bb83b6",
+				"label": "Deception (Cha)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "25751425-b29d-497f-9b20-7778606f9b5d",
+				"label": "History (Int)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "baeb947d-570a-4800-beb3-3506b4d67272",
+				"label": "Insight (Wis)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "32d77b0e-c5c2-4dd9-9728-e1cdb33a68c2",
+				"label": "Intimidation (Cha)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "2ec487ea-53bf-40e6-bdee-704984b9b018",
+				"label": "Investigation (Int)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "e03d1138-6188-4609-91df-fcb3d26e040c",
+				"label": "Medicine (Wis)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "3f68e68d-0148-4608-bb39-aeb3b958f6e4",
+				"label": "Nature (Int)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "650e3402-de7d-40d9-bbb1-f7221c8b5dd8",
+				"label": "Perception (Wis)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "2a406f15-1a6a-4972-aa99-371aa3d62a8e",
+				"label": "Performance (Cha)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "6cd9f461-4bdd-43c2-a0e0-998ae45d367a",
+				"label": "Persuasion (Cha)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "577921b2-9436-40e1-8258-4823913a99da",
+				"label": "Religion (Int)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "0d773686-1942-4d26-a9ab-38dba0398b0d",
+				"label": "Sleight of Hand (Dex)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "0bb95fe6-82e0-4fed-a1d0-57a0ef07d0d3",
+				"label": "Stealth (Dex)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			},
+			{
+				"description": "DnD Skill as example",
+				"group": "skills",
+				"id": "bea846a0-c6a3-423e-8363-fe1f3d166da9",
+				"label": "Survival (Wis)",
+				"name": "counterNum",
+				"type": "counterNum",
+				"value": "0",
+				"weight": 1
+			}
+		],
+		"compendium": [
+			
+		]
+	}
+}

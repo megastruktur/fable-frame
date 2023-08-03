@@ -158,7 +158,7 @@
 
   <!-- Character Sheet -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div class="mt-4">
+  <div class="mt-4 w-full">
     {#if CharacterSheet}
       <svelte:component this={CharacterSheet} />
     {/if}

@@ -27,8 +27,6 @@
 
   const matches = createMediaStore(query) //The type of the store will completely repeat the query
   
-  onDestroy(() => matches.destroy()) //Stop events for calculation
-
   let activeTab: string = "skill"
 
   let action: Field
@@ -62,7 +60,7 @@
 
   let inventoryTab: Field
 
-  characterStore.subscribe((character: CharactersResponse) => {
+  const unsubscribeCharacterStore = characterStore.subscribe((character: CharactersResponse) => {
 
     action = getFieldFromListByName("action", character.fields)
     fight = getFieldFromListByName("fight", character.fields)
@@ -115,6 +113,11 @@
   function setActiveTab(tab: string) {
     activeTab = tab
   }
+
+  onDestroy(() => {
+    matches.destroy()
+    unsubscribeCharacterStore()
+  })
   
 </script>
 
@@ -148,7 +151,7 @@
 
   <!-- Skills -->
   <section
-    class="mx-3 {matches && activeTab !== "skill" ? "hidden" : ""}">
+    class="mx-3 lg:w-auto w-full mb-3 relative {matches && activeTab !== "skill" ? "hidden" : ""}">
     <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
 
       <!-- Action -->
@@ -230,7 +233,7 @@
   <!-- Feelings -->
   <section
     role="figure"
-    class="mx-3 {matches && activeTab !== "feel" ? "hidden" : ""} lg:w-80 w-72">
+    class="mx-3 lg:w-auto w-full mb-3 relative {matches && activeTab !== "feel" ? "hidden" : ""} lg:w-80 w-72">
 
     <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
 
@@ -247,7 +250,7 @@
   <!-- General -->
   <section
     role="figure"
-    class="mx-3 {matches && activeTab !== "general" ? "hidden" : ""}">
+    class="mx-3 lg:w-auto w-full mb-3 relative {matches && activeTab !== "general" ? "hidden" : ""}">
 
     <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md lg:w-80 w-72">
 

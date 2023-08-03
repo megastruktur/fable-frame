@@ -1,3 +1,8 @@
+### 0.1.8
+- Feature: Adds primitive DnD support
+- Feature: Adds datatable field type
+- UI/UX: Design fixes
+
 ### 0.1.7
 - Feature: Adds logo
 
