@@ -50,13 +50,13 @@
 </script>
 
 
-<section class="mx-3 relative {matches && activeTabName !== tab.name ? "hidden" : ""}">
+<section class="mx-3 lg:w-auto w-full mb-3 relative {matches && activeTabName !== tab.name ? "hidden" : ""}">
 {#if $editMode}
   <button type="button"
     class="btn-icon btn-icon-sm variant-filled-error absolute -top-3 -right-3 z-10" on:click={removeTab}>✕</button>
 {/if}
 <div
-  class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md lg:w-80 w-72">
+  class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
   <h2 class="h2 text-center mb-3">
     {#if $editMode}
     <input type="text" class="input" bind:value={tab.label} />
