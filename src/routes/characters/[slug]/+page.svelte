@@ -1,7 +1,7 @@
 <!-- All Characters -->
 <script lang="ts">
   import { page } from "$app/stores"
-	import { deleteCharacter, getCharacter, getCharacterAvatar, updateCharacterWithHash } from "$models/character";
+	import { deleteCharacter, getCharacter, getCharacterAvatar, getCharacterTabs, updateCharacterWithHash } from "$models/character";
 	import { onMount, onDestroy } from "svelte";
   import { characterStore, fieldErrors, editMode } from "$lib/stores"
 	import type { Field, FieldError } from "$lib/types";
@@ -16,7 +16,9 @@
 	import type { CharactersResponse } from "$lib/pocketbase-types";
 	import { toastShow, toastShowError } from "$lib/toast";
 
-  import { fade } from "svelte/transition"
+  import { crossfade, fade } from "svelte/transition"
+  import { backOut } from 'svelte/easing';
+	import MediaQuery, { createMediaStore } from "svelte-media-queries";
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -25,14 +27,38 @@
   } = {}
   let characterAvatarUrl: string = ""
   let characterId: string = ""
+
+  let activeTabName: string = "general"
+  let tabsContent: { [key: string]: Field[] } = {general: []}
+  let tabs: {[key: string]: Field}
+
+  // Animation
+  export const [send, receive] = crossfade({
+    duration: (d) => Math.sqrt(d * 200),
+
+    fallback(node, params) {
+      const style = getComputedStyle(node);
+      const transform = style.transform === 'none' ? '' : style.transform;
+
+      return {
+        duration: 600,
+        css: (t) => `
+          transform: ${transform} scale(${t});
+          opacity: ${t}
+        `
+      };
+    }
+  })
   
   onMount(async () => {
 
+    // @todo Think about preloading character via server instead as it loads as undefined first.
     $characterStore = (await getCharacter($page.params.slug, {expand: "rpgSystem"}))
 
     characterName = $characterStore.name
     characterId = $characterStore.id
 
+    // Dynamically load component
     if ($characterStore.expand.rpgSystem) {
       CharacterSheet = (await import(`../../../data/systems/${$characterStore.expand.rpgSystem.identifier}/components/CharacterSheet.svelte`)).default
 
@@ -49,11 +75,50 @@
     }
   })
 
-  characterStore.subscribe((character: CharactersResponse) => {
-    if ($characterStore !== undefined) {
-      characterAvatarUrl = getCharacterAvatar($characterStore)
+
+  const unsubscribeCharacterStore = characterStore.subscribe((character: CharactersResponse) => {
+    
+    console.log("----------------")
+    console.log(character)
+
+    if (character !== undefined) {
+      characterAvatarUrl = getCharacterAvatar(character)
+
+      tabs = getCharacterTabs(character)
+      tabsContent = {general: []}
+  
+      // Cleanup tabsContent and Create tabs placeholders
+      Object.keys(tabs).forEach((tabName: string) => {
+        tabsContent[tabs[tabName].name] = []
+      })
+  
+      character.fields.forEach((field: Field) => {
+        if (field.group && field.type !== "tab") {
+  
+          // If tab doens't exist add fields to "general" tab.
+          let tabExists = (tabs[field.group] !== undefined)? true : false
+          let tabNameToAdd = "general"
+  
+          if (tabExists) {
+            tabNameToAdd = field.group
+          }
+          
+          if (tabsContent[field.group] === undefined) {
+            tabsContent[field.group] = []
+          }
+          tabsContent[tabNameToAdd] = [...tabsContent[field.group], field]
+        }
+      })
+
+      // Reorder all objects inside tabsContent by weight property.
+      Object.keys(tabsContent).forEach((key: string) => {
+        tabsContent[key].sort((a: Field, b: Field) => {
+          return a.weight - b.weight
+        })
+      })
     }
   })
+
 
   // Show errors.
   fieldErrors.subscribe((errors: FieldError[]) => {
@@ -120,18 +185,36 @@
     characterStore.rename(characterName)
   }
 
-  // Reset error handler.
-  onDestroy(() => {
-    fieldErrors.reset()
-  })
 
+  const query = {
+    "mobile": "(max-width: 480px)",
+    "tablet": "(min-width: 480px) and (max-width: 768px)",
+    "largeTablet": "(min-width: 768px) and (max-width: 1200px)",
+    "desktop": "(min-width: 1200px)",
+    "other": [
+      "(min-width: 1200px)",
+      "(max-height: 900px)"
+    ],
+    "themes": {
+      "dark": "(prefers-color-scheme: dark)",
+      "light": "(prefers-color-scheme: light)"
+    }
+  } //
+
+  const matches = createMediaStore(query) //The type of the store will completely repeat the query
+
+  onDestroy(() => {
+    matches.destroy()
+    unsubscribeCharacterStore()
+    fieldErrors.reset()
+  }) //Stop events for calculation
 
 </script>
 
 {#key $editMode}
 <div 
-  in:fade={{ duration: 300, delay: 300 }}
-  out:fade={{ duration: 300 }}
+  out:fade={{ duration: 500 }}
+  in:fade={{ duration: 500 }}
   class="flex flex-col items-center my-3"
   >
   <CharacterAvatar characterId={characterId} avatarUrl={characterAvatarUrl} />
@@ -160,7 +243,27 @@
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="mt-4 w-full">
     {#if CharacterSheet}
-      <svelte:component this={CharacterSheet} />
+      <MediaQuery query='(max-width: 1200px)' let:matches>
+
+        <!-- Tabs -->
+        {#if matches}
+        <div class="tabs tabs-boxed w-72">
+          {#each Object.keys(tabs) as tabName}
+          <a
+            href="/"
+            class="tab p-1 {tabName === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
+            on:click|preventDefault={() => activeTabName = tabName}
+            >{tabs[tabName].label}</a>
+          {/each}
+        </div>
+        {/if}
+
+        <!-- Character Sheet content -->
+        {#if $characterStore !== undefined}
+        <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} />
+        {/if}
+
+      </MediaQuery>
     {/if}
   </div>
 </div>

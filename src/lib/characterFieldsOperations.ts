@@ -27,7 +27,7 @@ export function getFieldsByGroup(group: string, fields: Field[]): Field[] {
 export function addCharacterField(character: CharactersResponse, field: Field): CharactersResponse {
 
   // Generate Field UUID.
-  if (!field.id) {
+  if (field.id === undefined || field.id === "") {
     field.id = uuidv4()
   }
   field.weight = 1
@@ -110,4 +110,15 @@ export function updateCharacterField(character: CharactersResponse, field: Field
     throw new Error(`Field ${field.id} not found in character`)
   }
 
+}
+
+export function getFieldByNameFromList(list: Field[], name: string): Field {
+  const field = list.find(field => field.name === name)
+
+  if (field === undefined) {
+    console.log({list})
+    throw new Error(`Field ${name} not found`)
+  }
+
+  return field
 }
