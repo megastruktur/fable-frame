@@ -12,6 +12,26 @@
 				"type": "text"
 			},
 			{
+				"name": "skill",
+				"label": "Skills",
+				"type": "tab"
+			},
+			{
+				"name": "feel",
+				"label": "I Feel",
+				"type": "tab"
+			},
+			{
+				"name": "general",
+				"label": "General",
+				"type": "tab"
+			},
+			{
+				"name": "inventory",
+				"label": "Inventory",
+				"type": "tab"
+			},
+			{
 				"name": "workplace",
 				"label": "Workplace",
         "group": "general",

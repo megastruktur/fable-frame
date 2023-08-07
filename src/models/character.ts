@@ -136,7 +136,14 @@ export function getCharacterFieldGroups(character: CharactersResponse) {
 }
 
 export function getCharacterTabs(character: CharactersResponse) {
-  return character.fields.filter((field: Field) => field.type === "tab")
+
+  const tabs: {[key: string]: Field} = {}
+
+  character.fields.filter((field: Field) => field.type === "tab").forEach((tab: Field) => {
+    tabs[tab.name] = tab
+  })
+
+  return tabs
 }
 
 export async function characterUpdateAvatar(characterId: string, avatarMultipart: any): Promise<CharactersResponse> {

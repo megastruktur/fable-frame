@@ -15,6 +15,8 @@
 	import { onMount } from "svelte";
 	import { getCharacterFieldByName } from "$lib/characterFieldsOperations";
 
+  import { v4 as uuidv4 } from 'uuid'
+
   export let group: string;
   export let type: string = "";
 
@@ -29,7 +31,7 @@
   let validationFailed: boolean = true
 
   let field = {
-    id: "",
+    id: uuidv4(),
     type: type,
     name: "",
     label: "",

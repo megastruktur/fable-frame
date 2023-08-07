@@ -1,3 +1,8 @@
+### 0.1.9
+- Feature: Adds Meta
+- Feature: Login simplified to Google-only for now
+- Feature: big character sheet refactoring
+
 ### 0.1.8
 - Feature: Adds primitive DnD support
 - Feature: Adds datatable field type

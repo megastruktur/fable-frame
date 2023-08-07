@@ -71,6 +71,7 @@
     use:dndzone={options}
     on:consider={handleDndConsider} on:finalize={handleDndFinalize}
     >
+    {#if fields.length > 0}
     {#each fields as field(field.id)}
     <div class="flex items-center mb-3" animate:flip="{{duration: flipDurationMs}}">
       <FieldRender field={field} />
@@ -81,6 +82,7 @@
       {/if}
     </div>
     {/each}
+    {/if}
   </div>
   {#if $editMode}
   <CircleAdd group={tab.name} />
