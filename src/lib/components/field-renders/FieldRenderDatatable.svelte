@@ -2,6 +2,7 @@
 	import type { Field } from "$lib/types.d";
   import { editMode } from "$lib/stores";
 	import { createEventDispatcher } from "svelte";
+	import { onMount } from "svelte";
 
   export let field: Field
   export let classes: string = ""
@@ -18,9 +19,12 @@
   }
 
   let tableData: { columns: Array<string>, data: Array<Array<string>> }
-  if (!$editMode) {
-    tableData = parseMDTable(field.value)
-  }
+
+  onMount(() => {
+    if (!$editMode) {
+      tableData = parseMDTable(field.value)
+    }
+  })
 
 </script>
 
@@ -30,6 +34,7 @@
     <textarea class="textarea" bind:value={field.value} on:focusout={() => {console.log(field); dispatch("fieldUpdate", field)}} />
   {:else}
     <div class="table-container">
+      {#if tableData !== undefined}
       <table class="table table-hover">
         <thead>
           <tr>
@@ -48,6 +53,7 @@
           {/each}
         </tbody>
       </table>
+      {/if}
     </div>
   {/if}
 </label>
