@@ -1,3 +1,6 @@
+### 0.1.10
+- Bugifx: Datatable fix
+
 ### 0.1.9
 - Feature: Adds Meta
 - Feature: Login simplified to Google-only for now
