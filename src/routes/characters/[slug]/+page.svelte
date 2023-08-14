@@ -3,22 +3,22 @@
   import { page } from "$app/stores"
 	import { deleteCharacter, getCharacter, getCharacterAvatar, getCharacterTabs, updateCharacterWithHash } from "$models/character";
 	import { onMount, onDestroy } from "svelte";
-  import { characterStore, fieldErrors, editMode } from "$lib/stores"
+  import { characterStore, fieldErrors, editMode, characterNotesStore } from "$lib/stores"
 	import type { Field, FieldError } from "$lib/types";
 
   // Icons
   import Icon from "svelte-icons-pack"
   import FaSolidSkull from "svelte-icons-pack/fa/FaSolidSkull";
 
-	import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+	import { modalStore, type ModalSettings, type DrawerSettings, drawerStore } from "@skeletonlabs/skeleton";
 	import { goto } from "$app/navigation";
 	import CharacterAvatar from "$lib/components/CharacterAvatar.svelte";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
 	import { toastShow, toastShowError } from "$lib/toast";
 
   import { crossfade, fade } from "svelte/transition"
-  import { backOut } from 'svelte/easing';
 	import MediaQuery, { createMediaStore } from "svelte-media-queries";
+	import { getCharacterNotesByCharacterId } from "$models/character_notes";
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -55,6 +55,9 @@
     // @todo Think about preloading character via server instead as it loads as undefined first.
     $characterStore = (await getCharacter($page.params.slug, {expand: "rpgSystem"}))
 
+    // Load Character Notes
+    $characterNotesStore = (await getCharacterNotesByCharacterId($page.params.slug))
+
     characterName = $characterStore.name
     characterId = $characterStore.id
 
@@ -73,8 +76,8 @@
 
       editMode.set(false)
     }
-  })
 
+  })
 
   const unsubscribeCharacterStore = characterStore.subscribe((character: CharactersResponse) => {
     
@@ -207,7 +210,21 @@
     matches.destroy()
     unsubscribeCharacterStore()
     fieldErrors.reset()
+    characterNotesStore.reset()
+    characterStore.reset()
   }) //Stop events for calculation
+
+
+  async function openCharacterNotesDrawer() {
+
+    // Character Notes Drawer
+    const characterNotesDrawerSettings: DrawerSettings = {
+      id: "character-notes",
+      position: "right",
+    }
+
+    drawerStore.open(characterNotesDrawerSettings)
+  }
 
 </script>
 
@@ -232,11 +249,12 @@
   <hr />
 
   <div class="flex items-center justify-center mt-4">
-    <button class="btn uppercase {$editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{$editMode ? "cancel" : "edit"}</button>
+    <button class="btn mr-3 uppercase {$editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{$editMode ? "cancel" : "edit"}</button>
     <!-- cancel edit button -->
     {#if $editMode}
       <button class="btn uppercase variant-filled-success ml-3" on:click={saveChanges}>save</button>
     {/if}
+    <button class="btn variant-filled-warning" on:click={openCharacterNotesDrawer}>notes</button>
   </div>
 
   <!-- Character Sheet -->

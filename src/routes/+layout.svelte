@@ -20,6 +20,7 @@
 	import BsEnvelope from "svelte-icons-pack/bs/BsEnvelope";
 
 	import { fade } from "svelte/transition"
+	import CharacterNotesDrawer from "$lib/components/character-notes/CharacterNotesDrawer.svelte";
 	
 	const drawerSettings: DrawerSettings = {
 		id: 'navbar',
@@ -36,7 +37,11 @@
 <Modal />
 
 <Drawer>
+	{#if $drawerStore.id === "navbar"}
 	<Sidebar />
+	{:else if $drawerStore.id === "character-notes"}
+	<CharacterNotesDrawer />
+	{/if}
 </Drawer>
 <!-- App Shell -->
 <AppShell slotSidebarLeft="bg-surface-500/5 w-0 lg:w-56">

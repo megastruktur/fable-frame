@@ -1,7 +1,9 @@
 import { writable } from "svelte/store"
-import { Collections, type CharactersResponse } from "./pocketbase-types.d";
-import type { Field, FieldError } from "./types";
+import { Collections, type CharactersResponse, type CharacterNotesResponse } from "./pocketbase-types.d";
+import type { CharacterNote, Field, FieldError } from "./types";
 import { addCharacterField, removeCharacterField, updateCharacterField, updateCharacterFieldValue } from "$lib/characterFieldsOperations";
+import { addCharacterNote, removeCharacterNote } from "./characterNotesOperations";
+import { updateCharacterNotes } from "$models/character_notes";
 
 
 function createCharacterStore() {
@@ -114,3 +116,65 @@ function createEditErrorsStore(initial: []) {
 }
 
 export const fieldErrors = createEditErrorsStore([]);
+
+// Character Notes Store
+function createCharacterNotesStore() {
+
+  const { subscribe, set, update } = writable<CharacterNotesResponse>();
+
+  function addNote(note: CharacterNote) {
+    update((characterNotes) => {
+      console.log(`Adding note`)
+      return addCharacterNote(characterNotes, note)
+    })
+  }
+
+  function deleteNote(noteId: string) {
+    update((characterNotes) => {
+      console.log(`Removing note`)
+      return removeCharacterNote(characterNotes, noteId)
+    })
+  }
+
+  function updateNote(note: CharacterNote) {
+    update((characterNotes) => {
+      characterNotes.data = characterNotes.data.map((n: CharacterNote) => {
+        if (n.id === note.id) {
+          n = note
+        }
+        return n
+      })
+      console.log(`Updated note`)
+      return characterNotes
+    })
+  }
+
+  function save() {
+    update((characterNotes) => {
+      console.log(`Saving Character Notes`)
+      updateCharacterNotes(characterNotes.id, characterNotes)
+      return characterNotes 
+    })
+  }
+
+  return {
+    subscribe,
+    set,
+    update,
+    save,
+    reset: () => set({
+      id: "",
+      data: [],
+      character: "",
+      creator: "",
+      created: "",
+      updated: "",
+      collectionId: "",
+      collectionName: Collections.CharacterNotes
+    }),
+    addNote,
+    deleteNote,
+    updateNote,
+  };
+}
+export const characterNotesStore = createCharacterNotesStore();
