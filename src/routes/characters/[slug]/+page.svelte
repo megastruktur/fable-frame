@@ -249,12 +249,12 @@
   <hr />
 
   <div class="flex items-center justify-center mt-4">
-    <button class="btn mr-3 uppercase {$editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{$editMode ? "cancel" : "edit"}</button>
+    <button class="btn uppercase {$editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{$editMode ? "cancel" : "edit"}</button>
     <!-- cancel edit button -->
     {#if $editMode}
       <button class="btn uppercase variant-filled-success ml-3" on:click={saveChanges}>save</button>
     {/if}
-    <button class="btn variant-filled-warning" on:click={openCharacterNotesDrawer}>notes</button>
+    <button class="btn variant-filled-warning ml-3" on:click={openCharacterNotesDrawer}>notes</button>
   </div>
 
   <!-- Character Sheet -->

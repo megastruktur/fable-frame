@@ -1,4 +1,6 @@
-# Fable Frame!
+<p align="center">
+  <img width="300" src="static/FF_Logo.svg" />
+</p>
 
 ### Demo: https://fable-frame.online
 
