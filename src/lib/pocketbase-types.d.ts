@@ -11,6 +11,7 @@ export enum Collections {
 	News = "news",
 	RpgSystems = "rpg_systems",
 	Users = "users",
+	CharacterNotes = "character_notes",
 }
 
 // Alias types for improved usability
@@ -91,6 +92,12 @@ export type UsersRecord = {
 	admin: boolean
 }
 
+export type CharacterNotesRecord<Tdata = unknown> = {
+	data: CharacterNote[]
+	character: RecordIdString
+	creator: RecordIdString
+}
+
 // Response types include system fields and match responses from the PocketBase API
 export type CampaignNotesResponse<Texpand = unknown> = Required<CampaignNotesRecord> & BaseSystemFields<Texpand>
 export type CampaignsResponse<Texpand = unknown> = Required<CampaignsRecord> & BaseSystemFields<Texpand>
@@ -98,6 +105,7 @@ export type CharactersResponse<Tdata = unknown, Texpand = unknown> = Required<Ch
 export type NewsResponse<Texpand = unknown> = Required<NewsRecord> & BaseSystemFields<Texpand>
 export type RpgSystemsResponse<Tdata = unknown, Texpand = unknown> = Required<RpgSystemsRecord<Tdata>> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
+export type CharacterNotesResponse<Tdata = unknown, Texpand = unknown> = Required<CharacterNotesRecord<Tdata>> & BaseSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
 
@@ -108,6 +116,7 @@ export type CollectionRecords = {
 	news: NewsRecord
 	rpg_systems: RpgSystemsRecord
 	users: UsersRecord
+	character_notes: CharacterNotesRecord
 }
 
 export type CollectionResponses = {
@@ -117,4 +126,5 @@ export type CollectionResponses = {
 	news: NewsResponse
 	rpg_systems: RpgSystemsResponse
 	users: UsersResponse
+	character_notes: CharacterNotesResponse
 }

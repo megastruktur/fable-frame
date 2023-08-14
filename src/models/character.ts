@@ -4,6 +4,7 @@ import type { SystemJSON, Field } from "$lib/types.d"
 import type { CharactersResponse, CharactersRecord } from "$lib/pocketbase-types.d"
 import getStringHash from "$lib/getStringHash"
 import { v4 as uuidv4 } from 'uuid'
+import { createCharacterNotes } from "./character_notes"
 
 export async function createCharacter(data: Partial<CharactersRecord>): Promise<CharactersResponse> {
   return await pb.collection("characters").create(data)
@@ -89,12 +90,19 @@ export async function createNewCharacter(systemId: string, name = "New Character
     return {...field, id: uuidv4() }
   });
 
-  return await createCharacter({
+  const character = await createCharacter({
     name: name,
     rpgSystem: systemId,
     hash: await getStringHash(JSON.stringify(fieldList)),
     fields: fieldList
   })
+
+  await createCharacterNotes({
+    character: character.id,
+    data: [],
+  })
+
+  return character
 }
 
 export function getCharacterField(character: CharactersResponse, fieldId: string): Field {

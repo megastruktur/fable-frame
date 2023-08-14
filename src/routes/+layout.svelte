@@ -20,6 +20,7 @@
 	import BsEnvelope from "svelte-icons-pack/bs/BsEnvelope";
 
 	import { fade } from "svelte/transition"
+	import CharacterNotesDrawer from "$lib/components/character-notes/CharacterNotesDrawer.svelte";
 	
 	const drawerSettings: DrawerSettings = {
 		id: 'navbar',
@@ -36,7 +37,11 @@
 <Modal />
 
 <Drawer>
+	{#if $drawerStore.id === "navbar"}
 	<Sidebar />
+	{:else if $drawerStore.id === "character-notes"}
+	<CharacterNotesDrawer />
+	{/if}
 </Drawer>
 <!-- App Shell -->
 <AppShell slotSidebarLeft="bg-surface-500/5 w-0 lg:w-56">
@@ -52,7 +57,7 @@
 							</svg>
 					</span>
 				</button>
-				<strong class="text-xl uppercase optima-regular">Fable Frame (WIP) <span class="text-xs text-red-800">v0.1.10</span></strong>
+				<strong class="text-xl uppercase optima-regular">Fable Frame (WIP) <span class="text-xs text-red-800">v0.2.0</span></strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<a href="mailto:astrtomortis@gmail.com" class="btn"><Icon src={BsEnvelope} /></a>

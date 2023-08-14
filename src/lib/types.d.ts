@@ -42,3 +42,10 @@ type FieldError = {
   fieldId?: string,
   message: string
 }
+
+type CharacterNote = {
+  id?: string
+  date?: string
+  note: string
+  weight?: number
+}

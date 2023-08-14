@@ -1,4 +1,4 @@
-import type { Field, FieldError } from "./types.d";
+import type { Field } from "./types.d";
 import type { CharactersResponse } from "./pocketbase-types";
 import { v4 as uuidv4 } from 'uuid'
 

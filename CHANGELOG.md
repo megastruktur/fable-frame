@@ -1,3 +1,9 @@
+### 0.2.0
+- Feature: CounterNum can be edited without plus/minus
+- Feature: DnD character sheet tweaks (stats and saves)
+- Feature: removes admin route
+- Feature: Character Notes
+
 ### 0.1.10
 - Bugifx: Datatable fix
 
