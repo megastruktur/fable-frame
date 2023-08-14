@@ -4,6 +4,7 @@
   import { editMode } from "$lib/stores";
 
   import { createEventDispatcher, onMount } from "svelte"
+	import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton"
 
   export let field: Field
   export let classes: string = ""
@@ -29,6 +30,30 @@
     }
   })
 
+  async function openModal() {
+    
+    if ($editMode) {
+      modalStore.clear();
+
+      const modalValueSet: ModalSettings = {
+        type: 'prompt',
+        title: `Edit field ${field.name}`,
+        value: field.value,
+        valueAttr: { required: true },
+        response: (r: any) => {
+          if (r !== false) {
+            // Validate if can be converted to integer
+            if (!isNaN(parseInt(r))) {
+              field.value = r
+              dispatch("fieldUpdate", field)
+            }
+          }
+        },
+      }
+
+      modalStore.trigger(modalValueSet)
+    }
+  }
 </script>
 
 <div class="{classes} h4 w-full flex flex-row justify-between">
@@ -36,7 +61,11 @@
     <button type="button" on:click={fieldDecrement} class="btn-icon btn-icon-sm variant-filled mr-1">-</button>
   {/if}
   <div class="flex">{field.label}</div>
-  <div class="flex text-secondary-500">{field.value ? field.value : 0}</div>
+  <button
+    class="flex text-secondary-500"
+    on:click={openModal}
+    >{field.value ? field.value : 0}
+  </button>
 
   {#if editable && $editMode}
     <button type="button" on:click={fieldIncrement} class="btn-icon btn-icon-sm variant-filled ml-1">+</button>

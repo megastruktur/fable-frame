@@ -1,3 +1,6 @@
+### 0.1.11
+- Feature: CounterNum can be edited without plus/minus
+
 ### 0.1.10
 - Bugifx: Datatable fix
 
