@@ -1,3 +1,6 @@
+### 0.2.1
+- UI/UX: Minor css fix
+
 ### 0.2.0
 - Feature: CounterNum can be edited without plus/minus
 - Feature: DnD character sheet tweaks (stats and saves)
