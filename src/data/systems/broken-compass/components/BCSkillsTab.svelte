@@ -6,6 +6,7 @@
   export let matches: boolean
   export let tabActive: boolean
   export let fields: Field[]
+  export let editMode: boolean = false
   
   let action:Field = getFieldByNameFromList(fields, "action")
   let fight:Field = getFieldByNameFromList(fields, "fight")
@@ -36,79 +37,79 @@
 
 <!-- Skills -->
 <section
-class="mx-3 lg:w-auto w-full mb-3 relative {matches && tabActive ? "hidden" : ""}">
+class="mx-3 w-80 mb-3 relative {matches && tabActive ? "hidden" : ""}">
 <div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
 
   <!-- Action -->
   <div class="mb-3">
     <h2 class="flex text-3xl justify-center h2">Skills</h2>
     <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
-      <DiamondSkill on:fieldUpdate skill={action} />
+      <DiamondSkill on:fieldUpdate skill={action} {editMode} />
     </h3>
     <h5 class="h5 flex flex-col items-end">
-      <DiamondSkill on:fieldUpdate skill={fight} />
-      <DiamondSkill on:fieldUpdate skill={leadership} />
-      <DiamondSkill on:fieldUpdate skill={stunt} />
+      <DiamondSkill on:fieldUpdate skill={fight} {editMode} />
+      <DiamondSkill on:fieldUpdate skill={leadership} {editMode} />
+      <DiamondSkill on:fieldUpdate skill={stunt} {editMode} />
     </h5>
   </div>
 
   <!-- Guts -->
   <div class="mb-3">
     <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
-      <DiamondSkill on:fieldUpdate skill={guts} />
+      <DiamondSkill on:fieldUpdate skill={guts} {editMode} />
     </h3>
     <h5 class="h5 flex flex-col items-end">
-      <DiamondSkill on:fieldUpdate skill={cool} />
-      <DiamondSkill on:fieldUpdate skill={drive} />
-      <DiamondSkill on:fieldUpdate skill={shoot} />
+      <DiamondSkill on:fieldUpdate skill={cool} {editMode} />
+      <DiamondSkill on:fieldUpdate skill={drive} {editMode} />
+      <DiamondSkill on:fieldUpdate skill={shoot} {editMode} />
     </h5>
   </div>
 
   <!-- Knowledge -->
   <div class="mb-3">
     <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
-      <DiamondSkill on:fieldUpdate skill={knowledge} />
+      <DiamondSkill on:fieldUpdate skill={knowledge} {editMode} />
     </h3>
     <h5 class="h5 flex flex-col items-end">
-      <DiamondSkill on:fieldUpdate skill={culture} />
-      <DiamondSkill on:fieldUpdate skill={first_aid} />
-      <DiamondSkill on:fieldUpdate skill={tech} />
+      <DiamondSkill on:fieldUpdate skill={culture} {editMode} />
+      <DiamondSkill on:fieldUpdate skill={first_aid} {editMode} />
+      <DiamondSkill on:fieldUpdate skill={tech} {editMode} />
     </h5>
   </div>
 
   <!-- Society -->
   <div class="mb-3">
     <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
-      <DiamondSkill on:fieldUpdate skill={society} />
+      <DiamondSkill on:fieldUpdate skill={society} {editMode} />
     </h3>
     <h5 class="h5 flex flex-col items-end">
-      <DiamondSkill on:fieldUpdate skill={charm} />
-      <DiamondSkill on:fieldUpdate skill={eloquence} />
-      <DiamondSkill on:fieldUpdate skill={observation} />
+      <DiamondSkill on:fieldUpdate skill={charm} {editMode} />
+      <DiamondSkill on:fieldUpdate skill={eloquence} {editMode} />
+      <DiamondSkill on:fieldUpdate skill={observation} {editMode} />
     </h5>
   </div>
 
   <!-- Wild -->
   <div class="mb-3">
     <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
-      <DiamondSkill on:fieldUpdate skill={wild} />
+      <DiamondSkill on:fieldUpdate skill={wild} {editMode} />
     </h3>
     <h5 class="h5 flex flex-col items-end">
-      <DiamondSkill on:fieldUpdate skill={scout} />
-      <DiamondSkill on:fieldUpdate skill={survival} />
-      <DiamondSkill on:fieldUpdate skill={tough} />
+      <DiamondSkill on:fieldUpdate skill={scout} {editMode} />
+      <DiamondSkill on:fieldUpdate skill={survival} {editMode} />
+      <DiamondSkill on:fieldUpdate skill={tough} {editMode} />
     </h5>
   </div>
 
   <!-- Crime -->
   <div class="mb-3">
     <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
-      <DiamondSkill on:fieldUpdate skill={crime} />
+      <DiamondSkill on:fieldUpdate skill={crime} {editMode} />
     </h3>
     <h5 class="h5 flex flex-col items-end">
-      <DiamondSkill on:fieldUpdate skill={alertF} />
-      <DiamondSkill on:fieldUpdate skill={dexterity} />
-      <DiamondSkill on:fieldUpdate skill={stealth} />
+      <DiamondSkill on:fieldUpdate skill={alertF} {editMode} />
+      <DiamondSkill on:fieldUpdate skill={dexterity} {editMode} />
+      <DiamondSkill on:fieldUpdate skill={stealth} {editMode} />
     </h5>
   </div>
 </div>

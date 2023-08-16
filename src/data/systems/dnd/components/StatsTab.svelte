@@ -1,6 +1,5 @@
 <script lang="ts">
 	import FieldRender from "$lib/components/field-renders/FieldRender.svelte";
-	import { editMode } from "$lib/stores";
 	import type { Field } from "$lib/types";
 	import type { ObjectType, QueryArray } from "svelte-media-queries/components/MediaQuery.types";
 
@@ -10,6 +9,7 @@
   export let activeTabName: string
   // matches the media queries:
   export let matches: boolean | QueryArray | ObjectType<any> = true
+  export let editMode: boolean = false
 
 </script>
 
@@ -33,8 +33,8 @@
       {@const modifier = (field.value && !isSave) ? Math.floor((parseInt(field.value) - 10)/2) : 0 }
         {#if !isSave}
         <div class="flex items-center mb-3">
-          {#if !$editMode}
-            <div class="h4 w-full flex flex-row justify-between">
+          {#if !editMode}
+            <div class="h4 w-full flex flex-row justify-between mx-2">
               <div class="flex">{field.label}</div>
               <button
                 class="flex text-secondary-500"
@@ -42,7 +42,7 @@
               </button>
             </div>
           {:else}        
-            <FieldRender field={field} />
+            <FieldRender field={field} {editMode} />
           {/if}
         </div>
         {/if}
@@ -55,7 +55,7 @@
       {@const isSave = field.name.includes("Save") ? true : false}
         {#if isSave}
         <div class="flex items-center mb-3">    
-          <FieldRender field={field} />
+          <FieldRender field={field} {editMode} />
         </div>
         {/if}
       {/each}

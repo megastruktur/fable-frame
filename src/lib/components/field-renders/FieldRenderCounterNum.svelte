@@ -1,14 +1,13 @@
 <script lang="ts">
 	import type { Field } from "$lib/types";
 
-  import { editMode } from "$lib/stores";
-
   import { createEventDispatcher, onMount } from "svelte"
 	import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton"
 
   export let field: Field
   export let classes: string = ""
   export let editable: boolean = true
+  export let editMode: boolean = false
 
   const dispatch = createEventDispatcher()
 
@@ -32,7 +31,7 @@
 
   async function openModal() {
     
-    if ($editMode) {
+    if (editMode) {
       modalStore.clear();
 
       const modalValueSet: ModalSettings = {
@@ -56,18 +55,22 @@
   }
 </script>
 
-<div class="{classes} h4 w-full flex flex-row justify-between">
-  {#if editable && $editMode}
-    <button type="button" on:click={fieldDecrement} class="btn-icon btn-icon-sm variant-filled mr-1">-</button>
+<div class="{classes} h4 w-full flex flex-row justify-between items-center">
+  
+  {#if editable && editMode}
+    <button type="button" on:click={fieldDecrement} class="btn-icon w-8 h-8 variant-filled mr-1">-</button>
   {/if}
-  <div class="flex">{field.label}</div>
-  <button
-    class="flex text-secondary-500"
-    on:click={openModal}
-    >{field.value ? field.value : 0}
-  </button>
 
-  {#if editable && $editMode}
-    <button type="button" on:click={fieldIncrement} class="btn-icon btn-icon-sm variant-filled ml-1">+</button>
+  <div class="flex flex-row justify-between w-full mx-2 items-center">
+    <div class="flex">{field.label}</div>
+    <button
+      class="flex text-secondary-500"
+      on:click={openModal}
+      >{field.value ? field.value : 0}
+    </button>
+  </div>
+
+  {#if editable && editMode}
+    <button type="button" on:click={fieldIncrement} class="btn-icon w-8 h-8 variant-filled ml-1">+</button>
   {/if}
 </div>

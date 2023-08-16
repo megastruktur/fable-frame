@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { characterStore, editMode } from "$lib/stores";
+	import { characterStore } from "$lib/stores";
 	import type { Field } from "$lib/types.d";
 	import FieldRenderCounter from "./FieldRenderCounter.svelte";
 	import FieldRenderCounterNum from "./FieldRenderCounterNum.svelte";
@@ -12,6 +12,7 @@
   export let renderAs: string = field.type
   export let classes: string = ""
   export let editable: boolean = true
+  export let editMode: boolean = false
   
   function updateField(event: { detail: Field }) {
     characterStore.setFieldValue(event.detail.id, event.detail.value)
@@ -23,26 +24,26 @@
 
 </script>
 
-{#if $editMode}
+{#if editMode}
 <button class="btn-icon" on:click={removeField}>✕</button>
 {/if}
 {#if renderAs === "text"}
-  <FieldRenderText {editable} {classes} field={field} on:fieldUpdate={updateField} />
+  <FieldRenderText {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />
 {/if}
 {#if renderAs === "counter"}
-  <FieldRenderCounter {editable} {classes} field={field} on:fieldUpdate={updateField} />
+  <FieldRenderCounter {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />
 {/if}
 {#if renderAs === "counterNum"}
-  <FieldRenderCounterNum {editable} {classes} field={field} on:fieldUpdate={updateField} />
+  <FieldRenderCounterNum {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />
 {/if}
 {#if renderAs === "tag"}
-  <FieldRenderTag {editable} {classes} field={field} on:fieldUpdate={updateField} />
+  <FieldRenderTag {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />
 {/if}
 {#if renderAs === "section"}
-  <FieldRenderSection {editable} {classes} field={field} on:fieldUpdate={updateField} />
+  <FieldRenderSection {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />
 {/if}
 {#if renderAs === "datatable"}
-  <FieldRenderDatatable {editable} {classes} field={field} on:fieldUpdate={updateField} />
+  <FieldRenderDatatable {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />
 {/if}
 
 <!-- For Tag it is remove the tag -->

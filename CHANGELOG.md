@@ -1,3 +1,6 @@
+### 0.3.0
+- UI/UX: Edit mode and animations refactoring
+
 ### 0.2.1
 - UI/UX: Minor css fix
 

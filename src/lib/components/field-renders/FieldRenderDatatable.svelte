@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { Field } from "$lib/types.d";
-  import { editMode } from "$lib/stores";
 	import { createEventDispatcher } from "svelte";
 	import { onMount } from "svelte";
 
   export let field: Field
   export let classes: string = ""
   export let editable: boolean = true
+  export let editMode: boolean = false
 
 
   const dispatch = createEventDispatcher()
@@ -21,7 +21,7 @@
   let tableData: { columns: Array<string>, data: Array<Array<string>> }
 
   onMount(() => {
-    if (!$editMode) {
+    if (!editMode) {
       tableData = parseMDTable(field.value)
     }
   })
@@ -30,8 +30,8 @@
 
 <label class="{classes} label w-full">
   <h4 class="h4">{field.label}</h4>
-  {#if editable && $editMode}
-    <textarea class="textarea" bind:value={field.value} on:focusout={() => {console.log(field); dispatch("fieldUpdate", field)}} />
+  {#if editable && editMode}
+    <textarea class="textarea" bind:value={field.value} on:focusout={() => dispatch("fieldUpdate", field)} />
   {:else}
     <div class="table-container">
       {#if tableData !== undefined}

@@ -3,10 +3,10 @@
 	import CharacterAvatarUploadModal from "./CharacterAvatarUploadModal.svelte";
   import Icon from "svelte-icons-pack"
   import BsPencil from "svelte-icons-pack/bs/BsPencil";
-	import { editMode } from "$lib/stores";
 
   export let avatarUrl: string = "";
   export let characterId: string = "";
+  export let editMode: boolean = false
 
   async function openModal() {
     
@@ -34,7 +34,7 @@
 <div class="relative">
   <Avatar src={avatarUrl} width="w-32" rounded="rounded-3xl" />
 
-  {#if $editMode}
+  {#if editMode}
   <button class="btn-icon btn-icon-sm variant-filled-secondary absolute bottom-0 right-0" type="button" on:click={openModal}>
     <Icon src={BsPencil} />
   </button>

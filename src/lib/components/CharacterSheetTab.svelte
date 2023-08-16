@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { characterStore, editMode } from "$lib/stores";
+	import { characterStore } from "$lib/stores";
 	import FieldRender from '$lib/components/field-renders/FieldRender.svelte';
 	import CircleAdd from '$lib/components/circle-add/CircleAdd.svelte';
 	import type { Field, FieldError } from "$lib/types";
@@ -15,6 +15,8 @@
   export let activeTabName: string
   // matches the media queries:
   export let matches: boolean | QueryArray | ObjectType<any> = true
+  export let removable: boolean = true
+  export let editMode: boolean = false
 
   const flipDurationMs: number = 300
 
@@ -22,7 +24,7 @@
   $: options = {
     items: fields,
     flipDurationMs: flipDurationMs,
-    dragDisabled: !$editMode,
+    dragDisabled: !editMode,
   }
 
   // Reorder fields
@@ -50,15 +52,15 @@
 </script>
 
 
-<section class="mx-3 lg:w-auto w-full mb-3 relative {matches && activeTabName !== tab.name ? "hidden" : ""}">
-{#if $editMode}
+<section class="mx-3 w-80 mb-3 relative {matches && activeTabName !== tab.name ? "hidden" : ""}">
+{#if removable && editMode}
   <button type="button"
     class="btn-icon btn-icon-sm variant-filled-error absolute -top-3 -right-3 z-10" on:click={removeTab}>✕</button>
 {/if}
 <div
   class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
   <h2 class="h2 text-center mb-3">
-    {#if $editMode}
+    {#if editMode}
     <input type="text" class="input" bind:value={tab.label} />
     {:else}
     <span>{tab.label}</span>
@@ -74,8 +76,8 @@
     {#if fields.length > 0}
     {#each fields as field(field.id)}
     <div class="flex items-center mb-3" animate:flip="{{duration: flipDurationMs}}">
-      <FieldRender field={field} />
-      {#if $editMode}
+      <FieldRender field={field} {editMode} />
+      {#if editMode}
       <button class="btn-icon btn-icon-sm">
         <Icon src={BsGrid3x3GapFill} />
       </button>
@@ -84,7 +86,7 @@
     {/each}
     {/if}
   </div>
-  {#if $editMode}
+  {#if editMode}
   <CircleAdd group={tab.name} />
   {/if}
 </div>

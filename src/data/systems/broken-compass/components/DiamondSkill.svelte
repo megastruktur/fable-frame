@@ -4,11 +4,11 @@
   import Icon from "svelte-icons-pack/Icon.svelte"
   import DiamondFilled from 'svelte-icons-pack/ri/RiFinanceVipDiamondFill';
   import DiamondLine from 'svelte-icons-pack/ri/RiFinanceVipDiamondLine';
-  import { editMode } from "$lib/stores";
 
   import { createEventDispatcher } from "svelte"
 
   export let skill: Field
+  export let editMode: boolean = false
 
   const dispatch = createEventDispatcher()
 
@@ -58,7 +58,7 @@
 
 {#if skill !== undefined}
 <div class="flex items-center">
-  {#if $editMode}
+  {#if editMode}
     <button type="button" on:click={skillDecrement} class="btn-icon btn-icon-sm variant-filled mr-1">-</button>
   {/if}
   <div class="flex mr-3 uppercase">{skill.label}</div>
@@ -71,7 +71,7 @@
       {/if}
     {/each}
   </div>
-  {#if $editMode}
+  {#if editMode}
     <button type="button" on:click={skillIncrement} class="btn-icon btn-icon-sm variant-filled ml-1">+</button>
   {/if}
 </div>

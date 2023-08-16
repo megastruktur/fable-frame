@@ -9,6 +9,7 @@
   export let tabsContent: { [key: string]: Field[] }
   export let activeTabName: string
   export let tabs: { [key: string]: Field }
+  export let editMode: boolean = false
   
   function updateField(event: { detail: Field }) {
     characterStore.setFieldValue(event.detail.id, event.detail.value)
@@ -18,13 +19,13 @@
 
 <div class="flex {matches ? "flex-col items-center" : "justify-center"}">
 
-  <BcSkillsTab {matches} on:fieldUpdate={updateField} fields={[...tabsContent["skill"]]} tabActive={activeTabName === "skill"} />
+  <BcSkillsTab {matches} on:fieldUpdate={updateField} fields={[...tabsContent["skill"]]} tabActive={activeTabName === "skill"} {editMode} />
 
-  <BcFeelTab {matches} fields={[...tabsContent["feel"]]} tabActive={activeTabName === "feel"} />
+  <BcFeelTab {matches} fields={[...tabsContent["feel"]]} tabActive={activeTabName === "feel"} {editMode} />
 
   <!-- General -->
-  <CharacterSheetTab tab={tabs["general"]} fields={[...tabsContent["general"]]} bind:activeTabName={activeTabName} {matches} />
+  <CharacterSheetTab tab={tabs["general"]} fields={[...tabsContent["general"]]} bind:activeTabName={activeTabName} {matches} removable={false} {editMode} />
 
   <!-- Inventory -->
-  <CharacterSheetTab tab={tabs["inventory"]} fields={[...tabsContent["inventory"]]} bind:activeTabName={activeTabName} {matches} />
+  <CharacterSheetTab tab={tabs["inventory"]} fields={[...tabsContent["inventory"]]} bind:activeTabName={activeTabName} {matches} removable={false} {editMode} />
 </div>
