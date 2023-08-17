@@ -247,20 +247,22 @@
 
         <!-- Tabs -->
         {#if matches}
-        <div class="tabs tabs-boxed w-72">
+        <div class="w-80 flex flex-wrap justify-center">
           {#each Object.keys(tabs) as tabName}
-          <a
-            href="/"
-            class="tab p-1 {tabName === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
+          <button
+            class="btn btn-sm {tabName === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
             on:click|preventDefault={() => activeTabName = tabName}
-            >{tabs[tabName].label}</a>
+            >{tabs[tabName].label}</button>
           {/each}
         </div>
         {/if}
 
         <!-- Character Sheet content -->
         {#if $characterStore !== undefined}
-        <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={$editMode}/>
+
+        <div class="flex flex-wrap justify-center">
+          <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={$editMode}/>
+        </div>
         {/if}
 
       </MediaQuery>

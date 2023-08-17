@@ -1,7 +1,7 @@
 <script lang="ts">
   import { characterStore } from "$lib/stores"
 	import type { Field } from "$lib/types";
-	import CharacterSheetTab from '$lib/components/CharacterSheetTab.svelte';
+	import CharacterSheetTab from '$lib/components/tabs/CharacterSheetTab.svelte';
 	import BcSkillsTab from './BCSkillsTab.svelte';
 	import BcFeelTab from "./BCFeelTab.svelte";
 
@@ -17,15 +17,12 @@
   
 </script>
 
-<div class="flex {matches ? "flex-col items-center" : "justify-center"}">
+<BcSkillsTab {matches} on:fieldUpdate={updateField} fields={[...tabsContent["skill"]]} {activeTabName} {editMode} />
 
-  <BcSkillsTab {matches} on:fieldUpdate={updateField} fields={[...tabsContent["skill"]]} tabActive={activeTabName === "skill"} {editMode} />
+<BcFeelTab {matches} fields={[...tabsContent["feel"]]} {activeTabName} {editMode} />
 
-  <BcFeelTab {matches} fields={[...tabsContent["feel"]]} tabActive={activeTabName === "feel"} {editMode} />
+<!-- General -->
+<CharacterSheetTab tab={tabs["general"]} fields={[...tabsContent["general"]]} bind:activeTabName={activeTabName} {matches} removable={false} {editMode} />
 
-  <!-- General -->
-  <CharacterSheetTab tab={tabs["general"]} fields={[...tabsContent["general"]]} bind:activeTabName={activeTabName} {matches} removable={false} {editMode} />
-
-  <!-- Inventory -->
-  <CharacterSheetTab tab={tabs["inventory"]} fields={[...tabsContent["inventory"]]} bind:activeTabName={activeTabName} {matches} removable={false} {editMode} />
-</div>
+<!-- Inventory -->
+<CharacterSheetTab tab={tabs["inventory"]} fields={[...tabsContent["inventory"]]} bind:activeTabName={activeTabName} {matches} removable={false} {editMode} />

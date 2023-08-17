@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Field } from "$lib/types";
-	import CharacterSheetTab from '$lib/components/CharacterSheetTab.svelte';
+	import CharacterSheetTab from '$lib/components/tabs/CharacterSheetTab.svelte';
 	import CircleAdd from '$lib/components/circle-add/CircleAdd.svelte';
 	import StatsTab from './StatsTab.svelte';
 
@@ -12,18 +12,11 @@
   
 </script>
 
-<div class="flex {matches ? "flex-col items-center" : "justify-center flex-wrap"}">
+{#each Object.keys(tabs) as tabName}
+  {#if tabName === "statsnsaves"}
+    <StatsTab tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {matches} {editMode} />
+  {:else}
 
-  {#each Object.keys(tabs) as tabName}
-    {#if tabName === "statsnsaves"}
-      <StatsTab tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {matches} {editMode} />
-    {:else}
-
-      <CharacterSheetTab tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {matches} {editMode} />
-    {/if}
-  {/each}
-
-  {#if editMode}
-  <CircleAdd type="tab" />
+    <CharacterSheetTab tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {matches} {editMode} editable={false} removable={false} />
   {/if}
-</div>
+{/each}

@@ -9,6 +9,7 @@
 
   import Icon from "svelte-icons-pack"
   import BsGrid3x3GapFill from "svelte-icons-pack/bs/BsGrid3x3GapFill";
+	import CharacterSheetTabWrapper from "./CharacterSheetTabWrapper.svelte";
 
   export let fields: Field[]
   export let tab: Field
@@ -17,6 +18,7 @@
   export let matches: boolean | QueryArray | ObjectType<any> = true
   export let removable: boolean = true
   export let editMode: boolean = false
+  export let editable: boolean = true
 
   const flipDurationMs: number = 300
 
@@ -51,16 +53,11 @@
 
 </script>
 
-
-<section class="mx-3 w-80 mb-3 relative {matches && activeTabName !== tab.name ? "hidden" : ""}">
-{#if removable && editMode}
-  <button type="button"
-    class="btn-icon btn-icon-sm variant-filled-error absolute -top-3 -right-3 z-10" on:click={removeTab}>✕</button>
-{/if}
-<div
-  class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
+<CharacterSheetTabWrapper {matches} {activeTabName}
+  {removable} {editMode}
+  tabName={tab.name}>
   <h2 class="h2 text-center mb-3">
-    {#if editMode}
+    {#if editable && editMode}
     <input type="text" class="input" bind:value={tab.label} />
     {:else}
     <span>{tab.label}</span>
@@ -86,8 +83,10 @@
     {/each}
     {/if}
   </div>
+  <!-- Circle is Character Sheet dependent to should be in ChSh -->
   {#if editMode}
   <CircleAdd group={tab.name} />
   {/if}
-</div>
-</section>
+</CharacterSheetTabWrapper>
+
+

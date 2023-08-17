@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { getFieldByNameFromList } from "$lib/characterFieldsOperations";
+	import CharacterSheetTabWrapper from "$lib/components/tabs/CharacterSheetTabWrapper.svelte";
 	import type { Field } from "$lib/types";
 	import DiamondSkill from "./DiamondSkill.svelte";
 
   export let matches: boolean
-  export let tabActive: boolean
   export let fields: Field[]
   export let editMode: boolean = false
+  export let activeTabName: string
   
   let action:Field = getFieldByNameFromList(fields, "action")
   let fight:Field = getFieldByNameFromList(fields, "fight")
@@ -36,9 +37,9 @@
 </script>
 
 <!-- Skills -->
-<section
-class="mx-3 w-80 mb-3 relative {matches && tabActive ? "hidden" : ""}">
-<div class="flex flex-col bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md">
+<CharacterSheetTabWrapper {matches} {activeTabName}
+  removable={false} {editMode}
+  tabName="skill">
 
   <!-- Action -->
   <div class="mb-3">
@@ -52,7 +53,7 @@ class="mx-3 w-80 mb-3 relative {matches && tabActive ? "hidden" : ""}">
       <DiamondSkill on:fieldUpdate skill={stunt} {editMode} />
     </h5>
   </div>
-
+  
   <!-- Guts -->
   <div class="mb-3">
     <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
@@ -64,7 +65,7 @@ class="mx-3 w-80 mb-3 relative {matches && tabActive ? "hidden" : ""}">
       <DiamondSkill on:fieldUpdate skill={shoot} {editMode} />
     </h5>
   </div>
-
+  
   <!-- Knowledge -->
   <div class="mb-3">
     <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
@@ -76,7 +77,7 @@ class="mx-3 w-80 mb-3 relative {matches && tabActive ? "hidden" : ""}">
       <DiamondSkill on:fieldUpdate skill={tech} {editMode} />
     </h5>
   </div>
-
+  
   <!-- Society -->
   <div class="mb-3">
     <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
@@ -88,7 +89,7 @@ class="mx-3 w-80 mb-3 relative {matches && tabActive ? "hidden" : ""}">
       <DiamondSkill on:fieldUpdate skill={observation} {editMode} />
     </h5>
   </div>
-
+  
   <!-- Wild -->
   <div class="mb-3">
     <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
@@ -100,7 +101,7 @@ class="mx-3 w-80 mb-3 relative {matches && tabActive ? "hidden" : ""}">
       <DiamondSkill on:fieldUpdate skill={tough} {editMode} />
     </h5>
   </div>
-
+  
   <!-- Crime -->
   <div class="mb-3">
     <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
@@ -112,6 +113,5 @@ class="mx-3 w-80 mb-3 relative {matches && tabActive ? "hidden" : ""}">
       <DiamondSkill on:fieldUpdate skill={stealth} {editMode} />
     </h5>
   </div>
-</div>
+</CharacterSheetTabWrapper>
 
-</section>

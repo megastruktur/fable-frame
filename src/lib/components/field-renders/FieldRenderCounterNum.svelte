@@ -61,7 +61,7 @@
     <button type="button" on:click={fieldDecrement} class="btn-icon w-8 h-8 variant-filled mr-1">-</button>
   {/if}
 
-  <div class="flex flex-row justify-between w-full mx-2 items-center">
+  <div class="flex flex-row justify-between w-full items-center">
     <div class="flex">{field.label}</div>
     <button
       class="flex text-secondary-500"
