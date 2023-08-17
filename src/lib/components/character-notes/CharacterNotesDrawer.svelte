@@ -8,12 +8,32 @@
 	import BsX from "svelte-icons-pack/bs/BsX"
 	import BsPencil from "svelte-icons-pack/bs/BsPencil"
 	import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+  import { crossfade } from "svelte/transition"
+	import { quintOut } from "svelte/easing";
 
   let characterNotesData: CharacterNote[]
   let isAddingNewNote = false
   let addingNewNoteText: string = ""
   let elm: any
   let editNoteId = ""
+
+  const [send, receive] = crossfade({
+		duration: (d) => Math.sqrt(d * 200),
+
+		fallback(node, params) {
+			const style = getComputedStyle(node);
+			const transform = style.transform === 'none' ? '' : style.transform;
+
+			return {
+				duration: 600,
+				easing: quintOut,
+				css: (t) => `
+					transform: ${transform} scale(${t});
+					opacity: ${t}
+				`
+			};
+		}
+	});
 
   const unsubscribeCharacterNotesStore = characterNotesStore.subscribe((characterNotes: CharacterNotesResponse) => {
 
@@ -100,9 +120,9 @@
     {/if}
 
     {#if $characterNotesStore !== undefined && $characterNotesStore.id !== "" && $characterNotesStore.data}
-      {#each $characterNotesStore.data as note}
-      {#if note}
-        <div class="flex flex-row justify-between mt-3">
+      {#each $characterNotesStore.data as note(note.id)}
+        <div class="flex flex-row justify-between mt-3"
+          in:receive={{ key: note.id }} out:send={{ key: note.id }}>
           <div class="flex flex-row mb-3 w-full">
 
 
@@ -134,9 +154,8 @@
             </button>
           </div>
         </div>
-      {/if}
 
-      <hr />
+        <hr />
       {/each}
 
     {/if}

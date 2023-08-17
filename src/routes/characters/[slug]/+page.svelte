@@ -16,7 +16,7 @@
 	import type { CharactersResponse } from "$lib/pocketbase-types";
 	import { toastShow, toastShowError } from "$lib/toast";
 
-  import { crossfade, fade } from "svelte/transition"
+  import { fade } from "svelte/transition"
 	import MediaQuery, { createMediaStore } from "svelte-media-queries";
 	import { getCharacterNotesByCharacterId } from "$models/character_notes";
 
@@ -31,24 +31,6 @@
   let activeTabName: string = "general"
   let tabsContent: { [key: string]: Field[] } = {general: []}
   let tabs: {[key: string]: Field}
-
-  // Animation
-  export const [send, receive] = crossfade({
-    duration: (d) => Math.sqrt(d * 200),
-
-    fallback(node, params) {
-      const style = getComputedStyle(node);
-      const transform = style.transform === 'none' ? '' : style.transform;
-
-      return {
-        duration: 600,
-        css: (t) => `
-          transform: ${transform} scale(${t});
-          opacity: ${t}
-        `
-      };
-    }
-  })
   
   onMount(async () => {
 
@@ -229,12 +211,12 @@
 </script>
 
 {#key $editMode}
-<div 
+<div
   out:fade={{ duration: 500 }}
-  in:fade={{ duration: 500 }}
+  in:fade={{ duration: 500, delay: 500 }}
   class="flex flex-col items-center my-3"
   >
-  <CharacterAvatar characterId={characterId} avatarUrl={characterAvatarUrl} />
+  <CharacterAvatar characterId={characterId} avatarUrl={characterAvatarUrl} editMode={$editMode} />
 	<h1 class="h1 text-3xl m-auto my-3 flex">
     {#if $editMode}
       <input type="text" class="input" bind:value={characterName} on:focusout={characterRename}/>
@@ -265,20 +247,22 @@
 
         <!-- Tabs -->
         {#if matches}
-        <div class="tabs tabs-boxed w-72">
+        <div class="w-80 flex flex-wrap justify-center">
           {#each Object.keys(tabs) as tabName}
-          <a
-            href="/"
-            class="tab p-1 {tabName === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
+          <button
+            class="btn btn-sm {tabName === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
             on:click|preventDefault={() => activeTabName = tabName}
-            >{tabs[tabName].label}</a>
+            >{tabs[tabName].label}</button>
           {/each}
         </div>
         {/if}
 
         <!-- Character Sheet content -->
         {#if $characterStore !== undefined}
-        <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} />
+
+        <div class="flex flex-wrap justify-center">
+          <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={$editMode}/>
+        </div>
         {/if}
 
       </MediaQuery>
