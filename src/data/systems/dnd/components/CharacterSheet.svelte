@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Field } from "$lib/types";
 	import CharacterSheetTab from '$lib/components/tabs/CharacterSheetTab.svelte';
-	import CircleAdd from '$lib/components/circle-add/CircleAdd.svelte';
 	import StatsTab from './StatsTab.svelte';
 
   export let matches: boolean

@@ -14,6 +14,11 @@ export default defineConfig({
 	preview: {
     port: 3006,
   },
+	server: {
+		fs: {
+			allow: ['CHANGELOG.md']
+		}
+	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	}
