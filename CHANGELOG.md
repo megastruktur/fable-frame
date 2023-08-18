@@ -1,3 +1,7 @@
+### 0.3.1
+- UI/UX: Change inputs and some other styles
+- UI/UX: For static fields disable reordering.
+
 ### 0.3.0
 - UI/UX: Edit mode and animations refactoring
 - UI/UX: Character Sheets refactoring

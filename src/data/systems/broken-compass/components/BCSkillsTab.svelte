@@ -38,7 +38,7 @@
 
 <!-- Skills -->
 <CharacterSheetTabWrapper {matches} {activeTabName}
-  removable={false} {editMode}
+  {editMode}
   tabName="skill">
 
   <!-- Action -->

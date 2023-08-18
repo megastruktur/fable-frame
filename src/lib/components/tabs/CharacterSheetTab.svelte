@@ -16,9 +16,11 @@
   export let activeTabName: string
   // matches the media queries:
   export let matches: boolean | QueryArray | ObjectType<any> = true
-  export let removable: boolean = true
   export let editMode: boolean = false
   export let editable: boolean = true
+  export let sortable: boolean = true
+
+  let removable: boolean = (tab.removable !== undefined) ? tab.removable : true
 
   const flipDurationMs: number = 300
 
@@ -58,7 +60,7 @@
   tabName={tab.name}>
   <h2 class="h2 text-center mb-3">
     {#if editable && editMode}
-    <input type="text" class="input" bind:value={tab.label} />
+    <input type="text" class="input h2 text-center" bind:value={tab.label} />
     {:else}
     <span>{tab.label}</span>
     {/if}
@@ -74,7 +76,7 @@
     {#each fields as field(field.id)}
     <div class="flex items-center mb-3" animate:flip="{{duration: flipDurationMs}}">
       <FieldRender field={field} {editMode} />
-      {#if editMode}
+      {#if sortable && editMode}
       <button class="btn-icon btn-icon-sm">
         <Icon src={BsGrid3x3GapFill} />
       </button>

@@ -9,59 +9,69 @@
 				"name": "words-to-live-by",
 				"label": "Words to Live By",
         "group": "general",
-				"type": "text"
+				"type": "text",
+				"removable": false
 			},
 			{
 				"name": "skill",
 				"label": "Skills",
-				"type": "tab"
+				"type": "tab",
+				"removable": false
 			},
 			{
 				"name": "feel",
 				"label": "I Feel",
-				"type": "tab"
+				"type": "tab",
+				"removable": false
 			},
 			{
 				"name": "general",
 				"label": "General",
-				"type": "tab"
+				"type": "tab",
+				"removable": false
 			},
 			{
 				"name": "inventory",
 				"label": "Inventory",
-				"type": "tab"
+				"type": "tab",
+				"removable": false
 			},
 			{
 				"name": "workplace",
 				"label": "Workplace",
         "group": "general",
-				"type": "text"
+				"type": "text",
+				"removable": false
 			},
 			{
 				"name": "homeland",
 				"label": "Homeland",
         "group": "general",
-				"type": "text"
+				"type": "text",
+				"removable": false
 			},
 			{
 				"name": "heritage",
 				"label": "Heritage",
         "group": "general",
-				"type": "text"
+				"type": "text",
+				"removable": false
 			},
 			{
 				"name": "luck",
 				"label": "luck",
 				"type": "counter-min-max",
         "group": "general",
-				"value": "++++++++++"
+				"value": "++++++++++",
+				"removable": false
 			},
 			{
 				"name": "luck-coin",
 				"label": "luck-coin",
 				"type": "counter",
         "group": "general",
-				"value": "+"
+				"value": "+",
+				"removable": false
 			},
 			{
 				"name": "action",

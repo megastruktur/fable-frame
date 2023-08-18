@@ -8,6 +8,8 @@
 	import { flip } from 'svelte/animate';
 	import { crossfade, fade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
+	import Icon from 'svelte-icons-pack';
+	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
 
 	const charOperationsMenu: PopupSettings = {
 		event: 'focus-click',
@@ -94,35 +96,40 @@
 			<ProgressRadial value={undefined} />
 		{:then _}
 			<ul class="list-nav">
-			{#each myCharacters as character(character.id)}
-			<li
-				animate:flip
-				in:receive={{ key: character.id }}
-				out:send={{ key: character.id }}
-				class="flex justify-between items-center">
-				<a class="list-option w-full" href="/characters/{character.id}">
-					<Avatar
-						initials={character.name.charAt(0)}
-						border="border-4 border-surface-300-600-token"
-						src={getCharacterAvatar(character)} />
-					<span class="flex-auto">
-						<div>
-							<h3 class="h3">{character.name}</h3>
-							{#if character.expand && character.expand.rpgSystem}
-								<article>{character.expand.rpgSystem.name}</article>
-							{/if}
-						</div>
+				{#each myCharacters as character(character.id)}
+				<li
+					animate:flip
+					in:receive={{ key: character.id }}
+					out:send={{ key: character.id }}
+					class="flex justify-between items-center">
+					<a class="list-option w-full" href="/characters/{character.id}">
+						<Avatar
+							initials={character.name.charAt(0)}
+							border="border-4 border-surface-300-600-token"
+							src={getCharacterAvatar(character)} />
+						<span class="flex-auto">
+							<div>
+								<h3 class="h3">{character.name}</h3>
+								{#if character.expand && character.expand.rpgSystem}
+									<article>{character.expand.rpgSystem.name}</article>
+								{/if}
+							</div>
+						</span>
+					</a>
+					<span>
+						<button
+							class="btn-icon btn-icon-sm"
+							on:click={() => operationsOnCharacterId = character.id}
+							use:popup={charOperationsMenu}
+							>⋮</button>
 					</span>
-				</a>
-				<span>
-					<button
-						class="btn-icon btn-icon-sm"
-						on:click={() => operationsOnCharacterId = character.id}
-						use:popup={charOperationsMenu}
-						>⋮</button>
-				</span>
-			</li>
-			{/each}
+				</li>
+				{/each}
+				<li>
+					<a class="btn btn-circle hover:bg-surface-800 w-full" href="/characters/create">
+						<Icon size="40" color="" src={BsPlus} />
+					</a>
+				</li>
 			</ul>
 		{/await}
 	</div>

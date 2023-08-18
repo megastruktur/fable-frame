@@ -16,7 +16,7 @@
   {#if tabName === "statsnsaves"}
     <StatsTab tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {matches} {editMode} />
   {:else}
-
-    <CharacterSheetTab tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {matches} {editMode} editable={false} removable={false} />
+    {@const sortable = (tabName === "skill" || tabName === "combat ")}
+    <CharacterSheetTab tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {matches} {editMode} editable={false} sortable={sortable} />
   {/if}
 {/each}
