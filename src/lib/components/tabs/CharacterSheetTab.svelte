@@ -58,14 +58,12 @@
 <CharacterSheetTabWrapper {matches} {activeTabName}
   {removable} {editMode}
   tabName={tab.name}>
-  <h2 class="h2 text-center mb-3">
-    {#if editable && editMode}
-    <input type="text" class="input h2 text-center" bind:value={tab.label} />
-    {:else}
-    <span>{tab.label}</span>
-    {/if}
-  </h2>
+  {#if editable && editMode}
+  <input type="text" class="input h2 text-center" bind:value={tab.label} />
+  {:else}
+  <h2 class="h2 text-center mb-3">{tab.label}</h2>
   <hr />
+  {/if}
   <!-- Draggable section -->
   <div
     class="mt-3"
