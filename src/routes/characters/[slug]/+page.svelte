@@ -6,15 +6,10 @@
   import { characterStore, fieldErrors, editMode, characterNotesStore } from "$lib/stores"
 	import type { Field, FieldError } from "$lib/types";
 
-  // Icons
-  import Icon from "svelte-icons-pack"
-  import FaSolidSkull from "svelte-icons-pack/fa/FaSolidSkull";
-
-	import { modalStore, type ModalSettings, type DrawerSettings, drawerStore } from "@skeletonlabs/skeleton";
-	import { goto } from "$app/navigation";
+	import { type DrawerSettings, drawerStore } from "@skeletonlabs/skeleton";
 	import CharacterAvatar from "$lib/components/CharacterAvatar.svelte";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
-	import { toastShow, toastShowError } from "$lib/toast";
+	import { toastShowError } from "$lib/toast";
 
   import { fade } from "svelte/transition"
 	import MediaQuery, { createMediaStore } from "svelte-media-queries";
@@ -119,25 +114,6 @@
     }
   })
 
-  function deleteCharacterPrompt() {
-
-    const modal: ModalSettings = {
-        type: 'confirm',
-        title: 'Please Confirm',
-        body: `Are you sure you want to remove character <span class="text-error-900">${characterName}</span>? This action cannot be undone.`,
-        response: async (r: boolean) => {
-          if (r === true) {
-            await deleteCharacter($characterStore.id)
-
-            toastShow(`Character <span class="text-error-900">${characterName}</span> has been removed`)
-
-            goto("/characters")
-          }
-        }
-      };
-      modalStore.trigger(modal);
-  }
-
   async function saveCharacter() {
     if ($characterStore && $characterStore.id) {
       try {
@@ -217,14 +193,11 @@
   class="flex flex-col items-center my-3"
   >
   <CharacterAvatar characterId={characterId} avatarUrl={characterAvatarUrl} editMode={$editMode} />
-	<h1 class="h1 text-3xl m-auto my-3 flex">
+	<h1 class="h2 my-3">
     {#if $editMode}
-      <input type="text" class="input" bind:value={characterName} on:focusout={characterRename}/>
+      <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
     {:else}
       <span>{characterName}</span>
-    {/if}
-    {#if $editMode}
-    <button class="btn-icon btn-icon-m variant-filled-error mx-3" on:click={deleteCharacterPrompt}><Icon src={FaSolidSkull} /></button>
     {/if}
   </h1>
 

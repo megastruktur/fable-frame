@@ -29,14 +29,14 @@
     }
   })
 
-  async function openModal() {
+  async function openEditModal() {
     
     if (editMode) {
       modalStore.clear();
 
       const modalValueSet: ModalSettings = {
         type: 'prompt',
-        title: `Edit field ${field.name}`,
+        title: `Edit field ${field.label}`,
         value: field.value,
         valueAttr: { required: true },
         response: (r: any) => {
@@ -61,14 +61,15 @@
     <button type="button" on:click={fieldDecrement} class="btn-icon w-8 h-8 variant-filled mr-1">-</button>
   {/if}
 
-  <div class="flex flex-row justify-between w-full items-center">
+  <button class="flex flex-row justify-between w-full items-center"
+    on:click={openEditModal}
+  >
     <div class="flex">{field.label}</div>
     <button
       class="flex text-secondary-500"
-      on:click={openModal}
       >{field.value ? field.value : 0}
     </button>
-  </div>
+  </button>
 
   {#if editable && editMode}
     <button type="button" on:click={fieldIncrement} class="btn-icon w-8 h-8 variant-filled ml-1">+</button>

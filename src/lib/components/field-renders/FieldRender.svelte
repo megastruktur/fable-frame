@@ -13,6 +13,8 @@
   export let classes: string = ""
   export let editable: boolean = true
   export let editMode: boolean = false
+
+  let removable: boolean = (field.removable !== undefined) ? field.removable : true
   
   function updateField(event: { detail: Field }) {
     characterStore.setFieldValue(event.detail.id, event.detail.value)
@@ -24,7 +26,7 @@
 
 </script>
 
-{#if editMode}
+{#if removable && editMode}
 <button class="btn-icon" on:click={removeField}>✕</button>
 {/if}
 {#if renderAs === "text"}

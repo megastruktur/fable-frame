@@ -22,7 +22,7 @@
 <BcFeelTab {matches} fields={[...tabsContent["feel"]]} {activeTabName} {editMode} />
 
 <!-- General -->
-<CharacterSheetTab tab={tabs["general"]} fields={[...tabsContent["general"]]} bind:activeTabName={activeTabName} {matches} removable={false} {editMode} />
+<CharacterSheetTab tab={tabs["general"]} fields={[...tabsContent["general"]]} bind:activeTabName={activeTabName} {matches} {editMode} />
 
 <!-- Inventory -->
-<CharacterSheetTab tab={tabs["inventory"]} fields={[...tabsContent["inventory"]]} bind:activeTabName={activeTabName} {matches} removable={false} {editMode} />
+<CharacterSheetTab tab={tabs["inventory"]} fields={[...tabsContent["inventory"]]} bind:activeTabName={activeTabName} {matches} {editMode} />

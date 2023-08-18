@@ -36,6 +36,7 @@ export type Field = {
   icon?: string
   description?: string
   weight: number
+  removable?: boolean // can the field be removed?
 }
 
 type FieldError = {
