@@ -21,6 +21,8 @@
 
 	import { fade } from "svelte/transition"
 	import CharacterNotesDrawer from "$lib/components/character-notes/CharacterNotesDrawer.svelte";
+	import { rpgSystemBanner } from "$lib/stores"
+	import { onDestroy } from "svelte"
 	
 	const drawerSettings: DrawerSettings = {
 		id: 'navbar',
@@ -32,6 +34,18 @@
 
 	export let data
 
+	rpgSystemBanner.set("")
+	let bannerUrl: string = ""
+	const unsubscriberpgSystemBanner = rpgSystemBanner.subscribe((banner: string) => {
+		bannerUrl = banner
+	})
+
+	onDestroy(() => {
+		unsubscriberpgSystemBanner()
+	})
+
+
+console.log($rpgSystemBanner)
 </script>
 
 <Modal />
@@ -44,7 +58,9 @@
 	{/if}
 </Drawer>
 <!-- App Shell -->
-<AppShell slotSidebarLeft="bg-surface-500/5 w-0 lg:w-56">
+<AppShell regionPage="relative">
+
+	<!-- Sidebar -->
 	<svelte:fragment slot="pageHeader">
 		<AppBar>
 			<svelte:fragment slot="lead">
@@ -65,15 +81,18 @@
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
+
 	<!-- Page Route Content -->
 	{#key data.pathname}
-	<div class="px-4 h-full page-content"
+	<div class="px-4 h-full page-content bg-surface-900 bg-blend-multiply bg-no-repeat bg-cover bg-center" style="background-image: url('{bannerUrl}')"
 		in:fade={{ duration: 300, delay: 300 }}
 		out:fade={{ duration: 300 }}
 		>
 		<slot />
 	</div>
 	{/key}
+
+	<!-- Footer -->
 	<svelte:fragment slot="pageFooter">
 		<div class="h-24"></div>
 	</svelte:fragment>

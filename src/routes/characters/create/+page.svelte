@@ -26,7 +26,7 @@ import type { RpgSystemsResponse } from "$lib/pocketbase-types";
       <Step stepTerm="Pick a name" locked={!characterName}>
         <svelte:fragment slot="header">Pick a name</svelte:fragment>
         <input class="input" type="text"
-        bind:value={characterName} placeholder="Input"
+        bind:value={characterName} placeholder="Character Name"
         name="name" />
       </Step>
       <!-- Select System -->
