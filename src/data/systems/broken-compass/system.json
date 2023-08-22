@@ -442,7 +442,7 @@
 			{
 				"name": "old",
 				"label": "Old",
-				"description": "You're old. You get the 4-th expertise.",
+				"description": "You're old. You get the 4-th expertise but additionally get the negative Old feeling that can't be lost.",
 				"group": "tagExperience",
 				"type": "tag",
 				"data": {}
