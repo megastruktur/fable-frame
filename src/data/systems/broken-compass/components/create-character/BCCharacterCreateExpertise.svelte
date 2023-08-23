@@ -35,3 +35,18 @@
     </span>
   {/if}
 {/each}
+<section>
+  {#each selectedTags as st}
+    {#if st.expertiseName !== undefined}
+      {@const expertise = expertiseAvailable.find(e => e.name === st.expertiseName)}
+      {#if expertise !== undefined}
+      <div class="mt-3">
+        <h4 class="h4">{expertise.label}</h4>
+        <article>
+          {expertise.description}
+        </article>
+      </div>
+      {/if}
+    {/if}
+  {/each}
+</section>

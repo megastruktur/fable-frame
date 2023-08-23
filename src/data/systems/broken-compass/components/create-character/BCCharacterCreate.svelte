@@ -101,7 +101,8 @@
     let tagName: string = e.detail.tagName
 
     if (tagName !== undefined) {
-
+      // cleanup existing expertise
+      removeAllAdditionalExpertise()
 
       if (selectedTags.find(selectedTag => selectedTag.tagName === tagName)) {
         selectedTags = selectedTags.filter(selectedTag => selectedTag.tagName !== tagName)
@@ -112,10 +113,14 @@
         }
       }
     }
+    console.log({selectedTags})
   }
 
   function changeExperienceHandler() {
-    // remove all addtional expertises
+    removeAllAdditionalExpertise()
+  }
+
+  function removeAllAdditionalExpertise() {
     selectedTags = selectedTags.filter(selectedTag => selectedTag.tagName !== undefined)
   }
 
@@ -152,7 +157,7 @@
 
       <!-- Expertise Picker  -->
       <Step locked={amountOfAdditionalExpertiseLeft !== 0}>
-        <svelte:fragment slot="header">Choose an Additional Expertise</svelte:fragment>
+        <svelte:fragment slot="header">Choose an Additional Expertise: {amountOfAdditionalExpertiseLeft}</svelte:fragment>
         <BCCharacterCreateExpertise
           {expertiseAvailable}
           selectedTags={selectedTags}
