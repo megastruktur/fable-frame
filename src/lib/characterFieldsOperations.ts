@@ -23,6 +23,10 @@ export function getFieldsByGroup(group: string, fields: Field[]): Field[] {
   return fields.filter(field => field.group === group).sort((a, b) => {return a.weight - b.weight});
 }
 
+export function getCharacterFieldsByGroup(character: CharactersResponse, group: string): Field[] {
+  return character.fields.filter(field => field.group === group).sort((a, b) => {return a.weight - b.weight});
+}
+
 
 export function addCharacterField(character: CharactersResponse, field: Field): CharactersResponse {
 
@@ -32,7 +36,7 @@ export function addCharacterField(character: CharactersResponse, field: Field): 
   }
   field.weight = 1
 
-  character.fields.push(field)
+  character.fields?.push(field)
   return character
 
 }
@@ -47,7 +51,7 @@ export function removeCharacterField(character: CharactersResponse, field: Field
 
 export function getCharacterFieldByName(character: CharactersResponse, fieldName: string): Field {
   
-  const field = character.fields.find(f => f.name === fieldName);
+  const field = character.fields?.find(f => f.name === fieldName);
 
   if (field !== undefined) {
     return field;
@@ -99,9 +103,9 @@ export function updateCharacterFieldValue(character: CharactersResponse, fieldId
 
 export function updateCharacterField(character: CharactersResponse, field: Field) {
 
-  const foundIndex = character.fields.findIndex((f: Field) => f.id === field.id);
+  const foundIndex = character.fields?.findIndex((f: Field) => f.id === field.id);
   // Update
-  if (foundIndex !== -1) {
+  if (character.fields !== undefined && foundIndex !== undefined && foundIndex !== -1) {
     character.fields[foundIndex] = field;
     return character
   }

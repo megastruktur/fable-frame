@@ -16,8 +16,8 @@
 
   let removable: boolean = (field.removable !== undefined) ? field.removable : true
   
-  function updateField(event: { detail: Field }) {
-    characterStore.setFieldValue(event.detail.id, event.detail.value)
+  function updateField(event: { detail: {field: Field, operation: string} }) {
+    characterStore.setFieldValue(event.detail.field.id, event.detail.field.value)
   }
   
   function removeField() {

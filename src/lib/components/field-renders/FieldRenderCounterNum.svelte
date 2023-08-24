@@ -12,15 +12,31 @@
   const dispatch = createEventDispatcher()
 
   function fieldIncrement() {
+    
+    const dispatchData = {
+      operation: "increment",
+      field: field
+    }
 
-    field.value = (parseInt(field.value) + 1).toString()
+    const dispatched = dispatch("fieldUpdate", dispatchData, { cancelable: true })
 
-    dispatch("fieldUpdate", field)
+    if (dispatched) {
+      field.value = (parseInt(field.value) + 1).toString()
+    }
   }
 
   function fieldDecrement() {
-    field.value = (parseInt(field.value) - 1).toString()
-    dispatch("fieldUpdate", field)
+
+    const dispatchData = {
+      operation: "decrement",
+      field: field
+    }
+
+    const dispatched = dispatch("fieldUpdate", dispatchData, { cancelable: true })
+
+    if (dispatched) {
+      field.value = (parseInt(field.value) - 1).toString()
+    }
   }
 
   onMount(() => {
@@ -43,8 +59,18 @@
           if (r !== false) {
             // Validate if can be converted to integer
             if (!isNaN(parseInt(r))) {
+              const oldValue = field.value
               field.value = r
-              dispatch("fieldUpdate", field)
+              const dispatchData = {
+                operation: "change",
+                field: field
+              }
+
+              const dispatched = dispatch("fieldUpdate", dispatchData, { cancelable: true })
+
+              if (!dispatched) {
+                field.value = oldValue
+              }
             }
           }
         },

@@ -16,44 +16,59 @@
 
   function fieldIncrement() {
 
-    let value: string = "";
-    let incremented = false;
-    for (let i = 0; i < field.value.length; i++) {
-
-      if (field.value.charAt(i) === "-" && !incremented) {
-        value += "+"
-        incremented = true
-      }
-      else {
-        value += field.value.charAt(i)
-      }
+    const dispatchData = {
+      operation: "increment",
+      field: field
     }
 
-    field.value = value
+    const dispatched = dispatch("fieldUpdate", dispatchData, { cancelable: true })
 
-    dispatch("fieldUpdate", field)
+    if (dispatched) {
+
+      let value: string = "";
+      let incremented = false;
+      for (let i = 0; i < field.value.length; i++) {
+
+        if (field.value.charAt(i) === "-" && !incremented) {
+          value += "+"
+          incremented = true
+        }
+        else {
+          value += field.value.charAt(i)
+        }
+      }
+
+      field.value = value
+    }
   }
 
   function fieldDecrement() {
-
-    let value: string = "";
-    let decremented = false;
-
-    for (let i = (field.value.length - 1); i >= 0; i--) {
-
-      if (field.value.charAt(i) === "+" && !decremented) {
-        value = "-" + value
-        decremented = true
-      }
-      else {
-        value = field.value.charAt(i) + value
-      }
+    
+    const dispatchData = {
+      operation: "decrement",
+      field: field
     }
 
-    field.value = value
+    const dispatched = dispatch("fieldUpdate", dispatchData, { cancelable: true })
 
+    if (dispatched) {
 
-    dispatch("fieldUpdate", field)
+      let value: string = "";
+      let decremented = false;
+
+      for (let i = (field.value.length - 1); i >= 0; i--) {
+
+        if (field.value.charAt(i) === "+" && !decremented) {
+          value = "-" + value
+          decremented = true
+        }
+        else {
+          value = field.value.charAt(i) + value
+        }
+      }
+
+      field.value = value
+    }
   }
 
 </script>

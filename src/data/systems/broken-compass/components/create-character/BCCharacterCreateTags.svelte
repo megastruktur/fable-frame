@@ -15,7 +15,7 @@
   export let selectedTags: {tagName?: string, expertiseName?: string}[] = []
 
   // Experience
-  export let tagExperienceSelected: string
+  export let tagExperienceSelectedName: string
 
   let experienceSelected: Field
 
@@ -40,7 +40,7 @@
   $: {
     // Set the experience
     if (tagExperienceAvailable !== undefined) {
-      experienceSelected = tagExperienceAvailable.find(ta => ta.name === tagExperienceSelected) || {
+      experienceSelected = tagExperienceAvailable.find(ta => ta.name === tagExperienceSelectedName) || {
         id: "experienced",
         name: "experienced",
         label: "Experienced",
@@ -78,7 +78,7 @@
       {#each tagExperienceAvailable as eA}
         <RadioItem
           on:change={changeExperienceEvent}
-          bind:group={tagExperienceSelected}
+          bind:group={tagExperienceSelectedName}
           name="expertise"
           value={eA.name}>{eA.label}
         </RadioItem>

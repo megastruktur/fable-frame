@@ -4,10 +4,10 @@
 	import type { Field } from "$lib/types";
 	import DiamondSkill from "./DiamondSkill.svelte";
 
-  export let matches: boolean
+  export let matches: boolean = false;
   export let fields: Field[]
   export let editMode: boolean = false
-  export let activeTabName: string
+  export let activeTabName: string = "skills"
   
   let action:Field = getFieldByNameFromList(fields, "action")
   let fight:Field = getFieldByNameFromList(fields, "fight")
