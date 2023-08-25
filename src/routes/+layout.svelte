@@ -84,7 +84,7 @@ console.log($rpgSystemBanner)
 
 	<!-- Page Route Content -->
 	{#key data.pathname}
-	<div class="px-4 h-full page-content bg-surface-900 bg-blend-multiply bg-no-repeat bg-cover bg-center" style="background-image: url('{bannerUrl}')"
+	<div class="px-4 h-full page-content {bannerUrl ? "bg-surface-900" : "bg-none"} bg-blend-multiply bg-no-repeat bg-cover bg-center" style="background-image: url('{bannerUrl}')"
 		in:fade={{ duration: 300, delay: 300 }}
 		out:fade={{ duration: 300 }}
 		>

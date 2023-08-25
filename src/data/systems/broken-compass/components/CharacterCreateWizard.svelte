@@ -4,17 +4,17 @@
 	import type { Field } from "$lib/types";
 	import { getRpgSystemByIdentifier } from "$models/rpg_system";
 	import { ProgressRadial, Step, Stepper } from "@skeletonlabs/skeleton";
-  import BCCharacterCreateTags from "./BCCharacterCreateTags.svelte";
-  import BCCharacterCreateExpertise from "./BCCharacterCreateExpertise.svelte";
+  import BCCharacterCreateTags from "./create-character/BCCharacterCreateTags.svelte";
+  import BCCharacterCreateExpertise from "./create-character/BCCharacterCreateExpertise.svelte";
   import banner from "$data/systems/broken-compass/assets/broken_compass_banner.webp"
 	import { rpgSystemBanner } from "$lib/stores";
-	import BCCharacterCreateGeneral from "./BCCharacterCreateGeneral.svelte";
-	import BCCHaracterCreateVerify from "./BCCharacterCreateVerify.svelte";
+	import BCCharacterCreateGeneral from "./create-character/BCCharacterCreateGeneral.svelte";
+	import BCCHaracterCreateVerify from "./create-character/BCCharacterCreateVerify.svelte";
 	import { createNewCharacterByCharacterData, getCharacterStub } from "$models/character";
 	import { addCharacterField, getCharacterFieldByName, getCharacterFieldsByGroup, updateCharacterField } from "$lib/characterFieldsOperations";
-  import BcCharacterCreateSkills from "./BCCharacterCreateSkills.svelte";
+  import BcCharacterCreateSkills from "./create-character/BCCharacterCreateSkills.svelte";
 
-  import { countSkillValue, skillDecrement, skillIncrement } from "../../lib/fieldOperations"
+  import { countSkillValue, skillDecrement, skillIncrement } from "../lib/fieldOperations"
 	import { createEventDispatcher, onMount } from "svelte";
 	import { goto } from "$app/navigation";
 
@@ -220,8 +220,6 @@
     // Additional 2 points of skills - selected by User
 
     // Save character
-    console.log("New Character is this fella:")
-    console.log(characterStubData)
     const char = await createNewCharacterByCharacterData(characterStubData)
 
     // Redirect
