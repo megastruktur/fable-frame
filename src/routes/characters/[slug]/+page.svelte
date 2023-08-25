@@ -190,9 +190,12 @@
 <div
   out:fade={{ duration: 500 }}
   in:fade={{ duration: 500, delay: 500 }}
-  class="flex flex-col items-center my-3"
+  class="flex flex-col items-center mb-3"
   >
-  <CharacterAvatar characterId={characterId} avatarUrl={characterAvatarUrl} editMode={$editMode} />
+  <div class="mt-3">
+    <CharacterAvatar characterId={characterId} avatarUrl={characterAvatarUrl} editMode={$editMode} />
+  </div>
+
 	<h1 class="h2 my-3">
     {#if $editMode}
       <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>

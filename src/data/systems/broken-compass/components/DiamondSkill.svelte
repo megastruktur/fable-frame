@@ -4,62 +4,30 @@
   import Icon from "svelte-icons-pack/Icon.svelte"
   import DiamondFilled from 'svelte-icons-pack/ri/RiFinanceVipDiamondFill';
   import DiamondLine from 'svelte-icons-pack/ri/RiFinanceVipDiamondLine';
-
-  import { createEventDispatcher } from "svelte"
+  import { countSkillValue, skillDecrementEvent, skillIncrementEvent } from "../lib/fieldOperations"
+	import { createEventDispatcher, onMount } from "svelte"
+  
 
   export let skill: Field
   export let editMode: boolean = false
 
+  export let blockIncrement = false
+  export let blockDecrement = false
+
   const dispatch = createEventDispatcher()
 
-  function skillIncrement() {
-
-    let value: string = "";
-    let incremented = false;
-    for (let i = 0; i < skill.value.length; i++) {
-
-      if (skill.value.charAt(i) === "-" && !incremented) {
-        value += "+"
-        incremented = true
-      }
-      else {
-        value += skill.value.charAt(i)
-      }
-    }
-
-    skill.value = value
-
-    dispatch("fieldUpdate", skill)
-  }
-
-  function skillDecrement() {
-
-    let value: string = "";
-    let decremented = false;
-
-    for (let i = (skill.value.length - 1); i >= 0; i--) {
-
-      if (skill.value.charAt(i) === "+" && !decremented) {
-        value = "-" + value
-        decremented = true
-      }
-      else {
-        value = skill.value.charAt(i) + value
-      }
-    }
-
-    skill.value = value
-
-
-    dispatch("fieldUpdate", skill)
-  }
+  onMount(() => {
+    countSkillValue
+    skillDecrementEvent
+    skillIncrementEvent
+  })
 
 </script>
 
 {#if skill !== undefined}
 <div class="flex items-center">
-  {#if editMode}
-    <button type="button" on:click={skillDecrement} class="btn-icon btn-icon-sm variant-filled mr-1">-</button>
+  {#if !blockDecrement && editMode && countSkillValue(skill.value) !== 0}
+    <button type="button" on:click={() => skill = skillDecrementEvent(skill, dispatch)} class="btn-icon btn-icon-sm variant-filled mr-1">-</button>
   {/if}
   <div class="flex mr-3 uppercase">{skill.label}</div>
   <div class="flex">
@@ -71,8 +39,8 @@
       {/if}
     {/each}
   </div>
-  {#if editMode}
-    <button type="button" on:click={skillIncrement} class="btn-icon btn-icon-sm variant-filled ml-1">+</button>
+  {#if !blockIncrement && editMode && countSkillValue(skill.value) < 3}
+    <button type="button" on:click={() => skill = skillIncrementEvent(skill, dispatch)} class="btn-icon btn-icon-sm variant-filled ml-1">+</button>
   {/if}
 </div>
 {/if}

@@ -11,8 +11,8 @@
   export let tabs: { [key: string]: Field }
   export let editMode: boolean = false
   
-  function updateField(event: { detail: Field }) {
-    characterStore.setFieldValue(event.detail.id, event.detail.value)
+  function updateField(event: { detail: {field: Field, operation: string} }) {
+    characterStore.setFieldValue(event.detail.field.id, event.detail.field.value)
   }
   
 </script>

@@ -178,3 +178,7 @@ function createCharacterNotesStore() {
   };
 }
 export const characterNotesStore = createCharacterNotesStore();
+
+
+// Create a store to contain a background image
+export const rpgSystemBanner = writable("");
