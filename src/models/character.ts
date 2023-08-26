@@ -78,6 +78,31 @@ export async function getAllCharactersWithSystem(): Promise<CharactersResponse[]
 
 export async function createNewCharacter(systemId: string, name = "New Character"): Promise<CharactersResponse> {
 
+  const characterStubData = await getCharacterStub(systemId)
+  characterStubData.name = name
+
+  const character = await createNewCharacterByCharacterData(characterStubData)
+
+  return character
+}
+
+
+export async function createNewCharacterByCharacterData(data: Partial<CharactersRecord>) {
+
+  data.hash = await getStringHash(JSON.stringify(data.fields))
+
+  const character = await createCharacter(data)
+
+  await createCharacterNotes({
+    character: character.id,
+    data: [],
+  })
+
+  return character
+}
+
+
+export async function getCharacterStub(systemId: string): Promise<CharactersResponse> {
   const rpgSystem = await getRpgSystem(systemId)
 
   if (!rpgSystem) {
@@ -90,20 +115,12 @@ export async function createNewCharacter(systemId: string, name = "New Character
     return {...field, id: uuidv4() }
   });
 
-  const character = await createCharacter({
-    name: name,
+  return {
     rpgSystem: systemId,
-    hash: await getStringHash(JSON.stringify(fieldList)),
+    name: "",
     fields: fieldList
-  })
-
-  await createCharacterNotes({
-    character: character.id,
-    data: [],
-  })
-
-  return character
-}
+  } as CharactersResponse
+} 
 
 export function getCharacterField(character: CharactersResponse, fieldId: string): Field {
   const field = character.fields.find((field: Field) => field.id === fieldId)

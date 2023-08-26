@@ -67,7 +67,7 @@
 			},
 			{
 				"name": "luck-coin",
-				"label": "luck-coin",
+				"label": "Luck Coin",
 				"type": "counter",
         "group": "general",
 				"value": "+",
@@ -76,6 +76,7 @@
 			{
 				"name": "action",
 				"label": "action",
+				"description": "Action is the Field you find yourself in when you're fighting, run-ning, or you have to take the situation into your own hands.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "++-"
@@ -83,6 +84,7 @@
 			{
 				"name": "guts",
 				"label": "guts",
+				"description": "Guts is the Field you find yourself in when you need to keep calm or concentrated while reacting quickly to stressful or dangerous situations.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "++-"
@@ -90,6 +92,7 @@
 			{
 				"name": "knowledge",
 				"label": "knowledge",
+				"description": "Knowledge is the Field you find yourself in when you must rely on your studies and technical or theoretical notions you acquired.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "++-"
@@ -97,6 +100,7 @@
 			{
 				"name": "society",
 				"label": "society",
+				"description": "Society is the Field you find yourself in when you deal with other people,  domesticated  animals  and  man-made  environments  (both  modern  and ancient).",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "++-"
@@ -104,6 +108,7 @@
 			{
 				"name": "wild",
 				"label": "wild",
+				"description": "Wild  is  the  Field  you  find  yourself  in  when  you're  interacting  with  natural or harsh environments and wild animals, when you need to tap into your primordial brain.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "++-"
@@ -111,6 +116,7 @@
 			{
 				"name": "crime",
 				"label": "crime",
+				"description": "Crime is the Field you find yourself in when you're acting secretly or try to avoid hidden dangers and ambushes.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "++-"
@@ -119,6 +125,7 @@
 				"data": { "parent": "action" },
 				"name": "fight",
 				"label": "fight",
+				"description": "Fighting (with or without weapons) enemies in close combat. Escaping a grapple.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -127,6 +134,7 @@
 				"data": { "parent": "action" },
 				"name": "leadership",
 				"label": "leadership",
+				"description": "Inspiring or leading others. Commanding or giving orders that leave no room for doubt.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -135,6 +143,7 @@
 				"data": { "parent": "action" },
 				"name": "stunt",
 				"label": "stunt",
+				"description": "Doing stunts. Moving in dangerous or acrobatic situations. Jumping off a runaway train. Running through a volley of bullets.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -143,6 +152,7 @@
 				"data": { "parent": "guts" },
 				"name": "cool",
 				"label": "cool",
+				"description": "Keeping your cool in the face of danger. Not reacting to a shocking scene. Acting with lucidity at the right time.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -151,6 +161,7 @@
 				"data": { "parent": "guts" },
 				"name": "drive",
 				"label": "drive",
+				"description": "Driving or piloting any kind of vehicle when you are doing dangerous maneuvers or trying to outrun or reach somebody.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -159,6 +170,7 @@
 				"data": { "parent": "guts" },
 				"name": "shoot",
 				"label": "shoot",
+				"description": "The ability to shoot a firearm, use bow and arrow or any other ranged weapon.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -167,6 +179,7 @@
 				"data": { "parent": "knowledge" },
 				"name": "culture",
 				"label": "culture",
+				"description": "General knowledge on a vast array of topics. Academic education. Comprehension of local uses and customs.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -175,6 +188,7 @@
 				"data": { "parent": "knowledge" },
 				"name": "first-aid",
 				"label": "first-aid",
+				"description": "Treating wounds and diagnosing illnesses. Allows you to remove certain Bad Feelings.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -183,6 +197,7 @@
 				"data": { "parent": "knowledge" },
 				"name": "tech",
 				"label": "tech",
+				"description": "Using, constructing or repairing mechanical, IT or electronic devices.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -191,6 +206,7 @@
 				"data": { "parent": "society" },
 				"name": "charm",
 				"label": "charm",
+				"description": "Appearing attractive or elegant. Making a good impression. Seducing or charming others.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -199,6 +215,7 @@
 				"data": { "parent": "society" },
 				"name": "eloquence",
 				"label": "eloquence",
+				"description": "Discussion, persuasion, deception and negotiation. Seeming lik-able and trustworthy to others.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -207,6 +224,7 @@
 				"data": { "parent": "society" },
 				"name": "observation",
 				"label": "observation",
+				"description": "Spotting someone or something. Noticing hidden  details. Sense other people's emotions and lies.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -215,6 +233,7 @@
 				"data": { "parent": "wild" },
 				"name": "scout",
 				"label": "scout",
+				"description": "Traveling through wild places. Climbing and trekking.  Swimming and diving. Finding your bearings in the wild.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -223,6 +242,7 @@
 				"data": { "parent": "wild" },
 				"name": "survival",
 				"label": "survival",
+				"description": "Surviving in harsh environments with no equipment. Hunting and tracking. Building a camp to create a Safe Place.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -231,6 +251,7 @@
 				"data": { "parent": "wild" },
 				"name": "tough",
 				"label": "tough",
+				"description": "Endurance to adverse conditions and pain. Lifting, pushing or mov-ing heavy objects. Showing off physical resistance and raw strength.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -239,6 +260,7 @@
 				"data": { "parent": "crime" },
 				"name": "alert",
 				"label": "alert",
+				"description": "Spotting dangers. Avoiding pursuit and not falling for traps. Noticing details that can lead to unexpected events.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -247,6 +269,7 @@
 				"data": { "parent": "crime" },
 				"name": "dexterity",
 				"label": "dexterity",
+				"description": "Accomplishing tasks that require exact and nimble hands. Lifting purses and picking locks. Doing sleight of hand tricks.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
@@ -255,9 +278,31 @@
 				"data": { "parent": "crime" },
 				"name": "stealth",
 				"label": "stealth",
+				"description": "Hiding or moving quietly. Treading softly and with extreme preci-sion. Following somebody or avoiding pursuit.",
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
+			},
+			{
+				"name": "pockets",
+				"label": "Pockets",
+        "group": "inventory",
+        "type": "section",
+				"weight": 1
+			},
+			{
+				"name": "bag",
+				"label": "Bag",
+        "group": "inventory",
+        "type": "section",
+				"weight": 2
+			},
+			{
+				"name": "backpack",
+				"label": "Backpack",
+        "group": "inventory",
+        "type": "section",
+				"weight": 3
 			}
 		],
 		"compendium": [
@@ -344,6 +389,148 @@
 				"group": "feel",
 				"label": "scared",
 				"type": "tag"
+			},
+			{
+				"name": "action_hero",
+				"label": "Action Hero",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "action",
+					"backup_field": "guts",
+					"expertise": ["heroism"],
+					"skills": [
+						"fight", "leadership", "stunt", "cool", "shoot", "charm", "scout", "survival"
+					]
+				}
+			},
+			{
+				"name": "cheater",
+				"label": "Cheater",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "society",
+					"backup_field": "crime",
+					"expertise": ["lies"],
+					"skills": [
+						"leadership", "cool", "culture", "charm", "eloquence", "observation", "alert", "stealth"
+					]
+				}
+			},
+			{
+				"name": "daredevil",
+				"label": "Daredevil",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "action",
+					"backup_field": "guts",
+					"expertise": ["height"],
+					"skills": [
+						"fight", "stunt", "cool", "drive", "shoot", "charm", "scout", "dexterity"
+					]
+				}
+			},
+			{
+				"name": "explorer",
+				"label": "Explorer",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "wild",
+					"backup_field": "crime",
+					"expertise": ["orienteering"],
+					"skills": [
+						"stunt", "first-aid", "observation", "scout", "survival", "tough", "alert", "stealth"
+					]
+				}
+			},
+			{
+				"name": "professor",
+				"label": "Professor",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "knowledge",
+					"backup_field": "society",
+					"expertise": ["archeology", "degree"],
+					"skills": [
+						"leadership", "culture", "first-aid", "tech", "eloquence", "observation", "alert", "stealth"
+					]
+				}
+			},
+			{
+				"name": "old",
+				"label": "Old",
+				"description": "You're old. You get the 4-th expertise but additionally get the negative Old feeling that can't be lost.",
+				"group": "tagExperience",
+				"type": "tag",
+				"data": {}
+			},
+			{
+				"name": "young",
+				"label": "Young",
+				"description": "You've just started living the path of an adventurer. You don't get the '3rd expertise. Though you get a 'Young' Good Feeling that is refreshed every Episode",
+				"group": "tagExperience",
+				"type": "tag",
+				"data": {}
+			},
+			{
+				"name": "experienced",
+				"label": "Experienced",
+				"description": "You're a regular adventurer. Go with regular rules",
+				"group": "tagExperience",
+				"type": "tag",
+				"data": {}
+			},
+			{
+				"name": "heroism",
+				"label": "Heroism",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Acting selflessly, showing courage, sacrifice",
+				"data": {}
+			},
+			{
+				"name": "lies",
+				"label": "Lies",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Tricking people, cheating",
+				"data": {}
+			},
+			{
+				"name": "height",
+				"label": "Height",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Running on rooftops, jumping across chasms and into the void",
+				"data": {}
+			},
+			{
+				"name": "orienteering",
+				"label": "Orienteering",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Finding and keeping your bearings using environmental clues, a compass, or a map",
+				"data": {}
+			},
+			{
+				"name": "archeology",
+				"label": "Archeology",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Establishing the age of an object or site, deciphering ancient languages, knowing the past",
+				"data": {}
+			},
+			{
+				"name": "degree",
+				"label": "Degree",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Practice and theory of your studies",
+				"data": {}
 			}
 		]
 	}

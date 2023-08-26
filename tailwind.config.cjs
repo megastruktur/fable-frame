@@ -9,6 +9,12 @@ module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}', join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')],
 	theme: {
 		extend: {},
+		backgroundSize: {
+      'auto': 'auto',
+      'cover': 'cover',
+      'contain': 'contain',
+      'sw': '100% auto',
+    },
 	},
 	plugins: [forms,typography,...skeleton()],
 }

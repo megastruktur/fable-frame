@@ -21,6 +21,8 @@
 
 	import { fade } from "svelte/transition"
 	import CharacterNotesDrawer from "$lib/components/character-notes/CharacterNotesDrawer.svelte";
+	import { rpgSystemBanner } from "$lib/stores"
+	import { onDestroy } from "svelte"
 	
 	const drawerSettings: DrawerSettings = {
 		id: 'navbar',
@@ -32,6 +34,15 @@
 
 	export let data
 
+	rpgSystemBanner.set("")
+	let bannerUrl: string = ""
+	const unsubscriberpgSystemBanner = rpgSystemBanner.subscribe((banner: string) => {
+		bannerUrl = banner
+	})
+
+	onDestroy(() => {
+		unsubscriberpgSystemBanner()
+	})
 </script>
 
 <Modal />
@@ -44,8 +55,11 @@
 	{/if}
 </Drawer>
 <!-- App Shell -->
-<AppShell slotSidebarLeft="bg-surface-500/5 w-0 lg:w-56">
+<AppShell regionPage="relative">
+
+	<!-- Sidebar -->
 	<svelte:fragment slot="pageHeader">
+
 		<AppBar>
 			<svelte:fragment slot="lead">
 				<button class="btn btn-sm mr-4" on:click={() => drawerStore.open(drawerSettings)}>
@@ -57,7 +71,7 @@
 							</svg>
 					</span>
 				</button>
-				<strong class="text-xl uppercase optima-regular">Fable Frame (WIP) <span class="text-xs text-red-800">v0.3.1</span></strong>
+				<strong class="text-xl uppercase optima-regular">Fable Frame (WIP) <span class="text-xs text-red-800">v0.4.0</span></strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<a href="mailto:astrtomortis@gmail.com" class="btn"><Icon src={BsEnvelope} /></a>
@@ -65,18 +79,16 @@
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
+
 	<!-- Page Route Content -->
 	{#key data.pathname}
-	<div class="px-4 h-full page-content"
+	<div class="px-4 pb-5 h-full page-content {bannerUrl ? "bg-surface-900" : "bg-none"} bg-blend-multiply bg-no-repeat bg-cover bg-top bg-fixed" style="background-image: url('{bannerUrl}')"
 		in:fade={{ duration: 300, delay: 300 }}
 		out:fade={{ duration: 300 }}
 		>
 		<slot />
 	</div>
 	{/key}
-	<svelte:fragment slot="pageFooter">
-		<div class="h-24"></div>
-	</svelte:fragment>
 </AppShell>
 
 <Toast />

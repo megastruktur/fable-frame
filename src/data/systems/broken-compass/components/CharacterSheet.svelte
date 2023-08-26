@@ -1,9 +1,12 @@
 <script lang="ts">
-  import { characterStore } from "$lib/stores"
+  import { characterStore, rpgSystemBanner } from "$lib/stores"
 	import type { Field } from "$lib/types";
 	import CharacterSheetTab from '$lib/components/tabs/CharacterSheetTab.svelte';
 	import BcSkillsTab from './BCSkillsTab.svelte';
 	import BcFeelTab from "./BCFeelTab.svelte";
+	import BcGeneralTab from "./BCGeneralTab.svelte";
+  import banner from "$data/systems/broken-compass/assets/broken_compass_banner.webp"
+	import { onMount } from "svelte";
 
   export let matches: boolean
   export let tabsContent: { [key: string]: Field[] }
@@ -11,9 +14,14 @@
   export let tabs: { [key: string]: Field }
   export let editMode: boolean = false
   
-  function updateField(event: { detail: Field }) {
-    characterStore.setFieldValue(event.detail.id, event.detail.value)
+  function updateField(event: { detail: {field: Field, operation: string} }) {
+    characterStore.setFieldValue(event.detail.field.id, event.detail.field.value)
   }
+
+
+  onMount(() => {
+    rpgSystemBanner.set(banner)
+  })
   
 </script>
 
@@ -22,7 +30,7 @@
 <BcFeelTab {matches} fields={[...tabsContent["feel"]]} {activeTabName} {editMode} />
 
 <!-- General -->
-<CharacterSheetTab tab={tabs["general"]} fields={[...tabsContent["general"]]} bind:activeTabName={activeTabName} {matches} {editMode} />
+<BcGeneralTab tab={tabs["general"]} fields={[...tabsContent["general"]]} bind:activeTabName={activeTabName} {matches} {editMode} />
 
 <!-- Inventory -->
 <CharacterSheetTab tab={tabs["inventory"]} fields={[...tabsContent["inventory"]]} bind:activeTabName={activeTabName} {matches} {editMode} />
