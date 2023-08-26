@@ -59,10 +59,11 @@
     countSkillValue
     skillDecrement
     skillIncrement
+    
+    // Set banner
+    rpgSystemBanner.set(banner)
   })
 
-  // Set banner
-  rpgSystemBanner.set(banner)
 
 
 
@@ -244,38 +245,36 @@
 
     if (selectedTagFields[0] !== undefined) {
       fieldNameToIncrement1 = selectedTagFields[0].data?.field
-    }
-    else {
-      throw new Error("Tags are not set properly")
-    }
 
-    if (fieldNameToIncrement1 !== undefined && selectedTagFields[1] !== undefined) {
-      if (selectedTagFields[1].data?.field !== fieldNameToIncrement1) {
-        fieldNameToIncrement2 = selectedTagFields[1].data?.field
-      }
-      else {
-        fieldNameToIncrement2 = selectedTagFields[1].data?.backup_field
-      }
-    }
-
-    // Iterate though all skills
-    skillFields.map(skill => {
-
-      // Increment Skill
-      selectedTagFields.forEach(sE => {
-        if (sE.data?.skills.includes(skill.name)) {
-          skill = skillIncrement(skill)
-          updateCharacterField(characterStubData, skill)
+      if (fieldNameToIncrement1 !== undefined && selectedTagFields[1] !== undefined) {
+        if (selectedTagFields[1].data?.field !== fieldNameToIncrement1) {
+          fieldNameToIncrement2 = selectedTagFields[1].data?.field
         }
+        else {
+          fieldNameToIncrement2 = selectedTagFields[1].data?.backup_field
+        }
+      }
+
+      // Iterate though all skills
+      skillFields.map(skill => {
+
+        // Increment Skill
+        selectedTagFields.forEach(sE => {
+          if (sE.data?.skills.includes(skill.name)) {
+            skill = skillIncrement(skill)
+            updateCharacterField(characterStubData, skill)
+          }
+        })
+        // Increment Field
+        if (
+          (fieldNameToIncrement1 !== undefined && skill.name ===fieldNameToIncrement1)
+          || (fieldNameToIncrement2 !== undefined && skill.name ===fieldNameToIncrement2)) {
+            skill = skillIncrement(skill)
+            updateCharacterField(characterStubData, skill)
+          }
       })
-      // Increment Field
-      if (
-        (fieldNameToIncrement1 !== undefined && skill.name ===fieldNameToIncrement1)
-        || (fieldNameToIncrement2 !== undefined && skill.name ===fieldNameToIncrement2)) {
-          skill = skillIncrement(skill)
-          updateCharacterField(characterStubData, skill)
-        }
-    })
+
+    }
   }
 
   /**
@@ -425,6 +424,15 @@
         />
       </Step>
 
+      <Step locked={additionalSkillsChanged.length < amountOfAdditionalSkills}>
+        <svelte:fragment slot="header">Additional skills left: {amountOfAdditionalSkills - additionalSkillsChanged.length}</svelte:fragment>
+        <div class="flex justify-center">
+          <div class="w-80">
+            <BcCharacterCreateSkills additionalSkillsChanged={[...additionalSkillsChanged]} fields={[...characterStubData.fields]} on:fieldUpdate={skillUpdate} />
+          </div>
+        </div>
+      </Step>
+
       <Step locked={characterName === undefined || characterName === ""}>
         <svelte:fragment slot="header">General information</svelte:fragment>
         <BCCharacterCreateGeneral
@@ -435,24 +443,18 @@
           />
       </Step>
 
-      <Step locked={additionalSkillsChanged.length < amountOfAdditionalSkills}>
-        <svelte:fragment slot="header">Additional skills left: {amountOfAdditionalSkills - additionalSkillsChanged.length}</svelte:fragment>
-        <div class="w-80">
-          <BcCharacterCreateSkills additionalSkillsChanged={[...additionalSkillsChanged]} fields={[...characterStubData.fields]} on:fieldUpdate={skillUpdate} />
-        </div>
-      </Step>
-
       <Step>
         <svelte:fragment slot="header">Verify character</svelte:fragment>
-
-        <BCCHaracterCreateVerify
-          {characterName}
-          {characterHeritage}
-          {characterHomeland}
-          {characterWorkplace}
-          {callMeIfYouNeed}
-          {selectedExpertise}
-        />
+        <div class="flex justify-center">
+          <BCCHaracterCreateVerify
+            {characterName}
+            {characterHeritage}
+            {characterHomeland}
+            {characterWorkplace}
+            {callMeIfYouNeed}
+            {selectedExpertise}
+          />
+        </div>
 
         <div class="w-80">
           <BcCharacterCreateSkills editMode={false} additionalSkillsChanged={[...additionalSkillsChanged]} fields={[...characterStubData.fields]} on:fieldUpdate={skillUpdate} />

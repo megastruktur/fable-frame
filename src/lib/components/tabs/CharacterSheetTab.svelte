@@ -2,7 +2,7 @@
 	import { characterStore } from "$lib/stores";
 	import FieldRender from '$lib/components/field-renders/FieldRender.svelte';
 	import CircleAdd from '$lib/components/circle-add/CircleAdd.svelte';
-	import type { Field, FieldError } from "$lib/types";
+	import type { Field } from "$lib/types";
 	import type { ObjectType, QueryArray } from "svelte-media-queries/components/MediaQuery.types";
   import {dndzone} from "svelte-dnd-action"
   import {flip} from "svelte/animate"

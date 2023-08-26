@@ -3,7 +3,7 @@
   import { page } from "$app/stores"
 	import { deleteCharacter, getCharacter, getCharacterAvatar, getCharacterTabs, updateCharacterWithHash } from "$models/character";
 	import { onMount, onDestroy } from "svelte";
-  import { characterStore, fieldErrors, editMode, characterNotesStore } from "$lib/stores"
+  import { characterStore, fieldErrors, editMode, characterNotesStore, rpgSystemBanner } from "$lib/stores"
 	import type { Field, FieldError } from "$lib/types";
 
 	import { type DrawerSettings, drawerStore } from "@skeletonlabs/skeleton";
@@ -58,7 +58,7 @@
 
   const unsubscribeCharacterStore = characterStore.subscribe((character: CharactersResponse) => {
     
-    console.log("----------------")
+    console.log("-------- Character --------")
     console.log(character)
 
     if (character !== undefined) {
@@ -69,24 +69,21 @@
   
       // Cleanup tabsContent and Create tabs placeholders
       Object.keys(tabs).forEach((tabName: string) => {
-        tabsContent[tabs[tabName].name] = []
+        tabsContent[tabName] = []
       })
   
       character.fields.forEach((field: Field) => {
         if (field.group && field.type !== "tab") {
   
           // If tab doens't exist add fields to "general" tab.
-          let tabExists = (tabs[field.group] !== undefined)? true : false
+          let tabExists = (tabs[field.group] !== undefined) ? true : false
           let tabNameToAdd = "general"
   
           if (tabExists) {
             tabNameToAdd = field.group
           }
-          
-          if (tabsContent[field.group] === undefined) {
-            tabsContent[field.group] = []
-          }
-          tabsContent[tabNameToAdd] = [...tabsContent[field.group], field]
+
+          tabsContent[tabNameToAdd] = [...tabsContent[tabNameToAdd], field]
         }
       })
 
@@ -170,6 +167,7 @@
     fieldErrors.reset()
     characterNotesStore.reset()
     characterStore.reset()
+    rpgSystemBanner.set("")
   }) //Stop events for calculation
 
 

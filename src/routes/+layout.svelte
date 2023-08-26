@@ -43,9 +43,6 @@
 	onDestroy(() => {
 		unsubscriberpgSystemBanner()
 	})
-
-
-console.log($rpgSystemBanner)
 </script>
 
 <Modal />
@@ -62,6 +59,7 @@ console.log($rpgSystemBanner)
 
 	<!-- Sidebar -->
 	<svelte:fragment slot="pageHeader">
+
 		<AppBar>
 			<svelte:fragment slot="lead">
 				<button class="btn btn-sm mr-4" on:click={() => drawerStore.open(drawerSettings)}>
@@ -84,18 +82,13 @@ console.log($rpgSystemBanner)
 
 	<!-- Page Route Content -->
 	{#key data.pathname}
-	<div class="px-4 h-full page-content {bannerUrl ? "bg-surface-900" : "bg-none"} bg-blend-multiply bg-no-repeat bg-cover bg-center" style="background-image: url('{bannerUrl}')"
+	<div class="px-4 pb-5 h-full page-content {bannerUrl ? "bg-surface-900" : "bg-none"} bg-blend-multiply bg-no-repeat bg-cover bg-top bg-fixed" style="background-image: url('{bannerUrl}')"
 		in:fade={{ duration: 300, delay: 300 }}
 		out:fade={{ duration: 300 }}
 		>
 		<slot />
 	</div>
 	{/key}
-
-	<!-- Footer -->
-	<svelte:fragment slot="pageFooter">
-		<div class="h-24"></div>
-	</svelte:fragment>
 </AppShell>
 
 <Toast />

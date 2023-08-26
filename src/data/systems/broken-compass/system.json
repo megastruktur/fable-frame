@@ -67,7 +67,7 @@
 			},
 			{
 				"name": "luck-coin",
-				"label": "luck-coin",
+				"label": "Luck Coin",
 				"type": "counter",
         "group": "general",
 				"value": "+",
@@ -282,6 +282,27 @@
 				"group": "skill",
 				"type": "counter-min-max",
 				"value": "+--"
+			},
+			{
+				"name": "pockets",
+				"label": "Pockets",
+        "group": "inventory",
+        "type": "section",
+				"weight": 1
+			},
+			{
+				"name": "bag",
+				"label": "Bag",
+        "group": "inventory",
+        "type": "section",
+				"weight": 2
+			},
+			{
+				"name": "backpack",
+				"label": "Backpack",
+        "group": "inventory",
+        "type": "section",
+				"weight": 3
 			}
 		],
 		"compendium": [

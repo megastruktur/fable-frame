@@ -7,14 +7,14 @@
   const avaiableWizards = ["broken-compass"]
 </script>
 
-<div>
+<div class="pt-3">
 
-	<h1 class="text-3xl m-auto my-3 text-center">Choose the RPG System</h1>
+	<h1 class="text-3xl m-auto mb-3 text-center">Choose the RPG System</h1>
 
   {#await getAllRpgSystems({ status: true })}
     <ProgressRadial value={undefined} />
   {:then rpgSystems}
-    <div class="flex justify-around flex-wrap">
+    <div class="flex justify-around flex-wrap mb-3">
       {#each rpgSystems as rpgSystem}
         {#if avaiableWizards.includes(rpgSystem.identifier)}
           <a href="/characters/create/wizard/{rpgSystem.identifier}">

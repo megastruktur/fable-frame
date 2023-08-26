@@ -10,7 +10,7 @@
 <button class="{classes} card w-52 card-hover {selected === true ? "border border-primary-50" : ""}" on:click>
   <header>
     {#if rpgSystem.image}
-    <img class="" src={getRpgSystemImage(rpgSystem)} alt={rpgSystem.name} />
+    <img class="w-full" src={getRpgSystemImage(rpgSystem)} alt={rpgSystem.name} />
     {/if}
   </header>
   <div class="p-4 space-y-4">

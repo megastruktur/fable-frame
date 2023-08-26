@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { Field } from "$lib/types.d";
-	import { createEventDispatcher } from "svelte";
+	import type { Field } from "$lib/types.d"
+	import { createEventDispatcher } from "svelte"
+	import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton"
 
   export let field: Field
   export let classes: string = ""
@@ -27,9 +28,23 @@
     }
   }
 
+  function openDescriptionModal() {
+
+    if (!editMode && field.description !== undefined) {
+
+      const descriptionModal: ModalSettings = {
+        type: 'alert',
+        title: "Description",
+        body: field.description,
+      }
+
+      modalStore.trigger(descriptionModal)
+    }
+  }
+
 </script>
 
-<div class="{classes} {!editMode || !editable ? "chip m-1" : ""}" on:click on:keyup>
+<div class="{classes} {!editMode || !editable ? "chip m-1" : ""}" on:click={openDescriptionModal} on:keyup>
   {#if editable && editMode}
     <input class="input" type="text" bind:value={fieldLabel} on:focusout={fieldEdit} />
   {:else}

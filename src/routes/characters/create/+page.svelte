@@ -4,13 +4,13 @@
 
 </script>
 
-<div>
+<div class="pt-3">
 
-	<h1 class="text-3xl m-auto my-3 text-center">Choose creation method</h1>
+	<h1 class="text-3xl m-auto mb-3 text-center">Choose creation method</h1>
 
   <div class="flex justify-around flex-wrap">
 
-    <a href="/characters/create/wizard" class="card w-80 p-4 justify-center items-center bg-initial card-hover">
+    <a href="/characters/create/wizard" class="card w-80 p-4 mb-3 justify-center items-center bg-initial card-hover">
       <header>
         <img src="{wizard}" alt="wizard" />
       </header>
@@ -22,7 +22,7 @@
       </div>
     </a>
 
-    <a href="/characters/create/barebones" class="card w-80 p-4 justify-center items-center bg-initial card-hover">
+    <a href="/characters/create/barebones" class="card w-80 p-4 mb-3 justify-center items-center bg-initial card-hover">
       <header>
         <img src="{barebones}" alt="barebones" />
       </header>

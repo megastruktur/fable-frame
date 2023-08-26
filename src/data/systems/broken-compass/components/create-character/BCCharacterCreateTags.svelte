@@ -94,7 +94,7 @@
     {#each tagsAvailable as tag}
       {@const tagSelected = selectedTags.find(t => t.tagName === tag.name)}
       <span
-        class="chip mx-2 {tagSelected !== undefined ? "variant-filled" : "variant-soft"}"
+        class="chip m-2 {tagSelected !== undefined ? "variant-filled" : "variant-soft"}"
         on:click={() => selectTagEvent(tag.name)}
         on:keypress
       >
