@@ -1,3 +1,6 @@
+### 0.4.1 Aug 26, 2023
+- UI/UX: Minor css fix
+
 ### 0.4.0 Aug 26, 2023
 - Feature: Adds BC Character Creation Wizard
 
