@@ -59,7 +59,7 @@
     countSkillValue
     skillDecrement
     skillIncrement
-    
+
     // Set banner
     rpgSystemBanner.set(banner)
   })
@@ -445,19 +445,19 @@
 
       <Step>
         <svelte:fragment slot="header">Verify character</svelte:fragment>
+        <BCCHaracterCreateVerify
+        {characterName}
+        {characterHeritage}
+        {characterHomeland}
+        {characterWorkplace}
+        {callMeIfYouNeed}
+        {selectedExpertise}
+        />
+        
         <div class="flex justify-center">
-          <BCCHaracterCreateVerify
-            {characterName}
-            {characterHeritage}
-            {characterHomeland}
-            {characterWorkplace}
-            {callMeIfYouNeed}
-            {selectedExpertise}
-          />
-        </div>
-
-        <div class="w-80">
-          <BcCharacterCreateSkills editMode={false} additionalSkillsChanged={[...additionalSkillsChanged]} fields={[...characterStubData.fields]} on:fieldUpdate={skillUpdate} />
+          <div class="w-80">
+            <BcCharacterCreateSkills editMode={false} additionalSkillsChanged={[...additionalSkillsChanged]} fields={[...characterStubData.fields]} on:fieldUpdate={skillUpdate} />
+          </div>
         </div>
       </Step>
 
