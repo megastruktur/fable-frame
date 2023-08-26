@@ -221,7 +221,7 @@
 
         <!-- Tabs -->
         {#if matches}
-        <div class="w-80 flex flex-wrap justify-center">
+        <div class="flex flex-wrap justify-center mb-2">
           {#each Object.keys(tabs) as tabName}
           <button
             class="btn btn-sm {tabName === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"

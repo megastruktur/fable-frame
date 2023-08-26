@@ -447,6 +447,90 @@
 				}
 			},
 			{
+				"name": "gunslinger",
+				"label": "Gunslinger",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "guts",
+					"backup_field": "action",
+					"expertise": ["pistol", "revolver"],
+					"skills": [
+						"fight", "stunt", "cool", "shoot", "tech", "observation", "alert", "dexterity"
+					]
+				}
+			},
+			{
+				"name": "hunk",
+				"label": "Hunk",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "wild",
+					"backup_field": "action",
+					"expertise": ["strength"],
+					"skills": [
+						"fight", "stunt", "cool", "drive", "charm", "scout", "survival", "tough"
+					]
+				}
+			},
+			{
+				"name": "hunter",
+				"label": "Hunter",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "wild",
+					"backup_field": "guts",
+					"expertise": ["hunting"],
+					"skills": [
+						"fight", "shoot", "tech", "scout", "survival", "tough", "alert", "stealth"
+					]
+				}
+			},
+			{
+				"name": "medic",
+				"label": "Medic",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "knowledge",
+					"backup_field": "action",
+					"expertise": ["medicine"],
+					"skills": [
+						"leadership", "cool", "culture", "first-aid", "eloquence", "observation", "survival", "dexterity"
+					]
+				}
+			},
+			{
+				"name": "pilot",
+				"label": "Pilot",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "guts",
+					"backup_field": "crime",
+					"expertise": ["vehicle"],
+					"skills": [
+						"stunt", "cool", "drive", "shoot", "tech", "charm", "alert", "dexterity"
+					]
+				}
+			},
+			{
+				"name": "playboy_femme_fatale",
+				"label": "Playboy / Femme Fatale",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "society",
+					"backup_field": "action",
+					"expertise": ["seduction"],
+					"skills": [
+						"leadership", "stunt", "drive", "charm", "eloquence", "observation", "dexterity", "stealth"
+					]
+				}
+			},
+			{
 				"name": "professor",
 				"label": "Professor",
 				"group": "tag",
@@ -457,6 +541,104 @@
 					"expertise": ["archeology", "degree"],
 					"skills": [
 						"leadership", "culture", "first-aid", "tech", "eloquence", "observation", "alert", "stealth"
+					]
+				}
+			},
+			{
+				"name": "rebel",
+				"label": "Rebel",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "crime",
+					"backup_field": "wild",
+					"expertise": ["sabotage"],
+					"skills": [
+						"stunt", "shoot", "tech", "scout", "survival", "tough", "dexterity", "stealth"
+					]
+				}
+			},
+			{
+				"name": "reporter",
+				"label": "Reporter",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "society",
+					"backup_field": "knowledge",
+					"expertise": ["journalism"],
+					"skills": [
+						"leadership", "drive", "culture", "tech", "eloquence", "observation", "alert", "stealth"
+					]
+				}
+			},
+			{
+				"name": "soldier",
+				"label": "Soldier",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "action",
+					"backup_field": "wild",
+					"expertise": ["military"],
+					"skills": [
+						"fight", "leadership", "shoot", "first-aid", "scout", "survival", "tough", "stealth"
+					]
+				}
+			},
+			{
+				"name": "spy",
+				"label": "Spy",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "crime",
+					"backup_field": "society",
+					"expertise": ["espionage"],
+					"skills": [
+						"leadership", "cool", "shoot", "charm", "eloquence", "observation", "alert", "stealth"
+					]
+				}
+			},
+			{
+				"name": "techie",
+				"label": "Techie",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "knowledge",
+					"backup_field": "wild",
+					"expertise": ["mechanics", "electronics", "it"],
+					"skills": [
+						"fight", "drive", "shoot", "culture", "tech", "survival", "tough", "dexterity"
+					]
+				}
+			},
+			{
+				"name": "thief",
+				"label": "Thief",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "crime",
+					"backup_field": "knowledge",
+					"expertise": ["pickpocket", "lockpicking"],
+					"skills": [
+						"stunt", "drive", "tech", "eloquence", "observation", "alert", "dexterity", "stealth"
+					]
+				}
+			},
+			{
+				"name": "wingman_woman",
+				"label": "Wingman / Woman",
+				"group": "tag",
+				"type": "tag",
+				"data": {
+					"field": "guts",
+					"backup_field": "knowledge",
+					"expertise": ["support"],
+					"skills": [
+						"stunt", "drive", "shoot", "culture", "first-aid", "tech", "eloquence", "scout"
 					]
 				}
 			},
@@ -514,6 +696,142 @@
 				"group": "expertise",
 				"type": "tag",
 				"description": "Finding and keeping your bearings using environmental clues, a compass, or a map",
+				"data": {}
+			},
+			{
+				"name": "espionage",
+				"label": "Espionage",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Acquiring information, eluding security systems and creating disguises.",
+				"data": {}
+			},
+			{
+				"name": "hunting",
+				"label": "Hunting",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Tracking, preparing traps, catching prey by surprise.",
+				"data": {}
+			},
+			{
+				"name": "journalism",
+				"label": "Journalism",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Interviewing people, following leads, finding contacts.",
+				"data": {}
+			},
+			{
+				"name": "mechanics",
+				"label": "Mechanics",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Knowing and being able to repair and create mechanical devices.",
+				"data": {}
+			},
+			{
+				"name": "electronics",
+				"label": "Electronics",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Knowing and being able to repair and create electronic devices.",
+				"data": {}
+			},
+			{
+				"name": "it",
+				"label": "IT",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Knowing and being able to repair and create IT devices.",
+				"data": {}
+			},
+			{
+				"name": "medicine",
+				"label": "Medicine",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Diagnosing illnesses, recognizing drugs, surgery.",
+				"data": {}
+			},
+			{
+				"name": "military",
+				"label": "Military",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Knowing military ranks and protocols, organizing operations, mil-itary training.",
+				"data": {}
+			},
+			{
+				"name": "pickpocket",
+				"label": "Pickpocket",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Lifting a purse.",
+				"data": {}
+			},
+			{
+				"name": "lockpicking",
+				"label": "Lock-Picking",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Picking a lock.",
+				"data": {}
+			},
+			{
+				"name": "pistol",
+				"label": "Pistol",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Managing, recognizing, evaluating, repairing and using a Pistol. Allows you to shoot with two weapons.",
+				"data": {}
+			},
+			{
+				"name": "revolver",
+				"label": "Revolver",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Managing, recognizing, evaluating, repairing and using a Revolver. Allows you to shoot with two weapons.",
+				"data": {}
+			},
+			{
+				"name": "sabotage",
+				"label": "Sabotage",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Tampering with equipment or vehicles, placing explosive charges and creating nuisances.",
+				"data": {}
+			},
+			{
+				"name": "seduction",
+				"label": "Seduction",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Charming people, flirting and stealing people's hearts.",
+				"data": {}
+			},
+			{
+				"name": "strength",
+				"label": "Strength",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Lifting, breaking, bursting things and exhibiting physical strength.",
+				"data": {}
+			},
+			{
+				"name": "support",
+				"label": "Support",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Helping  people,  providing  covering  fire,  helping  somebody  else's  action (i.e. holding a vehicle steady while somebody is jumping off ).",
+				"data": {}
+			},
+			{
+				"name": "vehicle",
+				"label": "Vehicle",
+				"group": "expertise",
+				"type": "tag",
+				"description": "Knowing, evaluating, repairing and driving a type of ve-hicle (i.e. automobiles, planes, seaplanes, etc.) Allows you to have one vehicle of the chosen type.",
 				"data": {}
 			},
 			{
