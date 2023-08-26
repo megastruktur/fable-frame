@@ -1,4 +1,4 @@
-### 0.4.0 Aug 25, 2023
+### 0.4.0 Aug 26, 2023
 - Feature: Adds BC Character Creation Wizard
 
 ### 0.3.1
