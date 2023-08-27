@@ -2,7 +2,7 @@
 	import type { Field } from "$lib/types";
 	import { createEventDispatcher } from "svelte";
 
-  export let selectedTags: {tagName?: string, expertiseName?: string}[] = []
+  export let tagsExpertiseSelected: {tag?: Field, expertise?: Field}[] = []
   export let expertiseAvailable: Field[]
 
   const dispatch = createEventDispatcher()
@@ -17,8 +17,8 @@
 
 
 {#each expertiseAvailable as expertise}
-  {@const expertiseSelected = selectedTags.find(t => t.expertiseName === expertise.name)}
-  {@const selectedByTag = (expertiseSelected !== undefined && expertiseSelected.tagName !== undefined)}
+  {@const expertiseSelected = tagsExpertiseSelected.find(tes => tes.expertise !== undefined && tes.expertise.name === expertise.name)}
+  {@const selectedByTag = (expertiseSelected !== undefined && expertiseSelected.tag !== undefined)}
   {#if selectedByTag}
     <span
       class="chip variant-filled mx-2"
@@ -36,17 +36,14 @@
   {/if}
 {/each}
 <section>
-  {#each selectedTags as st}
-    {#if st.expertiseName !== undefined}
-      {@const expertise = expertiseAvailable.find(e => e.name === st.expertiseName)}
-      {#if expertise !== undefined}
-      <div class="mt-3">
-        <h4 class="h4">{expertise.label}</h4>
-        <article>
-          {expertise.description}
-        </article>
-      </div>
-      {/if}
+  {#each tagsExpertiseSelected as tes}
+    {#if tes.expertise !== undefined}
+    <div class="mt-3">
+      <h4 class="h4">{tes.expertise.label}</h4>
+      <article>
+        {tes.expertise.description}
+      </article>
+    </div>
     {/if}
   {/each}
 </section>

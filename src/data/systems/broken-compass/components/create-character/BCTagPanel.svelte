@@ -4,14 +4,14 @@
 	import { createEventDispatcher, onMount } from "svelte";
 
 
-  export let tag: Field | undefined
-  export let expertise: Field[] | undefined
-  export let skillsAvailable: Field[] | undefined
+  export let tag: Field
+  export let expertise: Field[]
+  export let skillsAvailable: Field[]
 
 
   const dispatch = createEventDispatcher()
 
-  let expertiseSelectedName: string
+  let expertiseSelectedName: string = expertise[0].name
 
   let fieldSkill = skillsAvailable?.find((skill) => skill.name === tag.data.field)
   let backupFieldSkill = skillsAvailable?.find((skill) => skill.name === tag.data.backup_field)
@@ -27,7 +27,6 @@
 
   onMount(() => {
     if (expertise !== undefined) {
-      expertiseSelectedName = expertise[0].name
       selectExpertise()
     }
   })
@@ -60,14 +59,17 @@
 
   <div class="flex justify-center">
     <RadioGroup>
-      {#each expertise as e}
+      {#each expertise as e(e.name)}
         <RadioItem bind:group={expertiseSelectedName} name="expertise" value={e.name} on:change={selectExpertise}>{e.label}</RadioItem>
       {/each}
     </RadioGroup>
   </div>
 
   {#if expertiseSelectedName !== undefined}
-  <article class="italic">{expertise.find(e => e.name === expertiseSelectedName).description}</article>
+    {@const expertiseField = expertise.find(e => e.name === expertiseSelectedName)}
+    {#if expertiseField !== undefined}
+      <article class="italic">{expertise.find(e => e.name === expertiseSelectedName).description}</article>
+    {/if}
   {/if}
 
   {#if skillsAvailable !== undefined}

@@ -12,7 +12,7 @@
   export let tagExperienceAvailable: Field[]
   export let skillsAvailable: Field[]
 
-  export let selectedTags: {tagName?: string, expertiseName?: string}[] = []
+  export let tagsExpertiseSelected: {tag?: Field, expertise?: Field}[] = []
 
   // Experience
   export let tagExperienceSelectedName: string
@@ -65,10 +65,9 @@
         <span class="text-primary-100">
           {experienceSelected.label}
 
-          {#each selectedTags as st}
-            {@const t = tagsAvailable.find(ta => ta.name === st.tagName)}
-            {#if t !== undefined}
-              <span class="mr-1">{t.label}</span>
+          {#each tagsExpertiseSelected as tes}
+            {#if tes.tag !== undefined}
+              <span class="mr-1">{tes.tag.label}</span>
             {/if}
           {/each}
         </span>
@@ -92,7 +91,7 @@
 
   <div class="flex justify-items-start flex-wrap">
     {#each tagsAvailable as tag}
-      {@const tagSelected = selectedTags.find(t => t.tagName === tag.name)}
+      {@const tagSelected = tagsExpertiseSelected.find(tes => tes.tag !== undefined && tes.tag.name === tag.name)}
       <span
         class="chip m-2 {tagSelected !== undefined ? "variant-filled" : "variant-soft"}"
         on:click={() => selectTagEvent(tag.name)}
@@ -104,13 +103,14 @@
   </div>
 
   <div class="flex flex-wrap justify-around">
-    {#each selectedTags as selectedTag(selectedTag.tagName)}
-      {#if selectedTag.tagName !== undefined}
-        {@const selectedTagField = tagsAvailable.find(tag => tag.name === selectedTag.tagName)}
+    <!-- Add identifier for bind:group to work -->
+    {#each tagsExpertiseSelected as tes(tes.tag?.name)}
+      {#if tes.tag !== undefined}
+      {@const expertiseForTag = expertiseAvailable.filter(e => tes.tag.data.expertise.includes(e.name))}
         <BcTagPanel
-          tag={selectedTagField}
+          tag={tes.tag}
           {skillsAvailable}
-          expertise={expertiseAvailable.filter(e => selectedTagField?.data?.expertise.includes(e.name))}
+          expertise={expertiseForTag}
           on:selectExpertise
           />
         {/if}
