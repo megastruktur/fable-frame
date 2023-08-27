@@ -1,3 +1,6 @@
+### 0.4.2 Aug 27, 2023
+- Refactoring and Bugfix: BC Wizard logic refactor
+
 ### 0.4.1 Aug 26, 2023
 - UI/UX: Minor css fix
 

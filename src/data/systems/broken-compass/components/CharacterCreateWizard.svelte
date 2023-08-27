@@ -15,7 +15,7 @@
   import BcCharacterCreateSkills from "./create-character/BCCharacterCreateSkills.svelte";
 
   import { countSkillValue, skillDecrement, skillIncrement } from "../lib/fieldOperations"
-	import { createEventDispatcher, onMount } from "svelte";
+	import { onMount } from "svelte";
 	import { goto } from "$app/navigation";
 
   let rpgSystem: RpgSystemsResponse
@@ -27,12 +27,10 @@
   let skillsAvailable: Field[]
 
   // Selected
-  let selectedTags: {tagName?: string, expertiseName?: string}[] = [] // temp storage
-  let selectedTagFields: Field[] = []
+  let tagsExpertiseSelected: {tag?: Field, expertise?: Field}[] = []
   let tagsSelectedAmount: number
   let tagExperienceSelectedName: string = "experienced"
   let tagExperienceSelected: Field
-  let selectedExpertise: Field[] = []
 
   let amountOfAdditionalExpertiseLeft: number = 0
   let callMeIfYouNeed: string
@@ -53,8 +51,6 @@
   let characterStubDataInitial: CharactersResponse
   let characterStubData: CharactersResponse
 
-  const dispatch = createEventDispatcher()
-
   onMount(() => {
     countSkillValue
     skillDecrement
@@ -63,8 +59,6 @@
     // Set banner
     rpgSystemBanner.set(banner)
   })
-
-
 
 
   // Prepare and load the system.
@@ -79,46 +73,6 @@
     characterStubData = characterStubDataInitial
   }
 
-  function getExpertiseByName(expertiseName: string) {
-    const expertise = expertiseAvailable.find(expertise => expertise.name === expertiseName)
-
-    if (expertise === undefined) {
-      throw new Error("Expertise not found")
-    }
-
-    return expertise
-  }
-
-  function removeSelectedExpertiseByName(expertiseName: string) {
-    const expertise = expertiseAvailable.find(expertise => expertise.name === expertiseName)
-
-    if (expertise !== undefined) {
-      selectedExpertise = selectedExpertise.filter(expertise => expertise.name!== expertiseName)
-    }
-  }
-
-  function removeAdditionalSelectedExpertise() {
-    // Find additional selected expertise names
-    const additionalSelectedExpertiseNames = selectedTags.filter(st => st.tagName === undefined).map(ex => ex.expertiseName)
-
-    if (additionalSelectedExpertiseNames !== undefined && selectedExpertise !== undefined) {
-      selectedExpertise = selectedExpertise.filter(expertise =>!additionalSelectedExpertiseNames.includes(expertise.name))
-    }
-  }
-
-  function getSelectedTagFields() {
-
-    let sTF: Field[] = []
-    selectedTags.forEach(st => {
-      const tag = tagsAvailable.find(tag => tag.name === st.tagName)
-      if (tag!== undefined) {
-        sTF.push(tag)
-      }
-    })
-
-    return sTF
-  }
-
   function selectExpertiseHandler(e: any) {
     // find the tag in selectedTags by tagName and update expertiseName
     let expertiseName: string = e.detail.expertiseName
@@ -126,25 +80,31 @@
 
     if (tagName !== undefined) {
       // Set Tag-based expertise
-      selectedTags.forEach(selectedTag => {
-        if (selectedTag.tagName === tagName) {
-          selectedTag.expertiseName = expertiseName
-          selectedExpertise.push(getExpertiseByName(expertiseName))
+      tagsExpertiseSelected.forEach(tes => {
+        if (tes.tag !== undefined && tes.tag.name === tagName) {
+          // Remove the already selected expertise if any
+          const expertise = expertiseAvailable.find(expertise => expertise.name === expertiseName)
+          if (expertise !== undefined) {
+            tes.expertise = expertise
+          }
           return
         }
       })
     }
     // Set additional expertise
     else {
-      const foundTag = selectedTags.find(selectedTag => selectedTag.expertiseName === expertiseName)
-      if (foundTag !== undefined && foundTag.tagName === undefined) {
-        selectedTags = selectedTags.filter(selectedTag => selectedTag.expertiseName !== expertiseName)
-        removeSelectedExpertiseByName(expertiseName)
+      const foundAdditionalExpertise = tagsExpertiseSelected.find(tes => tes.expertise !== undefined && tes.expertise.name === expertiseName && tes.tag === undefined)
+      // Remove Expertise
+      if (foundAdditionalExpertise) {
+        tagsExpertiseSelected = tagsExpertiseSelected.filter(tes => tes.expertise !== undefined && tes.expertise.name !== expertiseName)
       }
-      else {      
+      else {     
+        // Add Expertise 
         if (amountOfAdditionalExpertiseLeft > 0) {
-          selectedTags = [...selectedTags, {expertiseName: expertiseName}]
-          selectedExpertise.push(getExpertiseByName(expertiseName))
+          const addExpertise = expertiseAvailable.find(expertise => expertise.name === expertiseName)
+          if (addExpertise !== undefined) {
+            tagsExpertiseSelected = [...tagsExpertiseSelected, {expertise: addExpertise}]
+          }
         }
       }
     }
@@ -166,16 +126,14 @@
       expertiseAmountByExperience = 1
     }
 
-    if (selectedTags !== undefined) {
-      left = expertiseAmountByExperience - selectedTags.filter(t => t.tagName === undefined).length
+    if (tagsExpertiseSelected !== undefined) {
+      left = expertiseAmountByExperience - tagsExpertiseSelected.filter(tes => tes.tag === undefined).length
     }
     return left
   }
 
   // Create a BC character
   async function createComplete() {
-    
-    selectedTagFields = getSelectedTagFields()
 
     characterStubData.name = characterName
 
@@ -207,14 +165,14 @@
       addCharacterField(characterStubData, experienceFeelingField)
     }
 
-    // Add "profession" tags
-    selectedTagFields.forEach(sTF => {
-      addCharacterField(characterStubData, sTF)
-    })
-
-    // Add Expertise
-    selectedExpertise.forEach(selectedExpertise => {
-      addCharacterField(characterStubData, selectedExpertise)
+    // Add tags and expertise
+    tagsExpertiseSelected.forEach(tes => {
+      if (tes.tag !== undefined) {
+        addCharacterField(characterStubData, tes.tag)
+      }
+      if (tes.expertise !== undefined) {
+      addCharacterField(characterStubData, tes.expertise)
+      }
     })
 
 
@@ -233,7 +191,7 @@
 
   function recalculateSkillsAndFields() {
 
-    selectedTagFields = getSelectedTagFields()
+    const tagsSelected = tagsExpertiseSelected.filter(tes => tes.tag !== undefined).map(t => t.tag)
 
     // Recalculate skills
     let skillFields = getCharacterFieldsByGroup(characterStubData, "skill")
@@ -243,15 +201,15 @@
     let fieldNameToIncrement1: string
     let fieldNameToIncrement2: string
 
-    if (selectedTagFields[0] !== undefined) {
-      fieldNameToIncrement1 = selectedTagFields[0].data?.field
+    if (tagsSelected[0] !== undefined) {
+      fieldNameToIncrement1 = tagsSelected[0].data?.field
 
-      if (fieldNameToIncrement1 !== undefined && selectedTagFields[1] !== undefined) {
-        if (selectedTagFields[1].data?.field !== fieldNameToIncrement1) {
-          fieldNameToIncrement2 = selectedTagFields[1].data?.field
+      if (fieldNameToIncrement1 !== undefined && tagsSelected[1] !== undefined) {
+        if (tagsSelected[1].data?.field !== fieldNameToIncrement1) {
+          fieldNameToIncrement2 = tagsSelected[1].data?.field
         }
         else {
-          fieldNameToIncrement2 = selectedTagFields[1].data?.backup_field
+          fieldNameToIncrement2 = tagsSelected[1].data?.backup_field
         }
       }
 
@@ -259,8 +217,8 @@
       skillFields.map(skill => {
 
         // Increment Skill
-        selectedTagFields.forEach(sE => {
-          if (sE.data?.skills.includes(skill.name)) {
+        tagsSelected.forEach(sE => {
+          if (sE?.data?.skills.includes(skill.name)) {
             skill = skillIncrement(skill)
             updateCharacterField(characterStubData, skill)
           }
@@ -290,16 +248,32 @@
     // Select the Tag
     let tagName: string = e.detail.tagName
 
-    if (tagName !== undefined) {
-      // cleanup existing expertise
-      removeAllAdditionalExpertise()
+    // cleanup existing expertise
+    removeAllAdditionalExpertise()
 
-      if (selectedTags.find(selectedTag => selectedTag.tagName === tagName)) {
-        selectedTags = selectedTags.filter(selectedTag => selectedTag.tagName !== tagName)
+    if (tagName !== undefined) {
+
+      // Remove Tag
+      const selectedTag = tagsExpertiseSelected.find(tes => tes.tag !== undefined && tes.tag.name === tagName)
+      if (selectedTag !== undefined) {
+
+        tagsExpertiseSelected = tagsExpertiseSelected.filter(tes => {
+
+          if (tes.tag === undefined || (tes.tag !== undefined && tes.tag.name !== tagName)) {
+            return tes
+          }
+
+        })
       }
+      // Add Tag
       else {
-        if (selectedTags.length < 2) {
-          selectedTags = [...selectedTags, {tagName: tagName}]
+        const selectedTagsAmount = tagsExpertiseSelected.filter(tes => tes.tag !== undefined).length
+        if (selectedTagsAmount < 2) {
+          const tag = tagsAvailable.find(tag => tag.name === tagName)
+
+          if (tag !== undefined) {
+            tagsExpertiseSelected = [...tagsExpertiseSelected, {tag: tag}]
+          }
         }
       }
 
@@ -308,12 +282,12 @@
   }
 
   function changeExperienceHandler() {
+    // Removes Expertise from selectedTags
     removeAllAdditionalExpertise()
-    removeAdditionalSelectedExpertise()
   }
 
   function removeAllAdditionalExpertise() {
-    selectedTags = selectedTags.filter(selectedTag => selectedTag.tagName !== undefined)
+    tagsExpertiseSelected = tagsExpertiseSelected.filter(tes => tes.tag !== undefined)
   }
 
   function callMeIfYouNeedString() {
@@ -323,10 +297,9 @@
     if (tagExperienceSelected !== undefined) {
       callMeIfYouNeed += tagExperienceSelected.label
 
-      selectedTags.map(st => {
-        const t = tagsAvailable.find(ta => ta.name === st.tagName)
-        if (t !== undefined) {
-          callMeIfYouNeed += ` ${t.label}`
+      tagsExpertiseSelected.map(tes => {
+        if (tes.tag !== undefined) {
+          callMeIfYouNeed += ` ${tes.tag.label}`
         }
       })
     }
@@ -336,7 +309,7 @@
 
   $: {
     amountOfAdditionalExpertiseLeft = calcAmountOfAdditionalExpertiseLeft()
-    tagsSelectedAmount = (selectedTags.filter(ta => ta.tagName !== undefined) || []).length
+    tagsSelectedAmount = (tagsExpertiseSelected.filter(tes => tes.tag !== undefined) || []).length
 
     if (tagExperienceAvailable !== undefined) {
       tagExperienceSelected = tagExperienceAvailable.find(ta => ta.name === tagExperienceSelectedName) || {
@@ -406,7 +379,7 @@
 
         <BCCharacterCreateTags
           {tagsAvailable} {expertiseAvailable} {tagExperienceAvailable} {skillsAvailable}
-          selectedTags={selectedTags}
+          {tagsExpertiseSelected}
           bind:tagExperienceSelectedName={tagExperienceSelectedName}
           on:selectTag={selectTagHandler}
           on:selectExpertise={selectExpertiseHandler}
@@ -419,7 +392,7 @@
         <svelte:fragment slot="header">Choose an Additional Expertise: {amountOfAdditionalExpertiseLeft}</svelte:fragment>
         <BCCharacterCreateExpertise
           {expertiseAvailable}
-          selectedTags={selectedTags}
+          {tagsExpertiseSelected}
           on:selectExpertise={selectExpertiseHandler}
         />
       </Step>
@@ -451,7 +424,7 @@
         {characterHomeland}
         {characterWorkplace}
         {callMeIfYouNeed}
-        {selectedExpertise}
+        selectedExpertise={tagsExpertiseSelected.filter(tes => tes.expertise !== undefined).map(tes => tes.expertise)}
         />
         
         <div class="flex justify-center">
