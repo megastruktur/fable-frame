@@ -15,7 +15,7 @@
   import BcCharacterCreateSkills from "./create-character/BCCharacterCreateSkills.svelte";
 
   import { countSkillValue, skillDecrement, skillIncrement } from "../lib/fieldOperations"
-	import { createEventDispatcher, onMount } from "svelte";
+	import { onMount } from "svelte";
 	import { goto } from "$app/navigation";
 
   let rpgSystem: RpgSystemsResponse
@@ -53,8 +53,6 @@
   let characterStubDataInitial: CharactersResponse
   let characterStubData: CharactersResponse
 
-  const dispatch = createEventDispatcher()
-
   onMount(() => {
     countSkillValue
     skillDecrement
@@ -63,8 +61,6 @@
     // Set banner
     rpgSystemBanner.set(banner)
   })
-
-
 
 
   // Prepare and load the system.
@@ -90,11 +86,7 @@
   }
 
   function removeSelectedExpertiseByName(expertiseName: string) {
-    const expertise = expertiseAvailable.find(expertise => expertise.name === expertiseName)
-
-    if (expertise !== undefined) {
-      selectedExpertise = selectedExpertise.filter(expertise => expertise.name!== expertiseName)
-    }
+    selectedExpertise = selectedExpertise.filter(expertise => expertise.name !== expertiseName)
   }
 
   function removeAdditionalSelectedExpertise() {
@@ -128,6 +120,10 @@
       // Set Tag-based expertise
       selectedTags.forEach(selectedTag => {
         if (selectedTag.tagName === tagName) {
+          // Remove the already selected expertise if any
+          if (selectedTag.expertiseName !== undefined) {
+            removeSelectedExpertiseByName(selectedTag.expertiseName)
+          }
           selectedTag.expertiseName = expertiseName
           selectedExpertise.push(getExpertiseByName(expertiseName))
           return
@@ -293,10 +289,19 @@
     if (tagName !== undefined) {
       // cleanup existing expertise
       removeAllAdditionalExpertise()
+      removeAdditionalSelectedExpertise()
 
-      if (selectedTags.find(selectedTag => selectedTag.tagName === tagName)) {
+      // Remove Tag
+      const selectedTag = selectedTags.find(selectedTag => selectedTag.tagName === tagName)
+      if (selectedTag !== undefined) {
+        if (selectedTag.expertiseName !== undefined) {
+          console.log("Removing expertise: " + selectedTag.expertiseName)
+          removeSelectedExpertiseByName(selectedTag.expertiseName)
+        }
         selectedTags = selectedTags.filter(selectedTag => selectedTag.tagName !== tagName)
+
       }
+      // Add Tag
       else {
         if (selectedTags.length < 2) {
           selectedTags = [...selectedTags, {tagName: tagName}]
@@ -305,10 +310,17 @@
 
       recalculateSkillsAndFields()
     }
+    console.log(selectedExpertise)
+  }
+
+  function recalculateTagExpertise() {
+
   }
 
   function changeExperienceHandler() {
+    // Removes Expertise from selectedTags
     removeAllAdditionalExpertise()
+    // Removes expertise Fields from selectedExpertise
     removeAdditionalSelectedExpertise()
   }
 
