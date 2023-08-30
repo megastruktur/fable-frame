@@ -4,7 +4,6 @@
     import Icon from "svelte-icons-pack";
     import BsGoogle from "svelte-icons-pack/bs/BsGoogle";
 
-    let isLogin = true
     let isError = false
     let errorText = ""
     let username: string
@@ -13,6 +12,7 @@
     async function login() {
         try {
             const loggedIn = await pb.collection("users").authWithPassword(username, password)
+            goto("/characters")
         }
         catch (e: any) {
             console.log({error: e})
