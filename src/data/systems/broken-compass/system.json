@@ -59,8 +59,8 @@
 			},
 			{
 				"name": "luck",
-				"label": "luck",
-				"type": "counter-min-max",
+				"label": "Luck",
+				"type": "counter",
         "group": "general",
 				"value": "++++++++++",
 				"removable": false
@@ -70,7 +70,7 @@
 				"label": "Luck Coin",
 				"type": "counter",
         "group": "general",
-				"value": "+",
+				"value": "+-",
 				"removable": false
 			},
 			{

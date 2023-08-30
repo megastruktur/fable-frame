@@ -20,19 +20,19 @@
   {@const expertiseSelected = tagsExpertiseSelected.find(tes => tes.expertise !== undefined && tes.expertise.name === expertise.name)}
   {@const selectedByTag = (expertiseSelected !== undefined && expertiseSelected.tag !== undefined)}
   {#if selectedByTag}
-    <span
-      class="chip variant-filled mx-2"
+    <button
+      class="btn btn-xl variant-ghost-success mx-2"
     >
       {expertise.label}
-    </span>
+    </button>
   {:else}
-    <span
-      class="chip variant-filled mx-2 {expertiseSelected !== undefined ? "variant-filled" : "variant-soft"}"
+    <button
+      class="btn btn-xl variant-filled mx-2 {expertiseSelected !== undefined ? "variant-filled" : "variant-soft"}"
       on:keypress
       on:click={() => selectExpertiseEvent(expertise.name)}
     >
       {expertise.label}
-    </span>
+    </button>
   {/if}
 {/each}
 <section>

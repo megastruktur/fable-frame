@@ -13,6 +13,8 @@
   export let classes: string = ""
   export let editable: boolean = true
   export let editMode: boolean = false
+  export let labelStyle: string = ""
+  export let valueStyle: string = ""
 
   let removable: boolean = (field.removable !== undefined) ? field.removable : true
   
@@ -30,10 +32,10 @@
 <button class="btn-icon" on:click={removeField}>✕</button>
 {/if}
 {#if renderAs === "text"}
-  <FieldRenderText {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />
+  <FieldRenderText {editable} {classes} {labelStyle} {valueStyle} field={field} on:fieldUpdate={updateField} {editMode} />
 {/if}
 {#if renderAs === "counter"}
-  <FieldRenderCounter {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />
+  <FieldRenderCounter {editable} {classes} {labelStyle} {valueStyle} field={field} on:fieldUpdate={updateField} {editMode} />
 {/if}
 {#if renderAs === "counterNum"}
   <FieldRenderCounterNum {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />

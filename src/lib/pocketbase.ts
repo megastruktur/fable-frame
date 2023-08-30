@@ -9,8 +9,21 @@ export const currentUser = writable(pb.authStore.model)
 pb.authStore.onChange((auth) => {
   console.log("AuthStore changed", auth)
   currentUser.set(pb.authStore.model)
-  document.cookie = pb.authStore.exportToCookie({ httpOnly: false })
+  if (document !== undefined) {
+    document.cookie = pb.authStore.exportToCookie({ httpOnly: false })
+  }
 })
+
+try {
+  if (pb.authStore.isValid) {
+    await pb.collection('users').authRefresh()
+  }
+  else {
+    currentUser.set(null)
+  }
+} catch (_) {
+  console.log("Error")
+}
 
 pb.beforeSend = function (url, options) {
 

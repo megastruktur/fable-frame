@@ -6,6 +6,8 @@
   export let classes: string = ""
   export let editable: boolean = true
   export let editMode: boolean = false
+  export let labelStyle = ""
+  export let valueStyle = ""
 
   let fieldValue: string = field.value
 
@@ -30,10 +32,10 @@
 </script>
 
 <label class="{classes} label">
-  <h4 class="h4">{field.label}</h4>
+  <h4 class="h4 {labelStyle}">{field.label}</h4>
   {#if editable && editMode}
     <input class="input" type="text" bind:value={fieldValue} on:focusout={fieldEdit} />
   {:else}
-    <p>{field.value ?? ""}</p>
+    <p class="{valueStyle}">{field.value ?? ""}</p>
   {/if}
 </label>
