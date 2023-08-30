@@ -89,16 +89,17 @@
     </article>
   </div>
 
+  <h3 class="h3">Select up to 2 tags for your character</h3>
   <div class="flex justify-items-start flex-wrap">
     {#each tagsAvailable as tag}
       {@const tagSelected = tagsExpertiseSelected.find(tes => tes.tag !== undefined && tes.tag.name === tag.name)}
-      <span
-        class="chip m-2 {tagSelected !== undefined ? "variant-filled" : "variant-soft"}"
+      <button
+        class="btn btn-xl m-2 {tagSelected !== undefined ? "variant-filled" : "variant-soft"}"
         on:click={() => selectTagEvent(tag.name)}
         on:keypress
       >
         {tag.label}
-      </span>
+      </button>
     {/each}
   </div>
 
