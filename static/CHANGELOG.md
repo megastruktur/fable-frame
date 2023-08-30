@@ -1,3 +1,6 @@
+### 0.4.3 Aug 30, 2023
+- Bugfix: Authentication fixes (updated token)
+
 ### 0.4.2 Aug 27, 2023
 - Refactoring and Bugfix: BC Wizard logic refactor
 
