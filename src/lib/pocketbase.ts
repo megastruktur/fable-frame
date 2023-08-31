@@ -15,10 +15,7 @@ pb.authStore.onChange((auth) => {
 })
 
 try {
-  if (pb.authStore.isValid) {
-    await pb.collection('users').authRefresh()
-  }
-  else {
+  if (!pb.authStore.isValid) {
     currentUser.set(null)
   }
 } catch (_) {
