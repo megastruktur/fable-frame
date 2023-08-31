@@ -26,11 +26,22 @@
   let tagExperienceAvailable: Field[]
   let skillsAvailable: Field[]
 
+  let defaultExperience: Field = {
+    id: "experienced",
+    name: "experienced",
+    label: "Experienced",
+    value: "experienced",
+    weight: 1,
+    description: "You're a regular adventurer. Go with regular rules",
+    group: "tagExperience",
+    type: "tag",
+    data: {}
+  }
+
   // Selected
   let tagsExpertiseSelected: {tag?: Field, expertise?: Field}[] = []
   let tagsSelectedAmount: number
-  let tagExperienceSelectedName: string = "experienced"
-  let tagExperienceSelected: Field
+  let tagExperienceSelected: Field = defaultExperience
 
   let amountOfAdditionalExpertiseLeft: number = 0
   let callMeIfYouNeed: string
@@ -70,7 +81,9 @@
     skillsAvailable = getRpgSystemFieldsByGroup(rpgSystem, "skill")
     
     characterStubDataInitial = await getCharacterStub(rpgSystem.id)
-    characterStubData = characterStubDataInitial
+    characterStubData = JSON.parse(JSON.stringify(characterStubDataInitial))
+
+    callMeIfYouNeed = callMeIfYouNeedString()
   }
 
   function selectExpertiseHandler(e: any) {
@@ -108,6 +121,8 @@
         }
       }
     }
+
+    callMeIfYouNeed = callMeIfYouNeedString()
   }
 
   /**
@@ -119,10 +134,10 @@
     let expertiseAmountByExperience = 0
     let left = 0
 
-    if (tagExperienceSelectedName === "old") {
+    if (tagExperienceSelected.name === "old") {
       expertiseAmountByExperience = 2
     }
-    else if (tagExperienceSelectedName === "experienced") {
+    else if (tagExperienceSelected.name === "experienced") {
       expertiseAmountByExperience = 1
     }
 
@@ -149,12 +164,13 @@
     updateCharacterField(characterStubData, workplaceField)
 
     // Add negative Old or positive Young feelings and tags
-    if (["old", "young"].includes(tagExperienceSelectedName)) {
+    if (["old", "young"].includes(tagExperienceSelected.name)) {
       const experienceFeelingField: Field = {
         id: "",
         type: "tag",
         group: "feel",
         weight: 1,
+        description: tagExperienceSelected.description,
         value: tagExperienceSelected.value,
         name: tagExperienceSelected.name,
         label: tagExperienceSelected.label,
@@ -191,9 +207,13 @@
 
   function recalculateSkillsAndFields() {
 
-    const tagsSelected = tagsExpertiseSelected.filter(tes => tes.tag !== undefined).map(t => t.tag)
+    const tagsSelected = tagsExpertiseSelected.filter(tes => tes.tag !== undefined && tes.tag.group === "tag").map(t => t.tag)
 
     // Recalculate skills
+    // Reset Skills
+    additionalSkillsChanged = []
+    amountOfAdditionalSkillsLeft = amountOfAdditionalSkills
+
     let skillFields = getCharacterFieldsByGroup(characterStubData, "skill")
 
     // Increment a Backup Field from the second tag if field of the first
@@ -202,11 +222,11 @@
     let fieldNameToIncrement2: string
 
     if (tagsSelected[0] !== undefined) {
-      fieldNameToIncrement1 = tagsSelected[0].data?.field
+      fieldNameToIncrement1 = tagsSelected[0].data?.field || ""
 
       if (fieldNameToIncrement1 !== undefined && tagsSelected[1] !== undefined) {
         if (tagsSelected[1].data?.field !== fieldNameToIncrement1) {
-          fieldNameToIncrement2 = tagsSelected[1].data?.field
+          fieldNameToIncrement2 = tagsSelected[1].data?.field || ""
         }
         else {
           fieldNameToIncrement2 = tagsSelected[1].data?.backup_field
@@ -242,7 +262,7 @@
   function selectTagHandler(e: any) {
 
     // Refresh Character Data if Tag changes as it affects skill calculation
-    characterStubData = characterStubDataInitial
+    characterStubData = JSON.parse(JSON.stringify(characterStubDataInitial))
     amountOfAdditionalSkillsLeft = amountOfAdditionalSkills
 
     // Select the Tag
@@ -267,7 +287,7 @@
       }
       // Add Tag
       else {
-        const selectedTagsAmount = tagsExpertiseSelected.filter(tes => tes.tag !== undefined).length
+        const selectedTagsAmount = tagsExpertiseSelected.filter(tes => tes.tag !== undefined && tes.tag.group === "tag").length
         if (selectedTagsAmount < 2) {
           const tag = tagsAvailable.find(tag => tag.name === tagName)
 
@@ -277,31 +297,55 @@
         }
       }
 
+      callMeIfYouNeed = callMeIfYouNeedString()
       recalculateSkillsAndFields()
     }
   }
 
-  function changeExperienceHandler() {
+  function changeExperienceHandler(e: any) {
     // Removes Expertise from selectedTags
     removeAllAdditionalExpertise()
+
+    tagsExpertiseSelected = tagsExpertiseSelected.filter(tes => tes.tag !== undefined && tes.tag.group !== "tagExperience")
+
+    tagExperienceSelected = tagExperienceAvailable.find(tes => tes.name === e.detail.experienceName) || defaultExperience
+
+    callMeIfYouNeed = callMeIfYouNeedString()
   }
 
   function removeAllAdditionalExpertise() {
     tagsExpertiseSelected = tagsExpertiseSelected.filter(tes => tes.tag !== undefined)
+    callMeIfYouNeed = callMeIfYouNeedString()
   }
 
   function callMeIfYouNeedString() {
 
     let callMeIfYouNeed = ""
+    let tagString: string = ""
+    let expertiseString: string = ""
+    let tagFound: boolean = false
+    let expertiseFound: boolean = false
 
-    if (tagExperienceSelected !== undefined) {
-      callMeIfYouNeed += tagExperienceSelected.label
+    callMeIfYouNeed += `<span class="text-primary-100">${tagExperienceSelected.label}</span>`
+    
+    tagsExpertiseSelected.forEach(tes => {
+      if (tes.tag !== undefined) {
+        tagString += ` ${tes.tag.label}`
+        tagFound = true
+      }
+      if (tes.expertise !== undefined) {
+        expertiseString += ` ${tes.expertise.label}`
+        expertiseFound = true
+      }
+    })
 
-      tagsExpertiseSelected.map(tes => {
-        if (tes.tag !== undefined) {
-          callMeIfYouNeed += ` ${tes.tag.label}`
-        }
-      })
+    if (tagFound) {
+      callMeIfYouNeed += `<span class="text-primary-100">${tagString}</span>`
+    }
+
+    if (expertiseFound) {
+      callMeIfYouNeed += ` with expertise in`
+      callMeIfYouNeed += `<span class="text-primary-100">${expertiseString}</span>`
     }
 
     return callMeIfYouNeed
@@ -310,22 +354,6 @@
   $: {
     amountOfAdditionalExpertiseLeft = calcAmountOfAdditionalExpertiseLeft()
     tagsSelectedAmount = (tagsExpertiseSelected.filter(tes => tes.tag !== undefined) || []).length
-
-    if (tagExperienceAvailable !== undefined) {
-      tagExperienceSelected = tagExperienceAvailable.find(ta => ta.name === tagExperienceSelectedName) || {
-        id: "experienced",
-        name: "experienced",
-        label: "Experienced",
-        value: "experienced",
-        weight: 1,
-        description: "You're a regular adventurer. Go with regular rules",
-        group: "tagExperience",
-        type: "tag",
-        data: {}
-      }
-    }
-
-    callMeIfYouNeed = callMeIfYouNeedString()
   }
 
   function skillUpdate(e: any) {
@@ -371,6 +399,13 @@
       <ProgressRadial value={undefined} />
     {:then}
 
+
+    <h3 class="h3 text-center mb-3">
+      <span>Call me if you need</span>
+      {@html callMeIfYouNeed}
+      
+    </h3>
+
     <Stepper on:complete={createComplete}>
 
       <!-- Tags picker -->
@@ -380,7 +415,8 @@
         <BCCharacterCreateTags
           {tagsAvailable} {expertiseAvailable} {tagExperienceAvailable} {skillsAvailable}
           {tagsExpertiseSelected}
-          bind:tagExperienceSelectedName={tagExperienceSelectedName}
+          {tagExperienceSelected}
+          tagsSelected={tagsExpertiseSelected.filter(tes => tes.tag!== undefined).map(tes => tes.tag)}
           on:selectTag={selectTagHandler}
           on:selectExpertise={selectExpertiseHandler}
           on:changeExperience={changeExperienceHandler}
@@ -423,7 +459,6 @@
         {characterHeritage}
         {characterHomeland}
         {characterWorkplace}
-        {callMeIfYouNeed}
         selectedExpertise={tagsExpertiseSelected.filter(tes => tes.expertise !== undefined).map(tes => tes.expertise)}
         />
         

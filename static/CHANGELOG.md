@@ -1,3 +1,7 @@
+### 0.4.4 Aug 30, 2023
+- Bugfix: Skill calculation on BC creation
+- UI/UX: BC Character creation multiple fixes
+
 ### 0.4.3 Aug 30, 2023
 - Bugfix: Authentication fixes (updated token)
 - UI/UX: BC Character creation fixes

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { getFieldByNameFromList } from "$lib/characterFieldsOperations";
 	import type { Field } from "$lib/types";
 	import DiamondSkill from "../DiamondSkill.svelte";
 

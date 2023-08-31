@@ -5,7 +5,6 @@
   export let characterHeritage: string
   export let characterHomeland: string
   export let characterWorkplace: string
-  export let callMeIfYouNeed: string
   export let selectedExpertise: Field[] | undefined
 
 </script>
@@ -19,9 +18,3 @@
 {#if characterWorkplace!== undefined}
   <h3 class="h3">Workplace: {characterWorkplace}</h3>
 {/if}
-<h3 class="h3">Call me if you need <span class="text-primary-100">{callMeIfYouNeed}</span> with expertise in<span class="text-primary-100">
-  {#if selectedExpertise !== undefined}
-  {#each selectedExpertise as se}&nbsp;{se.label}
-  {/each}
-  {/if}
-</span></h3>
