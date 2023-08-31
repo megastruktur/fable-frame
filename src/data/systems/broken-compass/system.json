@@ -307,87 +307,99 @@
 		],
 		"compendium": [
 			{
-				"data": { "type": "plus" },
+				"data": { "type": "plus", "field": "action" },
 				"name": "powerful",
 				"group": "feel",
 				"label": "powerful",
+				"description": "Advantage in Action",
 				"type": "tag"
 			},
 			{
-				"data": { "type": "plus" },
+				"data": { "type": "plus", "field": "guts" },
 				"name": "daring",
 				"group": "feel",
 				"label": "daring",
+				"description": "Advantage in Guts",
 				"type": "tag"
 			},
 			{
-				"data": { "type": "plus" },
+				"data": { "type": "plus", "field": "knowledge" },
 				"name": "focused",
 				"group": "feel",
 				"label": "focused",
+				"description": "Advantage in Knowledge",
 				"type": "tag"
 			},
 			{
-				"data": { "type": "plus" },
+				"data": { "type": "plus", "field": "society" },
 				"name": "confident",
 				"group": "feel",
 				"label": "confident",
+				"description": "Advantage in Society",
 				"type": "tag"
 			},
 			{
-				"data": { "type": "plus" },
+				"data": { "type": "plus", "field": "wild" },
 				"name": "fierce",
 				"group": "feel",
 				"label": "fierce",
+				"description": "Advantage in Wild",
 				"type": "tag"
 			},
 			{
-				"data": { "type": "plus" },
+				"data": { "type": "plus", "field": "crime" },
 				"name": "untouchable",
 				"group": "feel",
 				"label": "untouchable",
+				"description": "Advantage in Crime",
 				"type": "tag"
 			},
 			{
-				"data": { "type": "minus" },
+				"data": { "type": "minus", "field": "action" },
 				"name": "bleeding",
 				"group": "feel",
 				"label": "bleeding",
+				"description": "Disadvantage in Action",
 				"type": "tag"
 			},
 			{
-				"data": { "type": "minus" },
+				"data": { "type": "minus", "field": "guts" },
 				"name": "shocked",
 				"group": "feel",
 				"label": "shocked",
+				"description": "Disadvantage in Guts",
 				"type": "tag"
 			},
 			{
-				"data": { "type": "minus" },
+				"data": { "type": "minus", "field": "knowledge" },
 				"name": "dizzy",
 				"group": "feel",
 				"label": "dizzy",
+				"description": "Disadvantage in Knowledge",
 				"type": "tag"
 			},
 			{
-				"data": { "type": "minus" },
+				"data": { "type": "minus", "field": "society" },
 				"name": "embarrassed",
 				"group": "feel",
 				"label": "embarrassed",
+				"description": "Disadvantage in Society",
 				"type": "tag"
 			},
 			{
-				"data": { "type": "minus" },
+				"data": { "type": "minus", "field": "wild" },
 				"name": "broken",
 				"group": "feel",
 				"label": "broken",
+				"description": "Disadvantage in Wild",
 				"type": "tag"
 			},
 			{
-				"data": { "type": "minus" },
+				"data": { "type": "minus", "field": "crime" },
 				"name": "scared",
 				"group": "feel",
 				"label": "scared",
+				"description": "Disadvantage in Crime",
 				"type": "tag"
 			},
 			{

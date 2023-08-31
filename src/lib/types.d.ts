@@ -32,7 +32,9 @@ export type Field = {
   label?: string
   group?: string
   value: string
-  data?: object
+  data?: {
+    [key: string]: any
+  }
   icon?: string
   description?: string
   weight: number
