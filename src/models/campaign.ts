@@ -20,3 +20,8 @@ export async function deleteCampaign(id: string) {
 export async function getAllCampaigns(queryParams = {}): Promise<CampaignResponse[]> {
   return await pb.collection("campaigns").getFullList(queryParams)
 }
+
+
+export async function getCampaignWithRpgSystem(id: string): Promise<CampaignResponse> {
+  return await pb.collection("campaigns").getOne(id, { expand: "rpgSystem" })
+}

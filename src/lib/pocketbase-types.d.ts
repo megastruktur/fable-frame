@@ -58,6 +58,9 @@ export type CampaignRecord = {
 	creator: RecordIdString
 	characters?: RecordIdString[]
 	image?: string
+	expand?: {
+		rpgSystem: RpgSystemsResponse
+	}
 }
 
 export type CharactersRecord<Tdata = unknown> = {

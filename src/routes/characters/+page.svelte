@@ -10,6 +10,7 @@
 	import { quintOut } from 'svelte/easing';
 	import Icon from 'svelte-icons-pack';
 	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
+	import CharacterItem from '$lib/components/characters/CharacterItem.svelte';
 
 	const charOperationsMenu: PopupSettings = {
 		event: 'focus-click',
@@ -103,18 +104,7 @@
 					out:send={{ key: character.id }}
 					class="flex justify-between items-center">
 					<a class="list-option w-full" href="/characters/{character.id}">
-						<Avatar
-							initials={character.name.charAt(0)}
-							border="border-4 border-surface-300-600-token"
-							src={getCharacterAvatar(character)} />
-						<span class="flex-auto">
-							<div>
-								<h3 class="h3">{character.name}</h3>
-								{#if character.expand && character.expand.rpgSystem}
-									<article>{character.expand.rpgSystem.name}</article>
-								{/if}
-							</div>
-						</span>
+						<CharacterItem character={character} />
 					</a>
 					<span>
 						<button
