@@ -7,7 +7,7 @@
   export let classes: string = ""
 </script>
 
-<button class="{classes} card w-52 card-hover {selected === true ? "border border-primary-50" : ""}" on:click>
+<button class="{classes} card w-52 overflow-hidden card-hover {selected === true ? "border border-primary-50" : ""}" on:click>
   <header>
     {#if rpgSystem.image}
     <img class="w-full" src={getRpgSystemImage(rpgSystem)} alt={rpgSystem.name} />

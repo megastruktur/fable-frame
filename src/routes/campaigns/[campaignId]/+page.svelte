@@ -3,5 +3,5 @@
 </script>
 
 <div>
-  {$page.params.slug}
+  {$page.params.campaignId}
 </div>

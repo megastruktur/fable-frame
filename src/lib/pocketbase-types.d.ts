@@ -64,6 +64,7 @@ export type CharactersRecord<Tdata = unknown> = {
 	name: string
 	rpgSystem: RecordIdString
 	campaign?: RecordIdString
+	campaign_status?: number
 	avatar?: string
 	creator: RecordIdString
 	fields?: Field[]
@@ -112,7 +113,6 @@ export type CharacterNotesResponse<Tdata = unknown, Texpand = unknown> = Require
 export type CollectionRecords = {
 	campaign_notes: CampaignNotesRecord
 	campaigns: CampaignsRecord
-	characters: CharactersRecord
 	news: NewsRecord
 	rpg_systems: RpgSystemsRecord
 	users: UsersRecord
