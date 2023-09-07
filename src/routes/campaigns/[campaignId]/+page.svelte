@@ -1,8 +1,8 @@
 <script lang="ts">
   import { page } from "$app/stores"
+	import CharacterItem from "$lib/components/characters/CharacterItem.svelte";
 	import type { CampaignResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
-	import { getCampaign } from "$models/campaign";
-	import { getRpgSystem } from "$models/rpg_system";
+	import { getCampaignCharacterRequests, getCampaignCharacters, getCampaignWithRpgSystem } from "$models/campaign";
 	import { ProgressRadial } from "@skeletonlabs/skeleton";
 
   let campaign: CampaignResponse
@@ -13,13 +13,14 @@
 
     // @todo Investigate why there are so many calls (3 calls, 2 of them return 404)
     try {
-      campaign = await getCampaign($page.params.campaignId)
+      campaign = await getCampaignWithRpgSystem($page.params.campaignId)
   
       if (campaign) {
-        rpgSystem = await getRpgSystem(campaign.rpgSystem)
+        rpgSystem = campaign.expand.rpgSystem
       }
-      console.log("xx")
-      return campaign
+
+      characters = await getCampaignCharacters($page.params.campaignId)
+
     }
     catch (error) {
       // console.error(error)
@@ -33,9 +34,21 @@
 {:then}
   <div class="flex flex-col">
 
-    <h1 class="h2 m-auto mt-6">{campaign.name}</h1>
-    <h6 class="h6 m-auto my-6">{rpgSystem.name}</h6>
+    <h1 class="h2 mx-auto mt-6">{campaign.name}</h1>
+    <h6 class="h6 mx-auto my-6">{rpgSystem.name}</h6>
+    <div class="flex flex-wrap justify-center">
+      <a class="btn variant-ghost-warning mx-3" href="/campaigns/{$page.params.campaignId}/edit">EDIT</a>
+      <a class="btn variant-ghost-secondary mx-3" href="/campaigns/{$page.params.campaignId}/requests">CAMPAIGN REQUESTS</a>
+    </div>
 
-    <article class="">{campaign.description}</article>
+    <article class="mt-6 text-center">{campaign.description}</article>
+
+    <div class="flex flex-wrap justify-center">
+      {#each characters as character}
+      <a class="btn" href="/characters/{character.id}">
+        <CharacterItem {character} />
+      </a>
+      {/each}
+    </div>
   </div>
 {/await}

@@ -63,7 +63,7 @@
 {:then}
   <h1 class="h1 text-center my-6">Select a character to request to join campaign</h1>
   <hr />
-  <div class="flex justify-between my-6 flex-wrap">
+  <div class="flex justify-center my-6 flex-wrap">
     {#each characters as character}
   
     {@const isCharacterSelected = (characterSelected !== undefined && character.id === characterSelected.id ) }
@@ -73,5 +73,7 @@
     {/each}
   </div>
 
-  <button class="btn btn-xl { canComplete ? "variant-filled-success" : "variant-soft" }" on:click={sendCampaignRequest}>Send request</button>
+  <div class="flex justify-center">
+    <button class="btn btn-xl { canComplete ? "variant-filled-success" : "variant-soft" }" on:click={sendCampaignRequest}>Send request</button>
+  </div>
 {/await}
