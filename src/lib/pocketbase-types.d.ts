@@ -50,7 +50,7 @@ export type CampaignNotesRecord = {
 	creator: RecordIdString
 }
 
-export type CampaignsRecord = {
+export type CampaignRecord = {
 	name: string
 	image?: string
 	description?: string
@@ -101,7 +101,7 @@ export type CharacterNotesRecord<Tdata = unknown> = {
 
 // Response types include system fields and match responses from the PocketBase API
 export type CampaignNotesResponse<Texpand = unknown> = Required<CampaignNotesRecord> & BaseSystemFields<Texpand>
-export type CampaignsResponse<Texpand = unknown> = Required<CampaignsRecord> & BaseSystemFields<Texpand>
+export type CampaignResponse<Texpand = unknown> = Required<CampaignRecord> & BaseSystemFields<Texpand>
 export type CharactersResponse<Tdata = unknown, Texpand = unknown> = Required<CharactersRecord<Tdata>> & BaseSystemFields<Texpand>
 export type NewsResponse<Texpand = unknown> = Required<NewsRecord> & BaseSystemFields<Texpand>
 export type RpgSystemsResponse<Tdata = unknown, Texpand = unknown> = Required<RpgSystemsRecord<Tdata>> & BaseSystemFields<Texpand>
@@ -112,7 +112,7 @@ export type CharacterNotesResponse<Tdata = unknown, Texpand = unknown> = Require
 
 export type CollectionRecords = {
 	campaign_notes: CampaignNotesRecord
-	campaigns: CampaignsRecord
+	campaigns: CampaignRecord
 	news: NewsRecord
 	rpg_systems: RpgSystemsRecord
 	users: UsersRecord
@@ -121,7 +121,7 @@ export type CollectionRecords = {
 
 export type CollectionResponses = {
 	campaign_notes: CampaignNotesResponse
-	campaigns: CampaignsResponse
+	campaigns: CampaignResponse
 	characters: CharactersResponse
 	news: NewsResponse
 	rpg_systems: RpgSystemsResponse

@@ -12,7 +12,10 @@
   let canComplete: boolean = false
   let campaignDescription: string
 
-  $: canComplete = (selectedSystem !== undefined && campaignName !== undefined)
+  $: canComplete = (selectedSystem !== undefined
+    && campaignName !== undefined
+    && campaignName !== ""
+    )
 
   async function createCampaignHandler() {
 
