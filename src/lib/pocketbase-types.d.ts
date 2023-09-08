@@ -67,12 +67,15 @@ export type CharactersRecord<Tdata = unknown> = {
 	name: string
 	rpgSystem: RecordIdString
 	campaign?: RecordIdString
-	campaign_status?: number
+	campaignStatus?: number
 	avatar?: string
 	creator: RecordIdString
 	fields?: Field[]
 	hash: string
-	expand?: { rpgSystem?: RpgSystemsRecord }
+	expand?: {
+		rpgSystem?: RpgSystemsRecord,
+		campaign?: CampaignResponse,
+	}
 }
 
 export type NewsRecord = {

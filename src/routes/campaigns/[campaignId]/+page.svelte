@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/stores"
-	import CharacterItem from "$lib/components/characters/CharacterItem.svelte";
+	import CharacterItem from "$lib/components/characters/CharacterItem.svelte"
+	import { currentUser } from "$lib/pocketbase";
 	import type { CampaignResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { getCampaignCharacterRequests, getCampaignCharacters, getCampaignWithRpgSystem } from "$models/campaign";
 	import { ProgressRadial } from "@skeletonlabs/skeleton";
@@ -36,10 +37,13 @@
 
     <h1 class="h2 mx-auto mt-6">{campaign.name}</h1>
     <h6 class="h6 mx-auto my-6">{rpgSystem.name}</h6>
+
+    {#if campaign.creator === $currentUser?.id}
     <div class="flex flex-wrap justify-center">
       <a class="btn variant-ghost-warning mx-3" href="/campaigns/{$page.params.campaignId}/edit">EDIT</a>
       <a class="btn variant-ghost-secondary mx-3" href="/campaigns/{$page.params.campaignId}/requests">CAMPAIGN REQUESTS</a>
     </div>
+    {/if}
 
     <article class="mt-6 text-center">{campaign.description}</article>
 

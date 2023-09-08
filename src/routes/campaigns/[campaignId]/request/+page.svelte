@@ -37,7 +37,7 @@
     try {
 
       characterSelected.campaign = campaign.id
-      characterSelected.campaign_status = 0
+      characterSelected.campaignStatus = 0
       const characterUpdated = await updateCharacter(characterSelected.id, characterSelected)
 
       if (characterUpdated !== undefined) {

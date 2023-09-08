@@ -18,7 +18,7 @@
 
 		{#if $currentUser}
 		<li><a on:click={drawerClose} href="/characters">Characters</a></li>
-		<!-- <li><a on:click={drawerClose} href="/campaigns">Campaigns</a></li> -->
+		<li><a on:click={drawerClose} href="/campaigns">My Campaigns</a></li>
 		<li><a on:click={drawerClose} class="btn variant-filled-success" href="/characters/create">Create Character</a></li>
 		<li><LogoutButton /></li>
 		{:else}

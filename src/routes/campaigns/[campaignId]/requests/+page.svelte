@@ -16,7 +16,7 @@
 
   async function approveRequestHandler() {
     
-    characterSelected.campaign_status = 1
+    characterSelected.campaignStatus = 1
 
     try {
       const updatedCharacter = await updateCharacter(characterSelected.id, characterSelected)
