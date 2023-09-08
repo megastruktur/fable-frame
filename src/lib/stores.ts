@@ -8,7 +8,7 @@ import { updateCharacterNotes } from "$models/character_notes";
 
 function createCharacterStore() {
 
-  const { subscribe, set, update } = writable<CharactersResponse>();
+  const { subscribe, set, update } = writable<CharactersResponse>()
 
   function setFieldValue(fieldId: string, fieldValue: string) {
     update((character) => {
@@ -63,6 +63,7 @@ function createCharacterStore() {
       name: "",
       rpgSystem: "",
       campaign: "",
+      campaignStatus: 0,
       avatar: "",
       creator: "",
       fields: [],
@@ -73,7 +74,8 @@ function createCharacterStore() {
       collectionId: "",
       collectionName: Collections.Characters,
       expand: {
-        rpgSystem: undefined
+        rpgSystem: undefined,
+        campaign: undefined,
       }
     })
   };
@@ -179,6 +181,4 @@ function createCharacterNotesStore() {
 }
 export const characterNotesStore = createCharacterNotesStore();
 
-
-// Create a store to contain a background image
-export const rpgSystemBanner = writable("");
+export const headerBanner = writable();

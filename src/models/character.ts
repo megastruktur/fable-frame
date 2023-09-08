@@ -68,6 +68,11 @@ export async function deleteCharacter(id: string) {
   console.log(`Deleted character ${id}`)
 }
 
+/**
+ * Get current user's characters as permissions are controlled by Pocketbase
+ * @param queryParams 
+ * @returns 
+ */
 export async function getAllCharacters(queryParams: any = {}): Promise<CharactersResponse[]> {
   return await pb.collection("characters").getFullList(queryParams)
 }

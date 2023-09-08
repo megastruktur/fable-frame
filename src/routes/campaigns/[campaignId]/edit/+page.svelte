@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
   import { page } from "$app/stores"
+	import CampaignImageEdit from "$lib/components/campaign/CampaignImageEdit.svelte";
 	import type { CampaignResponse } from "$lib/pocketbase-types";
 	import { getCampaign, updateCampaign } from "$models/campaign";
 	import { ProgressRadial } from "@skeletonlabs/skeleton";
@@ -34,7 +35,11 @@
 {#await getData()}
   <ProgressRadial value={undefined} />
 {:then}
-  <input bind:value={campaign.name} class="input mb-6" type="text" placeholder="Campaign Name" />
+  <input bind:value={campaign.name} class="input mb-6 h1" type="text" placeholder="Campaign Name" />
+
+  <div class="flex justify-center">
+    <CampaignImageEdit {campaign} />
+  </div>
 
   <textarea bind:value={campaign.description} class="textarea my-3" rows="4" placeholder="Optional Description" />
 

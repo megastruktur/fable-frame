@@ -3,8 +3,10 @@
 	import CharacterItem from "$lib/components/characters/CharacterItem.svelte"
 	import { currentUser } from "$lib/pocketbase";
 	import type { CampaignResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
-	import { getCampaignCharacterRequests, getCampaignCharacters, getCampaignWithRpgSystem } from "$models/campaign";
-	import { ProgressRadial } from "@skeletonlabs/skeleton";
+	import { headerBanner } from "$lib/stores";
+	import { getCampaignCharacters, getCampaignImage, getCampaignWithRpgSystem } from "$models/campaign"
+	import { ProgressRadial } from "@skeletonlabs/skeleton"
+	import { onMount, onDestroy } from "svelte"
 
   let campaign: CampaignResponse
   let rpgSystem: RpgSystemsResponse
@@ -18,6 +20,8 @@
   
       if (campaign) {
         rpgSystem = campaign.expand.rpgSystem
+
+        headerBanner.set(getCampaignImage(campaign))
       }
 
       characters = await getCampaignCharacters($page.params.campaignId)

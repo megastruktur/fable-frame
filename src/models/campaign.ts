@@ -87,3 +87,15 @@ export async function getCampaignCharacters(campaignId: string) {
     filter: `campaign = "${campaignId}" && campaignStatus = 1`
   })
 }
+
+export async function campaignUpdateImage(campaignId: string, imageMultipart: any): Promise<CampaignResponse> {
+  return await pb.collection("campaigns").update(campaignId, imageMultipart);
+}
+
+export function getCampaignImage(campaign: CampaignResponse) {
+  if (campaign.image)
+    return pb.files.getUrl(campaign, campaign.image)
+  else {
+    return ""
+  }
+}

@@ -1,6 +1,6 @@
 <!-- Campaigns Page -->
 <script lang="ts">
-	import CampaignCard from '$lib/components/CampaignCard.svelte';
+	import CampaignCard from '$lib/components/campaign/CampaignCard.svelte';
 import type { CampaignResponse } from '$lib/pocketbase-types';
 	import { getGMCampaigns, getCharacterCampaigns } from '$models/campaign';
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
@@ -11,9 +11,6 @@ import type { CampaignResponse } from '$lib/pocketbase-types';
   async function getData() {
     characterCampaigns = await getCharacterCampaigns()
     gmCampaigns = await getGMCampaigns()
-
-    console.log({characterCampaigns})
-    console.log({gmCampaigns})
   }
 </script>
 

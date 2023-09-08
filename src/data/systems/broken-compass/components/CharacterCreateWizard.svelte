@@ -7,7 +7,7 @@
   import BCCharacterCreateTags from "./create-character/BCCharacterCreateTags.svelte";
   import BCCharacterCreateExpertise from "./create-character/BCCharacterCreateExpertise.svelte";
   import banner from "$data/systems/broken-compass/assets/broken_compass_banner.webp"
-	import { rpgSystemBanner } from "$lib/stores";
+	import { headerBanner } from "$lib/stores";
 	import BCCharacterCreateGeneral from "./create-character/BCCharacterCreateGeneral.svelte";
 	import BCCHaracterCreateVerify from "./create-character/BCCharacterCreateVerify.svelte";
 	import { createNewCharacterByCharacterData, getCharacterStub } from "$models/character";
@@ -68,7 +68,7 @@
     skillIncrement
 
     // Set banner
-    rpgSystemBanner.set(banner)
+    headerBanner.set(banner)
   })
 
 

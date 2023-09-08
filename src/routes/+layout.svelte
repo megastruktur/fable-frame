@@ -21,8 +21,8 @@
 
 	import { fade } from "svelte/transition"
 	import CharacterNotesDrawer from "$lib/components/character-notes/CharacterNotesDrawer.svelte";
-	import { rpgSystemBanner } from "$lib/stores"
-	import { onDestroy } from "svelte"
+	import { headerBanner } from "$lib/stores"
+	import { onDestroy, onMount } from "svelte"
 	
 	const drawerSettings: DrawerSettings = {
 		id: 'navbar',
@@ -33,16 +33,17 @@
 	inject({ mode: dev ? 'development' : 'production' });
 
 	export let data
+	let bannerUrl: string 
 
-	rpgSystemBanner.set("")
-	let bannerUrl: string = ""
-	const unsubscriberpgSystemBanner = rpgSystemBanner.subscribe((banner: string) => {
+	const unsubscribeheaderBanner = headerBanner.subscribe((banner: string) => {
 		bannerUrl = banner
 	})
 
 	onDestroy(() => {
-		unsubscriberpgSystemBanner()
+		unsubscribeheaderBanner()
 	})
+
+	$: data.pathname, headerBanner.set("")
 </script>
 
 <Modal />
@@ -55,40 +56,43 @@
 	{/if}
 </Drawer>
 <!-- App Shell -->
-<AppShell regionPage="relative">
 
-	<!-- Sidebar -->
-	<svelte:fragment slot="pageHeader">
-
-		<AppBar>
-			<svelte:fragment slot="lead">
-				<button class="btn btn-sm mr-4" on:click={() => drawerStore.open(drawerSettings)}>
-					<span>
-							<svg viewBox="0 0 100 80" class="fill-token w-4 h-4">
-								<rect width="100" height="20" />
-								<rect y="30" width="100" height="20" />
-								<rect y="60" width="100" height="20" />
-							</svg>
-					</span>
-				</button>
-				<strong class="text-xl uppercase optima-regular">Fable Frame (WIP) <span class="text-xs text-red-800">v0.4.4</span></strong>
-			</svelte:fragment>
-			<svelte:fragment slot="trail">
-				<a href="mailto:astrtomortis@gmail.com" class="btn"><Icon src={BsEnvelope} /></a>
-				<a href="https://github.com/megastruktur/fable-frame" class="btn"><Icon src={BsGithub} /></a>
-			</svelte:fragment>
-		</AppBar>
-	</svelte:fragment>
-
-	<!-- Page Route Content -->
-	{#key data.pathname}
-	<div class="px-4 pb-5 h-full page-content {bannerUrl ? "bg-surface-900" : "bg-none"} bg-blend-multiply bg-no-repeat bg-cover bg-top bg-fixed" style="background-image: url('{bannerUrl}')"
-		in:fade={{ duration: 300, delay: 300 }}
-		out:fade={{ duration: 300 }}
-		>
-		<slot />
-	</div>
-	{/key}
-</AppShell>
+<div class="w-full h-full {bannerUrl ? "bg-surface-900" : "bg-none"} bg-blend-multiply bg-no-repeat bg-cover bg-top bg-fixed" style="background-image: url('{bannerUrl}')">
+	<AppShell regionPage="relative">
+	
+		<!-- Sidebar -->
+		<svelte:fragment slot="pageHeader">
+	
+			<AppBar background="bg-surface-800/40">
+				<svelte:fragment slot="lead">
+					<button class="btn btn-sm mr-4" on:click={() => drawerStore.open(drawerSettings)}>
+						<span>
+								<svg viewBox="0 0 100 80" class="fill-token w-4 h-4">
+									<rect width="100" height="20" />
+									<rect y="30" width="100" height="20" />
+									<rect y="60" width="100" height="20" />
+								</svg>
+						</span>
+					</button>
+					<strong class="text-xl uppercase optima-regular">Fable Frame (WIP) <span class="text-xs text-red-800">v0.4.4</span></strong>
+				</svelte:fragment>
+				<svelte:fragment slot="trail">
+					<a href="mailto:astrtomortis@gmail.com" class="btn"><Icon src={BsEnvelope} /></a>
+					<a href="https://github.com/megastruktur/fable-frame" class="btn"><Icon src={BsGithub} /></a>
+				</svelte:fragment>
+			</AppBar>
+		</svelte:fragment>
+	
+		<!-- Page Route Content -->
+		{#key data.pathname}
+		<div class="px-4 pb-5 h-full page-content"
+			in:fade={{ duration: 300, delay: 300 }}
+			out:fade={{ duration: 300 }}
+			>
+			<slot />
+		</div>
+		{/key}
+	</AppShell>
+</div>
 
 <Toast />
