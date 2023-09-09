@@ -101,7 +101,7 @@
 
 </script>
 
-{#if $currentUser.id === $characterNotesStore.creator}
+{#if $currentUser?.id === $characterNotesStore.creator}
 <div class="m-4">
   <h2 class="h2 text-center">Character Notes</h2>
 
