@@ -10,6 +10,7 @@
 	import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton";
   import { crossfade } from "svelte/transition"
 	import { quintOut } from "svelte/easing";
+	import { currentUser } from "$lib/pocketbase";
 
   let characterNotesData: CharacterNote[]
   let isAddingNewNote = false
@@ -100,6 +101,7 @@
 
 </script>
 
+{#if $currentUser.id === $characterNotesStore.creator}
 <div class="m-4">
   <h2 class="h2 text-center">Character Notes</h2>
 
@@ -161,3 +163,4 @@
     {/if}
   </div>
 </div>
+{/if}

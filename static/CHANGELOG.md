@@ -1,3 +1,9 @@
+### 0.5.0
+- Feature: Campaign
+- UI/UX: Character campaign banner
+- UI/UX: No Edit Character and Notes buttons for non-creator
+- UI/UX: Minor tweaks
+
 ### 0.4.4 Aug 30, 2023
 - Bugfix: Skill calculation on BC creation
 - UI/UX: BC Character creation multiple fixes

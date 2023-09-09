@@ -15,6 +15,8 @@
 	import MediaQuery, { createMediaStore } from "svelte-media-queries";
 	import { getCharacterNotesByCharacterId } from "$models/character_notes";
 	import { getCampaignImage } from "$models/campaign";
+	import { currentUser } from "$lib/pocketbase";
+	import { goto } from "$app/navigation";
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -29,8 +31,12 @@
   let tabsContent: { [key: string]: Field[] } = {general: []}
   let tabs: {[key: string]: Field}
   
-
   async function getData() {
+
+    // Redirect to login if not logged in
+    if ($currentUser === null) {
+      goto("/login")
+    }
 
     // @todo Think about preloading character via server instead as it loads as undefined first.
     $characterStore = (await getCharacter($page.params.slug, {expand: "rpgSystem,campaign"}))
@@ -67,45 +73,6 @@
       editMode.set(false)
     }
   }
-
-  // onMount(async () => {
-
-
-  //   // @todo Think about preloading character via server instead as it loads as undefined first.
-  //   $characterStore = (await getCharacter($page.params.slug, {expand: "rpgSystem,campaign"}))
-
-  //   if ($characterStore.expand.campaign !== undefined) {
-
-  //     campaign = $characterStore.expand.campaign
-  //     let campaignImage = getCampaignImage(campaign)
-
-  //     if (campaignImage !== "") {
-  //       headerBanner.set(campaignImage)
-  //     }
-  //   }
-
-  //   // Load Character Notes
-  //   $characterNotesStore = (await getCharacterNotesByCharacterId($page.params.slug))
-
-  //   characterName = $characterStore.name
-  //   characterId = $characterStore.id
-
-  //   // Dynamically load component
-  //   if ($characterStore.expand.rpgSystem) {
-  //     CharacterSheet = (await import(`../../../data/systems/${$characterStore.expand.rpgSystem.identifier}/components/CharacterSheet.svelte`)).default
-
-  //     const compendiumFieldsRaw = $characterStore.expand.rpgSystem.data.fields.compendium
-
-  //     compendiumFieldsRaw.map((field: Field) => {
-  //       if (!compendiumFields[field.type]) {
-  //         compendiumFields[field.type] = []
-  //       }
-  //       compendiumFields[field.type].push(field)
-  //     })
-
-  //     editMode.set(false)
-  //   }
-  // })
 
   const unsubscribeCharacterStore = characterStore.subscribe((character: CharactersResponse) => {
     
@@ -240,64 +207,68 @@
   </div>
 {:then}
 
+{#if $currentUser !== null}
   {#key $editMode}
-  <div
-    out:fade={{ duration: 500 }}
-    in:fade={{ duration: 500, delay: 500 }}
-    class="flex flex-col items-center mb-3"
-    >
-    <div class="mt-3">
-      <CharacterAvatar characterName={$characterStore.name} characterId={characterId} avatarUrl={characterAvatarUrl} editMode={$editMode} />
-    </div>
+    <div
+      out:fade={{ duration: 500 }}
+      in:fade={{ duration: 500, delay: 500 }}
+      class="flex flex-col items-center mb-3"
+      >
+      <div class="mt-3">
+        <CharacterAvatar characterName={$characterStore.name} characterId={characterId} avatarUrl={characterAvatarUrl} editMode={$editMode} />
+      </div>
 
-    <h1 class="h2 my-3">
-      {#if $editMode}
-        <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
-      {:else}
-        <span>{characterName}</span>
-      {/if}
-    </h1>
+      <h1 class="h2 my-3">
+        {#if $editMode}
+          <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
+        {:else}
+          <span>{characterName}</span>
+        {/if}
+      </h1>
 
-    <hr />
+      <hr />
 
-    <div class="flex items-center justify-center mt-4">
-      <button class="btn uppercase {$editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{$editMode ? "cancel" : "edit"}</button>
-      <!-- cancel edit button -->
-      {#if $editMode}
-        <button class="btn uppercase variant-filled-success ml-3" on:click={saveChanges}>save</button>
-      {/if}
-      <button class="btn variant-filled-warning ml-3" on:click={openCharacterNotesDrawer}>notes</button>
-    </div>
-
-    <!-- Character Sheet -->
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <div class="mt-4 w-full">
-      {#if CharacterSheet}
-        <MediaQuery query='(max-width: 1200px)' let:matches>
-
-          <!-- Tabs -->
-          {#if matches}
-          <div class="flex flex-wrap justify-center mb-2">
-            {#each Object.keys(tabs) as tabName}
-            <button
-              class="btn btn-sm {tabName === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
-              on:click|preventDefault={() => activeTabName = tabName}
-              >{tabs[tabName].label}</button>
-            {/each}
-          </div>
+      {#if $currentUser.id === $characterStore.creator}
+        <div class="flex items-center justify-center mt-4">
+          <button class="btn uppercase {$editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{$editMode ? "cancel" : "edit"}</button>
+          <!-- cancel edit button -->
+          {#if $editMode}
+            <button class="btn uppercase variant-filled-success ml-3" on:click={saveChanges}>save</button>
           {/if}
-
-          <!-- Character Sheet content -->
-          {#if $characterStore !== undefined}
-
-          <div class="flex flex-wrap justify-center">
-            <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={$editMode}/>
-          </div>
-          {/if}
-
-        </MediaQuery>
+          <button class="btn variant-filled-warning ml-3" on:click={openCharacterNotesDrawer}>notes</button>
+        </div>
       {/if}
+
+      <!-- Character Sheet -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div class="mt-4 w-full">
+        {#if CharacterSheet}
+          <MediaQuery query='(max-width: 1200px)' let:matches>
+
+            <!-- Tabs -->
+            {#if matches}
+            <div class="flex flex-wrap justify-center mb-2">
+              {#each Object.keys(tabs) as tabName}
+              <button
+                class="btn btn-sm {tabName === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
+                on:click|preventDefault={() => activeTabName = tabName}
+                >{tabs[tabName].label}</button>
+              {/each}
+            </div>
+            {/if}
+
+            <!-- Character Sheet content -->
+            {#if $characterStore !== undefined}
+
+            <div class="flex flex-wrap justify-center">
+              <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={$editMode}/>
+            </div>
+            {/if}
+
+          </MediaQuery>
+        {/if}
+      </div>
     </div>
-  </div>
-  {/key}
+    {/key}
+  {/if}
 {/await}
