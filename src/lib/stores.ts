@@ -181,4 +181,4 @@ function createCharacterNotesStore() {
 }
 export const characterNotesStore = createCharacterNotesStore();
 
-export const headerBanner = writable();
+export const headerBanner = writable("");
