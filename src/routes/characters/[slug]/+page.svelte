@@ -247,7 +247,7 @@
     class="flex flex-col items-center mb-3"
     >
     <div class="mt-3">
-      <CharacterAvatar characterId={characterId} avatarUrl={characterAvatarUrl} editMode={$editMode} />
+      <CharacterAvatar characterName={$characterStore.name} characterId={characterId} avatarUrl={characterAvatarUrl} editMode={$editMode} />
     </div>
 
     <h1 class="h2 my-3">
