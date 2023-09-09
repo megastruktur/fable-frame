@@ -1,17 +1,76 @@
 <!-- Campaigns Page -->
 <script lang="ts">
 	import CampaignCard from '$lib/components/campaign/CampaignCard.svelte';
-import type { CampaignResponse } from '$lib/pocketbase-types';
-	import { getGMCampaigns, getCharacterCampaigns } from '$models/campaign';
-	import { ProgressRadial } from '@skeletonlabs/skeleton';
+  import type { CampaignResponse } from '$lib/pocketbase-types';
+	import { toastShow } from '$lib/toast';
+	import { getGMCampaigns, getCharacterCampaigns, deleteCampaign } from '$models/campaign';
+	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, modalStore } from '@skeletonlabs/skeleton';
+	import { flip } from 'svelte/animate';
+	import { quintOut } from 'svelte/easing';
+	import { crossfade } from 'svelte/transition';
 
   let gmCampaigns: CampaignResponse[]
   let characterCampaigns: CampaignResponse[]
+  let operationsOnCampaignId: string = ""
+
+
+  const campaignOperationsPopup: PopupSettings = {
+		event: 'focus-click',
+		target: "campaignOperationsPopup",
+		placement: 'bottom',
+		closeQuery: '.list-option'
+	};
+
+  // Animations
+	const [send, receive] = crossfade({
+		duration: (d) => Math.sqrt(d * 200),
+
+		fallback(node, params) {
+			const style = getComputedStyle(node);
+			const transform = style.transform === 'none' ? '' : style.transform;
+
+			return {
+				duration: 300,
+				easing: quintOut,
+				css: (t) => `
+					transform: ${transform} scale(${t});
+					opacity: ${t}
+				`
+			};
+		}
+	});
 
   async function getData() {
     characterCampaigns = await getCharacterCampaigns()
     gmCampaigns = await getGMCampaigns()
   }
+
+  function deleteCampaignPrompt() {
+
+    const campaign = gmCampaigns.find(c => c.id === operationsOnCampaignId)
+
+    if (campaign !== undefined) {
+
+      const modal: ModalSettings = {
+        type: 'confirm',
+        title: 'Please Confirm',
+        body: `Are you sure you want to remove campaign <span class="text-error-900">${campaign.name}</span>? This action cannot be undone.`,
+        response: async (r: boolean) => {
+          if (r === true) {
+  
+            await deleteCampaign(campaign.id)
+            gmCampaigns = gmCampaigns.filter(c => c.id !== campaign.id)
+            characterCampaigns = characterCampaigns.filter(c => c.id !== campaign.id)
+  
+            toastShow(`Campaign <span class="text-error-900">${campaign.name}</span> has been removed`)
+  
+          }
+        }
+      };
+      modalStore.trigger(modal);
+    }
+  }
+
 </script>
 
 <div class="flex flex-col">
@@ -26,8 +85,22 @@ import type { CampaignResponse } from '$lib/pocketbase-types';
       <h2 class="h2 text-center my-6">Game Master in</h2>
 
       <div class="flex flex-wrap justify-center">
-        {#each gmCampaigns as gc}
-          <CampaignCard campaign={gc} classes="m-3" />
+        {#each gmCampaigns as gc(gc.id)}
+          <div class="relative"
+            animate:flip
+            in:receive={{ key: gc.id }}
+            out:send={{ key: gc.id }}
+          >
+            <CampaignCard campaign={gc} classes="m-3" />
+
+            <!-- Campaign Operations -->
+            <button
+              class="btn-icon variant-ghost-secondary absolute right-2 top-2"
+              on:click={() => operationsOnCampaignId = gc.id}
+              use:popup={campaignOperationsPopup}
+            >⋮</button>
+
+          </div>
         {/each}
       </div>
     {/if}
@@ -36,10 +109,26 @@ import type { CampaignResponse } from '$lib/pocketbase-types';
       <h2 class="h2 text-center my-6">Play in</h2>
 
       <div class="flex flex-wrap justify-center">
-        {#each characterCampaigns as cc}
+        {#each characterCampaigns as cc(cc.id)}
+        <div
+					animate:flip
+					in:receive={{ key: cc.id }}
+					out:send={{ key: cc.id }}
+          >
           <CampaignCard campaign={cc} classes="m-3" />
+        </div>
         {/each}
       </div>
     {/if}
 	{/await}
+
+  <!-- Operations Popup -->
+  <div class="card w-48 shadow-xl py-2" data-popup="campaignOperationsPopup">
+    <ul class="list-nav px-2">
+      <li class="mb-2"><a href="/campaigns/{operationsOnCampaignId}/edit">Edit</a></li>
+      <li>
+        <a class="bg-error-900" href="/" on:click|preventDefault={deleteCampaignPrompt}>Remove</a></li>
+    </ul>
+    <div class="arrow bg-surface-100-800-token" />
+  </div>
 </div>

@@ -60,6 +60,7 @@ export type CampaignRecord = {
 	image?: string
 	expand?: {
 		rpgSystem: RpgSystemsResponse
+		"characters(campaign)": CharactersResponse[]
 	}
 }
 

@@ -1,13 +1,13 @@
 import { pb } from "$lib/pocketbase"
 import type { CampaignRecord, CampaignResponse, CharactersResponse } from "$lib/pocketbase-types.d"
-import { getAllCharacters } from "./character"
+import { getAllCharacters, updateCharacter } from "./character"
 
 export async function createCampaign(data: Partial<CampaignResponse>): Promise<CampaignResponse> {
   return await pb.collection("campaigns").create(data)
 }
 
-export async function getCampaign(id: string): Promise<CampaignResponse> {
-  return await pb.collection("campaigns").getOne(id)
+export async function getCampaign(id: string, queryParams = {}): Promise<CampaignResponse> {
+  return await pb.collection("campaigns").getOne(id, queryParams)
 }
 
 export async function updateCampaign(id: string, data: Partial<CampaignRecord>): Promise<CampaignResponse> {
@@ -15,6 +15,16 @@ export async function updateCampaign(id: string, data: Partial<CampaignRecord>):
 }
 
 export async function deleteCampaign(id: string) {
+
+  const campaignWithCharacters = await getCampaign(id, {
+    expand: `characters(campaign)`
+  })
+
+  campaignWithCharacters.expand["characters(campaign)"].forEach(async c => {
+    c.campaign = ""
+    await updateCharacter(c.id, c)
+  })
+
   await pb.collection("campaigns").delete(id)
 }
 
