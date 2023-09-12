@@ -1,12 +1,10 @@
 <script lang="ts">
-  import { characterStore, rpgSystemBanner } from "$lib/stores"
+  import { characterStore } from "$lib/stores"
 	import type { Field } from "$lib/types";
 	import CharacterSheetTab from '$lib/components/tabs/CharacterSheetTab.svelte';
 	import BcSkillsTab from './BCSkillsTab.svelte';
 	import BcFeelTab from "./BCFeelTab.svelte";
 	import BcGeneralTab from "./BCGeneralTab.svelte";
-  import banner from "$data/systems/broken-compass/assets/broken_compass_banner.webp"
-	import { onMount } from "svelte";
 
   export let matches: boolean
   export let tabsContent: { [key: string]: Field[] }
@@ -17,11 +15,6 @@
   function updateField(event: { detail: {field: Field, operation: string} }) {
     characterStore.setFieldValue(event.detail.field.id, event.detail.field.value)
   }
-
-
-  onMount(() => {
-    rpgSystemBanner.set(banner)
-  })
   
 </script>
 

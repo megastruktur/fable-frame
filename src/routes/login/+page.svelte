@@ -64,10 +64,14 @@
     {:else}
     
     
-    <h1 class="h1 m-auto my-3 flex">Login</h1>
+        <h1 class="h1 m-auto my-3 flex">Login</h1>
 
-    <hr class="w-full" />
-
-    <button class="btn variant-filled mt-3" on:click={googleLogin}><Icon src={BsGoogle} />oogle</button>
+        <button class="btn variant-filled mt-3" on:click={googleLogin}><Icon src={BsGoogle} />oogle</button>
+        <div class="text-center text-2xl my-6">OR</div>
+        <div>
+            <input class="input mt-2" type="text" placeholder="Username" bind:value={username} />
+            <input class="input mt-2" type="text" placeholder="Password" bind:value={password} />
+            <button class="btn mt-2 variant-filled-secondary" on:click={login}>Login</button>
+        </div>
     {/if}
 </div>

@@ -3,17 +3,20 @@
   import { page } from "$app/stores"
 	import { deleteCharacter, getCharacter, getCharacterAvatar, getCharacterTabs, updateCharacterWithHash } from "$models/character";
 	import { onMount, onDestroy } from "svelte";
-  import { characterStore, fieldErrors, editMode, characterNotesStore, rpgSystemBanner } from "$lib/stores"
+  import { characterStore, fieldErrors, editMode, characterNotesStore, headerBanner } from "$lib/stores"
 	import type { Field, FieldError } from "$lib/types";
 
-	import { type DrawerSettings, drawerStore } from "@skeletonlabs/skeleton";
-	import CharacterAvatar from "$lib/components/CharacterAvatar.svelte";
-	import type { CharactersResponse } from "$lib/pocketbase-types";
+	import { type DrawerSettings, drawerStore, ProgressBar } from "@skeletonlabs/skeleton";
+	import CharacterAvatar from "$lib/components/characters/CharacterAvatar.svelte";
+	import type { CampaignResponse, CharactersResponse } from "$lib/pocketbase-types";
 	import { toastShowError } from "$lib/toast";
 
   import { fade } from "svelte/transition"
 	import MediaQuery, { createMediaStore } from "svelte-media-queries";
 	import { getCharacterNotesByCharacterId } from "$models/character_notes";
+	import { getCampaignImage } from "$models/campaign";
+	import { currentUser } from "$lib/pocketbase";
+	import { goto } from "$app/navigation";
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -22,15 +25,31 @@
   } = {}
   let characterAvatarUrl: string = ""
   let characterId: string = ""
+  let campaign: CampaignResponse
 
   let activeTabName: string = "general"
   let tabsContent: { [key: string]: Field[] } = {general: []}
   let tabs: {[key: string]: Field}
   
-  onMount(async () => {
+  async function getData() {
+
+    // Redirect to login if not logged in
+    if ($currentUser === null) {
+      goto("/login")
+    }
 
     // @todo Think about preloading character via server instead as it loads as undefined first.
-    $characterStore = (await getCharacter($page.params.slug, {expand: "rpgSystem"}))
+    $characterStore = (await getCharacter($page.params.slug, {expand: "rpgSystem,campaign"}))
+
+    if ($characterStore.expand.campaign !== undefined) {
+
+      campaign = $characterStore.expand.campaign
+      let campaignImage = getCampaignImage(campaign)
+
+      if (campaignImage !== "") {
+        headerBanner.set(campaignImage)
+      }
+    }
 
     // Load Character Notes
     $characterNotesStore = (await getCharacterNotesByCharacterId($page.params.slug))
@@ -53,8 +72,7 @@
 
       editMode.set(false)
     }
-
-  })
+  }
 
   const unsubscribeCharacterStore = characterStore.subscribe((character: CharactersResponse) => {
     
@@ -167,7 +185,6 @@
     fieldErrors.reset()
     characterNotesStore.reset()
     characterStore.reset()
-    rpgSystemBanner.set("")
   }) //Stop events for calculation
 
 
@@ -184,63 +201,74 @@
 
 </script>
 
-{#key $editMode}
-<div
-  out:fade={{ duration: 500 }}
-  in:fade={{ duration: 500, delay: 500 }}
-  class="flex flex-col items-center mb-3"
-  >
-  <div class="mt-3">
-    <CharacterAvatar characterId={characterId} avatarUrl={characterAvatarUrl} editMode={$editMode} />
+{#await getData()}
+  <div class="flex justify-center">
+    <ProgressBar />
   </div>
+{:then}
 
-	<h1 class="h2 my-3">
-    {#if $editMode}
-      <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
-    {:else}
-      <span>{characterName}</span>
-    {/if}
-  </h1>
+{#if $currentUser !== null}
+  {#key $editMode}
+    <div
+      out:fade={{ duration: 500 }}
+      in:fade={{ duration: 500, delay: 500 }}
+      class="flex flex-col items-center mb-3"
+      >
+      <div class="mt-3">
+        <CharacterAvatar characterName={$characterStore.name} characterId={characterId} avatarUrl={characterAvatarUrl} editMode={$editMode} />
+      </div>
 
-  <hr />
-
-  <div class="flex items-center justify-center mt-4">
-    <button class="btn uppercase {$editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{$editMode ? "cancel" : "edit"}</button>
-    <!-- cancel edit button -->
-    {#if $editMode}
-      <button class="btn uppercase variant-filled-success ml-3" on:click={saveChanges}>save</button>
-    {/if}
-    <button class="btn variant-filled-warning ml-3" on:click={openCharacterNotesDrawer}>notes</button>
-  </div>
-
-  <!-- Character Sheet -->
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div class="mt-4 w-full">
-    {#if CharacterSheet}
-      <MediaQuery query='(max-width: 1200px)' let:matches>
-
-        <!-- Tabs -->
-        {#if matches}
-        <div class="flex flex-wrap justify-center mb-2">
-          {#each Object.keys(tabs) as tabName}
-          <button
-            class="btn btn-sm {tabName === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
-            on:click|preventDefault={() => activeTabName = tabName}
-            >{tabs[tabName].label}</button>
-          {/each}
-        </div>
+      <h1 class="h2 my-3">
+        {#if $editMode}
+          <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
+        {:else}
+          <span>{characterName}</span>
         {/if}
+      </h1>
 
-        <!-- Character Sheet content -->
-        {#if $characterStore !== undefined}
+      <hr />
 
-        <div class="flex flex-wrap justify-center">
-          <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={$editMode}/>
+      {#if $currentUser.id === $characterStore.creator}
+        <div class="flex items-center justify-center mt-4">
+          <button class="btn uppercase {$editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{$editMode ? "cancel" : "edit"}</button>
+          <!-- cancel edit button -->
+          {#if $editMode}
+            <button class="btn uppercase variant-filled-success ml-3" on:click={saveChanges}>save</button>
+          {/if}
+          <button class="btn variant-filled-warning ml-3" on:click={openCharacterNotesDrawer}>notes</button>
         </div>
-        {/if}
+      {/if}
 
-      </MediaQuery>
-    {/if}
-  </div>
-</div>
-{/key}
+      <!-- Character Sheet -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div class="mt-4 w-full">
+        {#if CharacterSheet}
+          <MediaQuery query='(max-width: 1200px)' let:matches>
+
+            <!-- Tabs -->
+            {#if matches}
+            <div class="flex flex-wrap justify-center mb-2">
+              {#each Object.keys(tabs) as tabName}
+              <button
+                class="btn btn-sm {tabName === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
+                on:click|preventDefault={() => activeTabName = tabName}
+                >{tabs[tabName].label}</button>
+              {/each}
+            </div>
+            {/if}
+
+            <!-- Character Sheet content -->
+            {#if $characterStore !== undefined}
+
+            <div class="flex flex-wrap justify-center">
+              <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={$editMode}/>
+            </div>
+            {/if}
+
+          </MediaQuery>
+        {/if}
+      </div>
+    </div>
+    {/key}
+  {/if}
+{/await}
