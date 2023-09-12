@@ -403,6 +403,14 @@
 				"type": "tag"
 			},
 			{
+				"data": { "type": "minus" },
+				"name": "wreck",
+				"group": "feel",
+				"label": "a wreck",
+				"description": "Disadvantage in any task. Find yourself a safe place to lick your wounds.",
+				"type": "tag"
+			},
+			{
 				"name": "action_hero",
 				"label": "Action Hero",
 				"group": "tag",
