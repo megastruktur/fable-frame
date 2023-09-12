@@ -3,7 +3,7 @@
 	import { getCompendiumFieldsByGroup, getRpgSystemFieldsByGroup } from "$lib/rpgSystemFieldsOperations";
 	import type { Field } from "$lib/types";
 	import { getRpgSystemByIdentifier } from "$models/rpg_system";
-	import { ProgressRadial, Step, Stepper } from "@skeletonlabs/skeleton";
+	import { ProgressRadial, Step, Stepper, type ModalSettings, modalStore } from "@skeletonlabs/skeleton";
   import BCCharacterCreateTags from "./create-character/BCCharacterCreateTags.svelte";
   import BCCharacterCreateExpertise from "./create-character/BCCharacterCreateExpertise.svelte";
   import banner from "$data/systems/broken-compass/assets/broken_compass_banner.webp"
@@ -61,6 +61,22 @@
 
   let characterStubDataInitial: CharactersResponse
   let characterStubData: CharactersResponse
+
+  // While true the "Complete" button is disabled
+  let creatingInProgress: boolean = false
+
+  const modalLoading: ModalSettings = {
+    type: 'component',
+    // Pass the component registry key as a string:
+    component: {
+        // Pass a reference to your custom component
+        ref: ProgressRadial,
+        // Add the component properties as key/value pairs
+        props: {
+          value: undefined
+        },
+      },
+  };
 
   onMount(() => {
     countSkillValue
@@ -149,6 +165,10 @@
 
   // Create a BC character
   async function createComplete() {
+
+    creatingInProgress = true
+
+    modalStore.trigger(modalLoading);
 
     characterStubData.name = characterName
 
@@ -452,7 +472,7 @@
           />
       </Step>
 
-      <Step>
+      <Step locked={creatingInProgress}>
         <svelte:fragment slot="header">Verify character</svelte:fragment>
         <BCCHaracterCreateVerify
         {characterName}
