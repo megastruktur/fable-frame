@@ -1,3 +1,6 @@
+### 0.6.0
+- UI/UX: Skeleton upgrade to v2
+
 ### 0.5.1
 - UI/UX: Campaign card is now a clickable link
 - UI/UX: Add Campaign button on Campaigns page

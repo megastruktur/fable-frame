@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { currentUser } from "$lib/pocketbase";
 	import LogoutButton from "./LogoutButton.svelte";
-	import { drawerStore } from '@skeletonlabs/skeleton';
+	import { getDrawerStore } from '@skeletonlabs/skeleton';
+
+	const drawerStore = getDrawerStore()
 
 	function drawerClose(): void {
 		drawerStore.close();

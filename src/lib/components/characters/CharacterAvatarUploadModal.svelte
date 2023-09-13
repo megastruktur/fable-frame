@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { characterStore } from "$lib/stores";
 	import { characterUpdateAvatar } from "$models/character";
-	import { FileDropzone, ProgressBar, toastStore, type ToastSettings, modalStore } from "@skeletonlabs/skeleton";
+	import { FileDropzone, ProgressBar, type ToastSettings, getToastStore, getModalStore } from "@skeletonlabs/skeleton";
 
   import Icon from "svelte-icons-pack";
   import BsUpload from "svelte-icons-pack/bs/BsUpload";
@@ -9,6 +9,9 @@
 
   export let characterId = ""
   export let parent: any;
+
+  const toastStore = getToastStore()
+  const modalStore = getModalStore()
 
   let files: FileList;
   let loading: boolean = false;

@@ -4,17 +4,18 @@
   import type { CampaignResponse } from '$lib/pocketbase-types';
 	import { toastShow } from '$lib/toast';
 	import { getGMCampaigns, getCharacterCampaigns, deleteCampaign } from '$models/campaign';
-	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, modalStore } from '@skeletonlabs/skeleton';
+	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, getModalStore } from '@skeletonlabs/skeleton';
 	import Icon from 'svelte-icons-pack';
 	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
 	import { crossfade } from 'svelte/transition';
 
+  const modalStore = getModalStore()
+
   let gmCampaigns: CampaignResponse[]
   let characterCampaigns: CampaignResponse[]
   let operationsOnCampaignId: string = ""
-
 
   const campaignOperationsPopup: PopupSettings = {
 		event: 'focus-click',

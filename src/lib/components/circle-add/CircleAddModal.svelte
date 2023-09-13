@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stepper, Step, ProgressRadial, modalStore } from "@skeletonlabs/skeleton";
+	import { Stepper, Step, ProgressRadial, getModalStore } from "@skeletonlabs/skeleton";
 	import FieldCreate from "./FieldCreate.svelte";
 	import { characterStore, fieldErrors } from "$lib/stores";
 
@@ -27,6 +27,8 @@
 
   // Modal parent.
   export let parent: any;
+
+  const modalStore = getModalStore()
 
   let validationFailed: boolean = true
 

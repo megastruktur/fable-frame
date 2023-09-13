@@ -5,12 +5,14 @@
 	import type { CampaignResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { getCampaignWithRpgSystem } from "$models/campaign";
 	import { getAllCharacters, updateCharacter } from "$models/character";
-	import { ProgressRadial, toastStore, type ToastSettings } from "@skeletonlabs/skeleton";
+	import { ProgressRadial, type ToastSettings, getToastStore } from "@skeletonlabs/skeleton";
 
   let rpgSystem: RpgSystemsResponse
   let campaign: CampaignResponse
   let characters: CharactersResponse[]
   let characterSelected: CharactersResponse
+
+  const toastStore = getToastStore()
 
   $: canComplete = characterSelected !== undefined
 
@@ -32,8 +34,6 @@
 
   async function sendCampaignRequest() {
 
-  
-    
     try {
 
       characterSelected.campaign = campaign.id

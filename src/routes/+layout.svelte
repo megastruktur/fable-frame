@@ -1,45 +1,47 @@
-<script lang='ts'>
-	import { dev } from "$app/environment"
-	import { inject } from "@vercel/analytics"
-	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
-  import { size } from '@floating-ui/dom';
-	import { storePopup, type DrawerSettings, Modal, Toast } from '@skeletonlabs/skeleton';
-	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow, size });
-	// The ordering of these imports is critical to your app working properly
-	import '@skeletonlabs/skeleton/themes/theme-crimson.css';
-	// If you have source.organizeImports set to true in VSCode, then it will auto change this ordering
-	import '@skeletonlabs/skeleton/styles/skeleton.css';
-	// Most of your app wide CSS should be put in this file
-	import '../app.postcss';
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
-	import Sidebar from '$lib/components/Sidebar.svelte';
-	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
+<script lang="ts">
+	import "../app.postcss";
+    import { dev } from "$app/environment"
+    import { inject } from "@vercel/analytics"
+    import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
+    import { size } from '@floating-ui/dom';
+    import { initializeStores, storePopup, type DrawerSettings, Modal, Toast, getDrawerStore, Drawer } from '@skeletonlabs/skeleton';
+    storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow, size });
+    // The ordering of these imports is critical to your app working properly
+    // import '@skeletonlabs/skeleton/themes/theme-crimson.css';
+    // Most of your app wide CSS should be put in this file
+    import '../app.postcss';
+    import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+    import Sidebar from '$lib/components/Sidebar.svelte';
 
-	import Icon from "svelte-icons-pack";
-	import BsGithub from "svelte-icons-pack/bs/BsGithub";
-	import BsEnvelope from "svelte-icons-pack/bs/BsEnvelope";
+    import Icon from "svelte-icons-pack";
+    import BsGithub from "svelte-icons-pack/bs/BsGithub";
+    import BsEnvelope from "svelte-icons-pack/bs/BsEnvelope";
 
-	import { fade } from "svelte/transition"
-	import CharacterNotesDrawer from "$lib/components/character-notes/CharacterNotesDrawer.svelte";
-	import { headerBanner } from "$lib/stores"
-	import { onDestroy, onMount } from "svelte"
-	
-	const drawerSettings: DrawerSettings = {
-		id: 'navbar',
-		width: 'w-50',
-	};
+    import { fade } from "svelte/transition"
+    import CharacterNotesDrawer from "$lib/components/character-notes/CharacterNotesDrawer.svelte";
+    import { headerBanner } from "$lib/stores"
+    import { onDestroy } from "svelte"
 
-	// Inject the Analytics functionality
-	inject({ mode: dev ? 'development' : 'production' });
+    initializeStores()
 
-	export let data
-	let bannerUrl: string 
+    const drawerStore = getDrawerStore()
 
-	const unsubscribeheaderBanner = headerBanner.subscribe((banner: string) => {
+    const drawerSettings: DrawerSettings = {
+			id: 'navbar',
+			width: 'w-50',
+		};
+
+    // Inject the Analytics functionality
+    inject({ mode: dev ? 'development' : 'production' });
+
+    export let data
+    let bannerUrl: string
+
+    const unsubscribeheaderBanner = headerBanner.subscribe((banner: string) => {
 		bannerUrl = banner
 	})
 
-	onDestroy(() => {
+    onDestroy(() => {
 		unsubscribeheaderBanner()
 	})
 
@@ -74,7 +76,7 @@
 								</svg>
 						</span>
 					</button>
-					<strong class="text-xl uppercase optima-regular">Fable Frame (WIP) <span class="text-xs text-red-800">v0.5.0</span></strong>
+					<strong class="text-xl uppercase optima-regular">Fable Frame (WIP) <span class="text-xs text-red-800">v0.6.0</span></strong>
 				</svelte:fragment>
 				<svelte:fragment slot="trail">
 					<a href="mailto:astrtomortis@gmail.com" class="btn"><Icon src={BsEnvelope} /></a>
@@ -95,4 +97,4 @@
 	</AppShell>
 </div>
 
-<Toast />
+<Toast></Toast>

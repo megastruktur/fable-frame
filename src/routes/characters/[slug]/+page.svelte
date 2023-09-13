@@ -1,12 +1,12 @@
 <!-- All Characters -->
 <script lang="ts">
   import { page } from "$app/stores"
-	import { deleteCharacter, getCharacter, getCharacterAvatar, getCharacterTabs, updateCharacterWithHash } from "$models/character";
-	import { onMount, onDestroy } from "svelte";
+	import { getCharacter, getCharacterAvatar, getCharacterTabs, updateCharacterWithHash } from "$models/character";
+	import { onDestroy } from "svelte";
   import { characterStore, fieldErrors, editMode, characterNotesStore, headerBanner } from "$lib/stores"
 	import type { Field, FieldError } from "$lib/types";
 
-	import { type DrawerSettings, drawerStore, ProgressBar } from "@skeletonlabs/skeleton";
+	import { type DrawerSettings, ProgressBar, getDrawerStore } from "@skeletonlabs/skeleton";
 	import CharacterAvatar from "$lib/components/characters/CharacterAvatar.svelte";
 	import type { CampaignResponse, CharactersResponse } from "$lib/pocketbase-types";
 	import { toastShowError } from "$lib/toast";
@@ -30,6 +30,8 @@
   let activeTabName: string = "general"
   let tabsContent: { [key: string]: Field[] } = {general: []}
   let tabs: {[key: string]: Field}
+
+  const drawerStore = getDrawerStore()
   
   async function getData() {
 

@@ -7,7 +7,7 @@
 	import BsPlus from "svelte-icons-pack/bs/BsPlus"
 	import BsX from "svelte-icons-pack/bs/BsX"
 	import BsPencil from "svelte-icons-pack/bs/BsPencil"
-	import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+	import { type ModalSettings, getModalStore } from "@skeletonlabs/skeleton";
   import { crossfade } from "svelte/transition"
 	import { quintOut } from "svelte/easing";
 	import { currentUser } from "$lib/pocketbase";
@@ -17,6 +17,8 @@
   let addingNewNoteText: string = ""
   let elm: any
   let editNoteId = ""
+
+  const modalStore = getModalStore()
 
   const [send, receive] = crossfade({
 		duration: (d) => Math.sqrt(d * 200),

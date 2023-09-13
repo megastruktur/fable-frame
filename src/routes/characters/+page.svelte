@@ -2,15 +2,16 @@
 <script lang="ts">
 	import type { CharactersResponse } from '$lib/pocketbase-types';
 	import { toastShow } from '$lib/toast';
-	import { cloneCharacter, deleteCharacter, getAllCharacters, getCharacterAvatar } from '$models/character';
-	import { ProgressRadial, type PopupSettings, popup, modalStore, type ModalSettings } from '@skeletonlabs/skeleton';
-	import { Avatar } from '@skeletonlabs/skeleton';
+	import { cloneCharacter, deleteCharacter, getAllCharacters } from '$models/character';
+	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, getModalStore } from '@skeletonlabs/skeleton';
 	import { flip } from 'svelte/animate';
 	import { crossfade, fade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import Icon from 'svelte-icons-pack';
 	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
 	import CharacterItem from '$lib/components/characters/CharacterItem.svelte';
+
+	const modalStore = getModalStore()
 
 	const charOperationsMenu: PopupSettings = {
 		event: 'focus-click',

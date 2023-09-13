@@ -1,12 +1,14 @@
 <script lang="ts">
 	import type { Field } from "$lib/types.d"
 	import { createEventDispatcher } from "svelte"
-	import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton"
+	import { type ModalSettings, getModalStore } from "@skeletonlabs/skeleton"
 
   export let field: Field
   export let classes: string = ""
   export let editable: boolean = true
   export let editMode: boolean = false
+
+  const modalStore = getModalStore()
 
   let fieldLabel: string = field.label || ""
 

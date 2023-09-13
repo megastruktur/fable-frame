@@ -1,11 +1,12 @@
 <script lang="ts">
 	import type { CampaignResponse } from "$lib/pocketbase-types"
-	import { characterStore } from "$lib/stores"
-	import { campaignUpdateImage } from "$models/campaign"
-	import { FileDropzone, ProgressBar, toastStore, type ToastSettings, modalStore } from "@skeletonlabs/skeleton"
-
+	import { campaignUpdateImage, getCampaignImage } from "$models/campaign"
+	import { FileDropzone, ProgressBar, type ToastSettings, getModalStore, getToastStore } from "@skeletonlabs/skeleton"
   import Icon from "svelte-icons-pack";
-  import BsUpload from "svelte-icons-pack/bs/BsUpload";
+  import BsUpload from "svelte-icons-pack/bs/BsUpload"
+
+  const modalStore = getModalStore()
+  const toastStore = getToastStore()
 
 
   export let campaign: CampaignResponse
@@ -27,7 +28,11 @@
 
       try {
         campaign = await campaignUpdateImage(campaign.id, formData)
+        const imageUrl = getCampaignImage(campaign)
         loading = false
+        if ($modalStore[0].response) {
+          $modalStore[0].response(imageUrl)
+        }
         modalStore.close()
         
       } catch (error) {
@@ -43,6 +48,7 @@
   }
 </script>
 
+{#if $modalStore[0]}
 <div class="w-modal-slim">
   {#if loading}
     <ProgressBar />
@@ -57,3 +63,4 @@
   {/if}
   <slot />
 </div>
+{/if}

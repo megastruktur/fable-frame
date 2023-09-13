@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { modalStore, type ModalSettings} from "@skeletonlabs/skeleton";
+	import { getModalStore, type ModalSettings} from "@skeletonlabs/skeleton";
 	import Icon from "svelte-icons-pack";
 	import BsPlus from "svelte-icons-pack/bs/BsPlus";
 	import CircleAddModal from "./CircleAddModal.svelte";
-	import { editMode } from "$lib/stores";
 
   export let group: string = "general";
   export let type: string = "";
@@ -12,6 +11,8 @@
   // Set empty if no compendium.
   export let compendium: string = "";
   export let compendiumGroup: string = "";
+
+  const modalStore = getModalStore()
 
   async function openModal() {
     
