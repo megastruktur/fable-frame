@@ -1,3 +1,6 @@
+### 0.5.1
+- UI/UX: Campaign card is now a clickable link
+
 ### 0.5.0
 - Feature: Campaign
 - UI/UX: Character campaign banner
