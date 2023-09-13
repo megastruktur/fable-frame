@@ -1,6 +1,7 @@
 ### 0.5.1
 - UI/UX: Campaign card is now a clickable link
 - UI/UX: Add Campaign button on Campaigns page
+- UI/UX: Minor UI tweaks
 
 ### 0.5.0
 - Feature: Campaign
