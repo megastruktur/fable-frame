@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Avatar, modalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+	import { Avatar, type ModalSettings, getModalStore } from "@skeletonlabs/skeleton";
 	import CampaignImageUploadModal from "./CampaignImageUploadModal.svelte";
   import Icon from "svelte-icons-pack"
   import BsPencil from "svelte-icons-pack/bs/BsPencil";
@@ -9,6 +9,8 @@
   export let campaign: CampaignResponse
 
   export let imageUrl: string = getCampaignImage(campaign)
+
+  const modalStore = getModalStore()
 
   async function openModal() {
     
@@ -25,11 +27,19 @@
           campaign: campaign
         },
       },
-      response: (r: string) => console.log('response:', r),
+      response: (r: string) => {
+
+        if (r !== undefined) {
+          console.log(r)
+          imageUrl = r
+        }
+      },
     };
 
     modalStore.trigger(modal)
   }
+
+  $: imageUrl
 
 </script>
 

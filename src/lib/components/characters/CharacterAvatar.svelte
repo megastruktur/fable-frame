@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Avatar, modalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+	import { Avatar, getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
 	import CharacterAvatarUploadModal from "./CharacterAvatarUploadModal.svelte";
   import Icon from "svelte-icons-pack"
   import BsPencil from "svelte-icons-pack/bs/BsPencil";
@@ -8,6 +8,8 @@
   export let characterId: string = ""
   export let characterName: string
   export let editMode: boolean = false
+
+  const modalStore = getModalStore()
 
   async function openModal() {
     

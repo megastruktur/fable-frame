@@ -1,6 +1,7 @@
-import { toastStore, type ToastSettings } from "@skeletonlabs/skeleton";
+import type { ToastSettings, ToastStore } from "@skeletonlabs/skeleton";
 
-export function toastShow(message: string) {
+export function toastShow(message: string, toastStore: ToastStore) {
+
   const t: ToastSettings = {
     message: message,
     timeout: 5000
@@ -9,7 +10,8 @@ export function toastShow(message: string) {
   toastStore.trigger(t)
 }
 
-export function toastShowError(message: string) {
+export function toastShowError(message: string, toastStore: ToastStore) {
+
   const t: ToastSettings = {
     message: message,
     background: "bg-error-400 z-50",

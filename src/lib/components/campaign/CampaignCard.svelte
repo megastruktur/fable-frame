@@ -13,16 +13,12 @@
 
 </script>
 
-<div
-  class="card w-96 shadow-xl card-hover overflow-hidden {classes} bg-contain h-96 relative bg-no-repeat"
-  style="background-image: url('{campaignImage}')">
-  <a
-    href="/campaigns/{campaign.id}"
-    >
-  
-    <div class="p-4 space-y-4 bg-primary-900/70 w-full bottom-0 absolute">
-      <h3 class="h3">{campaign.name}</h3>
-      <article>{campaign.description}</article>
-    </div>
-  </a>
-</div>
+<a
+  class="block card w-96 h-96 shadow-xl card-hover overflow-hidden {classes} bg-cover bg-center relative bg-no-repeat"
+  style="background-image: url('{campaignImage}')"
+  href="/campaigns/{campaign.id}">
+  <div class="p-4 bg-primary-900/70 w-full bottom-0 absolute h-1/4">
+    <h3 class="h3 text-center">{campaign.name}</h3>
+    <p class="mt-1 blo">{campaign.description}</p>
+  </div>
+</a>

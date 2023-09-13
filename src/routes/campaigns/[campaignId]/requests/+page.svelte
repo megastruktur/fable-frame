@@ -3,12 +3,14 @@
   import { page } from "$app/stores"
 	import type { CharactersResponse } from "$lib/pocketbase-types";
 	import { getCampaignCharacterRequests } from "$models/campaign";
-	import { ProgressRadial, toastStore, type ToastSettings } from "@skeletonlabs/skeleton";
+	import { ProgressRadial, type ToastSettings, getToastStore } from "@skeletonlabs/skeleton";
 	import CharacterItem from "$lib/components/characters/CharacterItem.svelte";
 	import { updateCharacter } from "$models/character";
 
   let characters: CharactersResponse[]
   let characterSelected: CharactersResponse
+
+  const toastStore = getToastStore()
 
   async function getData() {
     characters = await getCampaignCharacterRequests($page.params.campaignId)

@@ -2,12 +2,14 @@
 	import type { Field } from "$lib/types";
 
   import { createEventDispatcher, onMount } from "svelte"
-	import { modalStore, type ModalSettings } from "@skeletonlabs/skeleton"
+	import { type ModalSettings, getModalStore } from "@skeletonlabs/skeleton"
 
   export let field: Field
   export let classes: string = ""
   export let editable: boolean = true
   export let editMode: boolean = false
+
+  const modalStore = getModalStore()
 
   const dispatch = createEventDispatcher()
 

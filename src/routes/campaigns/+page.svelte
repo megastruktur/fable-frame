@@ -4,15 +4,19 @@
   import type { CampaignResponse } from '$lib/pocketbase-types';
 	import { toastShow } from '$lib/toast';
 	import { getGMCampaigns, getCharacterCampaigns, deleteCampaign } from '$models/campaign';
-	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, modalStore } from '@skeletonlabs/skeleton';
+	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, getModalStore, getToastStore } from '@skeletonlabs/skeleton';
+	import Icon from 'svelte-icons-pack';
+	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
 	import { flip } from 'svelte/animate';
 	import { quintOut } from 'svelte/easing';
 	import { crossfade } from 'svelte/transition';
 
+  const modalStore = getModalStore()
+  const toastStore = getToastStore()
+
   let gmCampaigns: CampaignResponse[]
   let characterCampaigns: CampaignResponse[]
   let operationsOnCampaignId: string = ""
-
 
   const campaignOperationsPopup: PopupSettings = {
 		event: 'focus-click',
@@ -62,7 +66,7 @@
             gmCampaigns = gmCampaigns.filter(c => c.id !== campaign.id)
             characterCampaigns = characterCampaigns.filter(c => c.id !== campaign.id)
   
-            toastShow(`Campaign <span class="text-error-900">${campaign.name}</span> has been removed`)
+            toastShow(`Campaign <span class="text-error-900">${campaign.name}</span> has been removed`, toastStore)
   
           }
         }
@@ -81,10 +85,10 @@
       <ProgressRadial value={undefined} />
     </div>
 	{:then}
-    {#if gmCampaigns.length > 0}
-      <h2 class="h2 text-center my-6">Game Master in</h2>
+    <h2 class="h2 text-center my-6">Game Master in</h2>
+    <div class="flex flex-wrap justify-center">
+      {#if gmCampaigns.length > 0}
 
-      <div class="flex flex-wrap justify-center">
         {#each gmCampaigns as gc(gc.id)}
           <div class="relative"
             animate:flip
@@ -102,8 +106,14 @@
 
           </div>
         {/each}
-      </div>
-    {/if}
+      {/if}
+      <a
+        class="card w-96 shadow-xl card-hover overflow-hidden bg-contain h-96 m-3 flex items-center justify-center"
+        href="/campaigns/create">
+        <Icon className="flex" size="100" color="" src={BsPlus} />
+      </a>
+    </div>
+
 
     {#if characterCampaigns.length > 0}
       <h2 class="h2 text-center my-6">Play in</h2>

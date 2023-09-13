@@ -3,7 +3,7 @@
 	import { getCompendiumFieldsByGroup, getRpgSystemFieldsByGroup } from "$lib/rpgSystemFieldsOperations";
 	import type { Field } from "$lib/types";
 	import { getRpgSystemByIdentifier } from "$models/rpg_system";
-	import { ProgressRadial, Step, Stepper, type ModalSettings, modalStore } from "@skeletonlabs/skeleton";
+	import { ProgressRadial, Step, Stepper, type ModalSettings, getModalStore } from "@skeletonlabs/skeleton";
   import BCCharacterCreateTags from "./create-character/BCCharacterCreateTags.svelte";
   import BCCharacterCreateExpertise from "./create-character/BCCharacterCreateExpertise.svelte";
   import banner from "$data/systems/broken-compass/assets/broken_compass_banner.webp"
@@ -19,6 +19,8 @@
 	import { goto } from "$app/navigation";
 
   let rpgSystem: RpgSystemsResponse
+
+  const modalStore = getModalStore()
 
   // Available from RPG system
   let tagsAvailable: Field[]
