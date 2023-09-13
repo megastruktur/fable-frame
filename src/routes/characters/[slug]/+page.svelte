@@ -18,6 +18,8 @@
 	import { currentUser } from "$lib/pocketbase";
 	import { goto } from "$app/navigation";
 
+  const toastStore = getToastStore()
+
   let CharacterSheet: any
   let characterName: string = ""
   let compendiumFields: {
@@ -123,7 +125,7 @@
     if (errors.length > 0) {
       errors.forEach((fieldError: FieldError) => {
         let message = `${fieldError.fieldId !== "" ? "Field " + fieldError.fieldId + ": " : ""}` + fieldError.message
-        toastShowError(message)
+        toastShowError(message, toastStore)
       })
 
       // Reset the store after showing errors.

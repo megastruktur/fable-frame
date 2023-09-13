@@ -5,8 +5,11 @@
 	import type { CampaignResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { headerBanner } from "$lib/stores";
 	import { getCampaignCharacters, getCampaignImage, getCampaignWithRpgSystem } from "$models/campaign"
-	import { ProgressRadial } from "@skeletonlabs/skeleton"
-	import { onMount, onDestroy } from "svelte"
+	import { ProgressRadial, getToastStore } from "@skeletonlabs/skeleton"
+  import { clipboard } from '@skeletonlabs/skeleton'
+	import { toastShow } from "$lib/toast";
+
+  const toastStore = getToastStore()
 
   let campaign: CampaignResponse
   let rpgSystem: RpgSystemsResponse
@@ -46,6 +49,7 @@
     <div class="flex flex-wrap justify-center">
       <a class="btn variant-ghost-warning mx-3" href="/campaigns/{$page.params.campaignId}/edit">EDIT</a>
       <a class="btn variant-ghost-secondary mx-3" href="/campaigns/{$page.params.campaignId}/requests">CAMPAIGN REQUESTS</a>
+      <button class="btn variant-ghost-success mx-3" use:clipboard={`${$page.url.origin}/campaigns/${$page.params.campaignId}/request`} on:click={() => toastShow("Invite link copied", toastStore)}>INVITE</button>
     </div>
     {/if}
 

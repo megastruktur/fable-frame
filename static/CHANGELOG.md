@@ -1,5 +1,7 @@
 ### 0.6.0
 - UI/UX: Skeleton upgrade to v2
+- UI/UX: Adds copy invite link button to campaign page
+- UI/UX: Fixes
 
 ### 0.5.1
 - UI/UX: Campaign card is now a clickable link

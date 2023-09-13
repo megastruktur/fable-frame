@@ -4,7 +4,7 @@
   import type { CampaignResponse } from '$lib/pocketbase-types';
 	import { toastShow } from '$lib/toast';
 	import { getGMCampaigns, getCharacterCampaigns, deleteCampaign } from '$models/campaign';
-	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, getModalStore } from '@skeletonlabs/skeleton';
+	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, getModalStore, getToastStore } from '@skeletonlabs/skeleton';
 	import Icon from 'svelte-icons-pack';
 	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
 	import { flip } from 'svelte/animate';
@@ -12,6 +12,7 @@
 	import { crossfade } from 'svelte/transition';
 
   const modalStore = getModalStore()
+  const toastStore = getToastStore()
 
   let gmCampaigns: CampaignResponse[]
   let characterCampaigns: CampaignResponse[]
@@ -65,7 +66,7 @@
             gmCampaigns = gmCampaigns.filter(c => c.id !== campaign.id)
             characterCampaigns = characterCampaigns.filter(c => c.id !== campaign.id)
   
-            toastShow(`Campaign <span class="text-error-900">${campaign.name}</span> has been removed`)
+            toastShow(`Campaign <span class="text-error-900">${campaign.name}</span> has been removed`, toastStore)
   
           }
         }

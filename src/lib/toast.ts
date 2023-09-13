@@ -1,8 +1,6 @@
-import { type ToastSettings, getToastStore } from "@skeletonlabs/skeleton";
+import type { ToastSettings, ToastStore } from "@skeletonlabs/skeleton";
 
-export function toastShow(message: string) {
-
-  const toastStore = getToastStore()
+export function toastShow(message: string, toastStore: ToastStore) {
 
   const t: ToastSettings = {
     message: message,
@@ -12,9 +10,7 @@ export function toastShow(message: string) {
   toastStore.trigger(t)
 }
 
-export function toastShowError(message: string) {
-
-  const toastStore = getToastStore()
+export function toastShowError(message: string, toastStore: ToastStore) {
 
   const t: ToastSettings = {
     message: message,
