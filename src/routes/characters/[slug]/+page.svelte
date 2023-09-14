@@ -6,7 +6,7 @@
   import { characterStore, fieldErrors, editMode, characterNotesStore, headerBanner } from "$lib/stores"
 	import type { Field, FieldError } from "$lib/types";
 
-	import { type DrawerSettings, ProgressBar, getDrawerStore } from "@skeletonlabs/skeleton";
+	import { type DrawerSettings, ProgressBar, getDrawerStore, getToastStore } from "@skeletonlabs/skeleton";
 	import CharacterAvatar from "$lib/components/characters/CharacterAvatar.svelte";
 	import type { CampaignResponse, CharactersResponse } from "$lib/pocketbase-types";
 	import { toastShowError } from "$lib/toast";
