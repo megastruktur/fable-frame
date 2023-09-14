@@ -1,3 +1,6 @@
+### 0.6.1
+- Bugfix: Toast store on character page import update
+
 ### 0.6.0
 - UI/UX: Skeleton upgrade to v2
 - UI/UX: Adds copy invite link button to campaign page
