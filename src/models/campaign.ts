@@ -1,6 +1,6 @@
 import { pb } from "$lib/pocketbase"
 import type { CampaignRecord, CampaignResponse, CharactersResponse } from "$lib/pocketbase-types.d"
-import { getAllCharacters, updateCharacter } from "./character"
+import { getAllCharacters, getMyCharacters, updateCharacter } from "./character"
 
 export async function createCampaign(data: Partial<CampaignResponse>): Promise<CampaignResponse> {
   return await pb.collection("campaigns").create(data)
@@ -42,7 +42,7 @@ export async function getCharacterCampaigns(): Promise<CampaignResponse[]> {
   const tCampaigns: {[id: string]: CampaignResponse} = {}
 
   try {
-    const charactersCampaigns = await getAllCharacters({
+    const charactersCampaigns = await getMyCharacters({
       expand: `campaign`
     })
 

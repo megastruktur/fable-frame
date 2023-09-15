@@ -70,7 +70,7 @@
         <div class="text-center text-2xl my-6">OR</div>
         <div>
             <input class="input mt-2" type="text" placeholder="Username" bind:value={username} />
-            <input class="input mt-2" type="text" placeholder="Password" bind:value={password} />
+            <input class="input mt-2" type="password" placeholder="Password" bind:value={password} />
             <button class="btn mt-2 variant-filled-secondary" on:click={login}>Login</button>
         </div>
     {/if}

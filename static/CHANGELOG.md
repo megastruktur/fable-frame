@@ -1,3 +1,11 @@
+### 0.6.2
+- Bugfix: Show only my characters on characters page
+- Bugfix: Campaign request only non-campaigned characters
+- Feature: Adds Campaign Notes functionality
+- Feature: Random field name when creating custom fields
+- UI/UX: Campaign link to Characters and Character pages
+- UI/UX: Minor fixes
+
 ### 0.6.1
 - Bugfix: Toast store on character page import update
 

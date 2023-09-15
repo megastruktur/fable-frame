@@ -2,7 +2,7 @@
 <script lang="ts">
 	import type { CharactersResponse } from '$lib/pocketbase-types';
 	import { toastShow } from '$lib/toast';
-	import { cloneCharacter, deleteCharacter, getAllCharacters } from '$models/character';
+	import { cloneCharacter, deleteCharacter, getMyCharacters } from '$models/character';
 	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, getModalStore, getToastStore } from '@skeletonlabs/skeleton';
 	import { flip } from 'svelte/animate';
 	import { crossfade, fade } from 'svelte/transition';
@@ -25,8 +25,8 @@
 	// Async load Characters and store in variable.
 	let myCharacters: CharactersResponse[]
 	async function loadMyCharacters() {
-		myCharacters = await getAllCharacters({
-			expand: 'rpgSystem'
+		myCharacters = await getMyCharacters({
+			expand: 'rpgSystem,campaign'
 		})
 	}
 
@@ -89,9 +89,7 @@
 
 <div class="flex flex-col" transition:fade>
 
-	<h1 class="text-3xl m-auto my-3">Your Characters</h1>
-	<hr />
-	<br />
+	<h1 class="text-3xl m-auto my-6">Your Characters</h1>
 
 	<!-- My Characters section -->
 	<div class="flex items-center justify-center flex-wrap">

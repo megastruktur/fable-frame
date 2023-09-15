@@ -52,12 +52,9 @@
   // If type is empty - list ONLY default types like Text, Tag, Counter and Etc.
 
   function createComplete() {
-
-    // Sanitize name. Make sure to rename the built in ones
-    //  as the validation won't allow duplicate names.
-    if (field.name === "" || field.name === field.type) {
-      field.name = field.label.toLocaleLowerCase().replace(/\s/g, '-')
-    }
+    
+    // Field name should be unique so make sure that's the case.
+    field.name = uuidv4()
     
     validateField()
     
