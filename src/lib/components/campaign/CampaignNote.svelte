@@ -59,7 +59,7 @@
 <div class="w-96 my-3 flex flex-wrap">
 
   {#if !editMode}
-    <div class="blockquote {isCreator ? "w-2/3" : ""} ">
+    <div class="blockquote not-italic {isCreator ? "w-2/3" : ""} ">
       {note}
     </div>
   {:else}
