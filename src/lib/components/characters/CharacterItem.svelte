@@ -18,5 +18,8 @@
     {#if character.expand && character.expand.rpgSystem}
       <article class="flex">{character.expand.rpgSystem.name}</article>
     {/if}
+    {#if character.expand?.campaign !== undefined}
+      <span>Campaign: <a href="/campaigns/{character.expand.campaign.id}">{character.expand.campaign.name}</a></span>
+    {/if}
   </span>
 </div>

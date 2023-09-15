@@ -89,6 +89,20 @@ export async function getMyCharacters(queryParams: any = {}): Promise<Characters
   return await pb.collection("characters").getFullList(queryParams)
 }
 
+/**
+ * Get current user's characters
+ * permissions are controlled by Pocketbase
+ * @param rpgSystemId 
+ * @returns 
+ */
+export async function getMyCharactersForSystemNoCampaign(rpgSystemId: string): Promise<CharactersResponse[]> {
+  const queryParams = {
+    filter: `creator="${pb.authStore.model?.id}" && rpgSystem="${rpgSystemId}"`
+  }
+  console.log(queryParams)
+  return await getAllCharacters(queryParams)
+}
+
 export async function getAllCharactersWithSystem(): Promise<CharactersResponse[]> {
   return await getAllCharacters({expand: "systemId"})
 }

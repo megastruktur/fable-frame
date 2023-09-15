@@ -26,7 +26,7 @@
 	let myCharacters: CharactersResponse[]
 	async function loadMyCharacters() {
 		myCharacters = await getMyCharacters({
-			expand: 'rpgSystem'
+			expand: 'rpgSystem,campaign'
 		})
 	}
 

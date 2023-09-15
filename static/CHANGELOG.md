@@ -1,5 +1,7 @@
 ### 0.6.2
 - Bugfix: Show only my characters on characters page
+- Bugfix: Campaign request only non-campaigned characters
+- UI/UX: Campaign link to Characters and Character pages
 - UI/UX: Minor fixes
 
 ### 0.6.1

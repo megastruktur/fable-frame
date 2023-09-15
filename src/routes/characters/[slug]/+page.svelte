@@ -222,15 +222,16 @@
         <CharacterAvatar characterName={$characterStore.name} characterId={characterId} avatarUrl={characterAvatarUrl} editMode={$editMode} />
       </div>
 
-      <h1 class="h2 my-3">
+      <h1 class="h2 my-3 items-center flex">
         {#if $editMode}
           <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
         {:else}
           <span>{characterName}</span>
+          {#if campaign !== undefined}
+            <a class="btn ml-3 variant-ghost-tertiary" href="/campaigns/{campaign.id}">{campaign.name}</a>
+          {/if}
         {/if}
       </h1>
-
-      <hr />
 
       {#if $currentUser.id === $characterStore.creator}
         <div class="flex items-center justify-center mt-4">
@@ -239,7 +240,7 @@
           {#if $editMode}
             <button class="btn uppercase variant-filled-success ml-3" on:click={saveChanges}>save</button>
           {/if}
-          <button class="btn variant-filled-warning ml-3" on:click={openCharacterNotesDrawer}>notes</button>
+          <button class="btn variant-filled-warning ml-3" on:click={openCharacterNotesDrawer}>NOTES</button>
         </div>
       {/if}
 

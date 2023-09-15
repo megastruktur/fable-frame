@@ -4,7 +4,7 @@
 	import CharacterItem from "$lib/components/characters/CharacterItem.svelte";
 	import type { CampaignResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { getCampaignWithRpgSystem } from "$models/campaign";
-	import { getMyCharacters, updateCharacter } from "$models/character";
+	import { getMyCharactersForSystemNoCampaign, updateCharacter } from "$models/character";
 	import { ProgressRadial, type ToastSettings, getToastStore } from "@skeletonlabs/skeleton";
 
   let rpgSystem: RpgSystemsResponse
@@ -24,7 +24,7 @@
   
       if (campaign !== undefined) {
         rpgSystem = campaign.expand.rpgSystem
-        characters = await getMyCharacters({ rpgSystem: rpgSystem.id })
+        characters = await getMyCharactersForSystemNoCampaign(rpgSystem.id)
       }
     }
     catch (error) {
