@@ -89,9 +89,7 @@
 
 <div class="flex flex-col" transition:fade>
 
-	<h1 class="text-3xl m-auto my-3">Your Characters</h1>
-	<hr />
-	<br />
+	<h1 class="text-3xl m-auto my-6">Your Characters</h1>
 
 	<!-- My Characters section -->
 	<div class="flex items-center justify-center flex-wrap">

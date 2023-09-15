@@ -1,5 +1,6 @@
 ### 0.6.2
 - Bugfix: Show only my characters on characters page
+- UI/UX: Minor fixes
 
 ### 0.6.1
 - Bugfix: Toast store on character page import update
