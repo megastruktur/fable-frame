@@ -2,18 +2,23 @@
   import { page } from "$app/stores"
 	import CharacterItem from "$lib/components/characters/CharacterItem.svelte"
 	import { currentUser } from "$lib/pocketbase";
-	import type { CampaignResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
+	import type { CampaignNotesResponse, CampaignResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { headerBanner } from "$lib/stores";
 	import { getCampaignCharacters, getCampaignImage, getCampaignWithRpgSystem } from "$models/campaign"
 	import { ProgressRadial, getToastStore } from "@skeletonlabs/skeleton"
   import { clipboard } from '@skeletonlabs/skeleton'
 	import { toastShow } from "$lib/toast";
+	import CampaignNoteAdd from "$lib/components/campaign/CampaignNoteAdd.svelte";
+	import { getCampaignNotes } from "$models/campaign_notes";
+	import CampaignNote from "$lib/components/campaign/CampaignNote.svelte";
 
   const toastStore = getToastStore()
 
   let campaign: CampaignResponse
+  let campaignNotes: CampaignNotesResponse[]
   let rpgSystem: RpgSystemsResponse
   let characters: CharactersResponse[]
+  let isUserGm: boolean = false
 
   async function loadData() {
 
@@ -23,6 +28,8 @@
   
       if (campaign) {
         rpgSystem = campaign.expand.rpgSystem
+        campaignNotes = await getCampaignNotes(campaign.id)
+        isUserGm = (campaign.creator === $currentUser?.id)
 
         headerBanner.set(getCampaignImage(campaign))
       }
@@ -32,6 +39,16 @@
     }
     catch (error) {
       // console.error(error)
+    }
+  }
+
+  async function campaignNoteAddedHandler() {
+    campaignNotes = await getCampaignNotes($page.params.campaignId)
+  }
+
+  function campaignNoteRemovedHandler(e: any) {
+    if (e.detail.campaignNoteId !== undefined) {
+      campaignNotes = campaignNotes.filter(note => note.id!== e.detail.campaignNoteId)
     }
   }
 
@@ -62,5 +79,18 @@
       </a>
       {/each}
     </div>
+    {#if isUserGm}
+      <CampaignNoteAdd campaignId={campaign.id} on:campaignNoteAdded={campaignNoteAddedHandler} />
+    {/if}
+
+    {#if campaignNotes !== undefined}
+    <div class="flex flex-col items-center my-6">
+      {#each campaignNotes as campaignNote(campaignNote.id)}
+        {#if !(!isUserGm && campaignNote.type === "gm")}
+        <CampaignNote {campaignNote} on:campaignNoteRemoved={campaignNoteRemovedHandler}/>
+        {/if}
+      {/each}
+    </div>
+    {/if}
   </div>
 {/await}

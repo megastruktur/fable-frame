@@ -61,6 +61,7 @@ export type CampaignRecord = {
 	expand?: {
 		rpgSystem: RpgSystemsResponse
 		"characters(campaign)": CharactersResponse[]
+		"campaign_notes(campaign)": CampaignNotesResponse[]
 	}
 }
 
