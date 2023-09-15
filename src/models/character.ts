@@ -69,11 +69,23 @@ export async function deleteCharacter(id: string) {
 }
 
 /**
- * Get current user's characters as permissions are controlled by Pocketbase
+ * Get current user's viewable characters
+ * permissions are controlled by Pocketbase
  * @param queryParams 
  * @returns 
  */
 export async function getAllCharacters(queryParams: any = {}): Promise<CharactersResponse[]> {
+  return await pb.collection("characters").getFullList(queryParams)
+}
+
+/**
+ * Get current user's characters
+ * permissions are controlled by Pocketbase
+ * @param queryParams 
+ * @returns 
+ */
+export async function getMyCharacters(queryParams: any = {}): Promise<CharactersResponse[]> {
+  queryParams.filter = `creator="${pb.authStore.model?.id}"`
   return await pb.collection("characters").getFullList(queryParams)
 }
 
