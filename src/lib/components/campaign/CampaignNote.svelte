@@ -4,6 +4,7 @@
 	import { toastShow } from "$lib/toast";
 	import { deleteCampaignNote, updateCampaignNotes } from "$models/campaign_notes";
 	import { SlideToggle, getModalStore, type ModalSettings, getToastStore } from "@skeletonlabs/skeleton";
+	import { marked } from "marked";
 	import { createEventDispatcher } from "svelte";
 	import Icon from "svelte-icons-pack";
   import BsPencil from "svelte-icons-pack/bs/BsPencil";
@@ -56,14 +57,14 @@
 
 </script>
 
-<div class="w-96 my-3 flex flex-wrap">
+<div class="w-96 md:w-100 my-3 flex flex-col">
 
   {#if !editMode}
-    <div class="blockquote not-italic {isCreator ? "w-2/3" : ""} ">
-      {note}
+    <div class="blockquote not-italic prose prose-invert">
+      {@html marked.parse(note)}
     </div>
   {:else}
-    <textarea class="textarea w-96 my-6" bind:value={note}></textarea>
+    <textarea class="textarea w-full my-6" bind:value={note}></textarea>
     <div class="flex items-center">
       <SlideToggle name="is-gm-note" bind:checked={isGmNote}>is GM-only?</SlideToggle>
       <button class="ml-6 btn variant-outline-primary" on:click={() => editMode = false}>Cancel</button>
@@ -72,11 +73,14 @@
   {/if}
 
   {#if isCreator && !editMode}
-  <button class="" on:click={() => editMode = true}>
-    <Icon src={BsPencil} />
-  </button>
-  <button class="ml-3" on:click={deleteNoteModal}>
-    <Icon src={BsTrash} />
-  </button>
+
+  <div class="my-3">
+    <button class="btn btn-icon btn-sm" on:click={() => editMode = true}>
+      <Icon src={BsPencil} />
+    </button>
+    <button class="ml-3" on:click={deleteNoteModal}>
+      <Icon src={BsTrash} />
+    </button>
+  </div>
   {/if}
 </div>

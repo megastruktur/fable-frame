@@ -11,6 +11,7 @@
   import { crossfade } from "svelte/transition"
 	import { quintOut } from "svelte/easing";
 	import { currentUser } from "$lib/pocketbase";
+	import { marked } from "marked";
 
   let characterNotesData: CharacterNote[]
   let isAddingNewNote = false
@@ -146,7 +147,7 @@
 
               <div>
                 <div class="text-sm">{new Date(note.date).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}</div>
-                <div class="h3">{note.note}</div>
+                <div class="prose prose-invert">{@html marked.parse(note.note)}</div>
               </div>
             {/if}
 
