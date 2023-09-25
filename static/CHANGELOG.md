@@ -1,5 +1,6 @@
 ### 0.6.3
 - UI/UX: Adds MD support for Character and Campaign Notes
+- Feature: Upgrade dependencies.
 
 ### 0.6.2
 - Bugfix: Show only my characters on characters page
