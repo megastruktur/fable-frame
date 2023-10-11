@@ -55,6 +55,11 @@ export type CampaignsRecord = {
 	image?: string
 	name: string
 	rpgSystem: RecordIdString
+	activeScene?: RecordIdString
+	expand?: {
+		"characters(campaign)": CharactersResponse[],
+		rpgSystem: RpgSystemsResponse
+	}
 }
 
 export type CharacterNotesRecord<Tdata = unknown> = {
@@ -79,7 +84,7 @@ export type CharactersRecord = {
 	rpgSystem: RecordIdString
 	expand?: {
 		rpgSystem?: RpgSystemsRecord,
-		campaign?: CampaignResponse,
+		campaign?: CampaignsResponse,
 	}
 }
 
@@ -106,6 +111,9 @@ export type ScenesRecord = {
 	secret_hash?: string
 	status?: number
 	weight?: number
+	expand?: {
+		campaign: CampaignsResponse
+	}
 }
 
 export type UsersRecord = {

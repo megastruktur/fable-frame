@@ -1,22 +1,22 @@
 import { pb } from "$lib/pocketbase"
-import type { CampaignRecord, CampaignResponse, CharactersResponse } from "$lib/pocketbase-types.d"
+import type { CampaignsRecord, CampaignsResponse } from "$lib/pocketbase-types.d"
 import { getAllCharacters, getMyCharacters, updateCharacter } from "./character"
 
-export async function createCampaign(data: Partial<CampaignResponse>): Promise<CampaignResponse> {
+export async function createCampaign(data: Partial<CampaignsResponse>): Promise<CampaignsResponse> {
   return await pb.collection("campaigns").create(data)
 }
 
-export async function getCampaign(id: string, queryParams = {}): Promise<CampaignResponse> {
+export async function getCampaign(id: string, queryParams = {}): Promise<CampaignsResponse> {
   return await pb.collection("campaigns").getOne(id, queryParams)
 }
 
-export async function updateCampaign(id: string, data: Partial<CampaignRecord>): Promise<CampaignResponse> {
+export async function updateCampaign(id: string, data: Partial<CampaignsRecord>): Promise<CampaignsResponse> {
   return await pb.collection("campaigns").update(id, data)
 }
 
 export async function deleteCampaign(id: string) {
 
-  const campaignWithCharacters = await getCampaign(id, {
+  const campaignWithCharacters: CampaignsResponse = await getCampaign(id, {
     expand: `characters(campaign)`
   })
 
@@ -28,7 +28,7 @@ export async function deleteCampaign(id: string) {
   await pb.collection("campaigns").delete(id)
 }
 
-export async function getAllCampaigns(queryParams = {}): Promise<CampaignResponse[]> {
+export async function getAllCampaigns(queryParams = {}): Promise<CampaignsResponse[]> {
   return await pb.collection("campaigns").getFullList(queryParams)
 }
 
@@ -36,10 +36,10 @@ export async function getAllCampaigns(queryParams = {}): Promise<CampaignRespons
  * Ge the list of campagins with current user as a Player.
  * @returns 
  */
-export async function getCharacterCampaigns(): Promise<CampaignResponse[]> {
+export async function getCharacterCampaigns(): Promise<CampaignsResponse[]> {
 
-  const campaigns: CampaignResponse[] = []
-  const tCampaigns: {[id: string]: CampaignResponse} = {}
+  const campaigns: CampaignsResponse[] = []
+  const tCampaigns: {[id: string]: CampaignsResponse} = {}
 
   try {
     const charactersCampaigns = await getMyCharacters({
@@ -69,7 +69,7 @@ export async function getCharacterCampaigns(): Promise<CampaignResponse[]> {
  * Get list of Campaigns with the current user as a GM.
  * @returns 
  */
-export async function getGMCampaigns(): Promise<CampaignResponse[]> {
+export async function getGMCampaigns(): Promise<CampaignsResponse[]> {
 
   if (pb.authStore.model?.id !== undefined) {
     return await getAllCampaigns({
@@ -82,7 +82,7 @@ export async function getGMCampaigns(): Promise<CampaignResponse[]> {
 }
 
 
-export async function getCampaignWithRpgSystem(id: string): Promise<CampaignResponse> {
+export async function getCampaignWithRpgSystem(id: string): Promise<CampaignsResponse> {
   return await pb.collection("campaigns").getOne(id, { expand: "rpgSystem" })
 }
 
@@ -98,11 +98,11 @@ export async function getCampaignCharacters(campaignId: string) {
   })
 }
 
-export async function campaignUpdateImage(campaignId: string, imageMultipart: any): Promise<CampaignResponse> {
+export async function campaignUpdateImage(campaignId: string, imageMultipart: any): Promise<CampaignsResponse> {
   return await pb.collection("campaigns").update(campaignId, imageMultipart);
 }
 
-export function getCampaignImage(campaign: CampaignResponse) {
+export function getCampaignImage(campaign: CampaignsResponse) {
   if (campaign.image)
     return pb.files.getUrl(campaign, campaign.image)
   else {

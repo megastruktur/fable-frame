@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { Avatar, type ModalSettings, getModalStore } from "@skeletonlabs/skeleton";
 	import CampaignImageUploadModal from "./CampaignImageUploadModal.svelte";
-  import Icon from "svelte-icons-pack"
   import BsPencil from "svelte-icons-pack/bs/BsPencil";
-	import type { CampaignResponse } from "$lib/pocketbase-types";
+	import type { CampaignsResponse } from "$lib/pocketbase-types";
 	import { getCampaignImage } from "$models/campaign";
 
-  export let campaign: CampaignResponse
+  const Icon = require("svelte-icons-pack").Icon
+
+  export let campaign: CampaignsResponse
 
   export let imageUrl: string = getCampaignImage(campaign)
 

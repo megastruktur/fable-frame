@@ -87,7 +87,7 @@
 	
 		<!-- Page Route Content -->
 		{#key data.pathname}
-		<div class="px-4 pb-5 h-full page-content"
+		<div class="pb-5 h-full page-content"
 			in:fade={{ duration: 300, delay: 300 }}
 			out:fade={{ duration: 300 }}
 			>

@@ -8,7 +8,7 @@
 
 	import { type DrawerSettings, ProgressBar, getDrawerStore, getToastStore } from "@skeletonlabs/skeleton";
 	import CharacterAvatar from "$lib/components/characters/CharacterAvatar.svelte";
-	import type { CampaignResponse, CharactersResponse } from "$lib/pocketbase-types";
+	import type { CampaignsResponse, CharactersResponse } from "$lib/pocketbase-types";
 	import { toastShowError } from "$lib/toast";
 
   import { fade } from "svelte/transition"
@@ -27,7 +27,7 @@
   } = {}
   let characterAvatarUrl: string = ""
   let characterId: string = ""
-  let campaign: CampaignResponse
+  let campaign: CampaignsResponse
 
   let activeTabName: string = "general"
   let tabsContent: { [key: string]: Field[] } = {general: []}

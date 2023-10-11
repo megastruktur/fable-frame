@@ -2,13 +2,13 @@
 	import { goto } from "$app/navigation";
   import { page } from "$app/stores"
 	import CampaignImageEdit from "$lib/components/campaign/CampaignImageEdit.svelte";
-	import type { CampaignResponse } from "$lib/pocketbase-types";
+	import type { CampaignsResponse } from "$lib/pocketbase-types";
 	import { getCampaign, updateCampaign } from "$models/campaign";
 	import { ProgressRadial } from "@skeletonlabs/skeleton";
   
   // $page.params.campaignId
 
-  let campaign: CampaignResponse
+  let campaign: CampaignsResponse
   let canComplete: boolean = false
 
   $: canComplete = (

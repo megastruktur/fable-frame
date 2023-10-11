@@ -1,21 +1,21 @@
 <!-- Campaigns Page -->
 <script lang="ts">
+	import { receive, send } from '$lib/animation';
 	import CampaignCard from '$lib/components/campaign/CampaignCard.svelte';
-  import type { CampaignResponse } from '$lib/pocketbase-types';
+  import type { CampaignsResponse } from '$lib/pocketbase-types';
 	import { toastShow } from '$lib/toast';
 	import { getGMCampaigns, getCharacterCampaigns, deleteCampaign } from '$models/campaign';
 	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, getModalStore, getToastStore } from '@skeletonlabs/skeleton';
-	import Icon from 'svelte-icons-pack';
+  import Icon from "svelte-icons-pack";
+  
 	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
 	import { flip } from 'svelte/animate';
-	import { quintOut } from 'svelte/easing';
-	import { crossfade } from 'svelte/transition';
 
   const modalStore = getModalStore()
   const toastStore = getToastStore()
 
-  let gmCampaigns: CampaignResponse[]
-  let characterCampaigns: CampaignResponse[]
+  let gmCampaigns: CampaignsResponse[]
+  let characterCampaigns: CampaignsResponse[]
   let operationsOnCampaignId: string = ""
 
   const campaignOperationsPopup: PopupSettings = {
@@ -24,25 +24,6 @@
 		placement: 'bottom',
 		closeQuery: '.list-option'
 	};
-
-  // Animations
-	const [send, receive] = crossfade({
-		duration: (d) => Math.sqrt(d * 200),
-
-		fallback(node, params) {
-			const style = getComputedStyle(node);
-			const transform = style.transform === 'none' ? '' : style.transform;
-
-			return {
-				duration: 300,
-				easing: quintOut,
-				css: (t) => `
-					transform: ${transform} scale(${t});
-					opacity: ${t}
-				`
-			};
-		}
-	});
 
   async function getData() {
     characterCampaigns = await getCharacterCampaigns()
