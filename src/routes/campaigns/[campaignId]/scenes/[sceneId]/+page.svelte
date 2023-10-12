@@ -1,14 +1,17 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import type { ScenesResponse } from "$lib/pocketbase-types";
+	import type { CampaignNotesResponse, CampaignsResponse, ScenesResponse } from "$lib/pocketbase-types";
 	import { getCampaign } from "$models/campaign";
 	import { getScene, getSceneImage } from "$models/scenes";
 	import { ProgressBar, getDrawerStore, type DrawerSettings } from "@skeletonlabs/skeleton";
 	import GiPerson from 'svelte-icons/gi/GiPerson.svelte'
+  import GiBookPile from 'svelte-icons/gi/GiBookPile.svelte'
 
   let scene: ScenesResponse
   let sceneImage: string
   let campaignCharactersIds: string[]
+  let campaign: CampaignsResponse
+  let campaignNotes: CampaignNotesResponse
 
   const drawerStore = getDrawerStore();
 
@@ -20,7 +23,10 @@
   async function openCharactersDrawer() {
 
     if (campaignCharactersIds === undefined) {
-      const campaign = await getCampaign($page.params.campaignId)
+
+      if (campaign === undefined) {
+        campaign = await getCampaign($page.params.campaignId)
+      }
       campaignCharactersIds = campaign.characters
     }
 
@@ -32,13 +38,28 @@
       width: "w-96",
       position: "right",
     };
-    console.log(characterDrawerSettings)
     drawerStore.open(characterDrawerSettings);
   }
   
+  async function openCampaignNotesDrawer() {
+    if (campaign === undefined) {
+      campaign = await getCampaign($page.params.campaignId)
+    }
+
+    const campaignNotesDrawerSettings: DrawerSettings = {
+      id: `campaign-notes-list`,
+      meta: {
+        campaignId: campaign.id
+      },
+      width: "w-96",
+      position: "left",
+    };
+    drawerStore.open(campaignNotesDrawerSettings);
+  }
+
 </script>
 
-<div>
+<div class="">
   {#await loadData()}
     <ProgressBar />
   {:then}
@@ -51,13 +72,20 @@
 
       <!-- Characters -->
       <button
-        class="btn btn-icon fixed right-0 top-2/4"
+        class="btn btn-icon variant-outline-primary fixed right-2 top-2/4 p-1"
         on:click={openCharactersDrawer}
       >
         <GiPerson />
       </button>
-      
+
       <!-- Campaign Notes -->
+      <button
+        class="btn btn-icon variant-outline-primary fixed left-2 top-2/4 p-1"
+        on:click={openCampaignNotesDrawer}
+      >
+        <GiBookPile />
+      </button>
+      
       <!-- Character Notes (?) -->
       <!-- Chat -->
       <!-- Dice -->

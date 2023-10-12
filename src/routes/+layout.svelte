@@ -22,6 +22,7 @@
     import { headerBanner } from "$lib/stores"
     import { onDestroy } from "svelte"
 	import CampaignCharactersDrawer from "$lib/components/characters/CampaignCharactersDrawer.svelte";
+	import CampaignNotesDrawer from "$lib/components/campaign/CampaignNotesDrawer.svelte";
 
     initializeStores()
 
@@ -58,6 +59,8 @@
 	<CharacterNotesDrawer />
 	{:else if $drawerStore.id === "campaign-character-list"}
 	<CampaignCharactersDrawer characterIds={$drawerStore.meta.campaignCharactersIds} />
+	{:else if $drawerStore.id === "campaign-notes-list"}
+	<CampaignNotesDrawer campaignId={$drawerStore.meta.campaignId} />
 	{/if}
 </Drawer>
 <!-- App Shell -->
