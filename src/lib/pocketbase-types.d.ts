@@ -2,7 +2,10 @@
 * This file was @generated using pocketbase-typegen
 */
 
+import type { SystemJSON } from "./types"
+
 export enum Collections {
+	CampaignChat = "campaign_chat",
 	CampaignNotes = "campaign_notes",
 	Campaigns = "campaigns",
 	CharacterNotes = "character_notes",
@@ -37,6 +40,15 @@ export type AuthSystemFields<T = never> = {
 
 // Record types for each collection
 
+export type CampaignChatRecord = {
+	campaign?: RecordIdString
+	character?: RecordIdString
+	message?: string
+	expand?: {
+		character?: CharacterRecord
+	}
+}
+
 export enum CampaignNotesTypeOptions {
 	"gm" = "gm",
 	"public" = "public",
@@ -50,6 +62,8 @@ export type CampaignNotesRecord = {
 }
 
 export type CampaignsRecord = {
+	activeScene?: RecordIdString
+	characters?: RecordIdString[]
 	creator: RecordIdString
 	description?: string
 	image?: string
@@ -59,6 +73,7 @@ export type CampaignsRecord = {
 	characters?: RecordIdString[]
 	expand?: {
 		"characters(campaign)": CharactersResponse[],
+		characters: CharactersResponse[],
 		rpgSystem: RpgSystemsResponse
 	}
 }
@@ -124,6 +139,7 @@ export type UsersRecord = {
 }
 
 // Response types include system fields and match responses from the PocketBase API
+export type CampaignChatResponse<Texpand = unknown> = Required<CampaignChatRecord> & BaseSystemFields<Texpand>
 export type CampaignNotesResponse<Texpand = unknown> = Required<CampaignNotesRecord> & BaseSystemFields<Texpand>
 export type CampaignsResponse<Texpand = unknown> = Required<CampaignsRecord> & BaseSystemFields<Texpand>
 export type CharacterNotesResponse<Tdata = unknown, Texpand = unknown> = Required<CharacterNotesRecord<Tdata>> & BaseSystemFields<Texpand>
@@ -136,6 +152,7 @@ export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSyste
 // Types containing all Records and Responses, useful for creating typing helper functions
 
 export type CollectionRecords = {
+	campaign_chat: CampaignChatRecord
 	campaign_notes: CampaignNotesRecord
 	campaigns: CampaignsRecord
 	character_notes: CharacterNotesRecord
@@ -147,6 +164,7 @@ export type CollectionRecords = {
 }
 
 export type CollectionResponses = {
+	campaign_chat: CampaignChatResponse
 	campaign_notes: CampaignNotesResponse
 	campaigns: CampaignsResponse
 	character_notes: CharacterNotesResponse

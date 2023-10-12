@@ -52,3 +52,10 @@ type CharacterNote = {
   note: string
   weight?: number
 }
+
+type ChatMessage = {
+  messageId: string,
+  characterName: string,
+  message: string,
+  time: string
+}

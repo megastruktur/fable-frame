@@ -6,6 +6,7 @@
 	import { ProgressBar, getDrawerStore, type DrawerSettings } from "@skeletonlabs/skeleton";
 	import GiPerson from 'svelte-icons/gi/GiPerson.svelte'
   import GiBookPile from 'svelte-icons/gi/GiBookPile.svelte'
+	import CampaignChatWindow from "$lib/components/campaign-chat/CampaignChatWindow.svelte";
 
   let scene: ScenesResponse
   let sceneImage: string
@@ -17,16 +18,15 @@
 
   async function loadData() {
     scene = await getScene($page.params.sceneId)
+    campaign = await getCampaign($page.params.campaignId, {
+      expand: "characters"
+    })
     sceneImage = getSceneImage(scene)
   }
 
   async function openCharactersDrawer() {
 
     if (campaignCharactersIds === undefined) {
-
-      if (campaign === undefined) {
-        campaign = await getCampaign($page.params.campaignId)
-      }
       campaignCharactersIds = campaign.characters
     }
 
@@ -42,9 +42,6 @@
   }
   
   async function openCampaignNotesDrawer() {
-    if (campaign === undefined) {
-      campaign = await getCampaign($page.params.campaignId)
-    }
 
     const campaignNotesDrawerSettings: DrawerSettings = {
       id: `campaign-notes-list`,
@@ -56,6 +53,35 @@
     };
     drawerStore.open(campaignNotesDrawerSettings);
   }
+
+	function dragChatWindow(node) {
+    let moving = false;
+    let left = 0;
+    let bottom = 0;
+
+    node.style.position = 'absolute';
+    node.style.bottom = `${bottom}px`;
+    node.style.left = `${left}px`;
+    node.style.cursor = 'move';
+    node.style.userSelect = 'none';
+
+    node.addEventListener('mousedown', () => {
+      moving = true;
+    });
+    
+  window.addEventListener('mousemove', (e) => {
+      if (moving) {
+          left += e.movementX;
+          bottom -= e.movementY;
+          node.style.bottom = `${bottom}px`;
+          node.style.left = `${left}px`;
+      }
+    });
+  
+    window.addEventListener('mouseup', () => {
+      moving = false;
+    });
+	}
 
 </script>
 
@@ -88,6 +114,12 @@
       
       <!-- Character Notes (?) -->
       <!-- Chat -->
+      <div
+        use:dragChatWindow
+        class="absolute bottom-10 left-5 w-96 h-96"
+      >
+        <CampaignChatWindow {campaign} characters={campaign.expand.characters} />
+      </div>
       <!-- Dice -->
     </div>
   {/await}

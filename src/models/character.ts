@@ -267,7 +267,7 @@ export async function removeCharacterFromCampaign(characterId: string, campaignI
   ])
 
   if (campaign.characters.find(campaignCharacterId => campaignCharacterId === characterId)!= null) {
-    
+
     const characterIds = campaign.characters.filter(campaignCharacterId => campaignCharacterId!== characterId)
 
     const [_, character] = await Promise.all([
@@ -278,4 +278,11 @@ export async function removeCharacterFromCampaign(characterId: string, campaignI
     return character
   }
   return character
+}
+
+export async function getPlayerharacterFromCampaign(campaignId: string, userId: string): Promise<CharactersResponse> {
+  console.log({campaignId, userId})
+  return await pb.collection("characters").getFirstListItem(
+    `creator="${userId}"&&campaign="${campaignId}"`
+  )
 }
