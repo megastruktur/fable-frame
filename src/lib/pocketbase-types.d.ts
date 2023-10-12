@@ -56,6 +56,7 @@ export type CampaignsRecord = {
 	name: string
 	rpgSystem: RecordIdString
 	activeScene?: RecordIdString
+	characters?: RecordIdString[]
 	expand?: {
 		"characters(campaign)": CharactersResponse[],
 		rpgSystem: RpgSystemsResponse

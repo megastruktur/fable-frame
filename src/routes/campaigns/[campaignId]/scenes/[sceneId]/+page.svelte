@@ -19,10 +19,12 @@
   {#await loadData()}
     <ProgressBar />
   {:then}
-    <div class="w-screen h-screen bg-cover bg-center relative bg-no-repeat"
-      
+    <div class="w-screen h-screen bg-contain bg-center relative bg-no-repeat"
       style="background-image: url('{sceneImage}')">
-  
+
+      <div class="bg-surface-900/70 py-2">
+        <h1 class="h1 text-center">{scene.name}</h1>
+      </div>
     </div>
   {/await}
 </div>

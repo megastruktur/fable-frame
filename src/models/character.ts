@@ -5,6 +5,7 @@ import type { CharactersResponse, CharactersRecord } from "$lib/pocketbase-types
 import getStringHash from "$lib/getStringHash"
 import { v4 as uuidv4 } from 'uuid'
 import { createCharacterNotes } from "./character_notes"
+import { getCampaign } from "./campaign"
 
 export async function createCharacter(data: Partial<CharactersRecord>): Promise<CharactersResponse> {
   return await pb.collection("characters").create(data)
@@ -226,4 +227,55 @@ export function subscribeCharacterOperations() {
 
 export function unsubscribeCharacterOperations() {
   pb.collection("characters").unsubscribe("*");
+}
+
+// @todo Remove character from other campaigns?
+export async function addCharacterToCampaign(characterId: string, campaignId: string): Promise<CharactersResponse> {
+
+  const [character, campaign] = await Promise.all([
+    await pb.collection("characters").update(characterId, {
+      campaign: campaignId,
+      campaignStatus: 1,
+    }),
+    getCampaign(campaignId)
+  ])
+
+  if (campaign.characters.find(campaignCharacterId => campaignCharacterId === character.id) != null) {
+
+    const characterIds: string[] = [...campaign.characters, characterId]
+
+    const [_, character] = await Promise.all([
+      pb.collection("campaigns").update(campaignId, { characters: characterIds }),
+      pb.collection("characters").update(characterId, { campaign: campaignId })
+    ])
+    return character
+  }
+
+  return character
+}
+
+
+
+export async function removeCharacterFromCampaign(characterId: string, campaignId: string) {
+
+  const [character, campaign] = await Promise.all([
+    await pb.collection("characters").update(characterId, {
+      campaign: campaignId,
+      campaignStatus: 1,
+    }),
+    getCampaign(campaignId)
+  ])
+
+  if (campaign.characters.find(campaignCharacterId => campaignCharacterId === characterId)!= null) {
+    
+    const characterIds = campaign.characters.filter(campaignCharacterId => campaignCharacterId!== characterId)
+
+    const [_, character] = await Promise.all([
+      pb.collection("campaigns").update(campaignId, { characters: characterIds }),
+      pb.collection("characters").update(characterId, { campaign: "" })
+    ])
+
+    return character
+  }
+  return character
 }

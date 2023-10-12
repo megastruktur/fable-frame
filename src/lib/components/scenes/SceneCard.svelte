@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ScenesResponse } from "$lib/pocketbase-types"
 	import { getSceneImage } from "$models/scenes";
+	import { popup, type PopupSettings } from "@skeletonlabs/skeleton";
 	import { createEventDispatcher } from "svelte";
   import FaEye from 'svelte-icons/fa/FaEye.svelte'
   import FaRegEyeSlash from 'svelte-icons/fa/FaRegEyeSlash.svelte'
@@ -18,6 +19,13 @@
   if (sceneImage === "") {
     sceneImage = "/images/fantasy-background-campaign.jpg"
   }
+
+  const sceneOperationsPopup: PopupSettings = {
+		event: 'focus-click',
+		target: `sceneOperationsPopup-${scene.id}`,
+		placement: 'bottom',
+		closeQuery: '.list-option'
+	};
   
 
   async function activateSceneHandler() {
@@ -35,6 +43,12 @@
     }
   }
 
+  function deleteScenePromptHandler() {
+    dispatch("deleteScenePrompt", {
+      sceneId: scene.id,
+    })
+  }
+
 
 </script>
 
@@ -50,6 +64,13 @@
     <FaRegEyeSlash />
     {/if}
   </button>
+
+  <!-- Scene Operations Popup -->
+  <button
+    class="btn-icon variant-ghost-secondary absolute left-2 top-2"
+    use:popup={sceneOperationsPopup}
+  >⋮</button>
+
   <a
     class="block w-full h-full"
     href="/campaigns/{scene.campaign}/scenes/{scene.id}">
@@ -57,4 +78,16 @@
       <h3 class="h3 text-center">{scene.name}</h3>
     </div>
   </a>
+
+
+  <!-- Operations Popup -->
+  <div class="card w-48 shadow-xl py-2" data-popup="sceneOperationsPopup-{scene.id}">
+    <ul class="list-nav px-2">
+      <li class="mb-2"><a href="/campaigns/{scene.campaign}/scenes/{scene.id}/edit">Edit</a></li>
+      <li>
+        <a class="bg-error-900" href="/" on:click|preventDefault={deleteScenePromptHandler}>Remove</a></li>
+    </ul>
+    <div class="arrow bg-surface-100-800-token" />
+  </div>
+
 </div>

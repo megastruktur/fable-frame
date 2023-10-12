@@ -10,6 +10,7 @@
     let password: string
 
     async function login() {
+        errorText = ""
         try {
             const loggedIn = await pb.collection("users").authWithPassword(username, password)
             goto("/characters")
@@ -68,10 +69,13 @@
 
         <button class="btn variant-filled mt-3" on:click={googleLogin}><Icon src={BsGoogle} />oogle</button>
         <div class="text-center text-2xl my-6">OR</div>
-        <div>
+        <form>
+            {#if errorText !== ""}
+                <p class="text-error-500">{errorText}</p>
+            {/if}
             <input class="input mt-2" type="text" placeholder="Username" bind:value={username} />
             <input class="input mt-2" type="password" placeholder="Password" bind:value={password} />
             <button class="btn mt-2 variant-filled-secondary" on:click={login}>Login</button>
-        </div>
+        </form>
     {/if}
 </div>
