@@ -44,8 +44,10 @@ export type CampaignChatRecord = {
 	campaign?: RecordIdString
 	character?: RecordIdString
 	message?: string
+	creator: RecordIdString
 	expand?: {
 		character?: CharacterRecord
+		creator?: UserRecord
 	}
 }
 

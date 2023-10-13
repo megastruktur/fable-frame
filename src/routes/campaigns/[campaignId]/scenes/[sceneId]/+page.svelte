@@ -54,42 +54,13 @@
     drawerStore.open(campaignNotesDrawerSettings);
   }
 
-	function dragChatWindow(node) {
-    let moving = false;
-    let left = 0;
-    let bottom = 0;
-
-    node.style.position = 'absolute';
-    node.style.bottom = `${bottom}px`;
-    node.style.left = `${left}px`;
-    node.style.cursor = 'move';
-    node.style.userSelect = 'none';
-
-    node.addEventListener('mousedown', () => {
-      moving = true;
-    });
-    
-  window.addEventListener('mousemove', (e) => {
-      if (moving) {
-          left += e.movementX;
-          bottom -= e.movementY;
-          node.style.bottom = `${bottom}px`;
-          node.style.left = `${left}px`;
-      }
-    });
-  
-    window.addEventListener('mouseup', () => {
-      moving = false;
-    });
-	}
-
 </script>
 
-<div class="">
+<div class="h-screen w-screen absolute top-0">
   {#await loadData()}
     <ProgressBar />
   {:then}
-    <div class="w-screen h-screen bg-contain bg-center relative bg-no-repeat"
+    <div class="h-full w-full relative bg-contain bg-center bg-no-repeat overflow-hidden"
       style="background-image: url('{sceneImage}')">
 
       <div class="bg-surface-900/70 py-2">
@@ -114,12 +85,8 @@
       
       <!-- Character Notes (?) -->
       <!-- Chat -->
-      <div
-        use:dragChatWindow
-        class="absolute bottom-10 left-5 w-96 h-96"
-      >
-        <CampaignChatWindow {campaign} characters={campaign.expand.characters} />
-      </div>
+      <CampaignChatWindow
+        {campaign} characters={campaign.expand.characters} />
       <!-- Dice -->
     </div>
   {/await}

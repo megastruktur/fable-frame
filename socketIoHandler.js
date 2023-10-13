@@ -10,6 +10,7 @@ export default function injectSocketIO(server) {
                 characterName: message.characterName,
                 message: message.message,
                 messageId: message.messageId,
+                creatorId: message.creatorId,
                 time: new Date().toLocaleString()
             });
         });
