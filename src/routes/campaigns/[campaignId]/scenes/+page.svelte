@@ -9,14 +9,12 @@
 	import { receive, send } from '$lib/animation';
   import Icon from "svelte-icons-pack";
 	import { getCampaign } from '$models/campaign';
-	import type { e } from 'vitest/dist/index-5aad25c1';
 	import { getModalStore, getToastStore, type ModalSettings } from '@skeletonlabs/skeleton';
 	import { toastShow } from '$lib/toast';
 
   let scenes: ScenesResponse[] = []
   let campaign: CampaignsResponse
   let campaignActiveScene: string
-  let operationsOnSceneId: string = ""
 
   const modalStore = getModalStore()
   const toastStore = getToastStore()

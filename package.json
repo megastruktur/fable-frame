@@ -46,6 +46,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@dice-roller/rpg-dice-roller": "^5.4.1",
 		"@types/marked": "^5.0.1",
 		"express": "^4.18.2",
 		"marked": "^7.0.5",

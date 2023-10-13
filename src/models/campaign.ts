@@ -10,6 +10,12 @@ export async function getCampaign(id: string, queryParams = {}): Promise<Campaig
   return await pb.collection("campaigns").getOne(id, queryParams)
 }
 
+export async function getCampaignWithCharacters(id: string): Promise<CampaignsResponse> {
+  return await pb.collection("campaigns").getOne(id, {
+    expand: "characters"
+  })
+}
+
 export async function updateCampaign(id: string, data: Partial<CampaignsRecord>): Promise<CampaignsResponse> {
   return await pb.collection("campaigns").update(id, data)
 }
