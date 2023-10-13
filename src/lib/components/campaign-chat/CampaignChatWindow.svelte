@@ -6,6 +6,7 @@
 	import { createChatMessage, getCampaignChat } from "$models/campaign_chat";
 	import { onMount, tick } from "svelte";
   import FaAngleRight from 'svelte-icons/fa/FaAngleRight.svelte'
+	import CampaignChatMessage from "./CampaignChatMessage.svelte";
 
 
   export let campaign: CampaignsResponse
@@ -100,17 +101,16 @@
 
 <div class="bg-surface-900 rounded-lg border-2 border-tertiary-900 overflow-hidden p-1 h-auto">
 
-  <div class="h-4 w-full" use:dragChatWindow></div>
+  <div class="w-full border-b-2 border-tertiary-900 mb-3" use:dragChatWindow>
+    <h3 class="h3">Chat</h3>
+  </div>
 
   <div
     class="h-60 w-full bg-surface-500 overflow-y-auto select-text"
     bind:this={element}
   >
     {#each messages as message(message.messageId)}
-    <div>
-      <div class="{message.isGm ? "bg-error-400" : "bg-surface-700"} p-1">{message.isGm ? "GM" : message.characterName}</div>
-      <div class="p-1 pl-3">{message.message}</div>
-    </div>
+      <CampaignChatMessage {message} />
     {/each}
   </div>
   <form class="flex my-3 mx-2" on:submit|preventDefault={sendMessage}>
