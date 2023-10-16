@@ -29,20 +29,7 @@
   }
 </script>
 
-<div class="pt-3">
-
-  {#if dieToRoll !== ""}
-    <div class="flex flex-wrap mb-2">
-
-      {#each diceAmounts as amount}
-        <button class="w-10" on:click={() => rollDiceAmount(amount)}>
-          <h4 class="h4">{amount}</h4>
-        </button>
-      {/each}
-
-    </div>
-  {/if}
-
+<div class="px-3">
 
   <div class="flex flex-wrap justify-between">
 
@@ -55,6 +42,19 @@
       </button>
     {/each}
   </div>
+
+
+  {#if dieToRoll !== ""}
+    <div class="flex flex-wrap mt-2">
+
+      {#each diceAmounts as amount}
+        <button class="w-10" on:click={() => rollDiceAmount(amount)}>
+          <h4 class="h4">{amount}</h4>
+        </button>
+      {/each}
+
+    </div>
+  {/if}
 </div>
 
 

@@ -21,8 +21,17 @@
     import CharacterNotesDrawer from "$lib/components/character-notes/CharacterNotesDrawer.svelte";
     import { headerBanner } from "$lib/stores"
     import { onDestroy } from "svelte"
-	import CampaignCharactersDrawer from "$lib/components/characters/CampaignCharactersDrawer.svelte";
-	import CampaignNotesDrawer from "$lib/components/campaign/CampaignNotesDrawer.svelte";
+		import CampaignCharactersDrawer from "$lib/components/characters/CampaignCharactersDrawer.svelte";
+		import CampaignNotesDrawer from "$lib/components/campaign/CampaignNotesDrawer.svelte";
+		import { page } from "$app/stores";
+	import CampaignChatWindow from "$lib/components/campaign-chat/CampaignChatWindow.svelte";
+
+		let fullscreen = false
+
+		// If $page.data.pathname string contains "scenes" - set fullscreen to true
+		if ($page.data.pathname.includes("scenes")) {
+			fullscreen = true
+		}
 
     initializeStores()
 
@@ -54,18 +63,20 @@
 
 <Drawer>
 	{#if $drawerStore.id === "navbar"}
-	<Sidebar />
+		<Sidebar />
 	{:else if $drawerStore.id === "character-notes"}
-	<CharacterNotesDrawer />
+		<CharacterNotesDrawer />
 	{:else if $drawerStore.id === "campaign-character-list"}
-	<CampaignCharactersDrawer characterIds={$drawerStore.meta.campaignCharactersIds} />
+		<CampaignCharactersDrawer characterIds={$drawerStore.meta.campaignCharactersIds} />
 	{:else if $drawerStore.id === "campaign-notes-list"}
-	<CampaignNotesDrawer campaignId={$drawerStore.meta.campaignId} />
+		<CampaignNotesDrawer campaignId={$drawerStore.meta.campaignId} />
+	{:else if $drawerStore.id === "campaign-chat"}
+		<CampaignChatWindow campaign={$drawerStore.meta.campaignWithCharacters} />
 	{/if}
 </Drawer>
 <!-- App Shell -->
 
-<div class="w-full h-full {bannerUrl ? "bg-surface-900" : "bg-none"} bg-blend-multiply bg-no-repeat bg-cover bg-top bg-fixed" style="background-image: url('{bannerUrl}')">
+<div class="w-full relative {fullscreen ? "h-screen" : "h-full"} {bannerUrl ? "bg-surface-900" : "bg-none"} bg-blend-multiply bg-no-repeat bg-cover bg-top bg-fixed" style="background-image: url('{bannerUrl}')">
 	<AppShell regionPage="relative">
 	
 		<!-- Sidebar -->

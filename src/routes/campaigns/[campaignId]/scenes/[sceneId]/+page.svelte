@@ -17,10 +17,8 @@ import type { CampaignsResponse, ScenesResponse } from "$lib/pocketbase-types";
 
 </script>
 
-<div class="h-screen w-screen absolute top-0">
-  {#await loadData()}
-    <ProgressBar />
-  {:then}
-    <Scene {campaign} {scene} />
-  {/await}
-</div>
+{#await loadData()}
+  <ProgressBar />
+{:then}
+  <Scene {campaign} {scene} />
+{/await}

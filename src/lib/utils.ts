@@ -8,7 +8,7 @@ export function getImageUrlsFromText(text: string): (string | undefined)[] {
   });
 }
 
-export function imageUrlToImg(text: string, maxWidthClass = "max-w-sm"): string {
+export function imageUrlToImg(text: string, maxWidthClass = "w-96"): string {
 
   let formattedText: string = text
   const imageUrls: (string | undefined)[] = getImageUrlsFromText(text);
