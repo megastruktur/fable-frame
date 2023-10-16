@@ -7,6 +7,9 @@
 	import { onMount, tick } from "svelte";
   import FaAngleRight from 'svelte-icons/fa/FaAngleRight.svelte'
 	import CampaignChatMessage from "./CampaignChatMessage.svelte";
+	import DiceRoller from "../dice/DiceRoller.svelte";
+  import { DiceRoll } from '@dice-roller/rpg-dice-roller';
+	import type { RollResult, RollResults } from '@dice-roller/rpg-dice-roller/types/results';
 
 
   export let campaign: CampaignsResponse
@@ -23,16 +26,35 @@
     node?.scroll({ top: node.scrollHeight, behavior: 'smooth' });
   }
 
-  async function sendMessage() {
+  function diceRollHandler({detail}: {detail: string}) {
 
+    rollDiceToChat(detail)
+  }
+
+  async function rollDiceToChat(diceString: string) {
+    let rollResults: number[] = []
+
+    const roll = new DiceRoll(diceString);
+
+    const currentRoll: {output: string} = JSON.parse(roll.export() || "{}")
+
+    await sendMessage(`/roll ${currentRoll.output}`)
+  }
+
+  async function sendMessage(messageString: string = "") {
+
+
+    if (messageString === "") {
+      messageString = chatMessage
+    }
     const campaignChatMessage = await createChatMessage({
       campaign: campaign.id,
       character: myCharacter?.id || "",
-      message: chatMessage
+      message: messageString
     })
     const message = {
       characterName: characterName,
-      message: chatMessage,
+      message: messageString,
       messageId: campaignChatMessage.id,
       creatorId: $currentUser?.id || "",
     }
@@ -113,11 +135,15 @@
       <CampaignChatMessage {message} />
     {/each}
   </div>
+
   <form class="flex my-3 mx-2" on:submit|preventDefault={sendMessage}>
     <input type="text" class="input" bind:value={chatMessage} />
     <button type="submit"
-      class="btn btn-icon btn-icon-sm variant-filled-tertiary"
+      class="btn btn-icon btn-icon-sm variant-filled-tertiary h-6 w-6"
     ><FaAngleRight class="text-secondary-600" /></button>
   </form>
+
+  <!-- Dice -->
+  <DiceRoller on:diceRoll={diceRollHandler} />
 
 </div>

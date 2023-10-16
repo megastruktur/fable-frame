@@ -5,6 +5,7 @@
 	import GiPerson from 'svelte-icons/gi/GiPerson.svelte'
   import GiBookPile from 'svelte-icons/gi/GiBookPile.svelte'
 	import CampaignChatWindow from "$lib/components/campaign-chat/CampaignChatWindow.svelte";
+	import DiceRoller from "../dice/DiceRoller.svelte";
 
   export let scene: ScenesResponse
   export let campaign: CampaignsResponse
@@ -74,5 +75,4 @@
   <!-- Chat -->
   <CampaignChatWindow
     {campaign} characters={campaign.expand.characters} />
-  <!-- Dice -->
 </div>
