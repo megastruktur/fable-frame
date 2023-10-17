@@ -76,7 +76,8 @@ export type CampaignsRecord = {
 	expand?: {
 		"characters(campaign)": CharactersResponse[],
 		characters: CharactersResponse[],
-		rpgSystem: RpgSystemsResponse
+		rpgSystem: RpgSystemsResponse,
+		activeScene: ScenesResponse,
 	}
 }
 

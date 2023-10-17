@@ -39,3 +39,10 @@ export async function deleteScene(sceneId: string) {
 export async function updateScene(sceneId: string, data: any): Promise<ScenesResponse> {
   return await pb.collection("scenes").update(sceneId, data)
 }
+
+export async function getCampaignActiveScene(campaignId: string): Promise<ScenesResponse | null> {
+  const campaign = await getCampaign(campaignId, {
+    expand: "activeScene"
+  })
+  return campaign.expand.activeScene || null
+}

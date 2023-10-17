@@ -1,5 +1,6 @@
 import { pb } from "$lib/pocketbase"
 import type { CampaignsRecord, CampaignsResponse } from "$lib/pocketbase-types.d"
+import type { RecordSubscription, Record, UnsubscribeFunc } from "pocketbase"
 import { getAllCharacters, getMyCharacters, updateCharacter } from "./character"
 
 export async function createCampaign(data: Partial<CampaignsResponse>): Promise<CampaignsResponse> {
@@ -13,6 +14,12 @@ export async function getCampaign(id: string, queryParams = {}): Promise<Campaig
 export async function getCampaignWithCharacters(id: string): Promise<CampaignsResponse> {
   return await pb.collection("campaigns").getOne(id, {
     expand: "characters"
+  })
+}
+
+export async function getCampaignWithCharactersAndActiveScene(id: string): Promise<CampaignsResponse> {
+  return await pb.collection("campaigns").getOne(id, {
+    expand: "characters,activeScene",
   })
 }
 
@@ -114,4 +121,8 @@ export function getCampaignImage(campaign: CampaignsResponse) {
   else {
     return ""
   }
+}
+
+export async function subscribeToCampaign(campaignId: string, callback: (data: RecordSubscription<Record>) => void): Promise<UnsubscribeFunc> {
+  return pb.collection("campaigns").subscribe(campaignId, callback)
 }
