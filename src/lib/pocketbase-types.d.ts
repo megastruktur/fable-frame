@@ -80,10 +80,10 @@ export type CampaignsRecord = {
 	}
 }
 
-export type CharacterNotesRecord<Tdata = unknown> = {
+export type CharacterNotesRecord = {
 	character: RecordIdString
 	creator: RecordIdString
-	data?: null | Tdata
+	data?: CharacterNote[]
 	expand?: {
 		rpgSystem: RpgSystemsResponse
 		"characters(campaign)": CharactersResponse[]

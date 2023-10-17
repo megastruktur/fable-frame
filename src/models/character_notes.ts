@@ -1,5 +1,6 @@
 import { pb } from "$lib/pocketbase"
 import type { CharacterNotesResponse, CharacterNotesRecord } from "$lib/pocketbase-types.d"
+import type { CharacterNote } from "$lib/types";
 export async function createCharacterNotes(data: Partial<CharacterNotesRecord>): Promise<CharacterNotesResponse> {
   if (!data.data) {
     data.data = [];
@@ -23,8 +24,7 @@ export async function getCharacterNotesByCharacterId(characterId: string): Promi
   } catch (e: any) {
     if (e.status === 404) {
       console.log("Character Notes not found. Creating a new one")
+      return await createCharacterNotes({ character: characterId })
     }
   }
-  return await createCharacterNotes({ character: characterId })
 }
-

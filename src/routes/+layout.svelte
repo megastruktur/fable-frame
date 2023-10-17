@@ -65,7 +65,7 @@
 	{#if $drawerStore.id === "navbar"}
 		<Sidebar />
 	{:else if $drawerStore.id === "character-notes"}
-		<CharacterNotesDrawer />
+		<CharacterNotesDrawer characterId={$drawerStore.meta.characterId} />
 	{:else if $drawerStore.id === "campaign-character-list"}
 		<CampaignCharactersDrawer characterIds={$drawerStore.meta.campaignCharactersIds} />
 	{:else if $drawerStore.id === "campaign-notes-list"}

@@ -2,7 +2,7 @@
 <script lang="ts">
 	import { getCharacterAvatar, getCharacterTabs, getCharacterWithSystemAndCampaign, updateCharacterWithHash } from "$models/character";
 	import { onDestroy, onMount } from "svelte";
-  import { fieldErrors, characterNotesStore, headerBanner } from "$lib/stores"
+  import { fieldErrors, headerBanner } from "$lib/stores"
 	import type { Field, FieldError } from "$lib/types";
 
 	import { type DrawerSettings, ProgressBar, getDrawerStore, getToastStore } from "@skeletonlabs/skeleton";
@@ -47,9 +47,6 @@
         headerBanner.set(campaignImage)
       }
     }
-
-    // Load Character Notes
-    $characterNotesStore = await getCharacterNotesByCharacterId(character.id)
 
     characterName = character.name
 
@@ -177,7 +174,6 @@
   onDestroy(() => {
     matches.destroy()
     fieldErrors.reset()
-    characterNotesStore.reset()
   }) //Stop events for calculation
 
 
@@ -187,6 +183,9 @@
     const characterNotesDrawerSettings: DrawerSettings = {
       id: "character-notes",
       position: "right",
+      meta: {
+        characterId: character.id,
+      }
     }
 
     drawerStore.open(characterNotesDrawerSettings)
