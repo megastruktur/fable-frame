@@ -2,7 +2,7 @@
 <script lang="ts">
 	import { getCharacterAvatar, getCharacterTabs, getCharacterWithSystemAndCampaign, updateCharacterWithHash } from "$models/character";
 	import { onDestroy, onMount } from "svelte";
-  import { fieldErrors, editMode, characterNotesStore, headerBanner } from "$lib/stores"
+  import { fieldErrors, characterNotesStore, headerBanner } from "$lib/stores"
 	import type { Field, FieldError } from "$lib/types";
 
 	import { type DrawerSettings, ProgressBar, getDrawerStore, getToastStore } from "@skeletonlabs/skeleton";
@@ -32,6 +32,7 @@
   let activeTabName: string = "general"
   let tabsContent: { [key: string]: Field[] } = {general: []}
   let tabs: {[key: string]: Field}
+  let editMode: boolean = false
 
   const drawerStore = getDrawerStore()
   
@@ -65,7 +66,7 @@
         compendiumFields[field.type].push(field)
       })
 
-      editMode.set(false)
+      editMode = false
     }
   }
 
@@ -138,17 +139,17 @@
   async function toggleEditMode() {
 
     // If toggling from edit mode to non-edit - save the character
-    if ($editMode) {
+    if (editMode) {
       console.log(`Resetting character, loading from DB`)
       character = await getCharacterWithSystemAndCampaign(character.id)
     }
 
-    editMode.set(!$editMode)
+    editMode = !editMode
   }
 
   function saveChanges() {
     saveCharacter()
-    editMode.set(false)
+    editMode = false
   }
 
   function characterRename() {
@@ -219,18 +220,18 @@
 {:then}
 
 {#if $currentUser !== null}
-  {#key $editMode}
+  {#key editMode}
     <div
       out:fade={{ duration: 500 }}
       in:fade={{ duration: 500, delay: 500 }}
       class="flex flex-col items-center mb-3"
       >
       <div class="mt-3">
-        <CharacterAvatar characterName={character.name} characterId={character.id} avatarUrl={characterAvatarUrl} editMode={$editMode} />
+        <CharacterAvatar characterName={character.name} characterId={character.id} avatarUrl={characterAvatarUrl} {editMode} />
       </div>
 
       <h1 class="h2 my-3 items-center flex">
-        {#if $editMode}
+        {#if editMode}
           <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
         {:else}
           <span>{characterName}</span>
@@ -242,9 +243,9 @@
 
       {#if $currentUser.id === character.creator}
         <div class="flex items-center justify-center mt-4">
-          <button class="btn uppercase {$editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{$editMode ? "cancel" : "edit"}</button>
+          <button class="btn uppercase {editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{editMode ? "cancel" : "edit"}</button>
           <!-- cancel edit button -->
-          {#if $editMode}
+          {#if editMode}
             <button class="btn uppercase variant-filled-success ml-3" on:click={saveChanges}>save</button>
           {/if}
           <button class="btn variant-filled-warning ml-3" on:click={openCharacterNotesDrawer}>NOTES</button>
@@ -273,7 +274,7 @@
             {#if character !== undefined}
 
             <div class="flex flex-wrap justify-center">
-              <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={$editMode}
+              <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={editMode}
               character={character}
               on:fieldUpdate={fieldUpdate}
               on:fieldRemove={fieldRemove}
