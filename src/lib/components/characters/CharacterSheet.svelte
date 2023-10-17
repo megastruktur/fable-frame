@@ -1,8 +1,8 @@
 <!-- All Characters -->
 <script lang="ts">
 	import { getCharacterAvatar, getCharacterTabs, getCharacterWithSystemAndCampaign, updateCharacterWithHash } from "$models/character";
-	import { onDestroy } from "svelte";
-  import { characterStore, fieldErrors, editMode, characterNotesStore, headerBanner } from "$lib/stores"
+	import { onDestroy, onMount } from "svelte";
+  import { fieldErrors, editMode, characterNotesStore, headerBanner } from "$lib/stores"
 	import type { Field, FieldError } from "$lib/types";
 
 	import { type DrawerSettings, ProgressBar, getDrawerStore, getToastStore } from "@skeletonlabs/skeleton";
@@ -15,10 +15,11 @@
 	import { getCharacterNotesByCharacterId } from "$models/character_notes";
 	import { getCampaignImage } from "$models/campaign";
 	import { currentUser } from "$lib/pocketbase";
+	import { addCharacterField, removeCharacterField, updateCharacterField } from "$lib/characterFieldsOperations";
 
   const toastStore = getToastStore()
-  
-  export let characterId: string = ""
+
+  export let character: CharactersResponse
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -36,12 +37,9 @@
   
   async function getData() {
 
-    // @todo Think about preloading character via server instead as it loads as undefined first.
-    $characterStore = (await getCharacterWithSystemAndCampaign(characterId))
+    if (character.expand.campaign !== undefined) {
 
-    if ($characterStore.expand.campaign !== undefined) {
-
-      campaign = $characterStore.expand.campaign
+      campaign = character.expand.campaign
       let campaignImage = getCampaignImage(campaign)
 
       if (campaignImage !== "") {
@@ -50,16 +48,15 @@
     }
 
     // Load Character Notes
-    $characterNotesStore = (await getCharacterNotesByCharacterId(characterId))
+    $characterNotesStore = await getCharacterNotesByCharacterId(character.id)
 
-    characterName = $characterStore.name
-    characterId = $characterStore.id
+    characterName = character.name
 
     // Dynamically load component
-    if ($characterStore.expand.rpgSystem) {
-      CharacterSheet = (await import(`../../../data/systems/${$characterStore.expand.rpgSystem.identifier}/components/CharacterSheet.svelte`)).default
+    if (character.expand.rpgSystem) {
+      CharacterSheet = (await import(`../../../data/systems/${character.expand.rpgSystem.identifier}/components/CharacterSheet.svelte`)).default
 
-      const compendiumFieldsRaw = $characterStore.expand.rpgSystem.data.fields.compendium
+      const compendiumFieldsRaw = character.expand.rpgSystem.data.fields.compendium
 
       compendiumFieldsRaw.map((field: Field) => {
         if (!compendiumFields[field.type]) {
@@ -72,8 +69,7 @@
     }
   }
 
-  const unsubscribeCharacterStore = characterStore.subscribe((character: CharactersResponse) => {
-    
+  onMount(() => {
     console.log("-------- Character --------")
     console.log(character)
 
@@ -128,9 +124,9 @@
   })
 
   async function saveCharacter() {
-    if ($characterStore && $characterStore.id) {
+    if (character && character.id) {
       try {
-        await updateCharacterWithHash($characterStore.id, $characterStore)
+        await updateCharacterWithHash(character.id, character)
       }
       catch (e) {
         console.error(e)
@@ -144,7 +140,7 @@
     // If toggling from edit mode to non-edit - save the character
     if ($editMode) {
       console.log(`Resetting character, loading from DB`)
-      $characterStore = (await getCharacterWithSystemAndCampaign(characterId))
+      character = await getCharacterWithSystemAndCampaign(character.id)
     }
 
     editMode.set(!$editMode)
@@ -156,7 +152,7 @@
   }
 
   function characterRename() {
-    characterStore.rename(characterName)
+    character.name = characterName
   }
 
 
@@ -179,10 +175,8 @@
 
   onDestroy(() => {
     matches.destroy()
-    unsubscribeCharacterStore()
     fieldErrors.reset()
     characterNotesStore.reset()
-    characterStore.reset()
   }) //Stop events for calculation
 
 
@@ -198,22 +192,22 @@
   }
 
   async function fieldUpdate({detail: {field}} : {detail: {field: Field}}) {
-    characterStore.setField(field)
+    character = updateCharacterField(character, field)
     console.log("On Field Update")
   }
 
   async function fieldRemove({detail: {field}} : {detail: {field: Field}}) {
-    characterStore.removeField(field)
+    character = removeCharacterField(character, field)
     console.log("On Field Remove")
   }
 
   async function fieldAdd({detail: {field}} : {detail: {field: Field}}) {
-    characterStore.addField(field)
+    character = addCharacterField(character, field)
     console.log("On Field Add")
   }
 
   async function avatarSet({detail: {avatar}} : {detail: {avatar: string}}) {
-    characterStore.setAvatar(avatar)
+    character.avatar = avatar
   }
 
 </script>
@@ -232,7 +226,7 @@
       class="flex flex-col items-center mb-3"
       >
       <div class="mt-3">
-        <CharacterAvatar characterName={$characterStore.name} characterId={characterId} avatarUrl={characterAvatarUrl} editMode={$editMode} />
+        <CharacterAvatar characterName={character.name} characterId={character.id} avatarUrl={characterAvatarUrl} editMode={$editMode} />
       </div>
 
       <h1 class="h2 my-3 items-center flex">
@@ -246,7 +240,7 @@
         {/if}
       </h1>
 
-      {#if $currentUser.id === $characterStore.creator}
+      {#if $currentUser.id === character.creator}
         <div class="flex items-center justify-center mt-4">
           <button class="btn uppercase {$editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{$editMode ? "cancel" : "edit"}</button>
           <!-- cancel edit button -->
@@ -276,11 +270,11 @@
             {/if}
 
             <!-- Character Sheet content -->
-            {#if $characterStore !== undefined}
+            {#if character !== undefined}
 
             <div class="flex flex-wrap justify-center">
               <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={$editMode}
-              character={$characterStore}
+              character={character}
               on:fieldUpdate={fieldUpdate}
               on:fieldRemove={fieldRemove}
               on:fieldAdd={fieldAdd}
