@@ -1,6 +1,6 @@
 <!-- All Characters -->
 <script lang="ts">
-	import { getCharacter, getCharacterAvatar, getCharacterTabs, updateCharacterWithHash } from "$models/character";
+	import { getCharacterAvatar, getCharacterTabs, getCharacterWithSystemAndCampaign, updateCharacterWithHash } from "$models/character";
 	import { onDestroy } from "svelte";
   import { characterStore, fieldErrors, editMode, characterNotesStore, headerBanner } from "$lib/stores"
 	import type { Field, FieldError } from "$lib/types";
@@ -37,7 +37,7 @@
   async function getData() {
 
     // @todo Think about preloading character via server instead as it loads as undefined first.
-    $characterStore = (await getCharacter(characterId, {expand: "rpgSystem,campaign"}))
+    $characterStore = (await getCharacterWithSystemAndCampaign(characterId))
 
     if ($characterStore.expand.campaign !== undefined) {
 
@@ -144,7 +144,7 @@
     // If toggling from edit mode to non-edit - save the character
     if ($editMode) {
       console.log(`Resetting character, loading from DB`)
-      $characterStore = (await getCharacter(characterId, {expand: "rpgSystem"}))
+      $characterStore = (await getCharacterWithSystemAndCampaign(characterId))
     }
 
     editMode.set(!$editMode)
@@ -195,6 +195,25 @@
     }
 
     drawerStore.open(characterNotesDrawerSettings)
+  }
+
+  async function fieldUpdate({detail: {field}} : {detail: {field: Field}}) {
+    characterStore.setField(field)
+    console.log("On Field Update")
+  }
+
+  async function fieldRemove({detail: {field}} : {detail: {field: Field}}) {
+    characterStore.removeField(field)
+    console.log("On Field Remove")
+  }
+
+  async function fieldAdd({detail: {field}} : {detail: {field: Field}}) {
+    characterStore.addField(field)
+    console.log("On Field Add")
+  }
+
+  async function avatarSet({detail: {avatar}} : {detail: {avatar: string}}) {
+    characterStore.setAvatar(avatar)
   }
 
 </script>
@@ -260,7 +279,12 @@
             {#if $characterStore !== undefined}
 
             <div class="flex flex-wrap justify-center">
-              <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={$editMode}/>
+              <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={$editMode}
+              character={$characterStore}
+              on:fieldUpdate={fieldUpdate}
+              on:fieldRemove={fieldRemove}
+              on:fieldAdd={fieldAdd}
+              />
             </div>
             {/if}
 

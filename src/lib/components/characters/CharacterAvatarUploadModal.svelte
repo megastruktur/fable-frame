@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { characterStore } from "$lib/stores";
 	import { characterUpdateAvatar } from "$models/character";
 	import { FileDropzone, ProgressBar, type ToastSettings, getToastStore, getModalStore } from "@skeletonlabs/skeleton";
 
+  // @ts-ignore
   import Icon from "svelte-icons-pack";
   import BsUpload from "svelte-icons-pack/bs/BsUpload";
 
@@ -31,7 +31,10 @@
       try {
         let character = await characterUpdateAvatar(characterId, formData)
         loading = false
-        characterStore.setAvatar(character.avatar)
+        // @ts-ignore
+        $modalStore[0].response({
+          avatar: character.avatar
+        })
         modalStore.close()
         
       } catch (error) {

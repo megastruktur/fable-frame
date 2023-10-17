@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { characterStore } from "$lib/stores";
 	import FieldRender from '$lib/components/field-renders/FieldRender.svelte';
 	import CircleAdd from '$lib/components/circle-add/CircleAdd.svelte';
 	import type { Field } from "$lib/types";
@@ -7,9 +6,12 @@
   import {dndzone} from "svelte-dnd-action"
   import {flip} from "svelte/animate"
 
+  // @ts-ignore
   import Icon from "svelte-icons-pack"
   import BsGrid3x3GapFill from "svelte-icons-pack/bs/BsGrid3x3GapFill";
 	import CharacterSheetTabWrapper from "./CharacterSheetTabWrapper.svelte";
+	import { createEventDispatcher } from "svelte";
+	import type { CharactersResponse } from '$lib/pocketbase-types';
 
   export let fields: Field[]
   export let tab: Field
@@ -19,10 +21,12 @@
   export let editMode: boolean = false
   export let editable: boolean = true
   export let sortable: boolean = true
+  export let character: CharactersResponse
 
   let removable: boolean = (tab.removable !== undefined) ? tab.removable : true
 
   const flipDurationMs: number = 300
+  const dispatch = createEventDispatcher()
 
   // Reorder fields
   $: options = {
@@ -41,16 +45,14 @@
     e.detail.items.forEach((field: Field) => {
       field.weight = counter
       counter++
-      characterStore.setField(field)
+      dispatch("fieldUpdate", {
+        field: field
+      })
     })
     fields = e.detail.items
 
     console.log({fields})
     console.log("Fields reordered")
-  }
-
-  function removeTab() {
-    characterStore.removeField(tab)
   }
 
 </script>
@@ -73,7 +75,7 @@
     {#if fields.length > 0}
     {#each fields as field(field.id)}
     <div class="flex items-center mb-3" animate:flip="{{duration: flipDurationMs}}">
-      <FieldRender field={field} {editMode} />
+      <FieldRender on:fieldRemove on:fieldUpdate field={field} {editMode} />
       {#if sortable && editMode}
       <button class="btn-icon btn-icon-sm">
         <Icon src={BsGrid3x3GapFill} />
@@ -85,7 +87,7 @@
   </div>
   <!-- Circle is Character Sheet dependent to should be in ChSh -->
   {#if editMode}
-  <CircleAdd group={tab.name} />
+  <CircleAdd {character} group={tab.name} on:fieldAdd />
   {/if}
 </CharacterSheetTabWrapper>
 

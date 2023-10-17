@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { Avatar, getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
 	import CharacterAvatarUploadModal from "./CharacterAvatarUploadModal.svelte";
+
+  // @ts-ignore
   import Icon from "svelte-icons-pack"
   import BsPencil from "svelte-icons-pack/bs/BsPencil";
+	import { createEventDispatcher } from "svelte";
 
   export let avatarUrl: string = ""
   export let characterId: string = ""
@@ -10,6 +13,7 @@
   export let editMode: boolean = false
 
   const modalStore = getModalStore()
+  const dispatch = createEventDispatcher()
 
   async function openModal() {
     
@@ -26,7 +30,11 @@
           characterId: characterId
         },
       },
-      response: (r: string) => console.log('response:', r),
+      response: (r) => {
+        if (r !== undefined && r.avatar !== undefined) {
+          dispatch("avatarSet", r.avatar)
+        }
+      },
     };
 
     modalStore.trigger(modal)
