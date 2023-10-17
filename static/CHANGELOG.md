@@ -1,5 +1,6 @@
 ### 0.7.0
 - Feature: Scenes functionality
+- Feature: Big refactoring
 
 ### 0.6.3
 - UI/UX: Adds MD support for Character and Campaign Notes

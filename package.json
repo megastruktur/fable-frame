@@ -6,6 +6,7 @@
 		"dev": "vite dev",
 		"build": "vite build && cp -fr ./socketio/* build/",
 		"preview": "node build/server.js",
+		"zip": "npm run build; zip-build build .; mv *.zip builds/",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:unit": "vitest",
@@ -42,7 +43,8 @@
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
 		"vite": "^4.3.0",
-		"vitest": "^0.25.3"
+		"vitest": "^0.25.3",
+		"zip-build": "^1.8.0"
 	},
 	"type": "module",
 	"dependencies": {
