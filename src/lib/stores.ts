@@ -1,8 +1,5 @@
 import { writable } from "svelte/store"
-import { Collections, type CharacterNotesResponse } from "./pocketbase-types.d";
-import type { CharacterNote, FieldError } from "./types";
-import { addCharacterNote, removeCharacterNote } from "./characterNotesOperations";
-import { updateCharacterNotes } from "$models/character_notes";
+import type { FieldError } from "./types";
 
 /**
  * Edit errors store. While it is not empty - won't allow to save.
