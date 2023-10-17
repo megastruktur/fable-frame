@@ -5,6 +5,7 @@
 	import type { CharactersResponse } from "$lib/pocketbase-types";
 
   export let matches: boolean
+  export let compactVersion: boolean = false
   export let tabsContent: { [key: string]: Field[] }
   export let activeTabName: string
   export let tabs: {[key: string]: Field}
@@ -18,6 +19,6 @@
     <StatsTab tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {matches} {editMode} />
   {:else}
     {@const sortable = (tabName === "skill" || tabName === "combat ")}
-    <CharacterSheetTab on:fieldAdd on:fieldRemove on:fieldUpdate {character} tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {matches} {editMode} editable={false} sortable={sortable} />
+    <CharacterSheetTab on:fieldAdd on:fieldRemove on:fieldUpdate {compactVersion} {character} tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {matches} {editMode} editable={false} sortable={sortable} />
   {/if}
 {/each}

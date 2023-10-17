@@ -12,6 +12,7 @@
   export let activeTabName: string
   // matches the media queries:
   export let matches: boolean | QueryArray | ObjectType<any> = true
+  export let compactVersion: boolean = false
   export let editMode: boolean = false
   export let character: CharactersResponse
 
@@ -40,7 +41,7 @@
 
 </script>
 
-<CharacterSheetTabWrapper {matches} {activeTabName}
+<CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
   {removable} {editMode}
   tabName={tab.name}>
   <h2 class="h2 text-center mb-3">{tab.label}</h2>

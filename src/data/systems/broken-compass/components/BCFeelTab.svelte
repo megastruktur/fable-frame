@@ -6,6 +6,7 @@ import CircleAdd from "$lib/components/circle-add/CircleAdd.svelte";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
 
   export let matches: boolean
+  export let compactVersion: boolean = false
   export let fields: Field[]
   export let editMode: boolean = false
   export let activeTabName: string
@@ -15,7 +16,7 @@ import CircleAdd from "$lib/components/circle-add/CircleAdd.svelte";
 </script>
 
 <!-- Feelings -->
-<CharacterSheetTabWrapper {matches} {activeTabName}
+<CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
 removable={false} {editMode}
 tabName="feel">
 

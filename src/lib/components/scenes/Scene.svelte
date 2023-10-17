@@ -2,13 +2,19 @@
 	import type { CampaignsResponse, ScenesResponse } from "$lib/pocketbase-types";
 	import { getSceneImage } from "$models/scenes";
 	import { getDrawerStore, type DrawerSettings } from "@skeletonlabs/skeleton";
+
+  // @ts-ignore
 	import GiPerson from 'svelte-icons/gi/GiPerson.svelte'
+  // @ts-ignore
   import GiBookPile from 'svelte-icons/gi/GiBookPile.svelte'
+  // @ts-ignore
   import MdChat from 'svelte-icons/md/MdChat.svelte'
+	import { currentUser } from "$lib/pocketbase";
 
   export let scene: ScenesResponse
   export let campaign: CampaignsResponse
 
+  let isGM = campaign.creator === $currentUser?.id || false
   let sceneImage = getSceneImage(scene)
 
   const drawerStore = getDrawerStore();
@@ -25,7 +31,7 @@
   const characterDrawerSettings: DrawerSettings = {
     id: `campaign-character-list`,
     meta: {
-      campaignCharactersIds: campaign.characters
+      campaignCharactersIds: isGM ? campaign.characters : campaign.expand.characters.filter(c => c.creator === $currentUser?.id).map(c => c.id)
     },
     width: "w-96",
     position: "right",

@@ -17,6 +17,7 @@
   export let tab: Field
   export let activeTabName: string
   // matches the media queries:
+  export let compactVersion: boolean = false
   export let matches: boolean | QueryArray | ObjectType<any> = true
   export let editMode: boolean = false
   export let editable: boolean = true
@@ -57,7 +58,7 @@
 
 </script>
 
-<CharacterSheetTabWrapper {matches} {activeTabName}
+<CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
   {removable} {editMode}
   tabName={tab.name}>
   {#if editable && editMode}

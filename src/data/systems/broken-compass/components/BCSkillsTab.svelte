@@ -5,6 +5,7 @@
 	import DiamondSkill from "./DiamondSkill.svelte";
 
   export let matches: boolean = false;
+  export let compactVersion: boolean = false;
   export let fields: Field[]
   export let editMode: boolean = false
   export let activeTabName: string = "skills"
@@ -37,7 +38,7 @@
 </script>
 
 <!-- Skills -->
-<CharacterSheetTabWrapper {matches} {activeTabName}
+<CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
   {editMode}
   tabName="skill">
 

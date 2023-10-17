@@ -3,6 +3,7 @@
   import { createEventDispatcher } from "svelte";
 
   export let matches: boolean | QueryArray | ObjectType<any> = true
+  export let compactVersion: boolean = false
   export let activeTabName: string
   export let tabName: string
   export let removable: boolean = true
@@ -16,7 +17,7 @@
 
 </script>
 
-<section class="w-80 mb-3 relative mx-2 {matches && activeTabName !== tabName ? "hidden" : ""}">
+<section class="w-80 mb-3 relative mx-2 {(matches || compactVersion) && activeTabName !== tabName ? "hidden" : ""}">
 
 
   {#if removable && editMode}

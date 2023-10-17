@@ -21,7 +21,7 @@
 {:then}
   <div class="flex flex-col w-96">
     {#each characters as character(character.id)}
-      <CharacterSheet {character} />
+      <CharacterSheet {character} compactVersion={true} />
     {/each}
   </div>
 {/await}

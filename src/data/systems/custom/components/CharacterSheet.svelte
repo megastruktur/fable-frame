@@ -5,6 +5,7 @@
 	import type { CharactersResponse } from '$lib/pocketbase-types';
   
   export let matches: boolean
+  export let compactVersion: boolean = false
   export let tabsContent: { [key: string]: Field[] }
   export let activeTabName: string
   export let tabs: {[key: string]: Field}
@@ -13,7 +14,7 @@
 </script>
 
 {#each Object.keys(tabs) as tabName}
-  <CharacterSheetTab {character} on:fieldRemove on:fieldUpdate on:fieldAdd tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {matches} {editMode} />
+  <CharacterSheetTab {character} on:fieldRemove on:fieldUpdate on:fieldAdd tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {compactVersion} {matches} {editMode} />
 {/each}
 
 {#if editMode}

@@ -7,6 +7,7 @@
 	import type { CharactersResponse } from "$lib/pocketbase-types";
 
   export let matches: boolean
+  export let compactVersion: boolean
   export let tabsContent: { [key: string]: Field[] }
   export let activeTabName: string
   export let tabs: { [key: string]: Field }
@@ -15,12 +16,12 @@
   
 </script>
 
-<BcSkillsTab on:fieldRemove on:fieldUpdate on:fieldAdd {matches} fields={[...tabsContent["skill"]]} {activeTabName} {editMode} />
+<BcSkillsTab on:fieldRemove on:fieldUpdate on:fieldAdd {compactVersion} {matches} fields={[...tabsContent["skill"]]} {activeTabName} {editMode} />
 
-<BcFeelTab {character} on:fieldRemove on:fieldUpdate on:fieldAdd {matches} fields={[...tabsContent["feel"]]} {activeTabName} {editMode} />
+<BcFeelTab {character} on:fieldRemove on:fieldUpdate on:fieldAdd {compactVersion} {matches} fields={[...tabsContent["feel"]]} {activeTabName} {editMode} />
 
 <!-- General -->
-<BcGeneralTab {character} on:fieldRemove on:fieldUpdate on:fieldAdd tab={tabs["general"]} fields={[...tabsContent["general"]]} bind:activeTabName={activeTabName} {matches} {editMode} />
+<BcGeneralTab {character} on:fieldRemove on:fieldUpdate on:fieldAdd {compactVersion} tab={tabs["general"]} fields={[...tabsContent["general"]]} bind:activeTabName={activeTabName} {matches} {editMode} />
 
 <!-- Inventory -->
-<CharacterSheetTab {character} on:fieldRemove on:fieldUpdate on:fieldAdd tab={tabs["inventory"]} fields={[...tabsContent["inventory"]]} bind:activeTabName={activeTabName} {matches} {editMode} />
+<CharacterSheetTab {character} on:fieldRemove on:fieldUpdate on:fieldAdd {compactVersion} tab={tabs["inventory"]} fields={[...tabsContent["inventory"]]} bind:activeTabName={activeTabName} {matches} {editMode} />

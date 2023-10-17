@@ -12,7 +12,6 @@
 
   import { fade } from "svelte/transition"
 	import MediaQuery, { createMediaStore } from "svelte-media-queries";
-	import { getCharacterNotesByCharacterId } from "$models/character_notes";
 	import { getCampaignImage } from "$models/campaign";
 	import { currentUser } from "$lib/pocketbase";
 	import { addCharacterField, removeCharacterField, updateCharacterField } from "$lib/characterFieldsOperations";
@@ -20,6 +19,7 @@
   const toastStore = getToastStore()
 
   export let character: CharactersResponse
+  export let compactVersion: boolean = false
 
   let CharacterSheet: any
   let characterName: string = ""
@@ -258,7 +258,7 @@
           <MediaQuery query='(max-width: 1200px)' let:matches>
 
             <!-- Tabs -->
-            {#if matches}
+            {#if matches || compactVersion}
             <div class="flex flex-wrap justify-center mb-2">
               {#each Object.keys(tabs) as tabName}
               <button
@@ -273,7 +273,7 @@
             {#if character !== undefined}
 
             <div class="flex flex-wrap justify-center">
-              <svelte:component this={CharacterSheet} {matches} {tabs} {tabsContent} {activeTabName} editMode={editMode}
+              <svelte:component this={CharacterSheet} {compactVersion} {matches} {tabs} {tabsContent} {activeTabName} editMode={editMode}
               character={character}
               on:fieldUpdate={fieldUpdate}
               on:fieldRemove={fieldRemove}
