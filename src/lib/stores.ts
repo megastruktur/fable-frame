@@ -1,83 +1,8 @@
 import { writable } from "svelte/store"
-import { Collections, type CharactersResponse, type CharacterNotesResponse } from "./pocketbase-types.d";
-import type { CharacterNote, Field, FieldError } from "./types";
-import { addCharacterField, removeCharacterField, updateCharacterField } from "$lib/characterFieldsOperations";
+import { Collections, type CharacterNotesResponse } from "./pocketbase-types.d";
+import type { CharacterNote, FieldError } from "./types";
 import { addCharacterNote, removeCharacterNote } from "./characterNotesOperations";
 import { updateCharacterNotes } from "$models/character_notes";
-
-
-function createCharacterStore() {
-
-  const { subscribe, set, update } = writable<CharactersResponse>()
-
-  function setField(field: Field) {
-    update((character) => {
-      return updateCharacterField(character, field)
-    })
-  }
-
-  function rename(name: string) {
-    update((character) => {
-      character.name = name
-      return character
-    })
-  }
-
-  function addField(field: Field) {
-    update((character) => {
-      console.log(`Adding field ${field.name} to character ${character.name}`)
-      return addCharacterField(character, field)
-    })
-  }
-
-  function removeField(field: Field) {
-    update((character) => {
-      console.log(`Removing field ${field.name} from character ${character.name}`)
-      return removeCharacterField(character, field)
-    })
-  }
-
-  function setAvatar(avatar: string) {
-    update((character) => {
-      character.avatar = avatar
-      return character
-    })
-  }
-
-  return {
-    subscribe,
-    rename,
-    setField,
-    addField,
-    removeField,
-    setAvatar,
-    set: (character: CharactersResponse) => set(character),
-    reset: () => set({
-      name: "",
-      rpgSystem: "",
-      campaign: "",
-      campaignStatus: 0,
-      avatar: "",
-      creator: "",
-      fields: [],
-      hash: "",
-      id: "",
-      created: "",
-      updated: "",
-      collectionId: "",
-      collectionName: Collections.Characters,
-      expand: {
-        rpgSystem: undefined,
-        campaign: undefined,
-      }
-    })
-  };
-}
-
-export const characterStore = createCharacterStore();
-
-export const editMode = writable(false);
-
 
 /**
  * Edit errors store. While it is not empty - won't allow to save.
