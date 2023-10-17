@@ -82,7 +82,7 @@
 {:then}
 
   {#if $currentUser?.id === characterNotes.creator}
-  <div class="m-4">
+  <div class="m-4 w-96">
     <h2 class="h2 text-center">Character Notes</h2>
 
     <div class="flex flex-col">

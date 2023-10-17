@@ -183,6 +183,7 @@
     const characterNotesDrawerSettings: DrawerSettings = {
       id: "character-notes",
       position: "right",
+      width: "w-96",
       meta: {
         characterId: character.id,
       }

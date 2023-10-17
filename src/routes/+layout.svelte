@@ -13,6 +13,7 @@
     import { AppShell, AppBar } from '@skeletonlabs/skeleton';
     import Sidebar from '$lib/components/Sidebar.svelte';
 
+		// @ts-ignore
     import Icon from "svelte-icons-pack";
     import BsGithub from "svelte-icons-pack/bs/BsGithub";
     import BsEnvelope from "svelte-icons-pack/bs/BsEnvelope";

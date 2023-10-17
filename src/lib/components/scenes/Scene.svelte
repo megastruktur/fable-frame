@@ -66,7 +66,10 @@
 
   
   <div class="bg-surface-900/70 py-2">
-    <h1 class="h1 text-center">{scene.name}</h1>
+    <h2 class="h2 text-center flex justify-center space-x-3">
+      <p>{scene.name}</p>
+      <a class="btn btn-sm m-0 variant-ghost-secondary" href="/campaigns/{campaign.id}">{campaign.name}</a>
+    </h2>
   </div>
 
   <!-- Characters -->
