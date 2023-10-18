@@ -10,12 +10,18 @@ export default function injectSocketIO(server) {
     });
 
     io.on('connection', (socket) => {
+
+        socket.on("create", (room) => {
+            socket.join(room);
+        })
+
         socket.on('campaignChat', (message) => {
-            io.emit('campaignChatMessage', {
+            io.to('campaign-chat-room-' + message.campaignId).emit('campaignChatMessage', {
                 characterName: message.characterName,
                 message: message.message,
                 messageId: message.messageId,
                 creatorId: message.creatorId,
+                campaignId: message.campaignId,
                 time: new Date().toLocaleString()
             });
         });

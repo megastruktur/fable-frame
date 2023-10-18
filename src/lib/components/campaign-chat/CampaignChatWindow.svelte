@@ -5,6 +5,7 @@
 	import { io } from '$lib/webSocketConnection';
 	import { createChatMessage, getCampaignChat } from "$models/campaign_chat";
 	import { onMount, tick } from "svelte";
+  // @ts-ignore
   import FaAngleRight from 'svelte-icons/fa/FaAngleRight.svelte'
 	import CampaignChatMessage from "./CampaignChatMessage.svelte";
 	import DiceRoller from "../dice/DiceRoller.svelte";
@@ -13,7 +14,7 @@
 
   export let campaign: CampaignsResponse
 
-  let myCharacter: CharactersResponse = campaign.expand.characters.find(c => c.creator === $currentUser?.id)
+  let myCharacter: CharactersResponse = campaign.expand.characters?.find(c => c.creator === $currentUser?.id)
   let characterName: string = myCharacter?.name || $currentUser?.username
 
   let chatMessage: string
@@ -47,6 +48,7 @@
         message: messageString
       })
       const message = {
+        campaignId: campaign.id,
         characterName: characterName,
         message: messageString,
         messageId: campaignChatMessage.id,
@@ -59,6 +61,8 @@
 
   onMount(async () => {
 
+    io.emit('create', `campaign-chat-room-${campaign.id}`);
+
     messages = (await getCampaignChat(campaign.id)).map(message => {
       return {
         characterName: campaign.expand.characters.find(c => c.id === message.character)?.name || message.expand.creator.username,
@@ -67,6 +71,7 @@
         creatorId: message.creator,
         isGm: message.creator === campaign.creator,
         time: message.created,
+        campaignId: campaign.id,
       }
     })
 

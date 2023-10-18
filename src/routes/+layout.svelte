@@ -42,9 +42,6 @@
 			width: 'w-50',
 		};
 
-    // Inject the Analytics functionality
-    inject({ mode: dev ? 'development' : 'production' });
-
     export let data
     let bannerUrl: string
 

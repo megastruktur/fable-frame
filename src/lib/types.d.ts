@@ -54,6 +54,7 @@ type CharacterNote = {
 }
 
 type ChatMessage = {
+  campaignId: string,
   messageId: string
   characterName: string
   message: string
