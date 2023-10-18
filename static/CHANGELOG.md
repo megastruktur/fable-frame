@@ -1,5 +1,6 @@
 ### 0.7.0
 - Feature: Scenes functionality
+- Feature: Chat functionality
 - Feature: Big refactoring
 
 ### 0.6.3

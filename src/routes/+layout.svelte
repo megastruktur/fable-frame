@@ -1,7 +1,6 @@
 <script lang="ts">
 	import "../app.postcss";
     import { dev } from "$app/environment"
-    import { inject } from "@vercel/analytics"
     import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
     import { size } from '@floating-ui/dom';
     import { initializeStores, storePopup, type DrawerSettings, Modal, Toast, getDrawerStore, Drawer } from '@skeletonlabs/skeleton';
@@ -94,7 +93,7 @@
 								</svg>
 						</span>
 					</button>
-					<strong class="text-xl uppercase optima-regular">Fable Frame (WIP) <span class="text-xs text-red-800">v0.6.3</span></strong>
+					<strong class="text-xl uppercase optima-regular">Fable Frame (WIP) <span class="text-xs text-red-800">v0.7.0</span></strong>
 				</svelte:fragment>
 				<svelte:fragment slot="trail">
 					<a href="mailto:astrtomortis@gmail.com" class="btn"><Icon src={BsEnvelope} /></a>

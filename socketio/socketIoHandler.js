@@ -2,7 +2,12 @@
 import { Server } from 'socket.io';
 
 export default function injectSocketIO(server) {
-    const io = new Server(server);
+    const io = new Server(server, {
+        cors: {
+            origin: "https://fable-frame.online",
+            methods: ["GET", "POST"],
+        }
+    });
 
     io.on('connection', (socket) => {
         socket.on('campaignChat', (message) => {
