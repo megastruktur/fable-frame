@@ -15,3 +15,7 @@ export async function createChatMessage(data: any): Promise<CampaignChatResponse
 export async function getChatMessage(messageId: string): Promise<CampaignChatResponse | null> {
   return await pb.collection("campaign_chat").getOne(messageId);
 }
+
+export async function updateChatMessage(messageId: string, data: Partial<CampaignChatResponse>): Promise<CampaignChatResponse> {
+  return await pb.collection("campaign_chat").update(messageId, data);
+}

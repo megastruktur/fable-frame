@@ -13,7 +13,11 @@
 
 
   function rollDiceAmount(amount: number) {    
-    dispatch("diceRoll", amount + dieToRoll)
+    dispatch("diceRoll", {
+      total: amount + dieToRoll,
+      die: dieToRoll,
+      amount: amount
+    })
     dieToRoll = ""
   }
 

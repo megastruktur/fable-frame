@@ -62,3 +62,15 @@ type ChatMessage = {
   creatorId: string
   isGm?: boolean
 }
+
+type DieRollChat = {
+  id: string
+  value: number
+  die: string
+  color?: string
+}
+
+type ColorForPicker = {
+  bg: string
+  text: string
+}

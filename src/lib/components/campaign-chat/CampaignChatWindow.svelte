@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { currentUser, pb } from "$lib/pocketbase";
 	import type { CampaignsResponse, CharactersResponse } from "$lib/pocketbase-types";
-	import type { ChatMessage } from "$lib/types";
+	import type { ChatMessage, DieRollChat } from "$lib/types";
 	import { io } from '$lib/webSocketConnection';
 	import { createChatMessage, getCampaignChat } from "$models/campaign_chat";
 	import { onMount, tick } from "svelte";
@@ -10,6 +10,7 @@
 	import CampaignChatMessage from "./CampaignChatMessage.svelte";
 	import DiceRoller from "../dice/DiceRoller.svelte";
   import { DiceRoll } from '@dice-roller/rpg-dice-roller';
+  import { v4 as uuidv4 } from 'uuid'
 
 
   export let campaign: CampaignsResponse
@@ -25,18 +26,31 @@
     node?.scroll({ top: node.scrollHeight, behavior: 'smooth' });
   }
 
-  function diceRollHandler({detail}: {detail: string}) {
+  function diceRollHandler({detail: {die, total, amount}}: {detail: {die: string, total: string, amount: number}}) {
 
-    rollDiceToChat(detail)
+    rollDiceToChat(total, die, amount)
   }
 
-  async function rollDiceToChat(diceString: string) {
+  async function rollDiceToChat(total: string, die: string, amount: number) {
 
-    const roll = new DiceRoll(diceString);
+    const roll = new DiceRoll(total);
+    let dieRolls: DieRollChat[] = []
 
-    const currentRoll: {output: string} = JSON.parse(roll.export() || "{}")
+    const currentRoll: {output: string, rolls: DiceRoll[]} = JSON.parse(roll.export() || "{}")
 
-    await sendMessage(`/roll ${currentRoll.output}`)
+
+    currentRoll.rolls.forEach(globalRoll => {
+      globalRoll.rolls.forEach(localRoll => {
+        dieRolls = [...dieRolls, {
+          id: uuidv4(),
+          // @ts-ignore
+          value: localRoll.value,
+          die: die
+        }]
+      })
+    })
+
+    await sendMessage(`/roll-result ${JSON.stringify(dieRolls)}`)
   }
 
   async function sendMessage(messageString: string = "") {
