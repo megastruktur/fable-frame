@@ -120,7 +120,7 @@
     </div>
   </div>
 
-  <div class="h-32 my-3">
+  <div class="my-3">
     <form class="flex my-3 mx-2" on:submit|preventDefault={() => sendMessage(chatMessage)}>
       <textarea class="input resize-none" bind:value={chatMessage} placeholder="Type here"></textarea>
       <button type="submit"

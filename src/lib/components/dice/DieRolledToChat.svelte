@@ -6,8 +6,7 @@
   export let die: DieRollChat
   export let selectedDieId: string
   export let colorPickerPopupSettings: PopupSettings
-
-  let selected: boolean = selectedDieId === die.id
+  export let editable: boolean
 
   const dispatch = createEventDispatcher()
 
@@ -18,7 +17,12 @@
   }
 </script>
 
-<button
-  on:click={selectDieHandler}
-  use:popup={colorPickerPopupSettings}
-  class="p-0.5 px-1 {die.die} {die.color !== undefined ? die.color : "bg-tertiary-400 text-white" }">{die.value}</button>
+{#if editable}
+  <button
+    on:click={selectDieHandler}
+    use:popup={colorPickerPopupSettings}
+    class="p-1 w-7 leading-6  {die.die} {die.color !== undefined ? die.color : "bg-tertiary-400 text-surface-500" }">{die.value}</button>
+{:else}
+  <button
+    class="p-1 w-7 leading-6  {die.die} {die.color !== undefined ? die.color : "bg-tertiary-400 text-surface-500" }">{die.value}</button>
+{/if}

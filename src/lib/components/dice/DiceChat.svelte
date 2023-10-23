@@ -4,6 +4,7 @@
 	import type { PopupSettings } from "@skeletonlabs/skeleton";
 	import ColorPickerPopup from "../global/ColorPickerPopup.svelte";
 	import DieRolledToChat from "./DieRolledToChat.svelte";
+	import { currentUser } from "$lib/pocketbase";
 
   export let dice: DieRollChat[]
   export let message: ChatMessage
@@ -53,8 +54,9 @@
 </div>
 
 <div class="space-x-1">
-  {#each dice as die}
+  {#each dice as die(die.id)}
     <DieRolledToChat
+      editable={message.creatorId === $currentUser?.id}
       selectedDieId={operationOnDieId} colorPickerPopupSettings={colorPickerPopup}
       on:selectDie={selectDieHandler} {die} />
   {/each}
