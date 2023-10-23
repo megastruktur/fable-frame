@@ -211,6 +211,11 @@
     character.avatar = avatar
   }
 
+  function avatarSetHandler({detail: {avatar}} : {detail: {avatar: string}}) {
+    character.avatar = avatar
+    characterAvatarUrl = getCharacterAvatar(character)
+  }
+
 </script>
 
 {#await getData()}
@@ -227,7 +232,7 @@
       class="flex flex-col items-center mb-3"
       >
       <div class="mt-3">
-        <CharacterAvatar characterName={character.name} characterId={character.id} avatarUrl={characterAvatarUrl} {editMode} />
+        <CharacterAvatar characterName={character.name} characterId={character.id} avatarUrl={characterAvatarUrl} {editMode} on:avatarSet={avatarSetHandler} />
       </div>
 
       <h1 class="h2 my-3 items-center flex">

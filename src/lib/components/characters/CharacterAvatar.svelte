@@ -32,7 +32,7 @@
       },
       response: (r) => {
         if (r !== undefined && r.avatar !== undefined) {
-          dispatch("avatarSet", r.avatar)
+          dispatch("avatarSet", {avatar: r.avatar})
         }
       },
     };
