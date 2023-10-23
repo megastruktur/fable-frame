@@ -12,14 +12,24 @@ export function imageUrlToImg(text: string, maxWidthClass = "w-96"): string {
 
   let formattedText: string = text
   const imageUrls: (string | undefined)[] = getImageUrlsFromText(text);
+  const imageTags: string[] = [];
 
   imageUrls.forEach((imageUrl) => {
     if (imageUrl!== undefined) {
-      formattedText = formattedText.replace(imageUrl,
-        `<img alt="note loaded" class="${maxWidthClass}" src="${imageUrl}" />`
-      )
+      imageTags.push(`<img alt="note loaded" class="${maxWidthClass}" src="${imageUrl}" />`)
+      formattedText = formattedText.replace(imageUrl, "")
     }
   })
+
+  if (formattedText.replace(" ", "") !== "") {
+    formattedText = "<div class=\"mx-3 my-2\">" + formattedText + "</div>"
+  }
+
+  if (imageTags.length > 0) {
+    imageTags.forEach((imageTag) => {
+      formattedText = imageTag + formattedText
+    })
+  }
 
 
   return formattedText

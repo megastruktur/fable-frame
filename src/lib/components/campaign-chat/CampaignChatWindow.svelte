@@ -11,12 +11,14 @@
 	import DiceRoller from "../dice/DiceRoller.svelte";
   import { DiceRoll } from '@dice-roller/rpg-dice-roller';
   import { v4 as uuidv4 } from 'uuid'
+	import { getCharacterAvatarThumb } from "$models/character";
 
 
   export let campaign: CampaignsResponse
 
   let myCharacter: CharactersResponse = campaign.expand.characters?.find(c => c.creator === $currentUser?.id)
-  let characterName: string = myCharacter?.name || $currentUser?.username
+  const characterName: string = myCharacter?.name || $currentUser?.username
+  const characterAvatar: string = myCharacter !== undefined ? getCharacterAvatarThumb(myCharacter) : ""
 
   let chatMessage: string
   let messages: ChatMessage[] = []
@@ -67,6 +69,7 @@
         message: messageString,
         messageId: campaignChatMessage.id,
         creatorId: $currentUser?.id || "",
+        characterAvatar: characterAvatar,
       }
       io.emit('campaignChat', message);
       chatMessage = ""
@@ -86,6 +89,7 @@
         isGm: message.creator === campaign.creator,
         time: message.created,
         campaignId: campaign.id,
+        characterAvatar: message.expand.character?.avatar ? getCharacterAvatarThumb(message.expand.character) : ""
       }
     })
 
@@ -109,14 +113,16 @@
     class="w-full h-4/6 overflow-y-auto select-text"
     bind:this={element}
   >
-    {#each messages as message(message.messageId)}
-      <CampaignChatMessage {message} />
-    {/each}
+    <div class="space-y-3">
+      {#each messages as message(message.messageId)}
+        <CampaignChatMessage {message} />
+      {/each}
+    </div>
   </div>
 
   <div class="h-1/6">
     <form class="flex my-3 mx-2" on:submit|preventDefault={() => sendMessage(chatMessage)}>
-      <input type="text" class="input" bind:value={chatMessage} placeholder="Type here" />
+      <textarea class="input" bind:value={chatMessage} placeholder="Type here"></textarea>
       <button type="submit"
         class="btn btn-icon btn-icon-sm variant-filled-tertiary h-6 w-6"
       ><FaAngleRight class="text-secondary-600" /></button>

@@ -4,7 +4,7 @@ import type { CampaignChatResponse } from "$lib/pocketbase-types";
 export async function getCampaignChat(campaignId: string): Promise<CampaignChatResponse[]> {
   return await pb.collection("campaign_chat").getFullList({
     filter: `campaign = "${campaignId}"`,
-    expand: "creator"
+    expand: "creator,character"
   });
 }
 

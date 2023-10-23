@@ -60,7 +60,8 @@ type ChatMessage = {
   message: string
   time: string
   creatorId: string
-  isGm?: boolean
+  isGm?: boolean,
+  characterAvatar?: string,
 }
 
 type DieRollChat = {
