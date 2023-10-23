@@ -107,10 +107,10 @@
 
 </script>
 
-<div class="h-full">
+<div class="h-full flex flex-col">
 
   <div
-    class="w-full h-4/6 overflow-y-auto select-text"
+    class="w-full overflow-y-auto select-text"
     bind:this={element}
   >
     <div class="space-y-3">
@@ -120,9 +120,9 @@
     </div>
   </div>
 
-  <div class="h-1/6">
+  <div class="h-32 my-3">
     <form class="flex my-3 mx-2" on:submit|preventDefault={() => sendMessage(chatMessage)}>
-      <textarea class="input" bind:value={chatMessage} placeholder="Type here"></textarea>
+      <textarea class="input resize-none" bind:value={chatMessage} placeholder="Type here"></textarea>
       <button type="submit"
         class="btn btn-icon btn-icon-sm variant-filled-tertiary h-6 w-6"
       ><FaAngleRight class="text-secondary-600" /></button>
