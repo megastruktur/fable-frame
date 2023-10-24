@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ChatMessage, DieRollChat } from "$lib/types";
-	import { updateChatMessage } from "$models/campaign_chat";
+	import { updateChatMessageWithSocket } from "$models/campaign_chat";
 	import { popup, type PopupSettings } from "@skeletonlabs/skeleton";
 	import ColorPickerPopup from "../global/ColorPickerPopup.svelte";
 	import { currentUser } from "$lib/pocketbase";
@@ -14,7 +14,7 @@
 
   const colorPickerPopup: PopupSettings = {
     event: 'click',
-    target: `colorPickerPopup-${message.messageId}`,
+    target: `colorPickerPopup-${message.idUpdatedString}`,
     placement: 'top',
     state: colorPickerPopupState,
   };
@@ -37,17 +37,16 @@
     dice = [...dice.map(die => {
       if (die.id === operationOnDieId) {
         die.color = detail
-        console.log("changed color")
       }
       return die
     })]
     message.message = rollResultPrefix + JSON.stringify(dice)
     operationOnDieId = ""
-    await updateChatMessage(message.messageId, {message: message.message})
+    await updateChatMessageWithSocket(message)
   }
 </script>
 
-<div class="card p-4 variant-filled-surface z-20" data-popup="colorPickerPopup-{message.messageId}">
+<div class="card p-4 variant-filled-surface z-20" data-popup="colorPickerPopup-{message.idUpdatedString}">
   <ColorPickerPopup
     on:selectColor={selectColorHandler}
     />

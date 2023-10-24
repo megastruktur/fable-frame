@@ -22,8 +22,13 @@ export default function injectSocketIO(server) {
                 messageId: message.messageId,
                 creatorId: message.creatorId,
                 campaignId: message.campaignId,
-                time: new Date().toLocaleString()
+                idMessageHash: message.idMessageHash,
+                time: message.time,
             });
+        });
+
+        socket.on('campaignChatEdited', (message) => {
+            io.to('campaign-chat-room-' + message.campaignId).emit('campaignChatMessageEdited', message);
         });
     });
 

@@ -61,6 +61,7 @@ type ChatMessage = {
   time: string
   creatorId: string
   isGm?: boolean,
+  idUpdatedString: string,
   characterAvatar?: string,
 }
 

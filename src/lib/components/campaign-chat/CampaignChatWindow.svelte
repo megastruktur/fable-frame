@@ -4,7 +4,7 @@
 	import type { ChatMessage, DieRollChat } from "$lib/types";
 	import { io } from '$lib/webSocketConnection';
 	import { createChatMessage, getCampaignChat } from "$models/campaign_chat";
-	import { onMount, tick } from "svelte";
+	import { onDestroy, onMount, tick } from "svelte";
   // @ts-ignore
   import FaAngleRight from 'svelte-icons/fa/FaAngleRight.svelte'
 	import CampaignChatMessage from "./CampaignChatMessage.svelte";
@@ -64,13 +64,15 @@
         character: myCharacter?.id || "",
         message: messageString
       })
-      const message = {
+      const message: ChatMessage = {
         campaignId: campaign.id,
         characterName: characterName,
         message: messageString,
         messageId: campaignChatMessage.id,
         creatorId: $currentUser?.id || "",
         characterAvatar: characterAvatar,
+        idUpdatedString: campaignChatMessage.id + campaignChatMessage.updated,
+        time: new Date().toLocaleString(),
       }
       io.emit('campaignChat', message);
       chatMessage = ""
@@ -90,6 +92,7 @@
         isGm: message.creator === campaign.creator,
         time: message.created,
         campaignId: campaign.id,
+        idUpdatedString: message.id + message.updated,
         characterAvatar: message.expand.character?.avatar ? getCharacterAvatarThumb(message.expand.character) : ""
       }
     })
@@ -101,10 +104,25 @@
         scrollToBottom(element)
     });
 
+    // Replace message if edited.
+    io.on('campaignChatMessageEdited', async (message: ChatMessage) => {
+      messages = [...messages.map(m => {
+        if (m.messageId === message.messageId) {
+          return message
+        }
+        return m
+      })]
+    });
+
     // Wait for data to populate
     await tick();
     scrollToBottom(element)
   });
+
+  onDestroy(() => {
+    io.off("campaignChatMessage")
+    io.off("campaignChatMessageEdited")
+  })
 
 </script>
 
@@ -115,7 +133,7 @@
     bind:this={element}
   >
     <div class="space-y-3">
-      {#each messages as message(message.messageId)}
+      {#each messages as message(message.idUpdatedString)}
         <CampaignChatMessage {message} />
       {/each}
     </div>
