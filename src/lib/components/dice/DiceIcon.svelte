@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { ColorPickerBgActive, ColorPickerContrast, ColorPickerText } from '$lib/enums';
 	import type { DieRollChat } from '$lib/types';
+
   // @ts-ignore
-  import { DiceD4Icon, DiceD6Icon, DiceD8Icon, DiceD10Icon, DiceD12Icon, DiceD20Icon } from 'svelte-uicons/rounded/solid'
+  import { Circle0Icon, DiceD4Icon, DiceD6Icon, DiceD8Icon, DiceD10Icon, DiceD12Icon, DiceD20Icon } from 'svelte-uicons/rounded/solid'
 
   export let die: DieRollChat
   export let dieSize: {
@@ -20,7 +21,7 @@
   <div class="rounded-full p-1 {bgActiveClass} border z-10 mx-auto {contrastColorClass}">{die.value}</div>
   <div class="absolute top-0 left-0">
     {#if die.die === "d2"}
-      <div></div>
+      <Circle0Icon />
     {:else if die.die === "d4"}
       <DiceD4Icon />
     {:else if die.die === "d6"}
