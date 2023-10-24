@@ -244,7 +244,7 @@ export async function addCharacterToCampaign(characterId: string, campaignId: st
     getCampaign(campaignId)
   ])
 
-  if (campaign.characters.find(campaignCharacterId => campaignCharacterId === character.id) != null) {
+  if (campaign.characters.find(campaignCharacterId => campaignCharacterId === character.id) === undefined) {
 
     const characterIds: string[] = [...campaign.characters, characterId]
 
@@ -270,7 +270,7 @@ export async function removeCharacterFromCampaign(characterId: string, campaignI
     getCampaign(campaignId)
   ])
 
-  if (campaign.characters.find(campaignCharacterId => campaignCharacterId === characterId)!= null) {
+  if (campaign.characters.find(campaignCharacterId => campaignCharacterId === characterId) !== undefined) {
 
     const characterIds = campaign.characters.filter(campaignCharacterId => campaignCharacterId!== characterId)
 
