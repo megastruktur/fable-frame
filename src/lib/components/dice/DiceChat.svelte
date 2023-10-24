@@ -53,23 +53,23 @@
   <div class="arrow variant-filled-surface" />
 </div>
 
-<div class="space-x-1 flex">
+<div class="flex flex-wrap">
   {#each dice as die(die.id)}
-    {#if allowOperationOnDie}
+    <div class="p-1">
 
-      <button
-        on:click={() => operationOnDieId = die.id}
-        use:popup={colorPickerPopup}
-      >
-        {#key die.color}
-          <DiceIcon {die} {dieSize} />
-        {/key}
-      </button>
-    {:else}
-      <DiceIcon {die} {dieSize} />
-    {/if}
-
-    <!-- editable={message.creatorId === $currentUser?.id} -->
+      {#if allowOperationOnDie}
+        <button
+          on:click={() => operationOnDieId = die.id}
+          use:popup={colorPickerPopup}
+        >
+          {#key die.color}
+            <DiceIcon {die} {dieSize} />
+          {/key}
+        </button>
+      {:else}
+        <DiceIcon {die} {dieSize} />
+      {/if}
+    </div>
   {/each}
 </div>
 

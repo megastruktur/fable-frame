@@ -33,7 +33,7 @@
   {/if}
 
   <div
-    class="{isMyMessage ? "bg-secondary-500" : "bg-surface-500"} rounded-2xl {isDiceRoll ? "px-3 py-2" : ""}">
+    class="{isMyMessage ? "bg-tertiary-900" : "bg-surface-500"} rounded-2xl {isDiceRoll ? "px-3 py-2" : ""}">
     {#if isDiceRoll}
       <DiceChat {dice} {message} />
     {:else}
