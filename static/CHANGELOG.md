@@ -1,3 +1,6 @@
+### 0.7.2
+- Bugfix: Character Add to campaign fix.
+
 ### 0.7.1
 - Fixes and tweaks
 

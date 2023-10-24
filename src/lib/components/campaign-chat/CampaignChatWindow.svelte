@@ -85,7 +85,7 @@
 
     messages = (await getCampaignChat(campaign.id)).map(message => {
       return {
-        characterName: campaign.expand.characters.find(c => c.id === message.character)?.name || message.expand.creator.username,
+        characterName: campaign.expand.characters?.find(c => c.id === message.character)?.name || message.expand.creator.username,
         message: message.message,
         messageId: message.id,
         creatorId: message.creator,
