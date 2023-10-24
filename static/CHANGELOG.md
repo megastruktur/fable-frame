@@ -1,3 +1,6 @@
+### 0.7.1
+- Fixes and tweaks
+
 ### 0.7.0
 - Feature: Scenes functionality
 - Feature: Chat functionality
