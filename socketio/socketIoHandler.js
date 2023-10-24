@@ -22,7 +22,7 @@ export default function injectSocketIO(server) {
                 messageId: message.messageId,
                 creatorId: message.creatorId,
                 campaignId: message.campaignId,
-                idMessageHash: message.idMessageHash,
+                idUpdatedString: message.idUpdatedString,
                 time: message.time,
             });
         });

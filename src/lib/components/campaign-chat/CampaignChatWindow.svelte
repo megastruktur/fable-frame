@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { currentUser, pb } from "$lib/pocketbase";
+	import { currentUser } from "$lib/pocketbase";
 	import type { CampaignsResponse, CharactersResponse } from "$lib/pocketbase-types";
 	import type { ChatMessage, DieRollChat } from "$lib/types";
 	import { io } from '$lib/webSocketConnection';
