@@ -5,7 +5,7 @@
 	import { getCampaignCharacterRequests } from "$models/campaign";
 	import { ProgressRadial, type ToastSettings, getToastStore } from "@skeletonlabs/skeleton";
 	import CharacterItem from "$lib/components/characters/CharacterItem.svelte";
-	import { updateCharacter } from "$models/character";
+	import { addCharacterToCampaign } from "$models/character";
 
   let characters: CharactersResponse[]
   let characterSelected: CharactersResponse
@@ -21,7 +21,7 @@
     characterSelected.campaignStatus = 1
 
     try {
-      const updatedCharacter = await updateCharacter(characterSelected.id, characterSelected)
+      const updatedCharacter = await addCharacterToCampaign(characterSelected.id, $page.params.campaignId)
       if (updatedCharacter !== undefined) {
         // Success Toast
         const t: ToastSettings = {

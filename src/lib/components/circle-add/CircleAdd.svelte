@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { getModalStore, type ModalSettings} from "@skeletonlabs/skeleton";
+  // @ts-ignore
 	import Icon from "svelte-icons-pack";
 	import BsPlus from "svelte-icons-pack/bs/BsPlus";
 	import CircleAddModal from "./CircleAddModal.svelte";
+	import type { CharactersResponse } from "$lib/pocketbase-types";
+	import { createEventDispatcher } from "svelte";
 
   export let group: string = "general";
   export let type: string = "";
+  export let character: CharactersResponse
 
   // Which compendium to use.
   // Set empty if no compendium.
@@ -13,6 +17,7 @@
   export let compendiumGroup: string = "";
 
   const modalStore = getModalStore()
+  const dispatch = createEventDispatcher()
 
   async function openModal() {
     
@@ -29,8 +34,16 @@
           group,
           type,
           compendium,
-          compendiumGroup
+          compendiumGroup,
+          character,
         },
+      },
+      response(r) {
+        if (r !== undefined && r.field !== undefined) {
+          dispatch("fieldAdd", {
+            field: r.field
+          })
+        }
       },
     };
 

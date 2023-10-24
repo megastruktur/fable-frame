@@ -44,7 +44,7 @@ tabName={tab.name}>
             </button>
           </div>
         {:else}        
-          <FieldRender field={field} {editMode} />
+          <FieldRender on:fieldRemove on:fieldUpdate field={field} {editMode} />
         {/if}
       </div>
       {/if}
@@ -57,7 +57,7 @@ tabName={tab.name}>
     {@const isSave = field.name.includes("Save") ? true : false}
       {#if isSave}
       <div class="flex items-center mb-3">    
-        <FieldRender field={field} {editMode} />
+        <FieldRender on:fieldRemove on:fieldUpdate field={field} {editMode} />
       </div>
       {/if}
     {/each}

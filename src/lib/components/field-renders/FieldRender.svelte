@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { characterStore } from "$lib/stores";
 	import type { Field } from "$lib/types.d";
 	import FieldRenderCounter from "./FieldRenderCounter.svelte";
 	import FieldRenderCounterNum from "./FieldRenderCounterNum.svelte";
@@ -7,6 +6,7 @@
 	import FieldRenderText from "./FieldRenderText.svelte";
 	import FieldRenderSection from "./FieldRenderSection.svelte";
 	import FieldRenderDatatable from "./FieldRenderDatatable.svelte";
+	import { createEventDispatcher } from "svelte";
 
   export let field: Field
   export let renderAs: string = field.type
@@ -17,13 +17,13 @@
   export let valueStyle: string = ""
 
   let removable: boolean = (field.removable !== undefined) ? field.removable : true
-  
-  function updateField(event: { detail: {field: Field, operation: string} }) {
-    characterStore.setFieldValue(event.detail.field.id, event.detail.field.value)
-  }
+
+  const dispatch = createEventDispatcher()
   
   function removeField() {
-    characterStore.removeField(field)
+    dispatch("fieldRemove", {
+      field: field
+    })
   }
 
 </script>
@@ -32,22 +32,22 @@
 <button class="btn-icon" on:click={removeField}>✕</button>
 {/if}
 {#if renderAs === "text"}
-  <FieldRenderText {editable} {classes} {labelStyle} {valueStyle} field={field} on:fieldUpdate={updateField} {editMode} />
+  <FieldRenderText {editable} {classes} {labelStyle} {valueStyle} field={field} on:fieldUpdate {editMode} />
 {/if}
 {#if renderAs === "counter"}
-  <FieldRenderCounter {editable} {classes} {labelStyle} {valueStyle} field={field} on:fieldUpdate={updateField} {editMode} />
+  <FieldRenderCounter {editable} {classes} {labelStyle} {valueStyle} field={field} on:fieldUpdate {editMode} />
 {/if}
 {#if renderAs === "counterNum"}
-  <FieldRenderCounterNum {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />
+  <FieldRenderCounterNum {editable} {classes} field={field} on:fieldUpdate {editMode} />
 {/if}
 {#if renderAs === "tag"}
-  <FieldRenderTag {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />
+  <FieldRenderTag {editable} {classes} field={field} on:fieldUpdate {editMode} />
 {/if}
 {#if renderAs === "section"}
-  <FieldRenderSection {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />
+  <FieldRenderSection {editable} {classes} field={field} on:fieldUpdate {editMode} />
 {/if}
 {#if renderAs === "datatable"}
-  <FieldRenderDatatable {editable} {classes} field={field} on:fieldUpdate={updateField} {editMode} />
+  <FieldRenderDatatable {editable} {classes} field={field} on:fieldUpdate {editMode} />
 {/if}
 
 <!-- For Tag it is remove the tag -->

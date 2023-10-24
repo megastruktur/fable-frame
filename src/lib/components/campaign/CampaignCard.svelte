@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { CampaignResponse } from "$lib/pocketbase-types"
+	import type { CampaignsResponse } from "$lib/pocketbase-types"
 	import { getCampaignImage } from "$models/campaign"
 
-  export let campaign: CampaignResponse
+  export let campaign: CampaignsResponse
   export let classes: string = ""
 
   let campaignImage = getCampaignImage(campaign)

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import "../app.postcss";
     import { dev } from "$app/environment"
-    import { inject } from "@vercel/analytics"
     import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
     import { size } from '@floating-ui/dom';
     import { initializeStores, storePopup, type DrawerSettings, Modal, Toast, getDrawerStore, Drawer } from '@skeletonlabs/skeleton';
@@ -13,6 +12,7 @@
     import { AppShell, AppBar } from '@skeletonlabs/skeleton';
     import Sidebar from '$lib/components/Sidebar.svelte';
 
+		// @ts-ignore
     import Icon from "svelte-icons-pack";
     import BsGithub from "svelte-icons-pack/bs/BsGithub";
     import BsEnvelope from "svelte-icons-pack/bs/BsEnvelope";
@@ -21,6 +21,17 @@
     import CharacterNotesDrawer from "$lib/components/character-notes/CharacterNotesDrawer.svelte";
     import { headerBanner } from "$lib/stores"
     import { onDestroy } from "svelte"
+		import CampaignCharactersDrawer from "$lib/components/characters/CampaignCharactersDrawer.svelte";
+		import CampaignNotesDrawer from "$lib/components/campaign/CampaignNotesDrawer.svelte";
+		import { page } from "$app/stores";
+	import CampaignChatWindow from "$lib/components/campaign-chat/CampaignChatWindow.svelte";
+
+		let fullscreen = false
+
+		// If $page.data.pathname string contains "scenes" - set fullscreen to true
+		if ($page.data.pathname.includes("scenes")) {
+			fullscreen = true
+		}
 
     initializeStores()
 
@@ -30,9 +41,6 @@
 			id: 'navbar',
 			width: 'w-50',
 		};
-
-    // Inject the Analytics functionality
-    inject({ mode: dev ? 'development' : 'production' });
 
     export let data
     let bannerUrl: string
@@ -52,14 +60,20 @@
 
 <Drawer>
 	{#if $drawerStore.id === "navbar"}
-	<Sidebar />
+		<Sidebar />
 	{:else if $drawerStore.id === "character-notes"}
-	<CharacterNotesDrawer />
+		<CharacterNotesDrawer characterId={$drawerStore.meta.characterId} />
+	{:else if $drawerStore.id === "campaign-character-list"}
+		<CampaignCharactersDrawer characterIds={$drawerStore.meta.campaignCharactersIds} />
+	{:else if $drawerStore.id === "campaign-notes-list"}
+		<CampaignNotesDrawer campaignId={$drawerStore.meta.campaignId} />
+	{:else if $drawerStore.id === "campaign-chat"}
+		<CampaignChatWindow campaign={$drawerStore.meta.campaignWithCharacters} />
 	{/if}
 </Drawer>
 <!-- App Shell -->
 
-<div class="w-full h-full {bannerUrl ? "bg-surface-900" : "bg-none"} bg-blend-multiply bg-no-repeat bg-cover bg-top bg-fixed" style="background-image: url('{bannerUrl}')">
+<div class="w-full relative {fullscreen ? "h-screen" : "h-full"} {bannerUrl ? "bg-surface-900" : "bg-none"} bg-blend-multiply bg-no-repeat bg-cover bg-top bg-fixed" style="background-image: url('{bannerUrl}')">
 	<AppShell regionPage="relative">
 	
 		<!-- Sidebar -->
@@ -76,7 +90,7 @@
 								</svg>
 						</span>
 					</button>
-					<strong class="text-xl uppercase optima-regular">Fable Frame (WIP) <span class="text-xs text-red-800">v0.6.3</span></strong>
+					<strong class="text-xl uppercase optima-regular">Fable Frame (WIP) <span class="text-xs text-red-800">v0.7.1</span></strong>
 				</svelte:fragment>
 				<svelte:fragment slot="trail">
 					<a href="mailto:astrtomortis@gmail.com" class="btn"><Icon src={BsEnvelope} /></a>
@@ -87,7 +101,7 @@
 	
 		<!-- Page Route Content -->
 		{#key data.pathname}
-		<div class="px-4 pb-5 h-full page-content"
+		<div class="pb-5 h-full page-content"
 			in:fade={{ duration: 300, delay: 300 }}
 			out:fade={{ duration: 300 }}
 			>

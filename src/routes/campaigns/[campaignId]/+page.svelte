@@ -2,7 +2,7 @@
   import { page } from "$app/stores"
 	import CharacterItem from "$lib/components/characters/CharacterItem.svelte"
 	import { currentUser } from "$lib/pocketbase";
-	import type { CampaignNotesResponse, CampaignResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
+	import type { CampaignNotesResponse, CampaignsResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { headerBanner } from "$lib/stores";
 	import { getCampaignCharacters, getCampaignImage, getCampaignWithRpgSystem } from "$models/campaign"
 	import { ProgressRadial, getToastStore } from "@skeletonlabs/skeleton"
@@ -14,7 +14,7 @@
 
   const toastStore = getToastStore()
 
-  let campaign: CampaignResponse
+  let campaign: CampaignsResponse
   let campaignNotes: CampaignNotesResponse[]
   let rpgSystem: RpgSystemsResponse
   let characters: CharactersResponse[]
@@ -62,13 +62,15 @@
     <h1 class="h2 mx-auto mt-6">{campaign.name}</h1>
     <h6 class="h6 mx-auto my-6">{rpgSystem.name}</h6>
 
-    {#if campaign.creator === $currentUser?.id}
     <div class="flex flex-wrap justify-center">
-      <a class="btn variant-ghost-warning mx-3" href="/campaigns/{$page.params.campaignId}/edit">EDIT</a>
-      <a class="btn variant-ghost-secondary mx-3" href="/campaigns/{$page.params.campaignId}/requests">CAMPAIGN REQUESTS</a>
-      <button class="btn variant-ghost-success mx-3" use:clipboard={`${$page.url.origin}/campaigns/${$page.params.campaignId}/request`} on:click={() => toastShow("Invite link copied", toastStore)}>INVITE</button>
+      {#if campaign.creator === $currentUser?.id}
+        <a class="btn variant-ghost-warning mx-3" href="/campaigns/{$page.params.campaignId}/edit">EDIT</a>
+        <a class="btn variant-ghost-secondary mx-3" href="/campaigns/{$page.params.campaignId}/requests">CAMPAIGN REQUESTS</a>
+        <button class="btn variant-ghost-success mx-3" use:clipboard={`${$page.url.origin}/campaigns/${$page.params.campaignId}/request`} on:click={() => toastShow("Invite link copied", toastStore)}>INVITE</button>
+        <a href="/campaigns/{campaign.id}/scenes" class="btn variant-ghost-success mx-3">Scenes Manager</a>
+      {/if}
+      <a class="btn variant-ghost-warning mx-3" href="/campaigns/{$page.params.campaignId}/game">GAME</a>
     </div>
-    {/if}
 
     <article class="mt-6 text-center">{campaign.description}</article>
 

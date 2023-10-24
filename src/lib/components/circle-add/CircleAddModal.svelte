@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Stepper, Step, ProgressRadial, getModalStore } from "@skeletonlabs/skeleton";
 	import FieldCreate from "./FieldCreate.svelte";
-	import { characterStore, fieldErrors } from "$lib/stores";
+	import { fieldErrors } from "$lib/stores";
 
   import BsTextCenter from "svelte-icons-pack/bs/BsTextCenter";
   import BsThreeDots from "svelte-icons-pack/bs/BsThreeDots";
@@ -16,9 +16,11 @@
 	import { getCharacterFieldByName } from "$lib/characterFieldsOperations";
 
   import { v4 as uuidv4 } from 'uuid'
+	import type { CharactersResponse } from "$lib/pocketbase-types";
 
   export let group: string;
   export let type: string = "";
+  export let character: CharactersResponse
 
   // Which compendium to use.
   // Set empty if no compendium.
@@ -62,9 +64,10 @@
       return
     }
 
-    characterStore.addField(field)
-
-    console.log(`Added field ${field.name} to character ${$characterStore.name}`)
+    // @ts-ignore
+    $modalStore[0].response({
+      field: field
+    })
 
     // reset selected field
     field = {
@@ -142,7 +145,7 @@ function validateField() {
 
   validationFailed = false
   // If field name is not unique
-  if (getCharacterFieldByName($characterStore, field.name).id !== "") {
+  if (getCharacterFieldByName(character, field.name).id !== "") {
     validationFailed = true
     fieldErrors.addError("This field name is already taken")
   }

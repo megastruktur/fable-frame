@@ -1,3 +1,12 @@
+### 0.7.1
+- Fixes and tweaks
+
+### 0.7.0
+- Feature: Scenes functionality
+- Feature: Chat functionality
+- Feature: Dice Roller to chat
+- Feature: Big refactoring
+
 ### 0.6.3
 - UI/UX: Adds MD support for Character and Campaign Notes
 - Feature: Upgrade dependencies.

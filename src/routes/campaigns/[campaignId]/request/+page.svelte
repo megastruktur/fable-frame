@@ -2,13 +2,13 @@
 	import { goto } from "$app/navigation";
   import { page } from "$app/stores"
 	import CharacterItem from "$lib/components/characters/CharacterItem.svelte";
-	import type { CampaignResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
+	import type { CampaignsResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { getCampaignWithRpgSystem } from "$models/campaign";
 	import { getMyCharactersForSystemNoCampaign, updateCharacter } from "$models/character";
 	import { ProgressRadial, type ToastSettings, getToastStore } from "@skeletonlabs/skeleton";
 
   let rpgSystem: RpgSystemsResponse
-  let campaign: CampaignResponse
+  let campaign: CampaignsResponse
   let characters: CharactersResponse[]
   let characterSelected: CharactersResponse
 

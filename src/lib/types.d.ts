@@ -52,3 +52,23 @@ type CharacterNote = {
   note: string
   weight?: number
 }
+
+type ChatMessage = {
+  campaignId: string,
+  messageId: string
+  characterName: string
+  message: string
+  time: string
+  creatorId: string
+  isGm?: boolean,
+  idUpdatedString: string,
+  characterAvatar?: string,
+}
+
+type DieRollChat = {
+  id: string
+  value: number
+  die: string
+  color?: string
+}
+

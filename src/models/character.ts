@@ -5,6 +5,7 @@ import type { CharactersResponse, CharactersRecord } from "$lib/pocketbase-types
 import getStringHash from "$lib/getStringHash"
 import { v4 as uuidv4 } from 'uuid'
 import { createCharacterNotes } from "./character_notes"
+import { getCampaign } from "./campaign"
 
 export async function createCharacter(data: Partial<CharactersRecord>): Promise<CharactersResponse> {
   return await pb.collection("characters").create(data)
@@ -12,6 +13,10 @@ export async function createCharacter(data: Partial<CharactersRecord>): Promise<
 
 export async function getCharacter(id: string, queryParams: any = {}): Promise<CharactersResponse> {
   return await pb.collection("characters").getOne(id, queryParams)
+}
+
+export async function getCharacterWithSystemAndCampaign(characterId: string) {
+  return await getCharacter(characterId, { expand: "rpgSystem,campaign" })
 }
 
 export async function updateCharacter(id: string, data: Partial<CharactersRecord>): Promise<CharactersResponse> {
@@ -227,3 +232,105 @@ export function subscribeCharacterOperations() {
 export function unsubscribeCharacterOperations() {
   pb.collection("characters").unsubscribe("*");
 }
+
+// @todo Remove character from other campaigns?
+export async function addCharacterToCampaign(characterId: string, campaignId: string): Promise<CharactersResponse> {
+
+  const [character, campaign] = await Promise.all([
+    await pb.collection("characters").update(characterId, {
+      campaign: campaignId,
+      campaignStatus: 1,
+    }),
+    getCampaign(campaignId)
+  ])
+
+  if (campaign.characters.find(campaignCharacterId => campaignCharacterId === character.id) != null) {
+
+    const characterIds: string[] = [...campaign.characters, characterId]
+
+    const [_, character] = await Promise.all([
+      pb.collection("campaigns").update(campaignId, { characters: characterIds }),
+      pb.collection("characters").update(characterId, { campaign: campaignId })
+    ])
+    return character
+  }
+
+  return character
+}
+
+
+
+export async function removeCharacterFromCampaign(characterId: string, campaignId: string) {
+
+  const [character, campaign] = await Promise.all([
+    await pb.collection("characters").update(characterId, {
+      campaign: campaignId,
+      campaignStatus: 1,
+    }),
+    getCampaign(campaignId)
+  ])
+
+  if (campaign.characters.find(campaignCharacterId => campaignCharacterId === characterId)!= null) {
+
+    const characterIds = campaign.characters.filter(campaignCharacterId => campaignCharacterId!== characterId)
+
+    const [_, character] = await Promise.all([
+      pb.collection("campaigns").update(campaignId, { characters: characterIds }),
+      pb.collection("characters").update(characterId, { campaign: "" })
+    ])
+
+    return character
+  }
+  return character
+}
+
+export async function getPlayerharacterFromCampaign(campaignId: string, userId: string): Promise<CharactersResponse> {
+  console.log({campaignId, userId})
+  return await pb.collection("characters").getFirstListItem(
+    `creator="${userId}"&&campaign="${campaignId}"`
+  )
+}
+
+// export class Character {
+//   id: string
+//   name: string
+//   rpgSystem: string
+//   campaign?: string
+//   campaignStatus: number
+//   avatar?: string
+//   creator: string
+//   fields: Field[]
+//   hash: string
+//   created: string
+//   updated: string
+
+//   constructor(character: CharactersResponse) {
+//     this.id = character?.id
+//     this.name = character?.name
+//     this.rpgSystem = character?.rpgSystem
+//     this.campaign = character?.campaign
+//     this.campaignStatus = character?.campaignStatus
+//     this.avatar = character?.avatar
+//     this.creator = character?.creator
+//     this.fields = character?.fields
+//     this.hash = character?.hash
+//     this.created = character?.created
+//     this.updated = character?.updated
+//   }
+
+//   getField(fieldId: string): Field | undefined {
+//     return this.fields.find((field: Field) => field.id === fieldId)
+//   }
+
+//   setField(field: Field) {
+//     this.fields = this.fields.map((f: Field) => {
+//       if (f.id === f.id) {
+//         return field
+//       }
+//       return f
+//     })
+//   }
+//   removeField(fieldId: string) {
+//     this.fields = this.fields.filter((field: Field) => field.id!== fieldId)
+//   }
+// }

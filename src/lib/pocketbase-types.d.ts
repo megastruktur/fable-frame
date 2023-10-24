@@ -2,16 +2,18 @@
 * This file was @generated using pocketbase-typegen
 */
 
-import type { Field } from "./types.d"
+import type { SystemJSON } from "./types"
 
 export enum Collections {
+	CampaignChat = "campaign_chat",
 	CampaignNotes = "campaign_notes",
 	Campaigns = "campaigns",
+	CharacterNotes = "character_notes",
 	Characters = "characters",
 	News = "news",
 	RpgSystems = "rpg_systems",
+	Scenes = "scenes",
 	Users = "users",
-	CharacterNotes = "character_notes",
 }
 
 // Alias types for improved usability
@@ -38,26 +40,51 @@ export type AuthSystemFields<T = never> = {
 
 // Record types for each collection
 
+export type CampaignChatRecord = {
+	campaign?: RecordIdString
+	character?: RecordIdString
+	message?: string
+	creator: RecordIdString
+	expand?: {
+		character?: CharacterRecord
+		creator?: UserRecord
+	}
+}
+
 export enum CampaignNotesTypeOptions {
 	"gm" = "gm",
 	"public" = "public",
 }
 export type CampaignNotesRecord = {
 	campaign: RecordIdString
-	type: CampaignNotesTypeOptions
-	note: HTMLString
-	image?: string
 	creator: RecordIdString
+	image?: string
+	note: HTMLString
+	type: CampaignNotesTypeOptions
 }
 
-export type CampaignRecord = {
-	name: string
-	image?: string
-	description?: string
-	rpgSystem: RecordIdString
-	creator: RecordIdString
+export type CampaignsRecord = {
+	activeScene?: RecordIdString
 	characters?: RecordIdString[]
+	creator: RecordIdString
+	description?: string
 	image?: string
+	name: string
+	rpgSystem: RecordIdString
+	activeScene?: RecordIdString
+	characters?: RecordIdString[]
+	expand?: {
+		"characters(campaign)": CharactersResponse[],
+		characters: CharactersResponse[],
+		rpgSystem: RpgSystemsResponse,
+		activeScene: ScenesResponse,
+	}
+}
+
+export type CharacterNotesRecord = {
+	character: RecordIdString
+	creator: RecordIdString
+	data?: CharacterNote[]
 	expand?: {
 		rpgSystem: RpgSystemsResponse
 		"characters(campaign)": CharactersResponse[]
@@ -65,74 +92,88 @@ export type CampaignRecord = {
 	}
 }
 
-export type CharactersRecord<Tdata = unknown> = {
-	name: string
-	rpgSystem: RecordIdString
+export type CharactersRecord = {
+	avatar?: string
 	campaign?: RecordIdString
 	campaignStatus?: number
-	avatar?: string
 	creator: RecordIdString
 	fields?: Field[]
 	hash: string
+	name: string
+	rpgSystem: RecordIdString
 	expand?: {
 		rpgSystem?: RpgSystemsRecord,
-		campaign?: CampaignResponse,
+		campaign?: CampaignsResponse,
 	}
 }
 
 export type NewsRecord = {
-	text: HTMLString
 	image?: string
+	text: HTMLString
 }
 
-export type RpgSystemsRecord<Tdata = unknown> = {
-	identifier: string
-	name: string
-	description?: string
+export type RpgSystemsRecord = {
 	data: SystemJSON
-	status?: boolean
+	description?: string
 	hash: string
+	identifier: string
 	image?: string
+	name: string
+	status?: boolean
+}
+
+export type ScenesRecord = {
+	campaign?: RecordIdString
+	group?: string
+	image?: string
+	name?: string
+	secret_hash?: string
+	status?: number
+	weight?: number
+	expand?: {
+		campaign: CampaignsResponse
+	}
 }
 
 export type UsersRecord = {
-	name?: string
+	admin?: boolean
 	avatar?: string
-	admin: boolean
-}
-
-export type CharacterNotesRecord<Tdata = unknown> = {
-	data: CharacterNote[]
-	character: RecordIdString
-	creator: RecordIdString
+	name?: string
 }
 
 // Response types include system fields and match responses from the PocketBase API
+export type CampaignChatResponse<Texpand = unknown> = Required<CampaignChatRecord> & BaseSystemFields<Texpand>
 export type CampaignNotesResponse<Texpand = unknown> = Required<CampaignNotesRecord> & BaseSystemFields<Texpand>
-export type CampaignResponse<Texpand = unknown> = Required<CampaignRecord> & BaseSystemFields<Texpand>
-export type CharactersResponse<Tdata = unknown, Texpand = unknown> = Required<CharactersRecord<Tdata>> & BaseSystemFields<Texpand>
+export type CampaignsResponse<Texpand = unknown> = Required<CampaignsRecord> & BaseSystemFields<Texpand>
+export type CharacterNotesResponse<Tdata = unknown, Texpand = unknown> = Required<CharacterNotesRecord<Tdata>> & BaseSystemFields<Texpand>
+export type CharactersResponse<Tfields = unknown, Texpand = unknown> = Required<CharactersRecord<Tfields>> & BaseSystemFields<Texpand>
 export type NewsResponse<Texpand = unknown> = Required<NewsRecord> & BaseSystemFields<Texpand>
 export type RpgSystemsResponse<Tdata = unknown, Texpand = unknown> = Required<RpgSystemsRecord<Tdata>> & BaseSystemFields<Texpand>
+export type ScenesResponse<Texpand = unknown> = Required<ScenesRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
-export type CharacterNotesResponse<Tdata = unknown, Texpand = unknown> = Required<CharacterNotesRecord<Tdata>> & BaseSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
 
 export type CollectionRecords = {
+	campaign_chat: CampaignChatRecord
 	campaign_notes: CampaignNotesRecord
-	campaigns: CampaignRecord
+	campaigns: CampaignsRecord
+	character_notes: CharacterNotesRecord
+	characters: CharactersRecord
 	news: NewsRecord
 	rpg_systems: RpgSystemsRecord
+	scenes: ScenesRecord
 	users: UsersRecord
-	character_notes: CharacterNotesRecord
 }
 
 export type CollectionResponses = {
+	campaign_chat: CampaignChatResponse
 	campaign_notes: CampaignNotesResponse
-	campaigns: CampaignResponse
+	campaigns: CampaignsResponse
+	character_notes: CharacterNotesResponse
 	characters: CharactersResponse
 	news: NewsResponse
 	rpg_systems: RpgSystemsResponse
+	scenes: ScenesResponse
 	users: UsersResponse
-	character_notes: CharacterNotesResponse
 }

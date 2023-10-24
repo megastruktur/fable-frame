@@ -1,15 +1,15 @@
 <script lang="ts">
-	import type { CampaignResponse } from "$lib/pocketbase-types"
+	import type { CampaignsResponse } from "$lib/pocketbase-types"
 	import { campaignUpdateImage, getCampaignImage } from "$models/campaign"
 	import { FileDropzone, ProgressBar, type ToastSettings, getModalStore, getToastStore } from "@skeletonlabs/skeleton"
-  import Icon from "svelte-icons-pack";
+  const Icon = require("svelte-icons-pack").Icon;
   import BsUpload from "svelte-icons-pack/bs/BsUpload"
 
   const modalStore = getModalStore()
   const toastStore = getToastStore()
 
 
-  export let campaign: CampaignResponse
+  export let campaign: CampaignsResponse
 
   let files: FileList;
   let loading: boolean = false;

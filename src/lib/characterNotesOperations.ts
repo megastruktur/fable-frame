@@ -11,13 +11,29 @@ export function addCharacterNote(characterNotes: CharacterNotesResponse, note: C
   note.date = new Date().toISOString()
   note.weight = 1
 
-  characterNotes.data.unshift(note)
+  if (characterNotes.data === undefined || !characterNotes.data) {
+    characterNotes.data = []
+  }
+
+  characterNotes.data = [note, ...characterNotes.data]
   return characterNotes
 
 }
 
 export function removeCharacterNote(characterNotes: CharacterNotesResponse, noteId: string): CharacterNotesResponse {
-  characterNotes.data = characterNotes.data.filter(note => note.id !== noteId)
+  characterNotes.data = characterNotes.data.filter((note: CharacterNote) => note.id !== noteId)
   return characterNotes
 
+}
+
+export function updateCharacterNote(characterNotes: CharacterNotesResponse, note: CharacterNote) {
+
+  characterNotes.data = characterNotes.data.map((n: CharacterNote) => {
+    if (n.id === note.id) {
+      n = note
+    }
+    return n
+  })
+
+  return characterNotes
 }
