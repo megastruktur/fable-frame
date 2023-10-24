@@ -71,7 +71,3 @@ type DieRollChat = {
   color?: string
 }
 
-type ColorForPicker = {
-  bg: string
-  text: string
-}

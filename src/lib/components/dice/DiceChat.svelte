@@ -1,23 +1,28 @@
 <script lang="ts">
-	import type { ChatMessage, ColorForPicker, DieRollChat } from "$lib/types";
+	import type { ChatMessage, DieRollChat } from "$lib/types";
 	import { updateChatMessage } from "$models/campaign_chat";
-	import type { PopupSettings } from "@skeletonlabs/skeleton";
+	import { popup, type PopupSettings } from "@skeletonlabs/skeleton";
 	import ColorPickerPopup from "../global/ColorPickerPopup.svelte";
-	import DieRolledToChat from "./DieRolledToChat.svelte";
 	import { currentUser } from "$lib/pocketbase";
+	import DiceIcon from "./DiceIcon.svelte";
 
   export let dice: DieRollChat[]
   export let message: ChatMessage
 
   const rollResultPrefix = "/roll-result "
-
+  const allowOperationOnDie = $currentUser?.id === message.creatorId
 
   const colorPickerPopup: PopupSettings = {
     event: 'click',
-    target: 'colorPickerPopup',
+    target: `colorPickerPopup-${message.messageId}`,
     placement: 'top',
     state: colorPickerPopupState,
   };
+
+  const dieSize = {
+    width: "w-12",
+    height: "h-12",
+  }
 
   let operationOnDieId: string = ""
 
@@ -27,15 +32,12 @@
       operationOnDieId = ""
     }
   }
-  
-  function selectDieHandler({detail: {id}}: {detail: {id: string}}) {
-    operationOnDieId = id
-  }
 
-  async function selectColorHandler({detail} : {detail: ColorForPicker}) {
+  async function selectColorHandler({detail} : {detail: string}) {
     dice = [...dice.map(die => {
       if (die.id === operationOnDieId) {
-        die.color = `${detail.bg} ${detail.text}`
+        die.color = detail
+        console.log("changed color")
       }
       return die
     })]
@@ -43,22 +45,32 @@
     operationOnDieId = ""
     await updateChatMessage(message.messageId, {message: message.message})
   }
-
 </script>
 
-<div class="card p-4 variant-filled-surface" data-popup="colorPickerPopup">
+<div class="card p-4 variant-filled-surface z-20" data-popup="colorPickerPopup-{message.messageId}">
   <ColorPickerPopup
     on:selectColor={selectColorHandler}
     />
   <div class="arrow variant-filled-surface" />
 </div>
 
-<div class="space-x-1">
+<div class="space-x-1 flex">
   {#each dice as die(die.id)}
-    <DieRolledToChat
-      editable={message.creatorId === $currentUser?.id}
-      selectedDieId={operationOnDieId} colorPickerPopupSettings={colorPickerPopup}
-      on:selectDie={selectDieHandler} {die} />
+    {#if allowOperationOnDie}
+
+      <button
+        on:click={() => operationOnDieId = die.id}
+        use:popup={colorPickerPopup}
+      >
+        {#key die.color}
+          <DiceIcon {die} {dieSize} />
+        {/key}
+      </button>
+    {:else}
+      <DiceIcon {die} {dieSize} />
+    {/if}
+
+    <!-- editable={message.creatorId === $currentUser?.id} -->
   {/each}
 </div>
 

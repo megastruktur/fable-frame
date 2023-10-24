@@ -47,7 +47,8 @@
           id: uuidv4(),
           // @ts-ignore
           value: localRoll.value,
-          die: die
+          die: die,
+          color: "Secondary",
         }]
       })
     })
