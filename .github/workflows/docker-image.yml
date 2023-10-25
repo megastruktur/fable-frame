@@ -3,6 +3,8 @@ name: Publish Dev build to Dockerhub
 on:
   push:
     branches: ['development']
+    tags:
+      - '*'
 
 jobs:
   push_to_registry:
@@ -27,4 +29,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: dev
+          labels: ${{ steps.meta.outputs.labels }}
