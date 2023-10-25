@@ -26,4 +26,4 @@ ARG PUBLIC_SOCKETIO_URL
 ENV PUBLIC_SOCKETIO_URL $PUBLIC_SOCKETIO_URL
 
 # Start the SvelteKit application
-CMD [ "node", "/app/build/server.js" ]
+ENTRYPOINT [ "node", "/app/build/server.js" ]
