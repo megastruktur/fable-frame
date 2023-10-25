@@ -8,6 +8,9 @@ jobs:
   push_to_registry:
     name: Push Docker image to Dockerhub
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_POCKETBASE_URL: ${{ vars.PUBLIC_POCKETBASE_URL }}
+      PUBLIC_SOCKETIO_URL: ${{ vars.PUBLIC_SOCKETIO_URL }}
     steps:
       - uses: actions/checkout@v3
       - name: Log in to Dockerhub
