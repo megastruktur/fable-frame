@@ -1,9 +1,5 @@
 name: Publish Dev build to Dockerhub
 
-env:
-  PUBLIC_POCKETBASE_URL: ${{ vars.PUBLIC_POCKETBASE_URL }}
-  PUBLIC_SOCKETIO_URL: ${{ vars.PUBLIC_SOCKETIO_URL }}
-
 on:
   push:
     branches: ['development']
@@ -27,6 +23,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
+          envkey_PUBLIC_POCKETBASE_URL: ${{ vars.PUBLIC_POCKETBASE_URL }}
+          envkey_PUBLIC_SOCKETIO_URL: ${{ vars.PUBLIC_SOCKETIO_URL }}
           context: .
           file: ./Dockerfile
           push: true
