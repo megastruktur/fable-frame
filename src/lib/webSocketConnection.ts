@@ -1,5 +1,5 @@
 import ioClient from 'socket.io-client';
-import { PUBLIC_SOCKETIO_URL } from '$env/static/public';
-const socket = ioClient(PUBLIC_SOCKETIO_URL);
+import { env } from '$env/dynamic/public';
+const socket = ioClient(env.PUBLIC_SOCKETIO_URL);
 
 export const io = socket;
