@@ -7,6 +7,7 @@
 	import SceneCard from '$lib/components/scenes/SceneCard.svelte';
 	import { flip } from 'svelte/animate';
 	import { receive, send } from '$lib/animation';
+  // @ts-ignore
   import Icon from "svelte-icons-pack";
 	import { getCampaign } from '$models/campaign';
 	import { getModalStore, getToastStore, type ModalSettings } from '@skeletonlabs/skeleton';

@@ -3,7 +3,9 @@
 	import { getSceneImage } from "$models/scenes";
 	import { popup, type PopupSettings } from "@skeletonlabs/skeleton";
 	import { createEventDispatcher } from "svelte";
+  // @ts-ignore
   import FaEye from 'svelte-icons/fa/FaEye.svelte'
+  // @ts-ignore
   import FaRegEyeSlash from 'svelte-icons/fa/FaRegEyeSlash.svelte'
 
   // BsCheckLg

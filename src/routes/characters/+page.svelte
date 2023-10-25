@@ -7,6 +7,7 @@
 	import { flip } from 'svelte/animate';
 	import { crossfade, fade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
+	// @ts-ignore
 	import Icon from 'svelte-icons-pack';
 	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
 	import CharacterItem from '$lib/components/characters/CharacterItem.svelte';

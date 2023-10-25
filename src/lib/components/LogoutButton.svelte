@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
   import { pb } from "$lib/pocketbase"
+  // @ts-ignore
   import Icon from "svelte-icons-pack/Icon.svelte"
   import IconDoorOpen from 'svelte-icons-pack/fa/FaSolidDoorOpen';
 

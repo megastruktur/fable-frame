@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Field } from "$lib/types";
 
+  // @ts-ignore
   import Icon from "svelte-icons-pack/Icon.svelte"
   import BsCircleFill from 'svelte-icons-pack/bs/BsCircleFill';
   import BsCircle from 'svelte-icons-pack/bs/BsCircle';

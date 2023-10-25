@@ -24,7 +24,7 @@ export function getFieldsByGroup(group: string, fields: Field[]): Field[] {
 }
 
 export function getCharacterFieldsByGroup(character: CharactersResponse, group: string): Field[] {
-  return character.fields.filter(field => field.group === group).sort((a, b) => {return a.weight - b.weight});
+  return character.fields.filter((field: Field) => field.group === group).sort((a: Field, b: Field) => {return a.weight - b.weight});
 }
 
 
@@ -44,14 +44,14 @@ export function addCharacterField(character: CharactersResponse, field: Field): 
 export function removeCharacterField(character: CharactersResponse, field: Field): CharactersResponse {
 
   // Remove an item from character.fields Array comparing by id
-  character.fields = character.fields.filter(item => item.id!== field.id);
+  character.fields = character.fields.filter((f: Field) => f.id!== field.id);
 
   return character;
 }
 
 export function getCharacterFieldByName(character: CharactersResponse, fieldName: string): Field {
   
-  const field = character.fields?.find(f => f.name === fieldName);
+  const field = character.fields?.find((f: Field) => f.name === fieldName);
 
   if (field !== undefined) {
     return field;
@@ -69,7 +69,7 @@ export function getCharacterFieldByName(character: CharactersResponse, fieldName
 
 export function getCharacterFieldsByName(character: CharactersResponse, fieldName: string): Field[] {
   
-  const fields = character.fields.filter(f => f.name === fieldName);
+  const fields = character.fields.filter((f: Field) => f.name === fieldName);
 
   if (fields !== undefined) {
     return fields;

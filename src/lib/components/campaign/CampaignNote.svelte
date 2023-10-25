@@ -6,6 +6,7 @@
 	import { SlideToggle, getModalStore, type ModalSettings, getToastStore } from "@skeletonlabs/skeleton";
 	import { marked } from "marked";
 	import { createEventDispatcher } from "svelte";
+  // @ts-ignore
 	import Icon from "svelte-icons-pack";
   import BsPencil from "svelte-icons-pack/bs/BsPencil";
   import BsTrash from "svelte-icons-pack/bs/BsTrash";

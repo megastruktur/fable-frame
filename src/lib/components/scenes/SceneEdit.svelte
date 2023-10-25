@@ -80,6 +80,8 @@
         status: 0,
         weight: 0,
         campaign: campaignId,
+        group: "",
+        secret_hash: "",
       }
     }
   }

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { currentUser, pb } from "$lib/pocketbase"
     import { goto } from "$app/navigation";
+    // @ts-ignore
     import Icon from "svelte-icons-pack";
     import BsGoogle from "svelte-icons-pack/bs/BsGoogle";
 

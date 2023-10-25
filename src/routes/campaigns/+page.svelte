@@ -6,6 +6,7 @@
 	import { toastShow } from '$lib/toast';
 	import { getGMCampaigns, getCharacterCampaigns, deleteCampaign } from '$models/campaign';
 	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, getModalStore, getToastStore } from '@skeletonlabs/skeleton';
+  // @ts-ignore
   import Icon from "svelte-icons-pack";
   
 	import BsPlus from 'svelte-icons-pack/bs/BsPlus';

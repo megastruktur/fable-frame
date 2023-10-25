@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Field } from "$lib/types";
 
+  // @ts-ignore
   import Icon from "svelte-icons-pack/Icon.svelte"
   import DiamondFilled from 'svelte-icons-pack/ri/RiFinanceVipDiamondFill';
   import DiamondLine from 'svelte-icons-pack/ri/RiFinanceVipDiamondLine';

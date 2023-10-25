@@ -1,3 +1,8 @@
+declare module '$env/static/public' {
+  export const PUBLIC_POCKETBASE_URL: string;
+  export const PUBLIC_SOCKETIO_URL: string;
+}
+
 export type Post = {
   id: string
   title: string

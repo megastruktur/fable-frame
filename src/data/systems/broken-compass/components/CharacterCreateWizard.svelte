@@ -481,7 +481,6 @@
         {characterHeritage}
         {characterHomeland}
         {characterWorkplace}
-        selectedExpertise={tagsExpertiseSelected.filter(tes => tes.expertise !== undefined).map(tes => tes.expertise)}
         />
         
         <div class="flex justify-center">
