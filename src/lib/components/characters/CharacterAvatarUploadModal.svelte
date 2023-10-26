@@ -8,7 +8,6 @@
 
 
   export let characterId = ""
-  export let parent: any;
 
   const toastStore = getToastStore()
   const modalStore = getModalStore()

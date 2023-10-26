@@ -436,7 +436,6 @@
 
         <BCCharacterCreateTags
           {tagsAvailable} {expertiseAvailable} {tagExperienceAvailable} {skillsAvailable}
-          {tagsExpertiseSelected}
           {tagExperienceSelected}
           tagsSelected={tagsExpertiseSelected.filter(tes => tes.tag!== undefined).map(tes => tes.tag)}
           on:selectTag={selectTagHandler}

@@ -73,6 +73,7 @@
       }
     }
     else {
+      // @ts-ignore
       scene = {
         id: sceneId,
         name: "",
