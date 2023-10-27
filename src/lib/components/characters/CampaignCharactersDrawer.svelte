@@ -21,7 +21,11 @@
 {:then}
   <div class="flex flex-col w-96">
     {#each characters as character(character.id)}
-      <CharacterSheet {character} compactVersion={true} />
+      <CharacterSheet
+        {character}
+        rpgSystem={character.expand.rpgSystem}
+        campaign={character.expand.campaign}
+        compactVersion={true} />
     {/each}
   </div>
 {/await}

@@ -24,7 +24,8 @@
 		import CampaignCharactersDrawer from "$lib/components/characters/CampaignCharactersDrawer.svelte";
 		import CampaignNotesDrawer from "$lib/components/campaign/CampaignNotesDrawer.svelte";
 		import { page } from "$app/stores";
-	import CampaignChatWindow from "$lib/components/campaign-chat/CampaignChatWindow.svelte";
+		import CampaignChatWindow from "$lib/components/campaign-chat/CampaignChatWindow.svelte";
+	import CharacterSheet from "$lib/components/characters/CharacterSheet.svelte";
 
 		let fullscreen = false
 
@@ -65,6 +66,12 @@
 		<CharacterNotesDrawer characterId={$drawerStore.meta.characterId} />
 	{:else if $drawerStore.id === "campaign-character-list"}
 		<CampaignCharactersDrawer characterIds={$drawerStore.meta.campaignCharactersIds} />
+	{:else if $drawerStore.id === "character-sheet"}
+		<CharacterSheet
+			character={$drawerStore.meta.character}
+			rpgSystem={$drawerStore.meta.rpgSystem}
+			campaign={$drawerStore.meta.campaign}
+			compactVersion={true} />
 	{:else if $drawerStore.id === "campaign-notes-list"}
 		<CampaignNotesDrawer campaignId={$drawerStore.meta.campaignId} />
 	{:else if $drawerStore.id === "campaign-chat"}

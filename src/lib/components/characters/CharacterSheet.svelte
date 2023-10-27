@@ -7,7 +7,7 @@
 
 	import { type DrawerSettings, ProgressBar, getDrawerStore, getToastStore } from "@skeletonlabs/skeleton";
 	import CharacterAvatar from "$lib/components/characters/CharacterAvatar.svelte";
-	import type { CampaignsResponse, CharactersResponse } from "$lib/pocketbase-types";
+	import type { CampaignsResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { toastShowError } from "$lib/toast";
 
   import { fade } from "svelte/transition"
@@ -19,6 +19,8 @@
   const toastStore = getToastStore()
 
   export let character: CharactersResponse
+  export let rpgSystem: RpgSystemsResponse
+  export let campaign: CampaignsResponse
   export let compactVersion: boolean = false
 
   let CharacterSheet: any
@@ -27,7 +29,6 @@
     [key: string]: Field[]
   } = {}
   let characterAvatarUrl: string = ""
-  let campaign: CampaignsResponse
 
   let activeTabName: string = "general"
   let tabsContent: { [key: string]: Field[] } = {general: []}
@@ -51,10 +52,10 @@
     characterName = character.name
 
     // Dynamically load component
-    if (character.expand.rpgSystem) {
-      CharacterSheet = (await import(`../../../data/systems/${character.expand.rpgSystem.identifier}/components/CharacterSheet.svelte`)).default
+    if (rpgSystem !== undefined) {
+      CharacterSheet = (await import(`../../../data/systems/${rpgSystem.identifier}/components/CharacterSheet.svelte`)).default
 
-      const compendiumFieldsRaw = character.expand.rpgSystem.data.fields.compendium
+      const compendiumFieldsRaw = rpgSystem.data.fields.compendium
 
       compendiumFieldsRaw.map((field: Field) => {
         if (!compendiumFields[field.type]) {

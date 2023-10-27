@@ -99,6 +99,12 @@ export async function getCampaignWithRpgSystem(id: string): Promise<CampaignsRes
   return await pb.collection("campaigns").getOne(id, { expand: "rpgSystem" })
 }
 
+export async function getCampaignWithRpgSystemCharsAndNotes(id: string): Promise<CampaignsResponse> {
+  return await pb.collection("campaigns").getOne(id, {
+    expand: "rpgSystem,characters,campaign_notes(campaign)"
+  })
+}
+
 export async function getCampaignCharacterRequests(campaignId: string) {
   return await getAllCharacters({
     filter: `campaign = "${campaignId}" && campaignStatus = 0`

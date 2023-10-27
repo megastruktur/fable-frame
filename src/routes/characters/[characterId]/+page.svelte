@@ -21,6 +21,10 @@
   {#await getCharacterWithSystemAndCampaign($page.params.characterId)}
     <ProgressBar />
   {:then character}
-    <CharacterSheet {character} />
+    <CharacterSheet
+      {character}
+      rpgSystem={character.expand.rpgSystem}
+      campaign={character.expand.campaign}
+      />
   {/await}
 {/if}
