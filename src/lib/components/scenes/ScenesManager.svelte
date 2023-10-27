@@ -7,8 +7,9 @@
 	import { receive, send } from '$lib/animation';
   // @ts-ignore
   import Icon from "svelte-icons-pack";
-	import { getModalStore, getToastStore, type ModalSettings } from '@skeletonlabs/skeleton';
+	import { getModalStore, getToastStore, type ModalComponent, type ModalSettings } from '@skeletonlabs/skeleton';
 	import { toastShow } from '$lib/toast';
+	import SceneEdit from './SceneEdit.svelte';
 
   export let scenes: ScenesResponse[] = []
   export let campaign: CampaignsResponse
@@ -52,6 +53,35 @@
     }
   }
 
+  function onSceneUpdatedHandler({ detail: {scene } }: { detail: { scene: ScenesResponse } }) {
+    scenes = scenes.map(s => s.id === scene.id ? scene : s)
+  }
+
+  async function createSceneModalHandler() {
+
+    const SceneEditModalComponent: ModalComponent = {
+      ref: SceneEdit,
+      props: {
+        campaignId: campaign.id,
+      },
+    }
+    const sceneEditModal: ModalSettings = {
+      type: 'component',
+      component: SceneEditModalComponent,
+      response: async ({scene, action}: {scene: ScenesResponse | null, action: string} = {scene: null, action: ""}) => {
+        if (scene !== undefined && scene !== null) {
+          if (action === "update") {
+            scenes = scenes.map(scene => scene.id === scene.id? scene : scene)
+          }
+          else if (action === "create") {
+            scenes = [...scenes, scene]
+          }
+        }
+      },
+    }
+    modalStore.trigger(sceneEditModal);
+  }
+
 </script>
 
 <div class="flex flex-wrap justify-center">
@@ -65,13 +95,15 @@
         on:activateScene={activateSceneHandler}
         on:deactivateScene={deactivateSceneHandler}
         on:deleteScenePrompt={deleteScenePromptHandler}
+        on:updatedScene={onSceneUpdatedHandler}
         isAcivated={campaignActiveScene === scene.id}
         />
     </div>
   {/each}
-  <a
+  <button
     class="card w-96 shadow-xl card-hover overflow-hidden bg-contain h-96 m-3 flex items-center justify-center"
-    href="/campaigns/{campaign.id}/scenes/create">
+    on:click={createSceneModalHandler}
+    >
     <Icon className="flex" size="100" color="" src={BsPlus} />
-  </a>
+  </button>
 </div>

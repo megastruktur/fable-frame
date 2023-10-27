@@ -2,11 +2,13 @@
 	import { goto } from "$app/navigation";
 	import type { ScenesResponse } from "$lib/pocketbase-types";
 	import { getScene, getSceneImage, createScene, updateScene } from "$models/scenes";
-  import { FileDropzone, ProgressBar } from "@skeletonlabs/skeleton";
+  import { FileDropzone, ProgressBar, getModalStore } from "@skeletonlabs/skeleton";
   export let campaignId: string
 
   export let sceneId: string = "new"
   
+  const modalStore = getModalStore()
+
   let scene: ScenesResponse
   let files: FileList
   let previewImageSrc: string
@@ -28,14 +30,16 @@
       formData.set("status", "0")
       formData.set("weight", "0")
 
-      if (files[0] !== undefined) {
+      if (files !== undefined && files[0] !== undefined) {
         formData.set("image", files[0])
       }
     }
     
     try {
       scene = await createScene(formData)
-      goto(`/campaigns/${campaignId}/scenes`)
+      // @ts-ignore
+      $modalStore[0].response({scene: scene, action: "create"})
+      modalStore.close()
     }
     catch(error) {
       console.log({error})
@@ -49,13 +53,15 @@
       if (scene.name !== "") {
         formData.set("name", `${scene.name}`)
   
-        if (files[0] !== undefined) {
+        if (files !== undefined && files[0] !== undefined) {
           formData.set("image", files[0])
         }
       }
       try {
         scene = await updateScene(scene.id, formData)
-        goto(`/campaigns/${campaignId}/scenes`)
+        // @ts-ignore
+        $modalStore[0].response({scene: scene, action: "update"})
+        modalStore.close()
       }
       catch(error) {
         console.log({error})

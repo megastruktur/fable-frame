@@ -1,12 +1,13 @@
 <script lang="ts">
 	import type { ScenesResponse } from "$lib/pocketbase-types"
 	import { getSceneImage } from "$models/scenes";
-	import { popup, type PopupSettings } from "@skeletonlabs/skeleton";
+	import { popup, type ModalComponent, type PopupSettings, type ModalSettings, getModalStore } from "@skeletonlabs/skeleton";
 	import { createEventDispatcher } from "svelte";
   // @ts-ignore
   import FaEye from 'svelte-icons/fa/FaEye.svelte'
   // @ts-ignore
   import FaRegEyeSlash from 'svelte-icons/fa/FaRegEyeSlash.svelte'
+	import SceneEdit from './SceneEdit.svelte';
 
   // BsCheckLg
 
@@ -15,6 +16,7 @@
   export let isAcivated = false
 
   const dispatch = createEventDispatcher()
+  const modalStore = getModalStore()
 
   let sceneImage = getSceneImage(scene)
 
@@ -51,6 +53,33 @@
     })
   }
 
+  async function sceneEditModalHandler() {
+    
+    const SceneEditModalComponent: ModalComponent = {
+      ref: SceneEdit,
+      props: {
+        campaignId: scene.campaign,
+        sceneId: scene.id
+      },
+    }
+    
+    const sceneEditModal: ModalSettings = {
+      type: 'component',
+      component: SceneEditModalComponent,
+      response: async ({scene, action}: {scene: ScenesResponse | null, action: string} = {scene: null, action: ""}) => {
+        if (scene !== undefined && scene !== null) {
+          if (action === "update") {
+            dispatch("updatedScene", {
+              scene: scene
+            })
+            sceneImage = getSceneImage(scene)
+          }
+        }
+      },
+    }
+    modalStore.trigger(sceneEditModal);
+  }
+
 
 </script>
 
@@ -85,7 +114,9 @@
   <!-- Operations Popup -->
   <div class="card w-48 shadow-xl py-2" data-popup="sceneOperationsPopup-{scene.id}">
     <ul class="list-nav px-2">
-      <li class="mb-2"><a href="/campaigns/{scene.campaign}/scenes/{scene.id}/edit">Edit</a></li>
+      <li class="mb-2">
+        <button on:click={sceneEditModalHandler}>Edit</button>
+      </li>
       <li>
         <a class="bg-error-900" href="/" on:click|preventDefault={deleteScenePromptHandler}>Remove</a></li>
     </ul>
