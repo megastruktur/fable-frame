@@ -87,7 +87,9 @@
     {/if}
 
     {#if isUserGm}
-      <CampaignAlert campaignId={campaign.id} />
+      <div class="mx-auto">
+        <CampaignAlert campaignId={campaign.id} />
+      </div>
     {/if}
 
     {#if campaignNotes !== undefined}
