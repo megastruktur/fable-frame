@@ -44,7 +44,7 @@
 
 </script>
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center w-80">
 
   {#await loadData()}
     <ProgressBar />
@@ -70,7 +70,7 @@
               <div class="w-6 h-6 text-warning-900">
                 <TriangleWarningIcon />
               </div>
-              <div>{alert.note}</div>
+              <div class="w-56">{alert.note}</div>
               
             </button>
             <button
