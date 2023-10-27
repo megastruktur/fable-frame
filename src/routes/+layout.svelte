@@ -26,6 +26,7 @@
 		import { page } from "$app/stores";
 		import CampaignChatWindow from "$lib/components/campaign-chat/CampaignChatWindow.svelte";
 	import CharacterSheet from "$lib/components/characters/CharacterSheet.svelte";
+	import ScenesManager from "$lib/components/scenes/ScenesManager.svelte";
 
 		let fullscreen = false
 
@@ -72,6 +73,8 @@
 			rpgSystem={$drawerStore.meta.rpgSystem}
 			campaign={$drawerStore.meta.campaign}
 			compactVersion={true} />
+	{:else if $drawerStore.id === "scenes-manager"}
+		<ScenesManager scenes={$drawerStore.meta.scenes} campaign={$drawerStore.meta.campaign} />
 	{:else if $drawerStore.id === "campaign-notes-list"}
 		<CampaignNotesDrawer campaignId={$drawerStore.meta.campaignId} />
 	{:else if $drawerStore.id === "campaign-chat"}

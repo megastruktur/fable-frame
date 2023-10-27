@@ -12,6 +12,7 @@
 	import { getCampaignNotes } from "$models/campaign_notes";
 	import CampaignNote from "$lib/components/campaign/CampaignNote.svelte";
 	import CampaignAlert from "$lib/components/character-notes/CampaignAlert.svelte";
+	import { getCampaignScenes } from "$models/scenes";
 
   const toastStore = getToastStore()
   const drawerStore = getDrawerStore()
@@ -50,6 +51,22 @@
     drawerStore.open(characterSheetDrawerSettings);
   }
 
+  async function openScenesManagerDrawer() {
+
+    const scenes = await getCampaignScenes(campaign.id)
+    const scenesManagerDrawerSettings: DrawerSettings = {
+      id: `scenes-manager`,
+      meta: {
+        scenes: scenes,
+        campaign: campaign,
+      },
+      width: "w-96",
+      position: "right",
+    };
+
+    drawerStore.open(scenesManagerDrawerSettings);
+  }
+
 </script>
 
 <div class="flex flex-col">
@@ -62,7 +79,9 @@
       <a class="btn variant-ghost-warning mx-3" href="/campaigns/{$page.params.campaignId}/edit">EDIT</a>
       <a class="btn variant-ghost-secondary mx-3" href="/campaigns/{$page.params.campaignId}/requests">CAMPAIGN REQUESTS</a>
       <button class="btn variant-ghost-success mx-3" use:clipboard={`${$page.url.origin}/campaigns/${$page.params.campaignId}/request`} on:click={() => toastShow("Invite link copied", toastStore)}>INVITE</button>
-      <a href="/campaigns/{campaign.id}/scenes" class="btn variant-ghost-success mx-3">Scenes Manager</a>
+      <button
+        on:click={openScenesManagerDrawer}
+        class="btn variant-ghost-success mx-3">Scenes Manager</button>
     {/if}
     <a class="btn variant-ghost-warning mx-3" href="/campaigns/{$page.params.campaignId}/game">GAME</a>
   </div>
