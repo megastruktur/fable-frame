@@ -82,14 +82,15 @@
       </a>
       {/each}
     </div>
-    {#if isUserGm}
-      <CampaignNoteAdd campaignId={campaign.id} on:campaignNoteAdded={campaignNoteAddedHandler} />
-    {/if}
 
     {#if isUserGm}
       <div class="mx-auto">
         <CampaignAlert campaignId={campaign.id} />
       </div>
+    {/if}
+    
+    {#if isUserGm}
+      <CampaignNoteAdd campaignId={campaign.id} on:campaignNoteAdded={campaignNoteAddedHandler} />
     {/if}
 
     {#if campaignNotes !== undefined}
