@@ -240,7 +240,11 @@
         {#if editMode}
           <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
         {:else}
-          <span>{characterName}</span>
+          {#if compactVersion}
+            <a href="/characters/{character.id}">{characterName}</a>
+          {:else}
+            <span>{characterName}</span>
+          {/if}
           {#if campaign !== undefined}
             <a class="btn ml-3 variant-ghost-tertiary" href="/campaigns/{campaign.id}">{campaign.name}</a>
           {/if}
