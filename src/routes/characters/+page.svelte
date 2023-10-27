@@ -5,12 +5,12 @@
 	import { cloneCharacter, deleteCharacter, getMyCharacters } from '$models/character';
 	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, getModalStore, getToastStore } from '@skeletonlabs/skeleton';
 	import { flip } from 'svelte/animate';
-	import { crossfade, fade } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
+	import { fade } from 'svelte/transition';
 	// @ts-ignore
 	import Icon from 'svelte-icons-pack';
 	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
 	import CharacterItem from '$lib/components/characters/CharacterItem.svelte';
+	import { receive, send } from '$lib/animation';
 
 	const modalStore = getModalStore()
 	const toastStore = getToastStore()
@@ -66,25 +66,6 @@
 			modalStore.trigger(modal);
 		}
 	}
-
-	// Animations
-	const [send, receive] = crossfade({
-		duration: (d) => Math.sqrt(d * 200),
-
-		fallback(node, params) {
-			const style = getComputedStyle(node);
-			const transform = style.transform === 'none' ? '' : style.transform;
-
-			return {
-				duration: 300,
-				easing: quintOut,
-				css: (t) => `
-					transform: ${transform} scale(${t});
-					opacity: ${t}
-				`
-			};
-		}
-	});
 
 </script>
 

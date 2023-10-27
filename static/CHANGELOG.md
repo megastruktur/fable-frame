@@ -1,3 +1,6 @@
+### 0.7.3
+- Feature: Adds Important Notes Section to campaign
+
 ### 0.7.2
 - Bugfix: Character Add to campaign fix.
 

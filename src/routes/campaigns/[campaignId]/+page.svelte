@@ -11,6 +11,7 @@
 	import CampaignNoteAdd from "$lib/components/campaign/CampaignNoteAdd.svelte";
 	import { getCampaignNotes } from "$models/campaign_notes";
 	import CampaignNote from "$lib/components/campaign/CampaignNote.svelte";
+	import CampaignAlert from "$lib/components/character-notes/CampaignAlert.svelte";
 
   const toastStore = getToastStore()
 
@@ -83,6 +84,10 @@
     </div>
     {#if isUserGm}
       <CampaignNoteAdd campaignId={campaign.id} on:campaignNoteAdded={campaignNoteAddedHandler} />
+    {/if}
+
+    {#if isUserGm}
+      <CampaignAlert campaignId={campaign.id} />
     {/if}
 
     {#if campaignNotes !== undefined}

@@ -9,17 +9,40 @@ export async function createCampaignNote(campaignId: string, noteText: string, i
     type: isGmNote ? CampaignNotesTypeOptions.gm : CampaignNotesTypeOptions.public,
     note: noteText,
     campaign: campaignId,
+    active: true,
   }
-  console.log(data)
   return await pb.collection("campaign_notes").create(data)
 }
 
 export async function getCampaignNotes(campaignId: string): Promise<CampaignNotesResponse[]> {
   const queryParams = {
-    filter: `campaign="${campaignId}"`,
+    filter: `campaign="${campaignId}" && type != "alert"`,
     sort: "-created",
   }
   return await pb.collection("campaign_notes").getFullList(queryParams)
+}
+
+export async function getCampaignAlerts(campaignId: string): Promise<CampaignNotesResponse[]> {
+  const queryParams = {
+    filter: `campaign="${campaignId}" && type="alert"`,
+    sort: "-created,active",
+  }
+  return await pb.collection("campaign_notes").getFullList(queryParams)
+}
+
+export async function createCampaignAlert(campaignId: string, noteText: string): Promise<CampaignNotesResponse> {
+  const data = {
+    type: CampaignNotesTypeOptions.alert,
+    note: noteText,
+    campaign: campaignId,
+    active: true,
+  }
+  return await pb.collection("campaign_notes").create(data)
+}
+
+export async function toggleCampaignNoteActive(note: CampaignNotesResponse) {
+  note.active = !note.active
+  return await updateCampaignNotes(note.id, note)
 }
 
 export async function updateCampaignNotes(id: string, data: Partial<CampaignNotesRecord>): Promise<CampaignNotesResponse> {

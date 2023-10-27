@@ -10,6 +10,7 @@
   // @ts-ignore
   import MdChat from 'svelte-icons/md/MdChat.svelte'
 	import { currentUser } from "$lib/pocketbase";
+	import CampaignAlert from "../character-notes/CampaignAlert.svelte";
 
   export let scene: ScenesResponse
   export let campaign: CampaignsResponse
@@ -71,6 +72,13 @@
       <a class="btn btn-sm m-0 variant-ghost-secondary" href="/campaigns/{campaign.id}">{campaign.name}</a>
     </h2>
   </div>
+
+  <!-- Alerts -->
+  {#if isGM}
+    <div class="fixed right-3 bottom-3">
+      <CampaignAlert campaignId={campaign.id} />
+    </div>
+  {/if}
 
   <!-- Characters -->
   <button

@@ -54,6 +54,7 @@ export type CampaignChatRecord = {
 export enum CampaignNotesTypeOptions {
 	"gm" = "gm",
 	"public" = "public",
+	"alert" = "alert",
 }
 export type CampaignNotesRecord = {
 	campaign: RecordIdString
@@ -61,6 +62,7 @@ export type CampaignNotesRecord = {
 	image?: string
 	note: HTMLString
 	type: CampaignNotesTypeOptions
+	active: boolean
 }
 
 export type CampaignsRecord = {
