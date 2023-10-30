@@ -47,7 +47,8 @@
       field.weight = counter
       counter++
       dispatch("fieldUpdate", {
-        field: field
+        field: field,
+        operation: "reorder",
       })
     })
     fields = e.detail.items

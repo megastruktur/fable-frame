@@ -134,6 +134,7 @@
     if (character && character.id) {
       try {
         await updateCharacterWithHash(character.id, character)
+        characterTabsPrepare()
       }
       catch (e) {
         console.error(e)

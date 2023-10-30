@@ -1,5 +1,7 @@
 ### 0.7.3
 - Feature: Adds Important Notes Section to campaign
+- Bugfix: Tab add and remove fix after refactoring
+- Bugfix: Reorder fields fix after refactoring
 
 ### 0.7.2
 - Bugfix: Character Add to campaign fix.
