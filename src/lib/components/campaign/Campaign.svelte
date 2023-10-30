@@ -4,7 +4,7 @@
 	import { currentUser } from "$lib/pocketbase";
 	import type { CampaignNotesResponse, CampaignsResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { headerBanner } from "$lib/stores";
-	import { getCampaignCharacters, getCampaignImage, getCampaignWithRpgSystem } from "$models/campaign"
+	import { getCampaignCharacterRequests, getCampaignImage } from "$models/campaign"
 	import { getToastStore, type DrawerSettings, getDrawerStore } from "@skeletonlabs/skeleton"
   import { clipboard } from '@skeletonlabs/skeleton'
 	import { toastShow } from "$lib/toast";
@@ -51,6 +51,20 @@
     drawerStore.open(characterSheetDrawerSettings);
   }
 
+  async function openCampaignRequestsDrawer() {
+    const characterRequests = await getCampaignCharacterRequests(campaign.id)
+
+    const characterRequestsDrawerSettings: DrawerSettings = {
+      id: `campaign-requests`,
+      meta: {
+        characters: characterRequests,
+      },
+      width: "w-96",
+      position: "right",
+    };
+    drawerStore.open(characterRequestsDrawerSettings);
+  }
+
   async function openScenesManagerDrawer() {
 
     const scenes = await getCampaignScenes(campaign.id)
@@ -77,7 +91,9 @@
   <div class="flex flex-wrap justify-center">
     {#if campaign.creator === $currentUser?.id}
       <a class="btn variant-ghost-warning mx-3" href="/campaigns/{$page.params.campaignId}/edit">EDIT</a>
-      <a class="btn variant-ghost-secondary mx-3" href="/campaigns/{$page.params.campaignId}/requests">CAMPAIGN REQUESTS</a>
+      <button
+        on:click={openCampaignRequestsDrawer}
+        class="btn variant-ghost-secondary mx-3">CAMPAIGN REQUESTS</button>
       <button class="btn variant-ghost-success mx-3" use:clipboard={`${$page.url.origin}/campaigns/${$page.params.campaignId}/request`} on:click={() => toastShow("Invite link copied", toastStore)}>INVITE</button>
       <button
         on:click={openScenesManagerDrawer}

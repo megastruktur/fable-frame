@@ -96,7 +96,6 @@
     <GiBookPile />
   </button>
   
-  <!-- Character Notes (?) -->
   <!-- Chat -->
   <button
     class="btn btn-icon variant-outline-primary fixed left-2 top-1/4 p-1"
