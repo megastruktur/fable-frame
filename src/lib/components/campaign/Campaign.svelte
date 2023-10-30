@@ -125,7 +125,7 @@
   {#if campaignNotes !== undefined}
   <div class="flex flex-col items-center my-6">
     {#each campaignNotes as campaignNote(campaignNote.id)}
-      {#if !(!isUserGm && campaignNote.type === "gm")}
+      {#if !(!isUserGm && campaignNote.type === "gm") && campaignNote.type !== "alert"}
       <CampaignNote {campaignNote} on:campaignNoteRemoved={campaignNoteRemovedHandler}/>
       {/if}
     {/each}

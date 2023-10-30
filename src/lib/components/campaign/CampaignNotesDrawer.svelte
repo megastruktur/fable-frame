@@ -16,7 +16,6 @@
 
   async function campaignNotesLoad() {
     campaignNotes = await getCampaignNotes(campaignId)
-    console.log(campaignNotes)
     campaign = await getCampaign(campaignId)
     isUserGm = (campaign.creator === $currentUser?.id)
   }
