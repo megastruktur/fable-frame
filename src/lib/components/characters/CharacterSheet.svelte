@@ -69,43 +69,51 @@
   }
 
   onMount(() => {
+    characterPrepare()
+  })
+
+  function characterPrepare() {
     console.log("-------- Character --------")
     console.log(character)
 
     if (character !== undefined) {
-      characterAvatarUrl = getCharacterAvatar(character)
-
-      tabs = getCharacterTabs(character)
-      tabsContent = {general: []}
-  
-      // Cleanup tabsContent and Create tabs placeholders
-      Object.keys(tabs).forEach((tabName: string) => {
-        tabsContent[tabName] = []
-      })
-  
-      character.fields.forEach((field: Field) => {
-        if (field.group && field.type !== "tab") {
-  
-          // If tab doens't exist add fields to "general" tab.
-          let tabExists = (tabs[field.group] !== undefined) ? true : false
-          let tabNameToAdd = "general"
-  
-          if (tabExists) {
-            tabNameToAdd = field.group
-          }
-
-          tabsContent[tabNameToAdd] = [...tabsContent[tabNameToAdd], field]
-        }
-      })
-
-      // Reorder all objects inside tabsContent by weight property.
-      Object.keys(tabsContent).forEach((key: string) => {
-        tabsContent[key].sort((a: Field, b: Field) => {
-          return a.weight - b.weight
-        })
-      })
+      characterTabsPrepare()
     }
-  })
+  }
+
+  function characterTabsPrepare() {
+    characterAvatarUrl = getCharacterAvatar(character)
+
+    tabs = getCharacterTabs(character)
+    tabsContent = {general: []}
+
+    // Cleanup tabsContent and Create tabs placeholders
+    Object.keys(tabs).forEach((tabName: string) => {
+      tabsContent[tabName] = []
+    })
+
+    character.fields.forEach((field: Field) => {
+      if (field.group && field.type !== "tab") {
+
+        // If tab doens't exist add fields to "general" tab.
+        let tabExists = (tabs[field.group] !== undefined) ? true : false
+        let tabNameToAdd = "general"
+
+        if (tabExists) {
+          tabNameToAdd = field.group
+        }
+
+        tabsContent[tabNameToAdd] = [...tabsContent[tabNameToAdd], field]
+      }
+    })
+
+    // Reorder all objects inside tabsContent by weight property.
+    Object.keys(tabsContent).forEach((key: string) => {
+      tabsContent[key].sort((a: Field, b: Field) => {
+        return a.weight - b.weight
+      })
+    })
+  }
 
 
   // Show errors.
@@ -200,16 +208,39 @@
 
   async function fieldRemove({detail: {field}} : {detail: {field: Field}}) {
     character = removeCharacterField(character, field)
+
+    if (field.group !== undefined) {
+      
+      if (field.type !== "tab") {
+      tabsContent[field.group] = tabsContent[field.group].filter((field: Field) => field.id!== field.id)
+      }
+      else {
+        console.log(field)
+      // Move all nested fields to General tab
+        if (field.name !== "general") {
+          tabsContent["general"] = [...tabsContent["general"], ...tabsContent[field.name]]
+
+          delete tabsContent[field.name]
+          delete tabs[field.name]
+        }
+      }
+    }
     console.log("On Field Remove")
   }
 
   async function fieldAdd({detail: {field}} : {detail: {field: Field}}) {
     character = addCharacterField(character, field)
-    console.log("On Field Add")
-  }
 
-  async function avatarSet({detail: {avatar}} : {detail: {avatar: string}}) {
-    character.avatar = avatar
+    if (field.group !== undefined) {
+      if (field.type !== "tab") {
+        tabsContent[field.group] = [...tabsContent[field.group], field]
+      }
+      else {
+        tabsContent[field.name] = []
+        tabs[field.name] = field
+      }
+    }
+    console.log("On Field Add")
   }
 
   function avatarSetHandler({detail: {avatar}} : {detail: {avatar: string}}) {

@@ -1,23 +1,26 @@
 <script lang="ts">
 	import type { ObjectType, QueryArray } from "svelte-media-queries/components/MediaQuery.types";
   import { createEventDispatcher } from "svelte";
+	import type { Field } from "$lib/types";
 
   export let matches: boolean | QueryArray | ObjectType<any> = true
   export let compactVersion: boolean = false
   export let activeTabName: string
-  export let tabName: string
+  export let tab: Field
   export let removable: boolean = true
   export let editMode: boolean
 
   const dispatch = createEventDispatcher();
 
   function removeTabEvent() {
-    dispatch("removeTab", { tabName })
+    dispatch("fieldRemove", {
+      field: tab
+    })
   }
 
 </script>
 
-<section class="w-80 mb-3 relative mx-2 {(matches || compactVersion) && activeTabName !== tabName ? "hidden" : ""}">
+<section class="w-80 mb-3 relative mx-2 {(matches || compactVersion) && activeTabName !== tab.name ? "hidden" : ""}">
 
 
   {#if removable && editMode}

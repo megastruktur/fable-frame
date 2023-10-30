@@ -15,13 +15,6 @@ console.log({field})
 </script>
 
 <div>
-  <!-- <input class="hidden input mb-2" type="text" placeholder="Name" bind:value={field.name} /> -->
-  
-
-  <!-- Tab should have a name -->
-  {#if field.type === "tab"}
-    <input class="input mb-2" type="text" placeholder="Name (unique)" bind:value={field.name} />
-  {/if}
   <input required class="input mb-2" type="text" placeholder="Label" bind:value={field.label} />
   <!-- Omit value for Tab type -->
   {#if field.type !== "tab" && field.type !== "tag" && field.type !== "section"}

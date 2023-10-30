@@ -59,8 +59,7 @@
 </script>
 
 <CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
-  {removable} {editMode}
-  tabName={tab.name}>
+  {removable} {editMode} {tab} on:fieldRemove >
   {#if editable && editMode}
   <input type="text" class="input h2 text-center" bind:value={tab.label} />
   {:else}
