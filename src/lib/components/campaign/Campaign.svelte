@@ -11,7 +11,7 @@
 	import CampaignNoteAdd from "$lib/components/campaign/CampaignNoteAdd.svelte";
 	import { getCampaignNotes } from "$models/campaign_notes";
 	import CampaignNote from "$lib/components/campaign/CampaignNote.svelte";
-	import CampaignAlert from "$lib/components/character-notes/CampaignAlert.svelte";
+	import CampaignAlert from "$lib/components/campaign/CampaignAlert.svelte";
 	import { getCampaignScenes } from "$models/scenes";
 
   const toastStore = getToastStore()
@@ -20,7 +20,11 @@
   // Ref to: getCampaignWithRpgSystemCharsAndNotes
   export let campaign: CampaignsResponse
   let characters: CharactersResponse[] = campaign.expand.characters
-  let campaignNotes: CampaignNotesResponse[] = campaign.expand["campaign_notes(campaign)"]
+  let campaignNotes: CampaignNotesResponse[] = campaign.expand["campaign_notes(campaign)"].sort((a, b) => {
+    return new Date(b.created).getTime() - new Date(a.created).getTime()
+  })
+  
+
   let rpgSystem: RpgSystemsResponse = campaign.expand.rpgSystem
   let isUserGm: boolean = campaign.creator === $currentUser?.id
 

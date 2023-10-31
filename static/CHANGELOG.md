@@ -2,6 +2,7 @@
 - Feature: Adds Important Notes Section to campaign
 - Bugfix: Tab add and remove fix after refactoring
 - Bugfix: Reorder fields fix after refactoring
+- Feature: Adds image to campaign notes
 
 ### 0.7.2
 - Bugfix: Character Add to campaign fix.

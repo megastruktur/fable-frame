@@ -28,11 +28,19 @@ pb.beforeSend = function (url, options) {
   if (options.body !== undefined) {
 
     try {
-      const bodyJson = JSON.parse(options.body)
 
-      if (bodyJson && !bodyJson.creator && pb.authStore.model !== null) {
-        bodyJson.creator = pb.authStore.model.id
-        options.body = JSON.stringify(bodyJson)
+      if (options.body instanceof FormData) {
+        if (pb.authStore.model !== null) {
+          options.body.set("creator", pb.authStore.model.id)
+        }
+      }
+      else {
+        const bodyJson = JSON.parse(options.body)
+  
+        if (bodyJson && !bodyJson.creator && pb.authStore.model !== null) {
+          bodyJson.creator = pb.authStore.model.id
+          options.body = JSON.stringify(bodyJson)
+        }
       }
     } catch (e) {
       console.log("Not a JSON object")

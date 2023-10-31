@@ -1,16 +1,7 @@
 import { pb } from "$lib/pocketbase"
 import { type CampaignNotesResponse, type CampaignNotesRecord, CampaignNotesTypeOptions } from "$lib/pocketbase-types.d"
-// export async function createCampaignNote(data: Partial<CampaignNotesRecord>): Promise<CampaignNotesResponse> {
-//   return await pb.collection("campaign_notes").create(data)
-// }
 
-export async function createCampaignNote(campaignId: string, noteText: string, isGmNote = false): Promise<CampaignNotesResponse> {
-  const data = {
-    type: isGmNote ? CampaignNotesTypeOptions.gm : CampaignNotesTypeOptions.public,
-    note: noteText,
-    campaign: campaignId,
-    active: true,
-  }
+export async function createCampaignNote(data: any): Promise<CampaignNotesResponse> {
   return await pb.collection("campaign_notes").create(data)
 }
 
@@ -51,4 +42,12 @@ export async function updateCampaignNotes(id: string, data: Partial<CampaignNote
 
 export async function deleteCampaignNote(campaignNoteId: string) {
   return await pb.collection("campaign_notes").delete(campaignNoteId)
+}
+
+export function getCampaignNotesImage(note: CampaignNotesResponse) {
+  if (note.image)
+    return pb.files.getUrl(note, note.image)
+  else {
+    return ""
+  }
 }

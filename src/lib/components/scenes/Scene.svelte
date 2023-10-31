@@ -10,7 +10,7 @@
   // @ts-ignore
   import MdChat from 'svelte-icons/md/MdChat.svelte'
 	import { currentUser } from "$lib/pocketbase";
-	import CampaignAlert from "../character-notes/CampaignAlert.svelte";
+	import CampaignAlert from "../campaign/CampaignAlert.svelte";
 
   export let scene: ScenesResponse
   export let campaign: CampaignsResponse
