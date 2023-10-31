@@ -11,14 +11,14 @@ import CircleAdd from "$lib/components/circle-add/CircleAdd.svelte";
   export let editMode: boolean = false
   export let activeTabName: string
   export let character: CharactersResponse
+  export let tab: Field
 
   
 </script>
 
 <!-- Feelings -->
 <CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
-removable={false} {editMode}
-tabName="feel">
+removable={false} {editMode} {tab}>
 
   <h2 class="flex text-3xl justify-center h2">I Feel</h2>
   <div class="flex flex-wrap">

@@ -9,8 +9,13 @@
   import GiBookPile from 'svelte-icons/gi/GiBookPile.svelte'
   // @ts-ignore
   import MdChat from 'svelte-icons/md/MdChat.svelte'
+  // @ts-ignore
+  import GiSteelDoor from 'svelte-icons/gi/GiSteelDoor.svelte'
+
 	import { currentUser } from "$lib/pocketbase";
 	import CampaignAlert from "../campaign/CampaignAlert.svelte";
+	import ScenesManagerCaller from "./ScenesManagerCaller.svelte";
+	import PersonSimpleIcon from "../icons/PersonSimpleIcon.svelte";
 
   export let scene: ScenesResponse
   export let campaign: CampaignsResponse
@@ -73,6 +78,52 @@
     </h2>
   </div>
 
+  <!-- Left Icons -->
+  <div
+    class="fixed left-0 top-2/4 flex flex-col space-y-3 p-3
+      bg-surface-600/80 rounded-r-2xl shadow-md">
+
+    <!-- Campaign Notes -->
+    <button
+      class="btn btn-icon text-secondary-400"
+      on:click={openCampaignNotesDrawer}
+    >
+      <GiBookPile />
+    </button>
+    
+    <!-- Chat -->
+    <button
+      class="btn btn-icon text-secondary-400"
+      on:click={openCampaignChatDrawer}
+    >
+      <MdChat />
+    </button>
+  
+    {#if isGM}
+      <ScenesManagerCaller
+        {campaign}
+        position="left"
+        classes="btn btn-icon text-secondary-400">
+        <GiSteelDoor />
+      </ScenesManagerCaller>
+    {/if}
+
+  </div>
+
+  <!-- Right icons -->
+  <div class="fixed right-0 top-1/4 flex flex-col space-y-3 p-3
+  bg-surface-600/80 rounded-l-2xl shadow-md">
+  
+    <!-- Characters -->
+    <button
+      class="btn btn-icon text-secondary-400"
+      on:click={openCharactersDrawer}
+    >
+      <PersonSimpleIcon />
+    </button>
+  </div>
+
+
   <!-- Alerts -->
   {#if isGM}
     <div class="fixed right-3 bottom-3">
@@ -80,27 +131,4 @@
     </div>
   {/if}
 
-  <!-- Characters -->
-  <button
-    class="btn btn-icon variant-outline-primary fixed right-2 top-2/4 p-1"
-    on:click={openCharactersDrawer}
-  >
-    <GiPerson />
-  </button>
-
-  <!-- Campaign Notes -->
-  <button
-    class="btn btn-icon variant-outline-primary fixed left-2 top-2/4 p-1"
-    on:click={openCampaignNotesDrawer}
-  >
-    <GiBookPile />
-  </button>
-  
-  <!-- Chat -->
-  <button
-    class="btn btn-icon variant-outline-primary fixed left-2 top-1/4 p-1"
-    on:click={openCampaignChatDrawer}
-  >
-    <MdChat />
-  </button>
 </div>

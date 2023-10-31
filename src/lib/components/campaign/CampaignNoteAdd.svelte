@@ -59,7 +59,7 @@
 
 <div class="flex flex-col items-center my-3">
   {#if previewImageSrc !== undefined && previewImageSrc !== ""}
-    <div class="w-96 relative">
+    <div class="relative">
       <button
         class="text-error-900"
         on:click={clearNoteImage}>✕</button>
@@ -67,7 +67,7 @@
     </div>
    
   {/if}
-  <textarea class="textarea w-96 my-6" bind:value={noteText}></textarea>
+  <textarea class="textarea my-6" bind:value={noteText}></textarea>
   <div class="flex items-center space-x-3">
     <SlideToggle
       name="is-gm-note"

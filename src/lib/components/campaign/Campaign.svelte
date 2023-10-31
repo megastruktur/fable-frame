@@ -12,7 +12,7 @@
 	import { getCampaignNotes } from "$models/campaign_notes";
 	import CampaignNote from "$lib/components/campaign/CampaignNote.svelte";
 	import CampaignAlert from "$lib/components/campaign/CampaignAlert.svelte";
-	import { getCampaignScenes } from "$models/scenes";
+	import ScenesManagerCaller from "../scenes/ScenesManagerCaller.svelte";
 
   const toastStore = getToastStore()
   const drawerStore = getDrawerStore()
@@ -69,22 +69,6 @@
     drawerStore.open(characterRequestsDrawerSettings);
   }
 
-  async function openScenesManagerDrawer() {
-
-    const scenes = await getCampaignScenes(campaign.id)
-    const scenesManagerDrawerSettings: DrawerSettings = {
-      id: `scenes-manager`,
-      meta: {
-        scenes: scenes,
-        campaign: campaign,
-      },
-      width: "w-96",
-      position: "right",
-    };
-
-    drawerStore.open(scenesManagerDrawerSettings);
-  }
-
 </script>
 
 <div class="flex flex-col">
@@ -99,9 +83,11 @@
         on:click={openCampaignRequestsDrawer}
         class="btn variant-ghost-secondary mx-3">CAMPAIGN REQUESTS</button>
       <button class="btn variant-ghost-success mx-3" use:clipboard={`${$page.url.origin}/campaigns/${$page.params.campaignId}/request`} on:click={() => toastShow("Invite link copied", toastStore)}>INVITE</button>
-      <button
-        on:click={openScenesManagerDrawer}
-        class="btn variant-ghost-success mx-3">Scenes Manager</button>
+      <ScenesManagerCaller
+        {campaign}
+        classes="btn variant-ghost-success mx-3" >
+        Scenes Manager
+      </ScenesManagerCaller>
     {/if}
     <a class="btn variant-ghost-warning mx-3" href="/campaigns/{$page.params.campaignId}/game">GAME</a>
   </div>
@@ -122,17 +108,19 @@
     </div>
   {/if}
   
-  {#if isUserGm}
-    <CampaignNoteAdd campaignId={campaign.id} on:campaignNoteAdded={campaignNoteAddedHandler} />
-  {/if}
-
-  {#if campaignNotes !== undefined}
-  <div class="flex flex-col items-center my-6">
-    {#each campaignNotes as campaignNote(campaignNote.id)}
-      {#if !(!isUserGm && campaignNote.type === "gm") && campaignNote.type !== "alert"}
-      <CampaignNote {campaignNote} on:campaignNoteRemoved={campaignNoteRemovedHandler}/>
-      {/if}
-    {/each}
+  <div class="w-96 mx-auto">
+    {#if isUserGm}
+      <CampaignNoteAdd campaignId={campaign.id} on:campaignNoteAdded={campaignNoteAddedHandler} />
+    {/if}
+  
+    {#if campaignNotes !== undefined}
+      <div class="my-6">
+        {#each campaignNotes as campaignNote(campaignNote.id)}
+          {#if !(!isUserGm && campaignNote.type === "gm") && campaignNote.type !== "alert"}
+          <CampaignNote {campaignNote} on:campaignNoteRemoved={campaignNoteRemovedHandler}/>
+          {/if}
+        {/each}
+      </div>
+    {/if}
   </div>
-  {/if}
 </div>

@@ -42,8 +42,7 @@
 </script>
 
 <CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
-  {removable} {editMode}
-  tabName={tab.name}>
+  {removable} {editMode} {tab}>
   <h2 class="h2 text-center mb-3">{tab.label}</h2>
   <!-- Draggable section -->
   <div

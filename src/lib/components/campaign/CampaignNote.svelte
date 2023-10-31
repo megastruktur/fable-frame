@@ -59,7 +59,7 @@
 
 </script>
 
-<div class="w-96 md:w-100 my-3 flex flex-col">
+<div class="my-3">
 
   {#if !editMode}
     <div>
@@ -71,7 +71,7 @@
       </div>
     </div>
   {:else}
-    <textarea class="textarea w-full my-6" bind:value={note}></textarea>
+    <textarea class="textarea my-6" bind:value={note}></textarea>
     <div class="flex items-center">
       <SlideToggle name="is-gm-note" bind:checked={isGmNote}>is GM-only?</SlideToggle>
       <button class="ml-6 btn variant-outline-primary" on:click={() => editMode = false}>Cancel</button>
