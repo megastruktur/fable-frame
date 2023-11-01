@@ -4,6 +4,7 @@
 - Bugfix: Reorder fields fix after refactoring
 - Feature: Adds image to campaign notes
 - UI/UX: Scene Manager design fix
+- UI/UX: Campaign add operation icons
 - UI/UX: and structure fixes
 
 ### 0.7.2

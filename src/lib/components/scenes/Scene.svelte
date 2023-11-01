@@ -4,8 +4,6 @@
 	import { getDrawerStore, type DrawerSettings } from "@skeletonlabs/skeleton";
 
   // @ts-ignore
-	import GiPerson from 'svelte-icons/gi/GiPerson.svelte'
-  // @ts-ignore
   import GiBookPile from 'svelte-icons/gi/GiBookPile.svelte'
   // @ts-ignore
   import MdChat from 'svelte-icons/md/MdChat.svelte'

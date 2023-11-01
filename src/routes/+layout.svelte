@@ -79,7 +79,7 @@
 	{:else if $drawerStore.id === "campaign-notes-list"}
 		<CampaignNotesDrawer campaignId={$drawerStore.meta.campaignId} />
 	{:else if $drawerStore.id === "campaign-requests"}
-		<CampaignRequests characters={$drawerStore.meta.campaignId} />
+		<CampaignRequests characters={$drawerStore.meta.characters} campaignId={$drawerStore.meta.campaignId} />
 	{:else if $drawerStore.id === "campaign-chat"}
 		<CampaignChatWindow campaign={$drawerStore.meta.campaignWithCharacters} />
 	{/if}

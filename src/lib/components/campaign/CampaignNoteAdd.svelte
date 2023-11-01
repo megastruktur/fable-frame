@@ -57,7 +57,7 @@
   }
 </script>
 
-<div class="flex flex-col items-center my-3">
+<div class="flex flex-col items-center">
   {#if previewImageSrc !== undefined && previewImageSrc !== ""}
     <div class="relative">
       <button
@@ -67,7 +67,7 @@
     </div>
    
   {/if}
-  <textarea class="textarea my-6" bind:value={noteText}></textarea>
+  <textarea class="textarea" bind:value={noteText}></textarea>
   <div class="flex items-center space-x-3">
     <SlideToggle
       size="sm"

@@ -14,6 +14,15 @@
 	import CampaignAlert from "$lib/components/campaign/CampaignAlert.svelte";
 	import ScenesManagerCaller from "../scenes/ScenesManagerCaller.svelte";
 
+  // @ts-ignore
+  import GiPlayButton from 'svelte-icons/gi/GiPlayButton.svelte'
+  // @ts-ignore
+  import MdShare from 'svelte-icons/md/MdShare.svelte'
+  // @ts-ignore
+	import FaPencilAlt from 'svelte-icons/fa/FaPencilAlt.svelte'
+  // @ts-ignore
+  import GiSteelDoor from 'svelte-icons/gi/GiSteelDoor.svelte'
+
   const toastStore = getToastStore()
   const drawerStore = getDrawerStore()
 
@@ -62,6 +71,7 @@
       id: `campaign-requests`,
       meta: {
         characters: characterRequests,
+        campaignId: campaign.id,
       },
       width: "w-96",
       position: "right",
@@ -76,25 +86,25 @@
   <h1 class="h2 mx-auto mt-6">{campaign.name}</h1>
   <h6 class="h6 mx-auto my-6">{rpgSystem.name}</h6>
 
-  <div class="flex flex-wrap justify-center">
+  <div class="flex flex-wrap justify-center space-x-3">
     {#if campaign.creator === $currentUser?.id}
-      <a class="btn variant-ghost-warning mx-3" href="/campaigns/{$page.params.campaignId}/edit">EDIT</a>
+      <a class="btn w-10 h-10 p-2 variant-ghost-warning" href="/campaigns/{$page.params.campaignId}/edit"><FaPencilAlt /></a>
       <button
         on:click={openCampaignRequestsDrawer}
-        class="btn variant-ghost-secondary mx-3">CAMPAIGN REQUESTS</button>
-      <button class="btn variant-ghost-success mx-3" use:clipboard={`${$page.url.origin}/campaigns/${$page.params.campaignId}/request`} on:click={() => toastShow("Invite link copied", toastStore)}>INVITE</button>
+        class="btn w-10 h-10 p-2 variant-ghost-secondary"><MdShare /></button>
+
       <ScenesManagerCaller
         {campaign}
-        classes="btn variant-ghost-success mx-3" >
-        Scenes Manager
+        classes="btn w-10 h-10 p-2 variant-ghost-success" >
+        <GiSteelDoor />
       </ScenesManagerCaller>
     {/if}
-    <a class="btn variant-ghost-warning mx-3" href="/campaigns/{$page.params.campaignId}/game">GAME</a>
+    <a class="btn w-10 h-10 p-2 variant-ghost-warning" href="/campaigns/{$page.params.campaignId}/game"><GiPlayButton /></a>
   </div>
 
   <article class="mt-6 text-center">{campaign.description}</article>
 
-  <div class="flex flex-wrap justify-center">
+  <div class="flex flex-wrap justify-center mb-3">
     {#each characters as character}
     <button class="btn" on:click|stopPropagation={() => openCharacterSheetDrawerHandler(character)}>
       <CharacterItem {character} />
@@ -102,25 +112,27 @@
     {/each}
   </div>
 
-  {#if isUserGm}
-    <div class="mx-auto">
-      <CampaignAlert campaignId={campaign.id} />
-    </div>
-  {/if}
-  
-  <div class="w-96 mx-auto">
+  <div class="flex flex-wrap justify-evenly">
     {#if isUserGm}
-      <CampaignNoteAdd campaignId={campaign.id} on:campaignNoteAdded={campaignNoteAddedHandler} />
-    {/if}
-  
-    {#if campaignNotes !== undefined}
-      <div class="my-6">
-        {#each campaignNotes as campaignNote(campaignNote.id)}
-          {#if !(!isUserGm && campaignNote.type === "gm") && campaignNote.type !== "alert"}
-          <CampaignNote {campaignNote} on:campaignNoteRemoved={campaignNoteRemovedHandler}/>
-          {/if}
-        {/each}
+      <div class="mb-6">
+        <CampaignAlert campaignId={campaign.id} />
       </div>
     {/if}
+    
+    <div class="w-96">
+      {#if isUserGm}
+        <CampaignNoteAdd campaignId={campaign.id} on:campaignNoteAdded={campaignNoteAddedHandler} />
+      {/if}
+    
+      {#if campaignNotes !== undefined}
+        <div class="my-6">
+          {#each campaignNotes as campaignNote(campaignNote.id)}
+            {#if !(!isUserGm && campaignNote.type === "gm") && campaignNote.type !== "alert"}
+            <CampaignNote {campaignNote} on:campaignNoteRemoved={campaignNoteRemovedHandler}/>
+            {/if}
+          {/each}
+        </div>
+      {/if}
+    </div>
   </div>
 </div>
