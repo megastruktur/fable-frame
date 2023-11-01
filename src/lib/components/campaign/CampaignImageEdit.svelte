@@ -4,8 +4,8 @@
   import BsPencil from "svelte-icons-pack/bs/BsPencil";
 	import type { CampaignsResponse } from "$lib/pocketbase-types";
 	import { getCampaignImage } from "$models/campaign";
-
-  const Icon = require("svelte-icons-pack").Icon
+  // @ts-ignore
+  import Icon from "svelte-icons-pack/Icon.svelte"
 
   export let campaign: CampaignsResponse
 
