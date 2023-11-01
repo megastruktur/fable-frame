@@ -7,7 +7,7 @@ export async function createCampaignNote(data: any): Promise<CampaignNotesRespon
 
 export async function getCampaignNotes(campaignId: string): Promise<CampaignNotesResponse[]> {
   const queryParams = {
-    filter: `campaign="${campaignId}" && type != "alert"`,
+    filter: `campaign="${campaignId}" && type !~ "alert"`,
     sort: "-created",
   }
   return await pb.collection("campaign_notes").getFullList(queryParams)
