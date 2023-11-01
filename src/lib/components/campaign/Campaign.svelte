@@ -17,6 +17,7 @@
   // @ts-ignore
   import GiSteelDoor from 'svelte-icons/gi/GiSteelDoor.svelte'
 	import CampaignNotes from "./CampaignNotes.svelte";
+	import { activateScene } from "$models/scenes";
 
   const drawerStore = getDrawerStore()
 
@@ -128,7 +129,9 @@
         <GiSteelDoor />
       </ScenesManagerCaller>
     {/if}
-    <a class="btn w-10 h-10 p-2 variant-ghost-warning" href="/campaigns/{campaign.id}/game"><GiPlayButton /></a>
+    {#if campaign.activeScene !== undefined && campaign.activeScene !== ""}
+      <a class="btn w-10 h-10 p-2 variant-ghost-warning" href="/campaigns/{campaign.id}/game"><GiPlayButton /></a>
+    {/if}
   </div>
 
   <article class="mt-6 text-center">{campaign.description}</article>
