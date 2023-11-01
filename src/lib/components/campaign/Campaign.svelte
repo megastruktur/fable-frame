@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { page } from "$app/stores"
 	import CharacterItem from "$lib/components/characters/CharacterItem.svelte"
 	import { currentUser } from "$lib/pocketbase";
 	import type { CampaignNotesResponse, CampaignsResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
@@ -118,7 +117,7 @@
 
   <div class="flex flex-wrap justify-center space-x-3">
     {#if campaign.creator === $currentUser?.id}
-      <a class="btn w-10 h-10 p-2 variant-ghost-warning" href="/campaigns/{$page.params.campaignId}/edit"><FaPencilAlt /></a>
+      <a class="btn w-10 h-10 p-2 variant-ghost-warning" href="/campaigns/{campaign.id}/edit"><FaPencilAlt /></a>
       <button
         on:click={openCampaignRequestsDrawer}
         class="btn w-10 h-10 p-2 variant-ghost-secondary"><MdShare /></button>
@@ -129,16 +128,16 @@
         <GiSteelDoor />
       </ScenesManagerCaller>
     {/if}
-    <a class="btn w-10 h-10 p-2 variant-ghost-warning" href="/campaigns/{$page.params.campaignId}/game"><GiPlayButton /></a>
+    <a class="btn w-10 h-10 p-2 variant-ghost-warning" href="/campaigns/{campaign.id}/game"><GiPlayButton /></a>
   </div>
 
   <article class="mt-6 text-center">{campaign.description}</article>
 
   <div class="flex flex-wrap justify-center mb-3">
     {#each characters as character}
-    <button class="btn" on:click|stopPropagation={() => openCharacterSheetDrawerHandler(character)}>
-      <CharacterItem {character} />
-    </button>
+      <button class="btn" on:click|stopPropagation={() => openCharacterSheetDrawerHandler(character)}>
+        <CharacterItem {character} />
+      </button>
     {/each}
   </div>
 

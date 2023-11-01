@@ -48,7 +48,7 @@
   
   async function getData() {
 
-    if (character.expand.campaign !== undefined) {
+    if (character.expand?.campaign !== undefined) {
 
       campaign = character.expand.campaign
       let campaignImage = getCampaignImage(campaign)
