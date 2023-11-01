@@ -67,13 +67,11 @@
 	{:else if $drawerStore.id === "character-notes"}
 		<CharacterNotesDrawer characterId={$drawerStore.meta.characterId} />
 	{:else if $drawerStore.id === "campaign-character-list"}
-		<CampaignCharactersDrawer characterIds={$drawerStore.meta.campaignCharactersIds} />
-	{:else if $drawerStore.id === "character-sheet"}
-		<CharacterSheet
-			character={$drawerStore.meta.character}
-			rpgSystem={$drawerStore.meta.rpgSystem}
+		<CampaignCharactersDrawer
+			characters={$drawerStore.meta.characters}
 			campaign={$drawerStore.meta.campaign}
-			compactVersion={true} />
+			rpgSystem={$drawerStore.meta.rpgSystem}
+			/>
 	{:else if $drawerStore.id === "scenes-manager"}
 		<ScenesManager scenes={$drawerStore.meta.scenes} campaign={$drawerStore.meta.campaign} />
 	{:else if $drawerStore.id === "campaign-notes-list"}

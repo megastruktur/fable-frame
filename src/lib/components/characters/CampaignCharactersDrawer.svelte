@@ -1,31 +1,18 @@
 <script lang="ts">
-	import type { CharactersResponse } from "$lib/pocketbase-types";
-	import { getCharacterWithSystemAndCampaign } from "$models/character";
-	import { ProgressBar } from "@skeletonlabs/skeleton";
+	import type { CampaignsResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import CharacterSheet from "./CharacterSheet.svelte";
 
-  export let characterIds: string[]
-
-  let characters: CharactersResponse[]
-
-  async function getCharacters() {
-    const requests = characterIds.map((characterId) => getCharacterWithSystemAndCampaign(characterId)
-    )
-
-    characters = await Promise.all(requests)
-  }
+  export let characters: CharactersResponse[]
+  export let rpgSystem: RpgSystemsResponse
+  export let campaign: CampaignsResponse
 </script>
 
-{#await getCharacters()}
-  <ProgressBar />
-{:then}
-  <div class="flex flex-col w-96">
-    {#each characters as character(character.id)}
-      <CharacterSheet
-        {character}
-        rpgSystem={character.expand.rpgSystem}
-        campaign={character.expand.campaign}
-        compactVersion={true} />
-    {/each}
-  </div>
-{/await}
+<div class="flex flex-col w-96">
+  {#each characters as character(character.id)}
+    <CharacterSheet
+      {character}
+      {rpgSystem}
+      {campaign}
+      compactVersion={true} />
+  {/each}
+</div>

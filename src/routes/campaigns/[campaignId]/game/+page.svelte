@@ -3,7 +3,7 @@
 	import { page } from "$app/stores";
 	import Scene from "$lib/components/scenes/Scene.svelte";
   import type { CampaignsResponse, ScenesResponse } from "$lib/pocketbase-types";
-	import { getCampaignWithCharactersAndActiveScene, subscribeToCampaign } from "$models/campaign";
+	import { getCampaignWithCharactersAndActiveSceneAndRpgSystem, subscribeToCampaign } from "$models/campaign";
 	import { ProgressBar } from "@skeletonlabs/skeleton";
 	import type { UnsubscribeFunc } from "pocketbase";
 	import { onDestroy, onMount } from "svelte";
@@ -19,7 +19,7 @@
   }
 
   async function setCampaignAndScene() {
-    campaign = await getCampaignWithCharactersAndActiveScene($page.params.campaignId)
+    campaign = await getCampaignWithCharactersAndActiveSceneAndRpgSystem($page.params.campaignId)
     scene = campaign.expand.activeScene
   }
 

@@ -37,7 +37,9 @@
   const characterDrawerSettings: DrawerSettings = {
     id: `campaign-character-list`,
     meta: {
-      campaignCharactersIds: isGM ? campaign.characters : campaign.expand.characters.filter(c => c.creator === $currentUser?.id).map(c => c.id)
+      rpgSystem: campaign.expand.rpgSystem,
+      campaign: campaign,
+      characters: isGM ? campaign.expand.characters : campaign.expand.characters.filter(c => c.creator === $currentUser?.id)
     },
     width: "w-96",
     position: "right",

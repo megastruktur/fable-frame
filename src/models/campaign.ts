@@ -23,6 +23,12 @@ export async function getCampaignWithCharactersAndActiveScene(id: string): Promi
   })
 }
 
+export async function getCampaignWithCharactersAndActiveSceneAndRpgSystem(id: string): Promise<CampaignsResponse> {
+  return await pb.collection("campaigns").getOne(id, {
+    expand: "characters,activeScene,rpgSystem",
+  })
+}
+
 export async function updateCampaign(id: string, data: Partial<CampaignsRecord>): Promise<CampaignsResponse> {
   return await pb.collection("campaigns").update(id, data)
 }

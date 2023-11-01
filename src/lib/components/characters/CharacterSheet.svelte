@@ -277,7 +277,7 @@
         <CharacterAvatar characterName={character.name} characterId={character.id} avatarUrl={characterAvatarUrl} {editMode} on:avatarSet={avatarSetHandler} />
       </div>
 
-      <div class="flex flex-wrap my-3 justify-around">
+      <div class="flex flex-wrap my-3 justify-around space-x-3">
         {#if editMode}
           <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
         {:else}

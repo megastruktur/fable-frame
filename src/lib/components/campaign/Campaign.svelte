@@ -42,9 +42,9 @@
 
   function openCharacterSheetDrawerHandler(character: CharactersResponse) {
     const characterSheetDrawerSettings: DrawerSettings = {
-      id: `character-sheet`,
+      id: `campaign-character-list`,
       meta: {
-        character: character,
+        characters: [character],
         rpgSystem: rpgSystem,
         campaign: campaign,
       },
