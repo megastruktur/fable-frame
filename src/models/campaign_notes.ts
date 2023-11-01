@@ -14,16 +14,18 @@ export async function getCampaignNotes(campaignId: string): Promise<CampaignNote
 }
 
 export async function getCampaignAlerts(campaignId: string): Promise<CampaignNotesResponse[]> {
-  const queryParams = {
-    filter: `campaign="${campaignId}" && type="alert"`,
+  return await pb.collection("campaign_notes").getFullList({
+    filter: pb.filter("campaign = {:campaignId} && type ?~ {:type}", {
+      campaignId: campaignId,
+      type: CampaignNotesTypeOptions.alert,
+    }),
     sort: "-created,active",
-  }
-  return await pb.collection("campaign_notes").getFullList(queryParams)
+  })
 }
 
 export async function createCampaignAlert(campaignId: string, noteText: string): Promise<CampaignNotesResponse> {
   const data = {
-    type: CampaignNotesTypeOptions.alert,
+    type: [CampaignNotesTypeOptions.alert],
     note: noteText,
     campaign: campaignId,
     active: true,

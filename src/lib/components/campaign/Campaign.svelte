@@ -5,10 +5,7 @@
 	import type { CampaignNotesResponse, CampaignsResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { headerBanner } from "$lib/stores";
 	import { getCampaignCharacterRequests, getCampaignImage } from "$models/campaign"
-	import { getToastStore, type DrawerSettings, getDrawerStore } from "@skeletonlabs/skeleton"
-	import CampaignNoteAdd from "$lib/components/campaign/CampaignNoteAdd.svelte";
-	import { getCampaignNotes } from "$models/campaign_notes";
-	import CampaignNote from "$lib/components/campaign/CampaignNote.svelte";
+	import { type DrawerSettings, getDrawerStore } from "@skeletonlabs/skeleton"
 	import CampaignAlert from "$lib/components/campaign/CampaignAlert.svelte";
 	import ScenesManagerCaller from "../scenes/ScenesManagerCaller.svelte";
 
@@ -20,31 +17,29 @@
 	import FaPencilAlt from 'svelte-icons/fa/FaPencilAlt.svelte'
   // @ts-ignore
   import GiSteelDoor from 'svelte-icons/gi/GiSteelDoor.svelte'
+	import CampaignNotes from "./CampaignNotes.svelte";
 
   const drawerStore = getDrawerStore()
 
   // Ref to: getCampaignWithRpgSystemCharsAndNotes
   export let campaign: CampaignsResponse
+
+  let isUserGm: boolean = campaign.creator === $currentUser?.id
+
   let characters: CharactersResponse[] = campaign.expand.characters
-  let campaignNotes: CampaignNotesResponse[] = campaign.expand["campaign_notes(campaign)"].sort((a, b) => {
+  let campaignNotesAll: CampaignNotesResponse[] = campaign.expand["campaign_notes(campaign)"].sort((a, b) => {
     return new Date(b.created).getTime() - new Date(a.created).getTime()
   })
+
+  let campaignNotes: CampaignNotesResponse[] = []
+  let campaignAlerts: CampaignNotesResponse[] = []
+  let campaignNpc: CampaignNotesResponse[] = []
+  filterCampaignNotes()
   
 
   let rpgSystem: RpgSystemsResponse = campaign.expand.rpgSystem
-  let isUserGm: boolean = campaign.creator === $currentUser?.id
 
   headerBanner.set(getCampaignImage(campaign))
-
-  async function campaignNoteAddedHandler() {
-    campaignNotes = await getCampaignNotes($page.params.campaignId)
-  }
-
-  function campaignNoteRemovedHandler(e: any) {
-    if (e.detail.campaignNoteId !== undefined) {
-      campaignNotes = campaignNotes.filter(note => note.id!== e.detail.campaignNoteId)
-    }
-  }
 
   function openCharacterSheetDrawerHandler(character: CharactersResponse) {
     const characterSheetDrawerSettings: DrawerSettings = {
@@ -74,6 +69,44 @@
       position: "right",
     };
     drawerStore.open(characterRequestsDrawerSettings);
+  }
+
+  function filterCampaignNotes() {
+
+    campaignAlerts = []
+    campaignNotes = []
+    campaignNpc = []
+
+    campaignNotesAll.forEach(note => {
+
+      let shouldReturn = true
+      let isAlert = false
+      let isNpc = false
+
+      note.type.forEach(t => {
+        if (t === "gm" && !isUserGm) {
+          shouldReturn = false
+        }
+        if (t === "alert") {
+          isAlert = true
+        }
+        if (t === "npc") {
+          isNpc = true
+        }
+      })
+
+      if (shouldReturn) {
+        if (isAlert) {
+          campaignAlerts = [...campaignAlerts, note]
+        }
+        else if (isNpc) {
+        }
+        else {
+          campaignNotes = [...campaignNotes, note]
+        }
+      }
+
+    })
   }
 
 </script>
@@ -112,24 +145,15 @@
   <div class="flex flex-wrap justify-evenly">
     {#if isUserGm}
       <div class="mb-6">
-        <CampaignAlert campaignId={campaign.id} />
+        <CampaignAlert bind:campaignAlerts={campaignAlerts} campaignId={campaign.id} />
       </div>
     {/if}
     
     <div class="w-96">
-      {#if isUserGm}
-        <CampaignNoteAdd campaignId={campaign.id} on:campaignNoteAdded={campaignNoteAddedHandler} />
-      {/if}
-    
-      {#if campaignNotes !== undefined}
-        <div class="my-6">
-          {#each campaignNotes as campaignNote(campaignNote.id)}
-            {#if !(!isUserGm && campaignNote.type === "gm") && campaignNote.type !== "alert"}
-            <CampaignNote {campaignNote} on:campaignNoteRemoved={campaignNoteRemovedHandler}/>
-            {/if}
-          {/each}
-        </div>
-      {/if}
+      <CampaignNotes
+        {isUserGm}
+        campaignId={campaign.id}
+        bind:campaignNotes={campaignNotes} />
     </div>
   </div>
 </div>

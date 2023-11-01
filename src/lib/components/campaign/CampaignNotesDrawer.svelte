@@ -38,7 +38,7 @@
     </div>
   {/if}
   {#each campaignNotes as campaignNote(campaignNote.id)}
-    {#if !(!isUserGm && campaignNote.type === "gm")}
+    {#if !(!isUserGm && campaignNote.type.find(type => type === "gm") === undefined)}
       <CampaignNote {campaignNote} />
     {/if}
   {/each}

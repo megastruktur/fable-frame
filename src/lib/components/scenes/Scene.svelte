@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { CampaignsResponse, ScenesResponse } from "$lib/pocketbase-types";
+	import type { CampaignNotesResponse, CampaignsResponse, ScenesResponse } from "$lib/pocketbase-types";
 	import { getSceneImage } from "$models/scenes";
-	import { getDrawerStore, type DrawerSettings } from "@skeletonlabs/skeleton";
+	import { getDrawerStore, type DrawerSettings, ProgressBar } from "@skeletonlabs/skeleton";
 
   // @ts-ignore
   import GiBookPile from 'svelte-icons/gi/GiBookPile.svelte'
@@ -14,12 +14,14 @@
 	import CampaignAlert from "../campaign/CampaignAlert.svelte";
 	import ScenesManagerCaller from "./ScenesManagerCaller.svelte";
 	import PersonSimpleIcon from "../icons/PersonSimpleIcon.svelte";
+	import { getCampaignAlerts } from "$models/campaign_notes";
 
   export let scene: ScenesResponse
   export let campaign: CampaignsResponse
 
   let isGM = campaign.creator === $currentUser?.id || false
   let sceneImage = getSceneImage(scene)
+  let campaignAlerts: CampaignNotesResponse[] = []
 
   const drawerStore = getDrawerStore();
 
@@ -60,6 +62,10 @@
 
   async function openCampaignChatDrawer() {
     drawerStore.open(campaignChatDrawerSettings);
+  }
+
+  async function getCampaignAlertsHandler() {
+    campaignAlerts = await getCampaignAlerts(campaign.id)
   }
 
 </script>
@@ -125,7 +131,11 @@
   <!-- Alerts -->
   {#if isGM}
     <div class="fixed right-3 bottom-3">
-      <CampaignAlert campaignId={campaign.id} />
+      {#await getCampaignAlertsHandler()}
+        <ProgressBar />
+      {:then}
+        <CampaignAlert bind:campaignAlerts={campaignAlerts} campaignId={campaign.id} />
+      {/await}
     </div>
   {/if}
 

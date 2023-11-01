@@ -4,7 +4,6 @@
 	import Scene from "$lib/components/scenes/Scene.svelte";
   import type { CampaignsResponse, ScenesResponse } from "$lib/pocketbase-types";
 	import { getCampaignWithCharactersAndActiveScene, subscribeToCampaign } from "$models/campaign";
-	import { getScene } from "$models/scenes";
 	import { ProgressBar } from "@skeletonlabs/skeleton";
 	import type { UnsubscribeFunc } from "pocketbase";
 	import { onDestroy, onMount } from "svelte";

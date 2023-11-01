@@ -55,13 +55,14 @@ export enum CampaignNotesTypeOptions {
 	"gm" = "gm",
 	"public" = "public",
 	"alert" = "alert",
+	"npc" = "npc",
 }
 export type CampaignNotesRecord = {
 	campaign: RecordIdString
 	creator: RecordIdString
 	image?: string
 	note: HTMLString
-	type: CampaignNotesTypeOptions
+	type: CampaignNotesTypeOptions[]
 	active: boolean
 }
 

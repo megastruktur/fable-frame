@@ -16,7 +16,7 @@
   const isCreator = $currentUser?.id === campaignNote.creator
   let editMode = false
   let note = campaignNote.note
-  let isGmNote = campaignNote.type === CampaignNotesTypeOptions.gm
+  let isGmNote = campaignNote.type.find(t => t === CampaignNotesTypeOptions.gm) !== undefined || false
   let imageUrl = getCampaignNotesImage(campaignNote)
 
   const modalStore = getModalStore()
@@ -25,7 +25,7 @@
   async function updateNote() {
     const campaignNoteCreated = await updateCampaignNotes(campaignNote.id, {
       note: note,
-      type: isGmNote ? CampaignNotesTypeOptions.gm : CampaignNotesTypeOptions.public
+      type: isGmNote ? [CampaignNotesTypeOptions.gm] : [CampaignNotesTypeOptions.public]
     })
 
     editMode = false
@@ -47,7 +47,7 @@
 						toastShow(`Note has been removed`, toastStore)
 
             dispatch('campaignNoteRemoved', {
-              campaignNoteId: campaignNote.id
+              note: campaignNote
             });
 
 					}

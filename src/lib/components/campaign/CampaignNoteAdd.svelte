@@ -48,7 +48,9 @@
   
       const campaignNoteCreated = await createCampaignNote(formData)
   
-      dispatch('campaignNoteAdded');
+      dispatch('campaignNoteAdded', {
+        note: campaignNoteCreated
+      });
   
       noteText = ""
       isGmNote = false
@@ -57,7 +59,7 @@
   }
 </script>
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center py-3">
   {#if previewImageSrc !== undefined && previewImageSrc !== ""}
     <div class="relative">
       <button
@@ -67,7 +69,7 @@
     </div>
    
   {/if}
-  <textarea class="textarea" bind:value={noteText}></textarea>
+  <textarea class="textarea mb-3" bind:value={noteText}></textarea>
   <div class="flex items-center space-x-3">
     <SlideToggle
       size="sm"
