@@ -31,7 +31,11 @@
 {:then}
 
   {#if isUserGm}
-    <CampaignNoteAdd campaignId={campaign.id} on:campaignNoteAdded={campaignNoteAddedHandler} />
+    <div class="px-3">
+      <CampaignNoteAdd
+        campaignId={campaign.id}
+        on:campaignNoteAdded={campaignNoteAddedHandler} />
+    </div>
   {/if}
   {#each campaignNotes as campaignNote(campaignNote.id)}
     {#if !(!isUserGm && campaignNote.type === "gm")}

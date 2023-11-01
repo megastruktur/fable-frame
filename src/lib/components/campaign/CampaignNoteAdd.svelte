@@ -70,12 +70,14 @@
   <textarea class="textarea my-6" bind:value={noteText}></textarea>
   <div class="flex items-center space-x-3">
     <SlideToggle
+      size="sm"
       name="is-gm-note"
       bind:checked={isGmNote}>is GM-only?</SlideToggle>
     <FileButton
+      width="btn btn-sm"
       name="files"
       bind:files={files}
       on:change={fileSelectedHandler} />
-    <button class="ml-6 btn variant-outline-success" on:click={createNote}>Create</button>
+    <button class="ml-6 btn btn-sm variant-outline-success" on:click={createNote}>Create</button>
   </div>
 </div>

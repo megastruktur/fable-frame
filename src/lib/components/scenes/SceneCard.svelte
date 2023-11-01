@@ -84,11 +84,11 @@
 </script>
 
 <div
-  class="block card w-96 h-96 shadow-xl card-hover overflow-hidden {classes} bg-cover bg-center relative bg-no-repeat"
+  class="block card w-40 h-40 shadow-xl card-hover overflow-hidden {classes} bg-cover bg-center relative bg-no-repeat"
   
   style="background-image: url('{sceneImage}')"
 >
-  <button type="button" class="btn btn-icon absolute top-0 right-3 {isAcivated ? "text-white" : "text-gray-400"}" on:click|stopPropagation={activateSceneHandler}>
+  <button type="button" class="btn btn-icon btn-icon-sm absolute top-2 right-2 {isAcivated ? "text-white" : "text-gray-400"}" on:click|stopPropagation={activateSceneHandler}>
     {#if isAcivated}
     <FaEye />
     {:else}
@@ -98,21 +98,21 @@
 
   <!-- Scene Operations Popup -->
   <button
-    class="btn-icon variant-ghost-secondary absolute left-2 top-2"
+    class="btn btn-icon btn-icon-sm variant-ghost-secondary absolute left-2 top-2"
     use:popup={sceneOperationsPopup}
   >⋮</button>
 
   <a
     class="block w-full h-full"
     href="/campaigns/{scene.campaign}/scenes/{scene.id}">
-    <div class="p-4 bg-primary-900/70 w-full bottom-0 absolute h-1/4">
-      <h3 class="h3 text-center">{scene.name}</h3>
+    <div class="bg-primary-900/70 w-full bottom-0 absolute h-1/4 flex items-center">
+      <h5 class="h5 text-center mx-auto">{scene.name}</h5>
     </div>
   </a>
 
 
   <!-- Operations Popup -->
-  <div class="card w-48 shadow-xl py-2" data-popup="sceneOperationsPopup-{scene.id}">
+  <div class="card shadow-xl py-2" data-popup="sceneOperationsPopup-{scene.id}">
     <ul class="list-nav px-2">
       <li class="mb-2">
         <button on:click={sceneEditModalHandler}>Edit</button>

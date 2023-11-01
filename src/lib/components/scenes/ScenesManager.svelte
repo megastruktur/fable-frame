@@ -84,7 +84,7 @@
 
 </script>
 
-<div class="flex flex-wrap justify-center">
+<div class="flex flex-wrap">
   {#each scenes as scene(scene.id)}
     <div class="relative m-3"
         animate:flip
@@ -101,7 +101,7 @@
     </div>
   {/each}
   <button
-    class="card w-96 shadow-xl card-hover overflow-hidden bg-contain h-96 m-3 flex items-center justify-center"
+    class="card w-40 h-40 shadow-xl card-hover overflow-hidden bg-contain m-3 flex items-center justify-center"
     on:click={createSceneModalHandler}
     >
     <Icon className="flex" size="100" color="" src={BsPlus} />

@@ -3,7 +3,8 @@
 - Bugfix: Tab add and remove fix after refactoring
 - Bugfix: Reorder fields fix after refactoring
 - Feature: Adds image to campaign notes
-- UI/UX and structure fixes
+- UI/UX: Scene design fix
+- UI/UX: and structure fixes
 
 ### 0.7.2
 - Bugfix: Character Add to campaign fix.

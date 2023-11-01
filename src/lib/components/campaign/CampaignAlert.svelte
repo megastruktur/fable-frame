@@ -44,7 +44,7 @@
 
 </script>
 
-<div class="flex flex-col items-center w-80">
+<div class="flex flex-col items-center w-80 bg-surface-900/70">
 
   {#await loadData()}
     <ProgressBar />
