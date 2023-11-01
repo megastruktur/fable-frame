@@ -6,8 +6,6 @@
 	import { headerBanner } from "$lib/stores";
 	import { getCampaignCharacterRequests, getCampaignImage } from "$models/campaign"
 	import { getToastStore, type DrawerSettings, getDrawerStore } from "@skeletonlabs/skeleton"
-  import { clipboard } from '@skeletonlabs/skeleton'
-	import { toastShow } from "$lib/toast";
 	import CampaignNoteAdd from "$lib/components/campaign/CampaignNoteAdd.svelte";
 	import { getCampaignNotes } from "$models/campaign_notes";
 	import CampaignNote from "$lib/components/campaign/CampaignNote.svelte";
@@ -23,7 +21,6 @@
   // @ts-ignore
   import GiSteelDoor from 'svelte-icons/gi/GiSteelDoor.svelte'
 
-  const toastStore = getToastStore()
   const drawerStore = getDrawerStore()
 
   // Ref to: getCampaignWithRpgSystemCharsAndNotes

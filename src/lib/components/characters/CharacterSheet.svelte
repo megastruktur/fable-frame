@@ -16,6 +16,15 @@
 	import { currentUser } from "$lib/pocketbase";
 	import { addCharacterField, removeCharacterField, updateCharacterField } from "$lib/characterFieldsOperations";
 
+  // @ts-ignore
+  import MdNote from 'svelte-icons/md/MdNote.svelte'
+  // @ts-ignore
+  import MdSave from 'svelte-icons/md/MdSave.svelte'
+  // @ts-ignore
+  import MdCancel from 'svelte-icons/md/MdCancel.svelte'
+  // @ts-ignore
+	import FaPencilAlt from 'svelte-icons/fa/FaPencilAlt.svelte'
+
   const toastStore = getToastStore()
 
   export let character: CharactersResponse
@@ -262,35 +271,51 @@
     <div
       out:fade={{ duration: 500 }}
       in:fade={{ duration: 500, delay: 500 }}
-      class="flex flex-col items-center mb-3"
+      class="flex flex-col items-center mb-3 px-3"
       >
       <div class="mt-3">
         <CharacterAvatar characterName={character.name} characterId={character.id} avatarUrl={characterAvatarUrl} {editMode} on:avatarSet={avatarSetHandler} />
       </div>
 
-      <h1 class="h2 my-3 items-center flex">
+      <div class="flex flex-wrap my-3 justify-around">
         {#if editMode}
           <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
         {:else}
-          {#if compactVersion}
-            <a href="/characters/{character.id}">{characterName}</a>
-          {:else}
-            <span>{characterName}</span>
-          {/if}
+
+          <div class="h2 flex">
+            {#if compactVersion}
+              <a href="/characters/{character.id}">{characterName}</a>
+            {:else}
+              <span>{characterName}</span>
+            {/if}
+          </div>
+
           {#if campaign !== undefined}
-            <a class="btn ml-3 variant-ghost-tertiary" href="/campaigns/{campaign.id}">{campaign.name}</a>
+            <a class="btn variant-ghost-tertiary" href="/campaigns/{campaign.id}">{campaign.name}</a>
           {/if}
+
         {/if}
-      </h1>
+      </div>
 
       {#if $currentUser.id === character.creator}
         <div class="flex items-center justify-center mt-4">
-          <button class="btn uppercase {editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{editMode ? "cancel" : "edit"}</button>
+          <button class="btn w-10 h-10 p-3 uppercase {editMode ? "variant-filled-error" : "variant-filled-secondary"}" on:click={toggleEditMode}>
+            {#if editMode}
+              <MdCancel />
+            {:else}
+              <FaPencilAlt />
+            {/if}
+          </button>
           <!-- cancel edit button -->
           {#if editMode}
-            <button class="btn uppercase variant-filled-success ml-3" on:click={saveChanges}>save</button>
+            <button class="btn w-10 h-10 p-2 uppercase variant-filled-success ml-3" on:click={saveChanges}>
+              <MdSave />
+            </button>
+          {:else}
+            <button class="btn w-10 h-10 p-2 variant-filled-warning ml-3" on:click={openCharacterNotesDrawer}>
+              <MdNote />
+            </button>
           {/if}
-          <button class="btn variant-filled-warning ml-3" on:click={openCharacterNotesDrawer}>NOTES</button>
         </div>
       {/if}
 

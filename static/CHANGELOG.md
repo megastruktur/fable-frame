@@ -5,6 +5,7 @@
 - Feature: Adds image to campaign notes
 - UI/UX: Scene Manager design fix
 - UI/UX: Campaign add operation icons
+- UI/UX: Character Sheet icons and UI fixes
 - UI/UX: and structure fixes
 
 ### 0.7.2
