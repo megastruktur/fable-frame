@@ -44,12 +44,12 @@
 
 </script>
 
-<div class="flex flex-col items-center w-80 bg-surface-900/70">
+<div class="flex flex-col items-center w-80 bg-surface-900/70 pt-3 pb-4">
 
   {#await loadData()}
     <ProgressBar />
   {:then}
-    <form class="my-3" on:submit|preventDefault={createCampaignAlertHandler}>
+    <form class="mb-3" on:submit|preventDefault={createCampaignAlertHandler}>
       <input class="input"
         placeholder="Important note here"
         type="text"
