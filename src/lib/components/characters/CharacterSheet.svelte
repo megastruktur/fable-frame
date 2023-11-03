@@ -219,22 +219,22 @@
   async function fieldRemove({detail: {field}} : {detail: {field: Field}}) {
     character = removeCharacterField(character, field)
 
-    if (field.group !== undefined) {
-      
-      if (field.type !== "tab") {
-      tabsContent[field.group] = tabsContent[field.group].filter((field: Field) => field.id!== field.id)
-      }
-      else {
-        console.log(field)
-      // Move all nested fields to General tab
-        if (field.name !== "general") {
-          tabsContent["general"] = [...tabsContent["general"], ...tabsContent[field.name]]
-
-          delete tabsContent[field.name]
-          delete tabs[field.name]
-        }
+    console.log(field)
+    if (field.type !== "tab") {
+      if (field.group !== undefined) {
+        tabsContent[field.group] = tabsContent[field.group].filter((f: Field) => f.id !== field.id)
       }
     }
+    else {
+      console.log(field)
+    // Move all nested fields to General tab
+      if (field.name !== "general") {
+        tabsContent["general"] = [...tabsContent["general"], ...tabsContent[field.name]]
+
+        delete tabsContent[field.name]
+        delete tabs[field.name]
+      }
+      }
     console.log("On Field Remove")
   }
 
