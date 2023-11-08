@@ -17,17 +17,18 @@ import type { RpgSystemsResponse } from "$lib/pocketbase-types";
 
 </script>
 
-<div class="flex flex-col">
+<div class="flex flex-col px-3">
 	<h1 class="text-3xl m-auto my-3">Create New Character</h1>
-	<hr />
   <div>
     <Stepper on:complete={createAndRedirect}>
       <!-- Select name -->
       <Step stepTerm="Pick a name" locked={!characterName}>
         <svelte:fragment slot="header">Pick a name</svelte:fragment>
-        <input class="input" type="text"
-        bind:value={characterName} placeholder="Character Name"
-        name="name" />
+        <input
+          class="input" type="text"
+          bind:value={characterName}
+          placeholder="Character Name"
+          name="name" />
       </Step>
       <!-- Select System -->
       <Step stepTerm="Select RPG System" locked={!selectedSystem}>

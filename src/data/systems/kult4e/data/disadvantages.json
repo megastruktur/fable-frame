@@ -1,0 +1,843 @@
+[
+  {
+    "name": "badReputation",
+    "label": "Bad Reputation",
+    "description": "For some reason, you have attracted the public's disapproval - even animosity. Perhaps you've been spotlighted in the tabloids as a pedophile or murderer, falsely or otherwise. In the first game session and whenever you attract the public's attention, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You blend in. Nobody is out to get you.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You have been recognized. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "Several people have recognized you. Anger and fear control their actions. The GM takes 3 Hold.The GM can spend Hold to make a Move representing how your bad reputation sticks to you. For example, people might react with fear and suspicion towards you, a lynch mob forms to bring you to justice, your property is vandalized, your allies turn against you, and you can lose your job, agreements, and relationships.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "broken",
+    "label": "Broken",
+    "description": "Some experience in your past has broken your psyche so badly you've been unable to recuperate from it. As a result, your Stability can never increase beyond Distressed (6).",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": []
+  },
+  {
+    "name": "competitor",
+    "label": "Competitor",
+    "description": "You have a competitor in the criminal underworld, whose business niche is similar to yours. Whenever you neglect to protect your interests or are distracted elsewhere, roll +0 to see if your competitor managed to damage your business:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You are safe from your competitor, for the moment.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You have been careless. Your competitor may strike against you. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "You hand your competitor a golden opportunity, and they move against your interests. The GM takes 3 Hold.The GM can spend Hold to make Moves for your competitor. For example, your competitor may take control of some of your business dealings, learn one of your secrets, sabotages one of your assets, or harms or buys off someone you care for and trust.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "condemned",
+    "label": "Condemned",
+    "description": "Time: ○○○○○○○○○○. Your fate has already been sealed. Perhaps you're dying from a disease, been promised as the sacrificial offering to a forgotten god, or you've sold your soul to some entity, waiting to drag you off to hell when your time is up. At the start of every game session, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You still have some time remaining.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "Your fate approaches. The GM chooses one of the following options:",
+        "options": [
+          "The player marks 1 Time.",
+          "You're tortured by dreams or visions of your fate. Reduce Stability (-2).",
+          "You're haunted by the entity or event that sealed your fate.",
+          "Someone in your vicinity is negatively affected by your fate.",
+          "Something provides you with false hope of escaping your fate."
+        ]
+      },
+      {
+        "type": "failure",
+        "description": "Your end approaches. The GM holds two options from the list above or marks 2 Time.When you finally run out of Time, you meet your ultimate fate.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "cursed",
+    "label": "Cursed",
+    "description": "You are cursed. In the first session and whenever you're confronted by the supernatural, roll +0 to see how strongly the curse influences you:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You temporarily avoid the curse's influence.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "The GM takes 3 Hold.The GM can spend Hold to make a Move for the curse. For example, you or someone you care about have an accident, something of yours is taken from you, you experience terrifying visions, or you're forced to take certain actions with risk of dire consequences, if you refuse.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "depression",
+    "label": "Depression",
+    "description": "You are constantly struggling with depression, which is only worsened by dejection and discouragement. Whenever facing personal setbacks, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You remain in control.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You experience temporary anxiety, decreased self-confidence, or lack of will. You take -1 to your next roll.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "You succumb to the sense of hopelessness or blame and punish yourself; reduce Stability (-2). Your lethargy and self-destructive urges do not go away until you numb your depression with medicine, drugs, or alcohol.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "drugAddict",
+    "label": "Drug Addict",
+    "description": "You are addicted to hard drugs; name at least one. In the first game session and whenever you have been using, or have the opportunity to use, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You are in control of the urge, for now.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "The GM takes 3 Hold.The GM may spend Hold to make a Move for your addiction. For example, you cannot resist using the drug, run out of drugs, become indebted to a dangerous person, put yourself in danger while under the influence of drugs, or ruin something important to you - like a relationship - while under the influence.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "experimentGoneWrong",
+    "label": "Experiment Gone Wrong",
+    "description": "You have carried out a scientific experiment, which went horribly awry. The experiment gave rise to something unnatural, which escaped and disappeared without a trace. Recently, the 'results' of your experiment tracked you down, reappearing in your life, and forcing you to either escape or confront it. In the first session and whenever things seem in control, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "Your experiment leaves you alone.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "Your experiment is close on your heels. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "Your experiment is in your vicinity and acts against you. The GM takes 3 Hold.The GM can spend Hold to make Moves on the experiment's behalf. For example, the experiment gives you a lead on the Truth, sabotages or otherwise disrupts your research, demands something from you under threat of retribution, or kidnaps someone you care for - possibly returning them dead or transformed.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "fanatic",
+    "label": "Fanatic",
+    "description": "You are a fervent adherent of an ideology. You interpret the whole world in accordance with your ideology, which must not be questioned. Whenever someone questions your ideology, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You can keep your emotions in check.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You become angry, confused, or frustrated. You take-1 to your next roll.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "You are forced to choose between taking steps to changing the person or situation to adhere to your ideology, or reduce Stability (-2).",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "greedy",
+    "label": "Greedy",
+    "description": "You are driven by an unquenchable desire for money and wealth, and are prepared to sacrifice your health, family, and friends to fill the emptiness inside. When an opportunity to increase your wealth arises, roll +0 to see if you are in control of your desire:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You keep your greed in check.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "The black void inside shrieks for more. As long as the opportunity exists and you do not take it, you suffer -1 ongoing to any rolls you make.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "You must take advantage of every opportunity to further your wealth, or reduce Stability (-2).",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "guilt",
+    "label": "Guilt",
+    "description": "You carry heavy guilt for your past sins, having harmed one or several people through your actions or inaction. In the first game session and whenever everything appears okay, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "Your guilt isn't on your mind at the moment.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You are reminded of your guilt. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "Your guilt catches up to you. The GM takes 3 Hold.The GM can spend Hold to make Moves for your guilt. For example, relatives of the people you've hurt seek you out, demons and other creatures are attracted by your guilt, the dead haunt you with nightmares or visions, or you fall victim to anxiety and self-doubt.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "harassed",
+    "label": "Harassed",
+    "description": "For some reason, personal or otherwise, people tend to harass you; the authorities in particular. In the first game session and whenever you draw attention to yourself, roll +0 to see if you're harassed:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You've managed to keep clear of harassment.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "The GM takes 3 Hold.The GM can spend Hold to make Moves for the harassers. For example, someone destroys your property or possessions, you are bullied and attacked by people with a prejudice against you, the authorities forcefully take something from you (rights, property, assets), someone you care about is harmed for associating with you, or you are denied your basic rights due to your identity.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "haunted",
+    "label": "Haunted",
+    "description": "You are haunted by supernatural forces. With the GM's assistance, determine the nature of what you believe is haunting you. In the first session and whenever you are distracted or weakened, roll +0 to see if the entity gains power over you:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "The entity leaves you alone.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "The GM takes 3 Hold.The GM can spend Hold to make a Move for the entity. For example, it requests a service from you and threatens retribution if you refuse, the entity possesses your body for the night, or the entity reveals a clue of what it is and what it wants from you.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "infirm",
+    "label": "Infirm",
+    "description": "You suffer from a dangerous physical disease or condition, such as heart disease, hypertension, morbid obesity, or serious gastric ulcer. Whenever you are subjected to major physical or psychological stress, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "Your condition is under control.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "Your condition triggers, causing pain and daze (-1 to all rolls until the scene ends).",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "Your condition is aggravated with life threatening results (Endure Injury with 2 Harm).",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "involuntaryMedium",
+    "label": "Involuntary Medium",
+    "description": "You are an open vessel for any spirits or demonic entities who desire a medium to speak through or need a corporeal body to use for their purposes. Whenever you encounter spiritual entities or haunted places, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You resist the possession.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "The entity gains influence over you. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "The entity gains control over you. The GM takes 3 Hold.The GM can spend Hold to make Moves for the being possessing you. For example, the entity may give you a vision, make use of your body, communicate with or through you, try to harm someone else through you, follow you unseen, demand something from you, or drag you into another dimension.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "jealousy",
+    "label": "Jealousy",
+    "description": "There is someone who has the life you want to have, and you would do anything to possess it. Whenever you encounter the subject of your jealousy or their life's trappings (possessions, family, friends, etc), roll +0 to see if you can keep your cool:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You maintain control over your jealousy.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You're afflicted by jealousy and take -1 ongoing for as long as you remain in the subject's vicinity, and you do not suppress your jealous desires.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "Your jealousy takes hold of you. You must Keep it Together to refrain from harming, destroying, or stealing from the subject of your jealousy.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "liar",
+    "label": "Liar",
+    "description": "You're a compulsive liar, who invents stories at every opportunity, especially when it's beneficial for you. At the start of every session, roll +0 to see what trouble your lies have gotten you into this time:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You have kept your lies tangle-free.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You've told one too many lies. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "Your web of lies has come completely unraveled. The GM takes 3 Hold.The GM can spend Hold whenever a PC encounters someone they know to ask, “What have you lied about to this person?” or to invent a troublesome lie the PC has told in the past.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "lostIdentity",
+    "label": "Lost Identity",
+    "description": "Your true identity has been lost to a military or private-run secret agent program. You do not remember anything about your pre-employment life. Recently, memories of your true identity have started coming back to you. In the first game session and whenever you encounter something from your repressed past, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You repress your true identity, remaining in the present.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "Your true identity is catching up to you. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "Your true identity resurfaces. The GM takes 3 Hold.The GM can spend Hold to make Moves for your true identity. For example, you recognize unknown people or places, organizations or individuals from your past life get in touch with you, your old identity influences your thought patterns or actions, or you suffer traumatic flashbacks.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "marked",
+    "label": "Marked",
+    "description": "You are marked by the darkness. The mark can take the shape of a full-body tattoo, a demonic body part such as a vestigial arm, an extra eye or mouth, machine parts integrated with your flesh, or similar manifestations. Whenever you consciously Harm someone, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You are still in control.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You feed the darkness. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "The darkness gains power over you. The GM takes 3 Hold.The GM can spend Hold to make Moves for the darkness living inside of you. For example, the darkness feeds on your life energy to sustain itself, forces you to commit murder in order to replenish its life energy, takes charge of your body and leaves you with only memory fragments of what transpired, forces you to harm someone in your vicinity, or temporarily transforms your body into something inhuman. You may have to Keep it Together to resist the darkness' influence.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "mentalCompulsion",
+    "label": "Mental Compulsion",
+    "description": "You are fixated on a particular idea or action, to the point of it strongly impacting your life. Choose a compulsion from the list below when you take this Disadvantage. In situations where you could be distracted by your compulsion, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "options": [
+      "Cleaning",
+      "Counting",
+      "Triple-checking",
+      "Showering",
+      "Memorizing",
+      "Pyromania",
+      "Kleptomania",
+      "Cursing",
+      "Confessing your sins",
+      "Eating",
+      "Hypochondria"
+    ],
+    "results": [
+      {
+        "type": "success",
+        "description": "You control your compulsions and can focus on other things.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You become distracted and take -1 ongoing to all rolls until you have removed yourself from the situation or succumbed to your compulsion, taking any actions it demands of you.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "You become completely obsessed with your compulsion. If you focus on anything else, reduce Stability (-2).",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "nemesis",
+    "label": "Nemesis",
+    "description": "Through some terrible act you have made an enemy, who does everything in their power to take revenge. Decide who your nemesis is and what you have done to earn their vengeance. In the first game session and whenever you let your guard down, roll +0 to see if your nemesis moves against you:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You are safe from your nemesis for the moment.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You have been careless and your nemesis moves against you. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "You have compromised your position and your nemesis strikes against you in full force. The GM takes 3 Hold.The GM can spend Hold to make Moves on behalf of your nemesis. For example, your nemesis may strike when you're alone, use secrets they've uncovered to extort you, intimidate you, hire henchmen to capture you, or attack someone or something you hold dear.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "nightmares",
+    "label": "Nightmares",
+    "description": "You suffer from recurring nightmares, probably connected to your Dark Secrets. During any scene when you sleep, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You sleep in peace.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "The nightmares torment you. The GM may make a Move for your nightmares. For example, you are unable to sleep at all during the night (-1 ongoing until you sleep), something follows you back into reality, the nightmares provide you insight into the Truth, or you are forced to process some trauma (Keep it Together) when you wake up.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "The nightmares take over completely. You are trapped in the dream until you find a way to wake up, and everything that happens there also directly affects your sleeping body.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "oathOfRevenge",
+    "label": "Oath of Revenge",
+    "description": "You have sworn to avenge an unforgivable injustice. Decide who is the subject of your vengeance and what they have done to you. It could be a single individual, people who share a certain trait, or members of an organization. Whenever the target of your vengeance (or someone/something associated with them) appears, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You remain in control of your vengeful nature and can act rationally.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You can't focus on anything, other than the target of your vengeance. Take -1 ongoing until the target's involvement in the scene ends.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "You become obsessed and can act only to further your revenge. Doing anything else requires you roll Keep it Together. Your obsession cannot be assuaged while the target remains in the same scene with you.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "objectOfDesire",
+    "label": "Object of Desire",
+    "description": "There is just something special about you. You ignite deep unhealthy desires in others, which they are unable to keep in check. At the first game session and whenever you meet one or more new people, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "The desire is not awakened at this moment.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "Someone becomes desirous of you. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "A strong desire is awakened in one or several people. The GM takes 3 Hold.The GM can spend Hold to ignite a person's desires, influencing their behavior. For example, someone can be afflicted with an uncontrollable passion for you, attempt to force themselves on you, strongly proposition you, become intensely jealous of you, or harm themselves or someone else because of their desire of you.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "obsession",
+    "label": "Obsession",
+    "description": "You have discovered a conspiracy or supernatural phenomenon, and you can't stop yourself from getting to the bottom of it. At the first game session and whenever you encounter something associated with your obsession, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You overcome your obsession for the moment.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "Your obsession influences your behavior. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "Your obsession takes over completely. The GM takes 3 Hold.The GM can spend Hold to let your obsession creep into your daily life. You may be forced to choose between either engaging in your obsession or losing Stability. You may forget about important tasks and chores, miss meetings, or neglect your interpersonal relationships to solely focus on your obsession. Your obsession may even influence your dreams, giving you visions and revelations. In turn, the object of your obsession may also take note of you and try to stop your investigations.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "owned",
+    "label": "Owned",
+    "description": "You used to be a dangerous person's private property, willingly or not. Since your escape, your former owner has been looking for you. Decide who your former owner is. In the first game session and whenever you draw attention to yourself in public, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "For the moment, you are safe.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "Your former owner picks up your scent. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "Your owner finds you. The GM takes 3 Hold.The GM can spend Hold to make Moves for your former owner. For example, they appear unexpectedly to convince you to return, send henchmen after you, kidnap or harm someone you care about, directly threaten you, destroy something important to you, try to mutilate you so nobody else would want you, or kill you outright so nobody else can have you.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "phobia",
+    "label": "Phobia",
+    "description": "You harbor an overpowering fear of something. Choose the stimulus that frightens you. Whenever you're confronted by the object of your phobia, you must Keep it Together.",
+    "attribute": "-",
+    "options": [],
+    "modificators": [],
+    "results": []
+  },
+  {
+    "name": "rationalist",
+    "label": "Rationalist",
+    "description": "You refuse to believe in anything not confirmed as fact by modern science, even when it is right in front of you. In addition to the standard effects, whenever you See Through the Illusion and whenever the Illusion shatters, the GM may choose one option:",
+    "attribute": "-",
+    "options": [
+      "Your presence nurtures the Illusion, making it more powerful and impenetrable.",
+      "Your bewildered psyche starts creating mirror images of familiar places and people in the Illusion.",
+      "You attract extradimensional entities.",
+      "You consciously deny what you see, even to your own detriment."
+    ],
+    "modificators": [],
+    "results": []
+  },
+  {
+    "name": "repressedMemories",
+    "label": "Repressed Memories",
+    "description": "You have repressed a particularly unpleasant event from your past, but the memory of it sometimes rises to the surface. It could be a crime or some horrible thing you have done, been subjected to, or witnessed. The GM decides the nature of your repressed memory, usually based on your Dark Secrets. In situations associated with your repressed memories, roll +0 to determine if the memories resurface:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You continue to suppress the memories.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "The memories partly resurface, taking the form of flashbacks and/or hallucinations. You must Keep it Together.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "You are overwhelmed by your repressed memories, completely losing yourself to them. The GM makes a hard Move and you reduce Stability (-2).",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "rival",
+    "label": "Rival",
+    "description": "You have an ambitious rival, who will do anything to be in your shoes. Choose who the rival is. In the first game session and whenever you make a mistake or let down your guard, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "All clear; your rival makes no moves against you.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You've given your rival an opportunity. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "You've handed your rival whatever they needed to completely undermine you. The GM takes 3 Hold.The GM can spend Hold to make a Move on behalf of your rival. For example, the rival may get an important person on their side, sabotage one of your projects, extort you with evidence damaging to your reputation, or take desperate measures to get rid of you permanently.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "schizophrenia",
+    "label": "Schizophrenia",
+    "description": "You struggle with recurring psychotic episodes and terrifying hallucinations. In the first game session and whenever you go through difficult experiences, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You maintain control of your insanity.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "Schizophrenia overtakes you. The GM takes 3 Hold.The GM may spend Hold to make a Move for your schizophrenia. For example, one of your hallucinations takes on physical form, you view your current surroundings as being hostile to you, you're afflicted by terrifying hallucinations, you're subjected to dark visions (true or false), or someone in your vicinity turns out to not actually be real.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "sexualNeurosis",
+    "label": "Sexual Neurosis",
+    "description": "Your sexuality is a destructive, controlling force in your life. You compulsively seek out superficial sexual encounters and are willing to perform degrading acts - or even commit crimes - to satisfy your fantasies. Whenever you have the opportunity to have consensual sex or take advantage of someone vulnerable to your advances, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You can control your urges.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "Choose between having sex with the person or reduce your Stability (-1).",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "You cannot resist having sex with the person and the GM chooses one option:",
+        "options": [
+          "You hurt, or you are hurt by, your sexual partner (physically or psychologically).",
+          "The boundaries between dimensions are weakened; an entity from beyond catches the scent of you or your lover.",
+          "Your sexual partner becomes obsessed with you and starts stalking you."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "stalker",
+    "label": "Stalker",
+    "description": "You are hunted by a faceless enemy. Anyone you meet could be one of their minions - or even the stalker themselves. No one can be trusted. You must constantly change your address and be vigilant at all times to avoid leaving any tracks they can follow. In the first game session and whenever you expose your current location, roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You are safe for now.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "Your enemies are on to you. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "Your enemies have caught up to you. The GM takes 3 Hold.The GM can spend Hold to make a Move for your pursuers. For example, a trusted associate has been paid off by them, one of your loved ones or allies disappears, something you are trying to do is undermined by your enemies, or they try to actively hurt you.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "victimOfPassion",
+    "label": "Victim of Passion",
+    "description": "You have an overwhelming passion for someone or something, seeking to possess it at any cost. In the first game session and whenever you encounter the subject of your passions (or anything resembling it), roll +0:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You keep your passion in check.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "The passion awakens within you. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "You are completely in the passion's grip. The GM takes 3 Hold.The GM can spend Hold to let your passion steer your actions. For example, you yearn uncontrollably for the subject of your passion - you must seek it out or reduce Stability (-2), your desire drags the subject of your passion into your dreams (perhaps trapping them there), your passion becomes tainted with jealousy and anger - making you want to control and damage it (Keep it Togetherto resist), your longing leaves you feeble vis-à-vis the objective of this passion (-1 to all rolls while sharing the same scene), or your passion can attract creatures of lust wishing to feed off it or make pacts with you.",
+        "options": []
+      }
+    ]
+  },
+  {
+    "name": "wanted",
+    "label": "Wanted",
+    "description": "You are wanted by the authorities - local, state, or federal - for crimes you have committed. Whenever you attract attention to yourself or forget to keep your head down, roll +0 to see if you've been discovered:",
+    "attribute": "-",
+    "modificators": [],
+    "results": [
+      {
+        "type": "success",
+        "description": "You are safe, for now.",
+        "options": []
+      },
+      {
+        "type": "partial",
+        "description": "You have made a mistake. The GM takes 1 Hold.",
+        "options": []
+      },
+      {
+        "type": "failure",
+        "description": "All eyes are on you. The GM takes 3 Hold.The GM can spend Hold to make a Move for the authorities. For example, your mugshot appears on the TV news and in newspapers, law enforcement officers attempt to trap and catch you, or the authorities detain and interrogate someone you care about, confiscate your possessions, or turn your friends/family against you.",
+        "options": []
+      }
+    ]
+  }
+]

@@ -72,3 +72,17 @@ type DieRollChat = {
   color?: string
 }
 
+export type K4eRollResult = {
+  type: "success" | "partial" | "failure"
+  description: string
+  choice?: string[]
+}
+
+export type K4ePlayerMove = {
+  name: string
+  label: string
+  description: string
+  attribute: "willpower" | "reflexes" | "fortitude" | "intuition" | "reasoning" | "perception" | "violence" | "coolness" | "charisma" | "soul"
+  modificators?: string[]
+  results?: K4eRollResult[]
+}

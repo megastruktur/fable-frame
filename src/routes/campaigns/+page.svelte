@@ -5,7 +5,7 @@
   import type { CampaignsResponse } from '$lib/pocketbase-types';
 	import { toastShow } from '$lib/toast';
 	import { getGMCampaigns, getCharacterCampaigns, deleteCampaign } from '$models/campaign';
-	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, getModalStore, getToastStore } from '@skeletonlabs/skeleton';
+	import { type PopupSettings, popup, type ModalSettings, getModalStore, getToastStore, ProgressBar } from '@skeletonlabs/skeleton';
   // @ts-ignore
   import Icon from "svelte-icons-pack";
   
@@ -64,7 +64,7 @@
 
 	{#await getData()}
     <div class="flex items-center">
-      <ProgressRadial value={undefined} />
+      <ProgressBar />
     </div>
 	{:then}
     <h2 class="h2 text-center my-6">Game Master in</h2>

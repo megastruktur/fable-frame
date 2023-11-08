@@ -1,0 +1,252 @@
+{
+	"identifier": "kult4e",
+	"name": "Kult: Divinity Lost 4e",
+	"label": "Kult: Divinity Lost 4e",
+	"description": "Kult: Divinity Lost 4e",
+	"fields": {
+		"character": [
+      {
+        "label": "General",
+        "name": "general",
+        "type": "tab"
+      },
+      {
+        "description": "Appearance",
+        "group": "general",
+        "label": "Appearance",
+        "name": "appearance",
+        "type": "text",
+        "value": "",
+				"removable": false,
+        "weight": 2
+      },
+      {
+        "description": "Wounds and Stability",
+        "group": "general",
+        "label": "Conditions",
+        "name": "conditions",
+        "type": "tab",
+        "value": "",
+				"removable": false,
+        "weight": 1
+      },
+      {
+        "description": "Gear and Weapons",
+        "group": "general",
+        "label": "Gear",
+        "name": "gear",
+        "type": "tab",
+        "value": "",
+				"removable": false,
+        "weight": 1
+      },
+      {
+        "description": "Advantages and Disadvantages",
+        "group": "general",
+        "label": "Relative Merits",
+        "name": "relative-merits",
+        "type": "tab",
+        "value": "",
+				"removable": false,
+        "weight": 1
+      },
+      {
+        "description": "Skills",
+        "group": "general",
+        "label": "Skills",
+        "name": "skills",
+        "type": "tab",
+        "value": "",
+				"removable": false,
+        "weight": 1
+      },
+      {
+        "description": "Stability",
+        "group": "conditions",
+        "label": "Stability",
+        "name": "stability",
+        "type": "counter",
+        "value": "++++++++++",
+				"removable": false,
+        "weight": 1
+      },
+      {
+        "description": "keep it together",
+        "group": "skills",
+        "label": "Willpower",
+        "name": "willpower",
+        "type": "counterNum",
+        "value": "0",
+				"removable": false,
+        "data": {
+          "move": "keepItTogether"
+        },
+        "weight": 1
+      },
+      {
+        "description": "avoid harm",
+        "group": "skills",
+        "label": "Reflexes",
+        "name": "reflexes",
+        "type": "counterNum",
+        "value": "0",
+				"removable": false,
+        "data": {
+          "move": "avoidHarm"
+        },
+        "weight": 1
+      },
+      {
+        "description": "endure injury",
+        "group": "skills",
+        "label": "Fortitude",
+        "name": "fortitude",
+        "type": "counterNum",
+        "value": "0",
+				"removable": false,
+        "data": {
+          "move": "endureInjury"
+        },
+        "weight": 1
+      },
+      {
+        "description": "read a person",
+        "group": "skills",
+        "label": "Intuition",
+        "name": "intuition",
+        "type": "counterNum",
+        "value": "0",
+				"removable": false,
+        "data": {
+          "move": "readAPerson"
+        },
+        "weight": 1
+      },
+      {
+        "description": "investigate",
+        "group": "skills",
+        "label": "Reasoning",
+        "name": "reasoning",
+        "type": "counterNum",
+        "value": "0",
+				"removable": false,
+        "data": {
+          "move": "investigate"
+        },
+        "weight": 1
+      },
+      {
+        "description": "observe a situation",
+        "group": "skills",
+        "label": "Perception",
+        "name": "perception",
+        "type": "counterNum",
+        "value": "0",
+				"removable": false,
+        "data": {
+          "move": "observeASituation"
+        },
+        "weight": 1
+      },
+      {
+        "description": "engage in combat",
+        "group": "skills",
+        "label": "Violence",
+        "name": "violence",
+        "type": "counterNum",
+        "value": "0",
+				"removable": false,
+        "data": {
+          "move": "engageInCombat"
+        },
+        "weight": 1
+      },
+      {
+        "description": "act under pressure",
+        "group": "skills",
+        "label": "Coolness",
+        "name": "coolness",
+        "type": "counterNum",
+        "value": "0",
+				"removable": false,
+        "data": {
+          "move": "actUnderPressure"
+        },
+        "weight": 1
+      },
+      {
+        "description": "influence others",
+        "group": "skills",
+        "label": "Charisma",
+        "name": "charisma",
+        "type": "counterNum",
+        "value": "0",
+				"removable": false,
+        "data": {
+          "move": "influenceOthers"
+        },
+        "weight": 1
+      },
+      {
+        "description": "see through the illusion",
+        "group": "skills",
+        "label": "Soul",
+        "name": "soul",
+        "type": "counterNum",
+        "value": "0",
+				"removable": false,
+        "data": {
+          "move": "seeThroughTheIllusion"
+        },
+        "weight": 1
+      },
+      {
+        "description": "-1 ongoing",
+        "group": "conditions",
+        "label": "Serious Wounds",
+        "name": "serious-wounds",
+        "type": "section",
+				"removable": false,
+        "weight": 1
+      },
+      {
+        "description": "-1 ongoing",
+        "group": "conditions",
+        "label": "Critical wounds",
+        "name": "critical-wounds",
+        "type": "section",
+				"removable": false,
+        "weight": 2
+      },
+      {
+        "description": "Character Story",
+        "group": "general",
+        "label": "Story",
+        "name": "character-story",
+        "type": "tab",
+				"removable": false,
+        "weight": 1
+      },
+      {
+        "description": "Character relations",
+        "group": "character-story",
+        "label": "Relations",
+        "name": "character-relations",
+        "type": "section",
+				"removable": false,
+        "weight": 0
+      },
+      {
+        "description": "Dramatic hooks",
+        "group": "character-story",
+        "label": "Dramatic Hooks",
+        "name": "dramatic-hooks",
+        "type": "section",
+				"removable": false,
+        "weight": 3
+      }
+		],
+		"compendium": [
+		]
+	}
+}
