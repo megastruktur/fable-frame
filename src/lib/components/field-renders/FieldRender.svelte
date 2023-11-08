@@ -11,6 +11,7 @@
   export let field: Field
   export let renderAs: string = field.type
   export let classes: string = ""
+  export let editableClasses: string = ""
   export let editable: boolean = true
   export let editMode: boolean = false
   export let labelStyle: string = ""
@@ -41,7 +42,7 @@
   <FieldRenderCounterNum {editable} {classes} field={field} on:fieldUpdate {editMode} />
 {/if}
 {#if renderAs === "tag"}
-  <FieldRenderTag {editable} {classes} field={field} on:fieldUpdate {editMode} />
+  <FieldRenderTag {editable} {classes} {editableClasses} field={field} on:fieldUpdate {editMode} />
 {/if}
 {#if renderAs === "section"}
   <FieldRenderSection {editable} {classes} field={field} on:fieldUpdate {editMode} />

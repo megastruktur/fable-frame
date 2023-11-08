@@ -7,6 +7,10 @@
   export let classes: string = ""
   export let editable: boolean = true
   export let editMode: boolean = false
+  export let editableClasses: string = ""
+  const editableClassesConst = "border-2 rounded-md p-2 border-surface-500"
+
+  const editClasses = editableClasses + " " + editableClassesConst
 
   const modalStore = getModalStore()
 
@@ -46,7 +50,7 @@
 
 </script>
 
-<div class="{classes} {!editMode || !editable ? "chip m-1" : ""}" on:click={openDescriptionModal} on:keyup>
+<div class="{classes} {!editMode || !editable ? "chip whitespace-normal m-1" : editClasses}" on:click={openDescriptionModal} on:keyup>
   {#if editable && editMode}
     <input class="input" type="text" bind:value={fieldLabel} on:focusout={fieldEdit} />
     <textarea class="textarea resize-none mt-3 mb-3" bind:value={field.description} on:focusout={fieldEdit}></textarea>

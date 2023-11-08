@@ -36,3 +36,7 @@ export function getRpgSystemImage(rpgSystem: RpgSystemsResponse) {
     return "";
   }
 }
+
+export async function loadRpgSystemData(rpgSystemName: string, datafileName: string) {
+  return await import(`$data/systems/${rpgSystemName}/data/${datafileName}.json`)
+}

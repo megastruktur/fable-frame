@@ -18,7 +18,7 @@ export default defineConfig({
 	server: {
 		port: 3000,
 		fs: {
-			allow: ['CHANGELOG.md']
+			allow: ['CHANGELOG.md', '*.json']
 		}
 	},
 	test: {

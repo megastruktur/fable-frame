@@ -1,1139 +1,1178 @@
 [
-  {
-    "name": "The Academic",
-    "description": "The Academic studies the world from her desk. Everything is interconnected via logical rules of causality, yet she suspects something must be wrong. Pieces refuse to fall into the safe, predictable patterns of common scientific models. Worse, shadowy forces silence new and alternative fields of research. Those who question the scientific establishment and its rational worldview risk disgrace and the destruction of their research, reputation, and revenue. Does she dare to look for the truth?",
-    "occupation": [
-      "Professor",
-      "Student",
-      "Ph.D. candidate",
-      "Teacher",
-      "Public servant",
-      "Advisor",
-      "Politician",
-      "Author",
-      "Television show host",
-      "Aristocrat",
-      "Researcher",
-      "Psychologist",
-      "Archaeologist",
-      "Dilettante",
-      "Antiquarian"
-    ],
-    "darkSecrets": [
-      "forbiddenKnowledge",
-      "guardian",
-      "occultExperience",
-      "returnedFromTheOtherSide",
-      "strangeDisappearance"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "nightmares",
-        "obsession",
-        "phobia",
-        "repressedMemories",
-        "rationalist",
-        "stalker"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "academicNetwork",
-      "authority",
-      "eliteEducation",
-      "collector",
-      "dataRetrieval",
-      "expert",
-      "occultStudies",
-      "eliteSport"
-    ],
-    "relations": [
-      "One of the characters studied at the same campus as you, and you became good friends. Take +1 Relation with each other.",
-      "One of the characters is your relative.",
-      "One of the characters met you at a seminar.",
-      "You hired one of the characters as an assistant for a research project.",
-      "One of the characters is your lover. Take Relation +1 or +2 with them.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Agent",
-    "description": "The Agent does whatever is necessary to protect and serve her employer's best interests. People are simply resources to be used, abused, and expended. Anyone standing in the way must be removed. She gathers and analyzes information at an almost impossible speed. Threats demand rapid responses, and sometimes there are no good choices. The Agent's job means accepting great costs, usually in the form of dangers, but also an ever-growing debt to those sacrificed for the greater good. When this burden finally becomes too heavy, The Agent's exits have likely already closed, and ‘good' and ‘evil' have lost all meaning.",
-    "occupation": [
-      "Open-source officer",
-      "Case officer",
-      "Counterterrorism analyst",
-      "Analytic methodologist",
-      "Special agent",
-      "Security professional",
-      "Operations officer",
-      "Collection management officer",
-      "Handler",
-      "Infiltrator",
-      "Spy",
-      "Sleeper agent"
-    ],
-    "darkSecrets": [
-      "forbiddenKnowledge",
-      "guardian",
-      "occultExperience",
-      "strangeDisappearance",
-      "victimOfMedicalExperiments"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "lostIdentity",
-        "nightmares",
-        "obsession",
-        "rival",
-        "stalker",
-        "wanted"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "moles",
-      "burglar",
-      "analyst",
-      "explosivesExpert",
-      "tracer",
-      "quickThinker",
-      "fieldAgent",
-      "endureTrauma"
-    ],
-    "relations": [
-      "One of the characters has been your informant for several years. They take +1 Relation with you.",
-      "You possess compromising information about one of the characters' past.",
-      "One of the characters is an old friend of yours. Take +1 Relation with each other.",
-      "One of the characters is your lover. They take +2 Relation with you. Choose what Relation you have with them.",
-      "One of the characters is your colleague. Take +1 Relation with them.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Artist",
-    "description": "The Artist exists only to create, to give themselves, body and soul, over to the arts. They express this desire through many mediums. A hypnotic painting, music trapping the audience in pure ecstasy, books spellbinding their readers, or a model's sculpted flesh are all the purview of The Artist. Artists have the ability to speak to the souls of others by inviting them into their own, but this ability always comes at a price. The price is paid by The Artist themselves, be it their sanity or strength.",
-    "occupation": [
-      "Author",
-      "Dancer",
-      "Actor",
-      "Painter",
-      "Videographer",
-      "Photographer",
-      "Designer",
-      "Model",
-      "Musician",
-      "Singer",
-      "Personal trainer",
-      "Cosmetologist",
-      "Television Host",
-      "Director",
-      "Reporter",
-      "Blogger"
-    ],
-    "darkSecrets": [
-      "curse",
-      "heir",
-      "mentalIllness",
-      "pactWithDarkForces",
-      "victimOfCrime"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "cursed",
-        "depression",
-        "drugAddict",
-        "nightmares",
-        "schizophrenia",
-        "victimOfPassion"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "artisticTalent",
-      "fascination",
-      "notorious",
-      "observant",
-      "bodyAwareness",
-      "enhancedAwareness",
-      "forbiddenInspiration",
-      "snakeCharmer"
-    ],
-    "relations": [
-      "One of the characters is involved in your art. Take +1 Relation with them.",
-      "One of the characters is your lover. Take +1 Relation with them.",
-      "One of the characters hurt you.",
-      "One of the characters is infatuated with you. They take +2 Relation with you.",
-      "One of the characters commissioned a work of art from you. They take +1 Relation with you.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Avenger",
-    "description": "The Avenger has been robbed of something dear to them, be it their loved one, job, family, humanity, honor, memories, or life goals. Regardless of what was taken from them, its loss can only be paid for in blood. The only thing remaining is revenge, and The Avenger isn't about to let anything or anyone get in their way, regardless of consequences.",
-    "occupation": [
-      "Homemaker",
-      "Police Officer",
-      "Panhandler",
-      "Unemployed",
-      "Student",
-      "Criminal",
-      "Conspiracy theorist",
-      "Refugee",
-      "Prison escapee",
-      "Prize fighter",
-      "Widow(er)",
-      "Washed-up celebrity",
-      "Failed businessperson",
-      "Science experiment on the run"
-    ],
-    "darkSecrets": [
-      "guardian",
-      "returnedFromTheOtherSide",
-      "strangeDisappearance",
-      "victimOfCrime",
-      "victimOfMedicalExperiments"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "oathOfRevenge",
-        "mentalCompulsion",
-        "nightmares",
-        "schizophrenia",
-        "stalker",
-        "wanted"
-      ],
-      "automaticallyReceived": ["oathOfRevenge"]
-    },
-    "advantages": [
-      "animalSpeaker",
-      "instinct",
-      "enhancedAwareness",
-      "intimidating",
-      "survivalInstinct",
-      "codeOfHonor",
-      "eyeForAnEye",
-      "rage"
-    ],
-    "relations": [
-      "You have entrusted one of the characters with a secret, which could put you away in prison if revealed.",
-      "One of the characters tried to get you to forget your oath of revenge. Give them +1 Relation with you.",
-      "One of the characters tried to help you fulfill your oath of revenge. Take +1 Relation with them.",
-      "One of the characters has ties to the target of your revenge.",
-      "One of the characters is connected to your past life somehow.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Broken",
-    "description": "The Broken has gazed into the Abyss and escaped with their mind in tatters. They could be a homeless person who subconsciously performs rituals to forgotten gods, the mental patient who became a test subject for experimental medications, or the sinner who was physically dragged down into hell, yet somehow managed to escape back to the land of the living. The Broken views things and sees through the Illusion in ways others do not. In exchange for their irreparable trauma, they've been granted unique insights about the Truth. The question is, how far can they trust their own senses?",
-    "occupation": [
-      "Homeless",
-      "Escaped mental patient",
-      "Street peddler",
-      "Street performer",
-      "Fence",
-      "Thief",
-      "Police",
-      "Drug dealer",
-      "Addict",
-      "Street artist",
-      "Freelance journalist",
-      "Tattoo artist",
-      "Abuse survivor",
-      "Normal person in the wrong place at the wrong time"
-    ],
-    "darkSecrets": [
-      "forbiddenKnowledge",
-      "mentalIllness",
-      "occultExperience",
-      "returnedFromTheOtherSide",
-      "victimOfMedicalExperiments"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "broken",
-        "drugAddict",
-        "involuntaryMedium",
-        "obsessiveCompulsion",
-        "schizophrenia",
-        "stalker"
-      ],
-      "automaticallyReceived": ["broken"]
-    },
-    "advantages": [
-      "streetContacts",
-      "intuitive",
-      "daredevil",
-      "contagiousInsanity",
-      "enhancedAwareness",
-      "magicalIntuition",
-      "sixthSense",
-      "wayfinder"
-    ],
-    "relations": [
-      "One of the characters is trying to get you back on your feet again. Take +1 Relation with each other.",
-      "One of the characters was with you when you were broken. Take +1 Relation with them.",
-      "One of the characters is your closest friend. Take +2 Relation with them.",
-      "One of the characters was the reason you were broken. Take +1 Relation with them.",
-      "You are angry with one of the characters. Take +1 Relation with them.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Careerist",
-    "description": "The Careerist is the consummate brown-nosing backstabber. Most remain stuck in a cubicle farm, performing the same mundane tasks day after day, while the ruthless few climb upwards in the corporate hierarchy. Potentially, The Careerist could also run their own company, fighting for survival against corporate giants. In a world where nothing is off limits when it comes to advancing one's career, success necessitates being willing to do whatever it takes.",
-    "occupation": [
-      "Lawyer",
-      "Businessman",
-      "Office worker",
-      "Director",
-      "CEO",
-      "Consultant",
-      "Bureaucrat",
-      "Politician",
-      "Jet setter",
-      "Yuppie",
-      "Salesman",
-      "Trainee",
-      "Aristocrat"
-    ],
-    "darkSecrets": [
-      "curse",
-      "guiltyOfCrime",
-      "occultExperience",
-      "pactWithDarkPowers",
-      "responsibleForMedicalExperiments"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "cursed",
-        "greedy",
-        "haunted",
-        "liar",
-        "rationalist",
-        "rival"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "aweInspiring",
-      "influentialFriends",
-      "networkOfContacts",
-      "notorious",
-      "daredevil",
-      "puppeteer",
-      "atAnyCost",
-      "opportunist"
-    ],
-    "relations": [
-      "One of the characters assisted you with removing a company rival. Take +1 Relation with them.",
-      "One of the characters opposes your business ventures.",
-      "One of the characters knows your Dark Secret.",
-      "One of the characters also works for your boss.",
-      "You are in love with one of the characters. Take +2 Relation with them.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Criminal",
-    "description": "Mobsters, gang members, thieves, drug dealers, and hitmen are all driven by two things: their quest for money and all the shit they've endured during their lives. For a precious few, their criminality grants them the life of luxury. But for most, they only catch a fleeting glimpse of wealth before someone bigger and meaner takes it all away from them. It's a dog-eat-dog world.",
-    "occupation": [
-      "Thief",
-      "Robber",
-      "Dealer",
-      "Gang member",
-      "Homeless",
-      "Prize fighter",
-      "Corrupt cop",
-      "Enforcer",
-      "Club owner",
-      "Extortionist",
-      "Hitman",
-      "Face of the operation",
-      "Getaway driver",
-      "Con artist",
-      "Mobster",
-      "Dealer",
-      "Muscle for hire"
-    ],
-    "darkSecrets": [
-      "familySecret",
-      "forbiddenKnowledge",
-      "guiltyOfCrime",
-      "occultExperience",
-      "victimOfCrime"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "badReputation",
-        "drugAddict",
-        "harassed",
-        "nemesis",
-        "sexualNeurosis",
-        "wanted"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "streetwise",
-      "burglar",
-      "escapeArtist",
-      "sixthSense",
-      "deadlyStare",
-      "enforcer",
-      "gangLeader",
-      "streetfighter"
-    ],
-    "relations": [
-      "One of the characters hid you from the police or others who were after you. Take +1 Relation with them.",
-      "One of the characters knows you've committed a terrible crime.",
-      "One of the characters is indebted to you.",
-      "One of the characters is connected to one of your rivals.",
-      "One of the characters knew you from before your criminal dealings. Take +1 Relation with them.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Cursed",
-    "description": "The Cursed is living on borrowed time. They might be the unfortunate victim of a deadly disease or the target of a higher power's rage. Usually, however, The Cursed has sealed their own fate by selling their soul for fortune and fame. Now their time is almost up, and The Cursed has realized life itself is the most worthwhile thing they possess. No price is too high to pay for The Cursed to thwart their destiny, even if it means sacrificing others.",
-    "occupation": [
-      "Occultist",
-      "Cult escapee",
-      "Police officer",
-      "CEO",
-      "Detective",
-      "Military Officer",
-      "Gangster",
-      "Politician",
-      "Disability collector",
-      "Amateur magician",
-      "Celebrity",
-      "Jailbird",
-      "Businessman",
-      "Playboy",
-      "Refugee",
-      "Researcher",
-      "Internet celebrity"
-    ],
-    "darkSecrets": [
-      "chosen",
-      "curse",
-      "occultExperience",
-      "pactWithDarkPowers",
-      "returnedFromTheOtherSide"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "cursed",
-        "haunted",
-        "nightmares",
-        "phobia",
-        "repressedMemories",
-        "stalker"
-      ],
-      "automaticallyReceived": ["condemned"]
-    },
-    "advantages": [
-      "occultStudies",
-      "bound",
-      "magicalIntuition",
-      "deathDrive",
-      "ruthless",
-      "desperate",
-      "sealedFate",
-      "toTheLastBreath"
-    ],
-    "relations": [
-      "One of the characters knows the fate awaiting you. Take +1 Relation with them.",
-      "One of the characters inadvertently caused your fate to befall you. They take +1 Relation with you.",
-      "You utilized your prior success to help one of the other characters. They take +1 Relation with you.",
-      "One of the characters is assisting you in avoiding your fate. Take +2 Relation with each other.",
-      "One of the characters is standing in your way, preventing you from avoiding your fate. Determine how together.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Deceiver",
-    "description": "You were in love. You finally met Mr. Right. Your future was certain, the wedding was planned, and everyone felt you were perfect for each other. Then one day, your beloved disappeared along with your bank account and all your jewelry. You were another target of the Deceiver. Deceivers are manipulative people who fool others into trusting them to deprive them of money or services. They are masters of masking their true intentions and feelings, and can become exactly the person their victims want. Deceivers leave a trail of bitter enemies in their wake. When their past catches up to them, it often ends in tragedy.",
-    "occupation": [
-      "Model",
-      "Between jobs",
-      "Catfisher",
-      "Lover",
-      "Escort",
-      "Heir(ess)",
-      "Jetsetter",
-      "Party animal",
-      "Secretary",
-      "Party planner",
-      "Marriage swindler",
-      "Con artist",
-      "Gigolo",
-      "Scammer",
-      "Thief",
-      "Snitch",
-      "Pornstar"
-    ],
-    "darkSecrets": [
-      "heir",
-      "mentalIllness",
-      "occultExperience",
-      "pactWithDarkPowers",
-      "victimOfCrime"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "cursed",
-        "greedy",
-        "liar",
-        "nemesis",
-        "sexualNeurosis",
-        "wanted"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "erotic",
-      "impostor",
-      "seducer",
-      "backstab",
-      "eyeForDetail",
-      "intuitive",
-      "grudge",
-      "manipulative"
-    ],
-    "relations": [
-      "One of the characters helped you kill one of your many enemies. Take +1 Relation with them.",
-      "One of the characters knows one of your victims.",
-      "One of the characters met you during a rare moment when you were your true self.",
-      "One of the characters is your current victim. They take +2 Relation with you.",
-      "One of the characters is attracted to you. They take +1 Relation with you.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Descendant",
-    "description": "Blood, soul and heritage weigh heavy on The Descendant's shoulders. She is an offspring of some mythic ancestor, a now dead family, a lost god, chosen by a dark cult or maybe the heir of some unknown power. It is the past that haunts The Descendant – the Sins of the Fathers. It may be dark pacts, servitude to demons, or a still lingering upbringing filled with abuse and violence. No matter where The Descendant goes or hides, her past will eventually catch up to her.",
-    "occupation": [
-      "Antiquarian",
-      "Aristocrat",
-      "Author",
-      "Homeless",
-      "Tattoo artist",
-      "Occultist",
-      "Sect escapee",
-      "Preacher",
-      "Heir",
-      "Unemployed",
-      "Office worker",
-      "Craftsman",
-      "Forester"
-    ],
-    "darkSecrets": [
-      "chosen",
-      "familySecret",
-      "heir",
-      "occultExperience",
-      "pactWithDarkPowers"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "cursed",
-        "haunted",
-        "nightmares",
-        "phobia",
-        "repressedMemories",
-        "stalker"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "influentialFriends",
-      "intuitive",
-      "occultLibrary",
-      "artifact",
-      "bound",
-      "enhancedAwareness",
-      "innerPower",
-      "watchers"
-    ],
-    "relations": [
-      "One of the characters grew up alongside you. Take +2 Relation to one another.",
-      "One of the characters has seen what is hunting you. Take +1 Relation to them.",
-      "You are secretly in love with one of the characters. Take +2 Relation to them.",
-      "One of the characters is your contact person.",
-      "One of the characters is intertwined with your dark secrets. Take +1 Relation with them.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Detective",
-    "description": "Be they the disillusioned private eye in their office shrouded in clouds of cigarette smoke or the hardened investigator on the homicide unit, The Detective is motivated by their desperate need to find answers. Meanwhile, their families disintegrate, friends abandon them, and they fall into a spiral of darkness and addiction. Their ‘noble' search leads them down lonely and dangerous paths best left untrodden.",
-    "occupation": [
-      "Beat cop",
-      "Private eye",
-      "Lawyer",
-      "Investigator",
-      "Security guard",
-      "Investigative journalist",
-      "Intelligence officer",
-      "Detective",
-      "Medium",
-      "Hacker",
-      "Cryptologist",
-      "Conspiracy theorist"
-    ],
-    "darkSecrets": [
-      "forbiddenKnowledge",
-      "guiltyOfCrime",
-      "occultExperience",
-      "returnedFromTheOtherSide",
-      "strangeDisappearance"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "drugAddict",
-        "infirm",
-        "nightmares",
-        "repressedMemories",
-        "stalker"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "fastTalk",
-      "interrogator",
-      "instinct",
-      "readACrowd",
-      "shadow",
-      "crimeSceneInvestigator",
-      "dreamer",
-      "enhancedAwareness"
-    ],
-    "relations": [
-      "One of the characters saved you from a dangerous situation. Take +1 Relation with them.",
-      "One of the characters tricked you into protecting someone you were investigating.",
-      "You helped one of the characters solve a mystery. They take +1 Relation with you.",
-      "One of the characters is your coworker. Take +1 Relation with them and they take +1 Relation with you.",
-      "One of the characters is your informant. Take +1 Relation with them.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Doll",
-    "description": "In the shadows, The Doll stands ready. The Doll strives to break free, to be human again, and assume control of her own life while others strive to possess her. She has lived a life in submission, as an outcast, a prisoner, a freak, or a trophy. Feelings of emptiness and tragedy reside within her, as well as dreams of hope, love, and happiness – dreams which are shattered over and over again.",
-    "occupation": [
-      "Child beauty contestant",
-      "Model",
-      "Stripper",
-      "Trophy wife",
-      "Gigolo",
-      "Actor",
-      "Escaped experiment",
-      "High school prom queen",
-      "Vlogger",
-      "Reality TV celebrity",
-      "Pornstar",
-      "Escort",
-      "Abuse survivor",
-      "Imprisoned innocent",
-      "Trafficking victim"
-    ],
-    "darkSecrets": [
-      "chosen",
-      "guiltyOfCrime",
-      "occultExperience",
-      "victimOfCrime",
-      "victimOfMedicalExperiments"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "harassed",
-        "owned",
-        "phobia",
-        "sexualNeurosis",
-        "stalker"
-      ],
-      "automaticallyReceived": ["objectOfDesire"]
-    },
-    "advantages": [
-      "perpetualVictim",
-      "backstab",
-      "iceCold",
-      "sneak",
-      "divine",
-      "magneticAttraction",
-      "endureTrauma",
-      "grittedTeeth"
-    ],
-    "relations": [
-      "One of the characters is in love with you. They take +2 Relation with you.",
-      "One of the characters has taken care of you. Take +1 Relation with each other.",
-      "You are secretly in love with one of the characters. Take +2 Relation with them.",
-      "One of the characters liberated you. Take +1 Relation with each other.",
-      "One of the characters is jealous of you.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Drifter",
-    "description": "The Drifter never stays in one place long enough to feel at home. The road is their home. It could be an uncontrollable urge to never put down roots, or a reaction to pursuers always on their heels. The Drifter has learned to live with whatever fits in their backpack or the back of their car. What is important to others lacks meaning to The Drifter, who never gets attached to anything. Other vagabonds and outcasts are their friends and allies. They seek refuge in rundown motels, boxcars, abandoned homes, and other makeshift shelters. The eternal question for those who meet them is: what are you running from?",
-    "occupation": [
-      "Homeless",
-      "Vagabond",
-      "Runaway",
-      "In witness protection",
-      "Draft dodger",
-      "Small-time crook",
-      "Backpacker",
-      "Refugee",
-      "Prison escapee",
-      "Traveling salesman",
-      "Courier",
-      "Day laborer",
-      "Outsider"
-    ],
-    "darkSecrets": [
-      "curse",
-      "familySecret",
-      "mentalIllness",
-      "returnedFromTheOtherSide",
-      "rootless"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "cursed",
-        "harassed",
-        "haunted",
-        "schizophrenia",
-        "stalker",
-        "wanted"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "streetContacts",
-      "driver",
-      "improviser",
-      "characterActor",
-      "vigilant",
-      "wanderer",
-      "artifact",
-      "enhancedAwareness"
-    ],
-    "relations": [
-      "One of the characters lets you stay with them sometimes. Take +1 Relation with them.",
-      "One of the characters got you out of a bind. Take +1 Relation with them.",
-      "One of the characters is an old friend. Take +2 Relation with them.",
-      "One of the characters is someone you know in the underworld.",
-      "One of the characters gives you occasional jobs.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Fixer",
-    "description": "The Fixer has all the contacts, and uses them to make quick cash. Drugs, weapons, illegal prizefights, antiques, cars, apartments – The Fixer can set you up with whatever you need. But everything she sells comes with a catch. Once The Fixer gets their hooks in you she'll never let you go. As long as there's money involved The Fixer doesn't care about the stakes, and the more successful she is, the more enemies she makes along the way. In the underworld, there are always people hungrily watching you, waiting for the right moment, and willing to step over your body to take your place.",
-    "occupation": [
-      "Mafia boss",
-      "Business person",
-      "Real estate agent",
-      "Dealer",
-      "Restaurateur",
-      "Club owner",
-      "Fence",
-      "Loan shark",
-      "Bookie",
-      "Advisor",
-      "Extortionist",
-      "Criminal",
-      "Consigliere"
-    ],
-    "darkSecrets": [
-      "forbiddenKnowledge",
-      "guiltyOfCrime",
-      "heir",
-      "pactWithDarkPowers",
-      "victimOfCrime"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "competitor",
-        "cursed",
-        "greedy",
-        "jealousy",
-        "liar",
-        "stalker"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "forkedTongue",
-      "streetwise",
-      "aceUpTheSleeve",
-      "backstab",
-      "boss",
-      "extortionist",
-      "sixthSense",
-      "worldly"
-    ],
-    "relations": [
-      "One of the characters endured a beating to get you out of a bind. Take +1 Relation with them.",
-      "One of the characters caused a problem for which they let you take the blame.",
-      "One of the characters is indebted to you.",
-      "One of the characters works for you.",
-      "One of the characters is a business contact.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Occultist",
-    "description": "The Occultist seeks the answers to life's mysteries through occult theories. Ancient tomes, mad sect leaders, and obscure internet forums speak of different dimensions, magical rituals, otherworldly creatures, and powers that can turn men into gods. The Occultist has discovered enough information to begin experimenting with these forces, but not nearly enough to give them any degree of control. Magic always comes at a high price, and The Occultist's account is coming due.",
-    "occupation": [
-      "Antiquarian",
-      "Medium",
-      "Exorcist",
-      "Linguist",
-      "Unemployed",
-      "Theologian",
-      "Professor",
-      "Morgue employee",
-      "Teenager",
-      "Student",
-      "Bureaucrat",
-      "Disability collector",
-      "Librarian",
-      "Recent convert",
-      "Thelemic"
-    ],
-    "darkSecrets": [
-      "forbiddenKnowledge",
-      "guardian",
-      "occultExperience",
-      "pactWithDarkPowers",
-      "visitations"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "guilt",
-        "haunted",
-        "involuntaryMedium",
-        "nightmares",
-        "repressedMemories",
-        "stalker"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "crafty",
-      "occultLibrary",
-      "dabblerInTheOccult",
-      "dreamer",
-      "enhancedAwareness",
-      "exorcist",
-      "magicalIntuition",
-      "thirstForKnowledge"
-    ],
-    "relations": [
-      "One of the characters participated in one of your rituals.",
-      "One of the characters is related to someone you lost. Take +1 Relation with them.",
-      "One of the characters is your friend. Take +1 Relation with them.",
-      "One of the characters assists you with acquiring books, information, and artifacts. Take +1 Relation with them.",
-      "One of the characters hates you for doing something to them, despite your love for them. Take +2 Relation with them.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Prophet",
-    "description": "Faith and religion bestow power, whether you're a priest, pastor, imam, rabbi, or other sect leader. The Prophet may have chosen to serve their god, but it could also be a path they've been forced to walk by their family or congregation from an early age. Being on the inside of a religious association provides access to community and a sense of higher purpose. However, the shadows cast by the Divine's light often hide abuse of power, occultism, perverted doctrine, forced marriages, and the worship of false gods.",
-    "occupation": [
-      "Priest",
-      "Pastor",
-      "Imam",
-      "Rabbi",
-      "Sect leader",
-      "Sect member",
-      "Sect escapee",
-      "Prophet",
-      "Medium",
-      "Witch",
-      "Preacher",
-      "Healer",
-      "Missionary",
-      "Seer",
-      "Cultist",
-      "Idolater",
-      "Iconoclast",
-      "Elder",
-      "Oracle",
-      "Guru"
-    ],
-    "darkSecrets": [
-      "chosen",
-      "forbiddenKnowledge",
-      "guardian",
-      "occultExperience",
-      "visitations"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "cursed",
-        "fanatic",
-        "harassed",
-        "involuntaryMedium",
-        "sexualNeurosis",
-        "stalker"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "charismaticAura",
-      "cultLeader",
-      "enhancedAwareness",
-      "exorcist",
-      "layOnHands",
-      "voiceOfInsanity",
-      "divineChampion",
-      "goodSamaritan"
-    ],
-    "relations": [
-      "One of the characters shares your faith.",
-      "One of the characters saved you. Take +1 Relation with them.",
-      "One of the characters denied your god.",
-      "You saved one of the other character's immortal soul. They take +1 Relation with you.",
-      "One of the characters is your lover. Take +1 Relation with them.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Ronin",
-    "description": "The Ronin always teeters at the edge of a bottomless pit. When you've run out of options, you hire The Ronin to solve the problem. They perform any task where compassion and morality are liabilities, and where mistakes mean prison, death, or worse. The Ronin can never trust anyone. Yesterday's employers are tomorrow's potential targets. Once The Ronin's hunt has begun, there is no escape for their prey.",
-    "occupation": [
-      "Contract killer",
-      "Hitman",
-      "Special agent",
-      "Special ops",
-      "Military experiment",
-      "Sniper",
-      "Spree killer"
-    ],
-    "darkSecrets": [
-      "curse",
-      "guardian",
-      "occultExperience",
-      "victimOfMedicalExperiments",
-      "visitations"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "cursed",
-        "haunted",
-        "marked",
-        "nemesis",
-        "nightmares",
-        "wanted"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "weaponMaster",
-      "chameleon",
-      "exitStrategy",
-      "manhunter",
-      "sixthSense",
-      "lightningFast",
-      "sniper",
-      "jaded"
-    ],
-    "relations": [
-      "One of the characters knows who you really are. Take +1 Relation with each other.",
-      "One of the characters knows you under one of your aliases.",
-      "One of the characters knows your deepest fear.",
-      "One of the characters owes their life to you. They take +1 Relation with you.",
-      "You harbor a secret passion for one of the character's partners. Take +2 Relation with that partner.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Scientist",
-    "description": "The Scientist explores the unknown in the hope of finding answers to the questions of life and the universe. Her research often leads to dangerous experiments, where the fabric between our dimension and others is temporarily blown aside. In psychology, medicine, physics, chemistry, and various parasciences, these experiments often lead to terrible consequences. They might call her mad, but she knows this is because they refuse to see the Truth.",
-    "occupation": [
-      "Doctor",
-      "Psychologist",
-      "Surgeon",
-      "Inventor",
-      "Engineer",
-      "Technician",
-      "Therapist",
-      "Physicist"
-    ],
-    "darkSecrets": [
-      "forbiddenKnowledge",
-      "mentalIllness",
-      "responsibleForMedicalExperiments",
-      "returnedFromTheOtherSide",
-      "victimOfMedicalExperiments"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "badReputation",
-        "experimentGoneWrong",
-        "fanatic",
-        "mentalCompulsion",
-        "repressedMemories",
-        "wanted"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "battlefieldMedicine",
-      "inventor",
-      "scientist",
-      "enhancedAwareness",
-      "genius",
-      "implantedMessages",
-      "arcaneResearcher",
-      "workaholic"
-    ],
-    "relations": [
-      "One of the characters received help from you. They take +1 Relation with you.",
-      "One of the characters assisted you with an experiment, which went terribly wrong.",
-      "One of the characters knows details of your dreams.",
-      "One of the characters volunteered for one of your experiments. Take +1 Relation with them.",
-      "One of the characters is involved in your research.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Seeker",
-    "description": "Seekers are explorers of modern, ancient, and forgotten urban myths. They are bloggers, hackers, and storytellers of the Modern Age. On the Internet, faceless voices whisper of lies and conspiracies. In abandoned subway stations, someone leaves messages in seemingly meaningless graffiti. If you dig deep enough you'll find the Truth, but most of us cannot see through the thick fog of misinformation, and we become hopelessly lost in the tempest of propaganda, pornography, and mindless entertainment. The Seeker knows how to use the Internet to uncover secrets under stones best left unturned. For the Seeker, no price is too great to find the Truth and expose it for public consumption.",
-    "occupation": [
-      "Student",
-      "Unemployed",
-      "Blogger",
-      "Hacker",
-      "Activist",
-      "Academic",
-      "Researcher",
-      "Parapsychologist",
-      "Author",
-      "Journalist",
-      "Thief",
-      "Medium",
-      "Conspiracy Theorist"
-    ],
-    "darkSecrets": [
-      "familySecret",
-      "forbiddenKnowledge",
-      "guardian",
-      "occultExperience",
-      "strangeDisappearance"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "cursed",
-        "haunted",
-        "nightmares",
-        "repressedMemories",
-        "stalker",
-        "wanted"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "parkour",
-      "accessTheDarkNet",
-      "keen-eyed",
-      "hacker",
-      "prepared",
-      "enhancedAwareness",
-      "stubborn",
-      "endureTrauma"
-    ],
-    "relations": [
-      "You entrusted one of the characters with a secret, which could put you away in prison.",
-      "One of the characters helped you with your investigations. Take +1 Relation with them.",
-      "You look up to one of the characters. Take +1 Relation with them.",
-      "One of the characters saved your life. Take +1 Relation with them.",
-      "You have discovered one of the characters in the act of something criminal, obscene, or extremely shameful.",
-      "You befriended one of the characters in the process of assisting them with some supernatural trouble. Give her +1 Relation with you.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  },
-  {
-    "name": "The Veteran",
-    "description": "The Veteran has seen death up close. She has spent a major part of her life in combat, weapon in hand, and adrenaline coursing through her veins. She might be an infantry soldier crouching in an Afghanistan foxhole, a SWAT officer carrying out frequent missions against heavily armed criminals, or a civilian from a country devastated by war, now a refugee but still tortured by memories of the conflict.",
-    "occupation": [
-      "Special agent",
-      "Military soldier",
-      "Street soldier",
-      "Mercenary",
-      "MMA fighter",
-      "Military officer",
-      "Security guard",
-      "Body guard",
-      "Hitman",
-      "War refugee",
-      "Military police",
-      "Retiree",
-      "Homeless vet"
-    ],
-    "darkSecrets": [
-      "guiltyOfCrime",
-      "returnedFromTheOtherSide",
-      "victimOfCrime",
-      "victimOfMedicalExperiments",
-      "visitations"
-    ],
-    "disadvantages": {
-      "count": 2,
-      "list": [
-        "drugAddict",
-        "haunted",
-        "nightmares",
-        "phobia",
-        "repressedMemories",
-        "stalker",
-        "wanted"
-      ],
-      "automaticallyReceived": []
-    },
-    "advantages": [
-      "hunter",
-      "instinct",
-      "survivalist",
-      "voiceOfPain",
-      "martialArtsExpert",
-      "officer",
-      "deadShot",
-      "hardened"
-    ],
-    "relations": [
-      "One of the characters assisted you when you were in need. Take +1 Relation with them.",
-      "One of the characters abandoned you when you needed them most.",
-      "One of the characters followed you into battle. Take +1 Relation with each other.",
-      "One of the characters listened to your war stories.",
-      "One of the characters has seen you lose control.",
-      "Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
-    ]
-  }
+	{
+		"name": "academic",
+		"label": "The Academic",
+    "group": "archetypes",
+		"description": "The Academic studies the world from her desk. Everything is interconnected via logical rules of causality, yet she suspects something must be wrong. Pieces refuse to fall into the safe, predictable patterns of common scientific models. Worse, shadowy forces silence new and alternative fields of research. Those who question the scientific establishment and its rational worldview risk disgrace and the destruction of their research, reputation, and revenue. Does she dare to look for the truth?",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Professor",
+				"Student",
+				"Ph.D. candidate",
+				"Teacher",
+				"Public servant",
+				"Advisor",
+				"Politician",
+				"Author",
+				"Television show host",
+				"Aristocrat",
+				"Researcher",
+				"Psychologist",
+				"Archaeologist",
+				"Dilettante",
+				"Antiquarian"
+			],
+			"darkSecrets": [
+				"forbiddenKnowledge",
+				"guardian",
+				"occultExperience",
+				"returnedFromTheOtherSide",
+				"strangeDisappearance"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": [
+					"nightmares",
+					"obsession",
+					"phobia",
+					"repressedMemories",
+					"rationalist",
+					"stalker"
+				],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"academicNetwork",
+				"authority",
+				"eliteEducation",
+				"collector",
+				"dataRetrieval",
+				"expert",
+				"occultStudies",
+				"eliteSport"
+			],
+			"relations": [
+				"One of the characters studied at the same campus as you, and you became good friends. Take +1 Relation with each other.",
+				"One of the characters is your relative.",
+				"One of the characters met you at a seminar.",
+				"You hired one of the characters as an assistant for a research project.",
+				"One of the characters is your lover. Take Relation +1 or +2 with them.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "agent",
+		"label": "The Agent",
+    "group": "archetypes",
+		"description": "The Agent does whatever is necessary to protect and serve her employer's best interests. People are simply resources to be used, abused, and expended. Anyone standing in the way must be removed. She gathers and analyzes information at an almost impossible speed. Threats demand rapid responses, and sometimes there are no good choices. The Agent's job means accepting great costs, usually in the form of dangers, but also an ever-growing debt to those sacrificed for the greater good. When this burden finally becomes too heavy, The Agent's exits have likely already closed, and 'good' and 'evil' have lost all meaning.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Open-source officer",
+				"Case officer",
+				"Counterterrorism analyst",
+				"Analytic methodologist",
+				"Special agent",
+				"Security professional",
+				"Operations officer",
+				"Collection management officer",
+				"Handler",
+				"Infiltrator",
+				"Spy",
+				"Sleeper agent"
+			],
+			"darkSecrets": [
+				"forbiddenKnowledge",
+				"guardian",
+				"occultExperience",
+				"strangeDisappearance",
+				"victimOfMedicalExperiments"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": ["lostIdentity", "nightmares", "obsession", "rival", "stalker", "wanted"],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"moles",
+				"burglar",
+				"analyst",
+				"explosivesExpert",
+				"tracer",
+				"quickThinker",
+				"fieldAgent",
+				"endureTrauma"
+			],
+			"relations": [
+				"One of the characters has been your informant for several years. They take +1 Relation with you.",
+				"You possess compromising information about one of the characters' past.",
+				"One of the characters is an old friend of yours. Take +1 Relation with each other.",
+				"One of the characters is your lover. They take +2 Relation with you. Choose what Relation you have with them.",
+				"One of the characters is your colleague. Take +1 Relation with them.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "artist",
+		"label": "The Artist",
+    "group": "archetypes",
+		"description": "The Artist exists only to create, to give themselves, body and soul, over to the arts. They express this desire through many mediums. A hypnotic painting, music trapping the audience in pure ecstasy, books spellbinding their readers, or a model's sculpted flesh are all the purview of The Artist. Artists have the ability to speak to the souls of others by inviting them into their own, but this ability always comes at a price. The price is paid by The Artist themselves, be it their sanity or strength.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Author",
+				"Dancer",
+				"Actor",
+				"Painter",
+				"Videographer",
+				"Photographer",
+				"Designer",
+				"Model",
+				"Musician",
+				"Singer",
+				"Personal trainer",
+				"Cosmetologist",
+				"Television Host",
+				"Director",
+				"Reporter",
+				"Blogger"
+			],
+			"darkSecrets": ["curse", "heir", "mentalIllness", "pactWithDarkForces", "victimOfCrime"],
+			"disadvantages": {
+				"count": 2,
+				"list": [
+					"cursed",
+					"depression",
+					"drugAddict",
+					"nightmares",
+					"schizophrenia",
+					"victimOfPassion"
+				],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"artisticTalent",
+				"fascination",
+				"notorious",
+				"observant",
+				"bodyAwareness",
+				"enhancedAwareness",
+				"forbiddenInspiration",
+				"snakeCharmer"
+			],
+			"relations": [
+				"One of the characters is involved in your art. Take +1 Relation with them.",
+				"One of the characters is your lover. Take +1 Relation with them.",
+				"One of the characters hurt you.",
+				"One of the characters is infatuated with you. They take +2 Relation with you.",
+				"One of the characters commissioned a work of art from you. They take +1 Relation with you.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "avenger",
+		"label": "The Avenger",
+    "group": "archetypes",
+		"description": "The Avenger has been robbed of something dear to them, be it their loved one, job, family, humanity, honor, memories, or life goals. Regardless of what was taken from them, its loss can only be paid for in blood. The only thing remaining is revenge, and The Avenger isn't about to let anything or anyone get in their way, regardless of consequences.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Homemaker",
+				"Police Officer",
+				"Panhandler",
+				"Unemployed",
+				"Student",
+				"Criminal",
+				"Conspiracy theorist",
+				"Refugee",
+				"Prison escapee",
+				"Prize fighter",
+				"Widow(er)",
+				"Washed-up celebrity",
+				"Failed businessperson",
+				"Science experiment on the run"
+			],
+			"darkSecrets": [
+				"guardian",
+				"returnedFromTheOtherSide",
+				"strangeDisappearance",
+				"victimOfCrime",
+				"victimOfMedicalExperiments"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": [
+					"oathOfRevenge",
+					"mentalCompulsion",
+					"nightmares",
+					"schizophrenia",
+					"stalker",
+					"wanted"
+				],
+				"automaticallyReceived": ["oathOfRevenge"]
+			},
+			"advantages": [
+				"animalSpeaker",
+				"instinct",
+				"enhancedAwareness",
+				"intimidating",
+				"survivalInstinct",
+				"codeOfHonor",
+				"eyeForAnEye",
+				"rage"
+			],
+			"relations": [
+				"You have entrusted one of the characters with a secret, which could put you away in prison if revealed.",
+				"One of the characters tried to get you to forget your oath of revenge. Give them +1 Relation with you.",
+				"One of the characters tried to help you fulfill your oath of revenge. Take +1 Relation with them.",
+				"One of the characters has ties to the target of your revenge.",
+				"One of the characters is connected to your past life somehow.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "broken",
+		"label": "The Broken",
+    "group": "archetypes",
+		"description": "The Broken has gazed into the Abyss and escaped with their mind in tatters. They could be a homeless person who subconsciously performs rituals to forgotten gods, the mental patient who became a test subject for experimental medications, or the sinner who was physically dragged down into hell, yet somehow managed to escape back to the land of the living. The Broken views things and sees through the Illusion in ways others do not. In exchange for their irreparable trauma, they've been granted unique insights about the Truth. The question is, how far can they trust their own senses?",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Homeless",
+				"Escaped mental patient",
+				"Street peddler",
+				"Street performer",
+				"Fence",
+				"Thief",
+				"Police",
+				"Drug dealer",
+				"Addict",
+				"Street artist",
+				"Freelance journalist",
+				"Tattoo artist",
+				"Abuse survivor",
+				"Normal person in the wrong place at the wrong time"
+			],
+			"darkSecrets": [
+				"forbiddenKnowledge",
+				"mentalIllness",
+				"occultExperience",
+				"returnedFromTheOtherSide",
+				"victimOfMedicalExperiments"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": [
+					"broken",
+					"drugAddict",
+					"involuntaryMedium",
+					"obsessiveCompulsion",
+					"schizophrenia",
+					"stalker"
+				],
+				"automaticallyReceived": ["broken"]
+			},
+			"advantages": [
+				"streetContacts",
+				"intuitive",
+				"daredevil",
+				"contagiousInsanity",
+				"enhancedAwareness",
+				"magicalIntuition",
+				"sixthSense",
+				"wayfinder"
+			],
+			"relations": [
+				"One of the characters is trying to get you back on your feet again. Take +1 Relation with each other.",
+				"One of the characters was with you when you were broken. Take +1 Relation with them.",
+				"One of the characters is your closest friend. Take +2 Relation with them.",
+				"One of the characters was the reason you were broken. Take +1 Relation with them.",
+				"You are angry with one of the characters. Take +1 Relation with them.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "careerist",
+		"label": "The Careerist",
+    "group": "archetypes",
+		"description": "The Careerist is the consummate brown-nosing backstabber. Most remain stuck in a cubicle farm, performing the same mundane tasks day after day, while the ruthless few climb upwards in the corporate hierarchy. Potentially, The Careerist could also run their own company, fighting for survival against corporate giants. In a world where nothing is off limits when it comes to advancing one's career, success necessitates being willing to do whatever it takes.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Lawyer",
+				"Businessman",
+				"Office worker",
+				"Director",
+				"CEO",
+				"Consultant",
+				"Bureaucrat",
+				"Politician",
+				"Jet setter",
+				"Yuppie",
+				"Salesman",
+				"Trainee",
+				"Aristocrat"
+			],
+			"darkSecrets": [
+				"curse",
+				"guiltyOfCrime",
+				"occultExperience",
+				"pactWithDarkPowers",
+				"responsibleForMedicalExperiments"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": ["cursed", "greedy", "haunted", "liar", "rationalist", "rival"],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"aweInspiring",
+				"influentialFriends",
+				"networkOfContacts",
+				"notorious",
+				"daredevil",
+				"puppeteer",
+				"atAnyCost",
+				"opportunist"
+			],
+			"relations": [
+				"One of the characters assisted you with removing a company rival. Take +1 Relation with them.",
+				"One of the characters opposes your business ventures.",
+				"One of the characters knows your Dark Secret.",
+				"One of the characters also works for your boss.",
+				"You are in love with one of the characters. Take +2 Relation with them.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "criminal",
+		"label": "The Criminal",
+    "group": "archetypes",
+		"description": "Mobsters, gang members, thieves, drug dealers, and hitmen are all driven by two things: their quest for money and all the shit they've endured during their lives. For a precious few, their criminality grants them the life of luxury. But for most, they only catch a fleeting glimpse of wealth before someone bigger and meaner takes it all away from them. It's a dog-eat-dog world.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Thief",
+				"Robber",
+				"Dealer",
+				"Gang member",
+				"Homeless",
+				"Prize fighter",
+				"Corrupt cop",
+				"Enforcer",
+				"Club owner",
+				"Extortionist",
+				"Hitman",
+				"Face of the operation",
+				"Getaway driver",
+				"Con artist",
+				"Mobster",
+				"Dealer",
+				"Muscle for hire"
+			],
+			"darkSecrets": [
+				"familySecret",
+				"forbiddenKnowledge",
+				"guiltyOfCrime",
+				"occultExperience",
+				"victimOfCrime"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": ["badReputation", "drugAddict", "harassed", "nemesis", "sexualNeurosis", "wanted"],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"streetwise",
+				"burglar",
+				"escapeArtist",
+				"sixthSense",
+				"deadlyStare",
+				"enforcer",
+				"gangLeader",
+				"streetfighter"
+			],
+			"relations": [
+				"One of the characters hid you from the police or others who were after you. Take +1 Relation with them.",
+				"One of the characters knows you've committed a terrible crime.",
+				"One of the characters is indebted to you.",
+				"One of the characters is connected to one of your rivals.",
+				"One of the characters knew you from before your criminal dealings. Take +1 Relation with them.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "cursed",
+		"label": "The Cursed",
+    "group": "archetypes",
+		"description": "The Cursed is living on borrowed time. They might be the unfortunate victim of a deadly disease or the target of a higher power's rage. Usually, however, The Cursed has sealed their own fate by selling their soul for fortune and fame. Now their time is almost up, and The Cursed has realized life itself is the most worthwhile thing they possess. No price is too high to pay for The Cursed to thwart their destiny, even if it means sacrificing others.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Occultist",
+				"Cult escapee",
+				"Police officer",
+				"CEO",
+				"Detective",
+				"Military Officer",
+				"Gangster",
+				"Politician",
+				"Disability collector",
+				"Amateur magician",
+				"Celebrity",
+				"Jailbird",
+				"Businessman",
+				"Playboy",
+				"Refugee",
+				"Researcher",
+				"Internet celebrity"
+			],
+			"darkSecrets": [
+				"chosen",
+				"curse",
+				"occultExperience",
+				"pactWithDarkPowers",
+				"returnedFromTheOtherSide"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": ["cursed", "haunted", "nightmares", "phobia", "repressedMemories", "stalker"],
+				"automaticallyReceived": ["condemned"]
+			},
+			"advantages": [
+				"occultStudies",
+				"bound",
+				"magicalIntuition",
+				"deathDrive",
+				"ruthless",
+				"desperate",
+				"sealedFate",
+				"toTheLastBreath"
+			],
+			"relations": [
+				"One of the characters knows the fate awaiting you. Take +1 Relation with them.",
+				"One of the characters inadvertently caused your fate to befall you. They take +1 Relation with you.",
+				"You utilized your prior success to help one of the other characters. They take +1 Relation with you.",
+				"One of the characters is assisting you in avoiding your fate. Take +2 Relation with each other.",
+				"One of the characters is standing in your way, preventing you from avoiding your fate. Determine how together.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "deceiver",
+		"label": "The Deceiver",
+    "group": "archetypes",
+		"description": "You were in love. You finally met Mr. Right. Your future was certain, the wedding was planned, and everyone felt you were perfect for each other. Then one day, your beloved disappeared along with your bank account and all your jewelry. You were another target of the Deceiver. Deceivers are manipulative people who fool others into trusting them to deprive them of money or services. They are masters of masking their true intentions and feelings, and can become exactly the person their victims want. Deceivers leave a trail of bitter enemies in their wake. When their past catches up to them, it often ends in tragedy.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Model",
+				"Between jobs",
+				"Catfisher",
+				"Lover",
+				"Escort",
+				"Heir(ess)",
+				"Jetsetter",
+				"Party animal",
+				"Secretary",
+				"Party planner",
+				"Marriage swindler",
+				"Con artist",
+				"Gigolo",
+				"Scammer",
+				"Thief",
+				"Snitch",
+				"Pornstar"
+			],
+			"darkSecrets": [
+				"heir",
+				"mentalIllness",
+				"occultExperience",
+				"pactWithDarkPowers",
+				"victimOfCrime"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": ["cursed", "greedy", "liar", "nemesis", "sexualNeurosis", "wanted"],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"erotic",
+				"impostor",
+				"seducer",
+				"backstab",
+				"eyeForDetail",
+				"intuitive",
+				"grudge",
+				"manipulative"
+			],
+			"relations": [
+				"One of the characters helped you kill one of your many enemies. Take +1 Relation with them.",
+				"One of the characters knows one of your victims.",
+				"One of the characters met you during a rare moment when you were your true self.",
+				"One of the characters is your current victim. They take +2 Relation with you.",
+				"One of the characters is attracted to you. They take +1 Relation with you.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "descendant",
+		"label": "The Descendant",
+    "group": "archetypes",
+		"description": "Blood, soul and heritage weigh heavy on The Descendant's shoulders. She is an offspring of some mythic ancestor, a now dead family, a lost god, chosen by a dark cult or maybe the heir of some unknown power. It is the past that haunts The Descendant – the Sins of the Fathers. It may be dark pacts, servitude to demons, or a still lingering upbringing filled with abuse and violence. No matter where The Descendant goes or hides, her past will eventually catch up to her.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Antiquarian",
+				"Aristocrat",
+				"Author",
+				"Homeless",
+				"Tattoo artist",
+				"Occultist",
+				"Sect escapee",
+				"Preacher",
+				"Heir",
+				"Unemployed",
+				"Office worker",
+				"Craftsman",
+				"Forester"
+			],
+			"darkSecrets": ["chosen", "familySecret", "heir", "occultExperience", "pactWithDarkPowers"],
+			"disadvantages": {
+				"count": 2,
+				"list": ["cursed", "haunted", "nightmares", "phobia", "repressedMemories", "stalker"],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"influentialFriends",
+				"intuitive",
+				"occultLibrary",
+				"artifact",
+				"bound",
+				"enhancedAwareness",
+				"innerPower",
+				"watchers"
+			],
+			"relations": [
+				"One of the characters grew up alongside you. Take +2 Relation to one another.",
+				"One of the characters has seen what is hunting you. Take +1 Relation to them.",
+				"You are secretly in love with one of the characters. Take +2 Relation to them.",
+				"One of the characters is your contact person.",
+				"One of the characters is intertwined with your dark secrets. Take +1 Relation with them.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "detective",
+		"label": "The Detective",
+    "group": "archetypes",
+		"description": "Be they the disillusioned private eye in their office shrouded in clouds of cigarette smoke or the hardened investigator on the homicide unit, The Detective is motivated by their desperate need to find answers. Meanwhile, their families disintegrate, friends abandon them, and they fall into a spiral of darkness and addiction. Their 'noble' search leads them down lonely and dangerous paths best left untrodden.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Beat cop",
+				"Private eye",
+				"Lawyer",
+				"Investigator",
+				"Security guard",
+				"Investigative journalist",
+				"Intelligence officer",
+				"Detective",
+				"Medium",
+				"Hacker",
+				"Cryptologist",
+				"Conspiracy theorist"
+			],
+			"darkSecrets": [
+				"forbiddenKnowledge",
+				"guiltyOfCrime",
+				"occultExperience",
+				"returnedFromTheOtherSide",
+				"strangeDisappearance"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": ["drugAddict", "infirm", "nightmares", "repressedMemories", "stalker"],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"fastTalk",
+				"interrogator",
+				"instinct",
+				"readACrowd",
+				"shadow",
+				"crimeSceneInvestigator",
+				"dreamer",
+				"enhancedAwareness"
+			],
+			"relations": [
+				"One of the characters saved you from a dangerous situation. Take +1 Relation with them.",
+				"One of the characters tricked you into protecting someone you were investigating.",
+				"You helped one of the characters solve a mystery. They take +1 Relation with you.",
+				"One of the characters is your coworker. Take +1 Relation with them and they take +1 Relation with you.",
+				"One of the characters is your informant. Take +1 Relation with them.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "doll",
+		"label": "The Doll",
+    "group": "archetypes",
+		"description": "In the shadows, The Doll stands ready. The Doll strives to break free, to be human again, and assume control of her own life while others strive to possess her. She has lived a life in submission, as an outcast, a prisoner, a freak, or a trophy. Feelings of emptiness and tragedy reside within her, as well as dreams of hope, love, and happiness – dreams which are shattered over and over again.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Child beauty contestant",
+				"Model",
+				"Stripper",
+				"Trophy wife",
+				"Gigolo",
+				"Actor",
+				"Escaped experiment",
+				"High school prom queen",
+				"Vlogger",
+				"Reality TV celebrity",
+				"Pornstar",
+				"Escort",
+				"Abuse survivor",
+				"Imprisoned innocent",
+				"Trafficking victim"
+			],
+			"darkSecrets": [
+				"chosen",
+				"guiltyOfCrime",
+				"occultExperience",
+				"victimOfCrime",
+				"victimOfMedicalExperiments"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": ["harassed", "owned", "phobia", "sexualNeurosis", "stalker"],
+				"automaticallyReceived": ["objectOfDesire"]
+			},
+			"advantages": [
+				"perpetualVictim",
+				"backstab",
+				"iceCold",
+				"sneak",
+				"divine",
+				"magneticAttraction",
+				"endureTrauma",
+				"grittedTeeth"
+			],
+			"relations": [
+				"One of the characters is in love with you. They take +2 Relation with you.",
+				"One of the characters has taken care of you. Take +1 Relation with each other.",
+				"You are secretly in love with one of the characters. Take +2 Relation with them.",
+				"One of the characters liberated you. Take +1 Relation with each other.",
+				"One of the characters is jealous of you.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "drifter",
+		"label": "The Drifter",
+    "group": "archetypes",
+		"description": "The Drifter never stays in one place long enough to feel at home. The road is their home. It could be an uncontrollable urge to never put down roots, or a reaction to pursuers always on their heels. The Drifter has learned to live with whatever fits in their backpack or the back of their car. What is important to others lacks meaning to The Drifter, who never gets attached to anything. Other vagabonds and outcasts are their friends and allies. They seek refuge in rundown motels, boxcars, abandoned homes, and other makeshift shelters. The eternal question for those who meet them is: what are you running from?",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Homeless",
+				"Vagabond",
+				"Runaway",
+				"In witness protection",
+				"Draft dodger",
+				"Small-time crook",
+				"Backpacker",
+				"Refugee",
+				"Prison escapee",
+				"Traveling salesman",
+				"Courier",
+				"Day laborer",
+				"Outsider"
+			],
+			"darkSecrets": [
+				"curse",
+				"familySecret",
+				"mentalIllness",
+				"returnedFromTheOtherSide",
+				"rootless"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": ["cursed", "harassed", "haunted", "schizophrenia", "stalker", "wanted"],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"streetContacts",
+				"driver",
+				"improviser",
+				"characterActor",
+				"vigilant",
+				"wanderer",
+				"artifact",
+				"enhancedAwareness"
+			],
+			"relations": [
+				"One of the characters lets you stay with them sometimes. Take +1 Relation with them.",
+				"One of the characters got you out of a bind. Take +1 Relation with them.",
+				"One of the characters is an old friend. Take +2 Relation with them.",
+				"One of the characters is someone you know in the underworld.",
+				"One of the characters gives you occasional jobs.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "fixer",
+		"label": "The Fixer",
+    "group": "archetypes",
+		"description": "The Fixer has all the contacts, and uses them to make quick cash. Drugs, weapons, illegal prizefights, antiques, cars, apartments – The Fixer can set you up with whatever you need. But everything she sells comes with a catch. Once The Fixer gets their hooks in you she'll never let you go. As long as there's money involved The Fixer doesn't care about the stakes, and the more successful she is, the more enemies she makes along the way. In the underworld, there are always people hungrily watching you, waiting for the right moment, and willing to step over your body to take your place.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Mafia boss",
+				"Business person",
+				"Real estate agent",
+				"Dealer",
+				"Restaurateur",
+				"Club owner",
+				"Fence",
+				"Loan shark",
+				"Bookie",
+				"Advisor",
+				"Extortionist",
+				"Criminal",
+				"Consigliere"
+			],
+			"darkSecrets": [
+				"forbiddenKnowledge",
+				"guiltyOfCrime",
+				"heir",
+				"pactWithDarkPowers",
+				"victimOfCrime"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": ["competitor", "cursed", "greedy", "jealousy", "liar", "stalker"],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"forkedTongue",
+				"streetwise",
+				"aceUpTheSleeve",
+				"backstab",
+				"boss",
+				"extortionist",
+				"sixthSense",
+				"worldly"
+			],
+			"relations": [
+				"One of the characters endured a beating to get you out of a bind. Take +1 Relation with them.",
+				"One of the characters caused a problem for which they let you take the blame.",
+				"One of the characters is indebted to you.",
+				"One of the characters works for you.",
+				"One of the characters is a business contact.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "occultist",
+		"label": "The Occultist",
+    "group": "archetypes",
+		"description": "The Occultist seeks the answers to life's mysteries through occult theories. Ancient tomes, mad sect leaders, and obscure internet forums speak of different dimensions, magical rituals, otherworldly creatures, and powers that can turn men into gods. The Occultist has discovered enough information to begin experimenting with these forces, but not nearly enough to give them any degree of control. Magic always comes at a high price, and The Occultist's account is coming due.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Antiquarian",
+				"Medium",
+				"Exorcist",
+				"Linguist",
+				"Unemployed",
+				"Theologian",
+				"Professor",
+				"Morgue employee",
+				"Teenager",
+				"Student",
+				"Bureaucrat",
+				"Disability collector",
+				"Librarian",
+				"Recent convert",
+				"Thelemic"
+			],
+			"darkSecrets": [
+				"forbiddenKnowledge",
+				"guardian",
+				"occultExperience",
+				"pactWithDarkPowers",
+				"visitations"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": [
+					"guilt",
+					"haunted",
+					"involuntaryMedium",
+					"nightmares",
+					"repressedMemories",
+					"stalker"
+				],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"crafty",
+				"occultLibrary",
+				"dabblerInTheOccult",
+				"dreamer",
+				"enhancedAwareness",
+				"exorcist",
+				"magicalIntuition",
+				"thirstForKnowledge"
+			],
+			"relations": [
+				"One of the characters participated in one of your rituals.",
+				"One of the characters is related to someone you lost. Take +1 Relation with them.",
+				"One of the characters is your friend. Take +1 Relation with them.",
+				"One of the characters assists you with acquiring books, information, and artifacts. Take +1 Relation with them.",
+				"One of the characters hates you for doing something to them, despite your love for them. Take +2 Relation with them.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "prophet",
+		"label": "The Prophet",
+    "group": "archetypes",
+		"description": "Faith and religion bestow power, whether you're a priest, pastor, imam, rabbi, or other sect leader. The Prophet may have chosen to serve their god, but it could also be a path they've been forced to walk by their family or congregation from an early age. Being on the inside of a religious association provides access to community and a sense of higher purpose. However, the shadows cast by the Divine's light often hide abuse of power, occultism, perverted doctrine, forced marriages, and the worship of false gods.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Priest",
+				"Pastor",
+				"Imam",
+				"Rabbi",
+				"Sect leader",
+				"Sect member",
+				"Sect escapee",
+				"Prophet",
+				"Medium",
+				"Witch",
+				"Preacher",
+				"Healer",
+				"Missionary",
+				"Seer",
+				"Cultist",
+				"Idolater",
+				"Iconoclast",
+				"Elder",
+				"Oracle",
+				"Guru"
+			],
+			"darkSecrets": [
+				"chosen",
+				"forbiddenKnowledge",
+				"guardian",
+				"occultExperience",
+				"visitations"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": ["cursed", "fanatic", "harassed", "involuntaryMedium", "sexualNeurosis", "stalker"],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"charismaticAura",
+				"cultLeader",
+				"enhancedAwareness",
+				"exorcist",
+				"layOnHands",
+				"voiceOfInsanity",
+				"divineChampion",
+				"goodSamaritan"
+			],
+			"relations": [
+				"One of the characters shares your faith.",
+				"One of the characters saved you. Take +1 Relation with them.",
+				"One of the characters denied your god.",
+				"You saved one of the other character's immortal soul. They take +1 Relation with you.",
+				"One of the characters is your lover. Take +1 Relation with them.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "ronin",
+		"label": "The Ronin",
+    "group": "archetypes",
+		"description": "The Ronin always teeters at the edge of a bottomless pit. When you've run out of options, you hire The Ronin to solve the problem. They perform any task where compassion and morality are liabilities, and where mistakes mean prison, death, or worse. The Ronin can never trust anyone. Yesterday's employers are tomorrow's potential targets. Once The Ronin's hunt has begun, there is no escape for their prey.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Contract killer",
+				"Hitman",
+				"Special agent",
+				"Special ops",
+				"Military experiment",
+				"Sniper",
+				"Spree killer"
+			],
+			"darkSecrets": [
+				"curse",
+				"guardian",
+				"occultExperience",
+				"victimOfMedicalExperiments",
+				"visitations"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": ["cursed", "haunted", "marked", "nemesis", "nightmares", "wanted"],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"weaponMaster",
+				"chameleon",
+				"exitStrategy",
+				"manhunter",
+				"sixthSense",
+				"lightningFast",
+				"sniper",
+				"jaded"
+			],
+			"relations": [
+				"One of the characters knows who you really are. Take +1 Relation with each other.",
+				"One of the characters knows you under one of your aliases.",
+				"One of the characters knows your deepest fear.",
+				"One of the characters owes their life to you. They take +1 Relation with you.",
+				"You harbor a secret passion for one of the character's partners. Take +2 Relation with that partner.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "scientist",
+		"label": "The Scientist",
+    "group": "archetypes",
+		"description": "The Scientist explores the unknown in the hope of finding answers to the questions of life and the universe. Her research often leads to dangerous experiments, where the fabric between our dimension and others is temporarily blown aside. In psychology, medicine, physics, chemistry, and various parasciences, these experiments often lead to terrible consequences. They might call her mad, but she knows this is because they refuse to see the Truth.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Doctor",
+				"Psychologist",
+				"Surgeon",
+				"Inventor",
+				"Engineer",
+				"Technician",
+				"Therapist",
+				"Physicist"
+			],
+			"darkSecrets": [
+				"forbiddenKnowledge",
+				"mentalIllness",
+				"responsibleForMedicalExperiments",
+				"returnedFromTheOtherSide",
+				"victimOfMedicalExperiments"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": [
+					"badReputation",
+					"experimentGoneWrong",
+					"fanatic",
+					"mentalCompulsion",
+					"repressedMemories",
+					"wanted"
+				],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"battlefieldMedicine",
+				"inventor",
+				"scientist",
+				"enhancedAwareness",
+				"genius",
+				"implantedMessages",
+				"arcaneResearcher",
+				"workaholic"
+			],
+			"relations": [
+				"One of the characters received help from you. They take +1 Relation with you.",
+				"One of the characters assisted you with an experiment, which went terribly wrong.",
+				"One of the characters knows details of your dreams.",
+				"One of the characters volunteered for one of your experiments. Take +1 Relation with them.",
+				"One of the characters is involved in your research.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "seeker",
+		"label": "The Seeker",
+    "group": "archetypes",
+		"description": "Seekers are explorers of modern, ancient, and forgotten urban myths. They are bloggers, hackers, and storytellers of the Modern Age. On the Internet, faceless voices whisper of lies and conspiracies. In abandoned subway stations, someone leaves messages in seemingly meaningless graffiti. If you dig deep enough you'll find the Truth, but most of us cannot see through the thick fog of misinformation, and we become hopelessly lost in the tempest of propaganda, pornography, and mindless entertainment. The Seeker knows how to use the Internet to uncover secrets under stones best left unturned. For the Seeker, no price is too great to find the Truth and expose it for public consumption.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Student",
+				"Unemployed",
+				"Blogger",
+				"Hacker",
+				"Activist",
+				"Academic",
+				"Researcher",
+				"Parapsychologist",
+				"Author",
+				"Journalist",
+				"Thief",
+				"Medium",
+				"Conspiracy Theorist"
+			],
+			"darkSecrets": [
+				"familySecret",
+				"forbiddenKnowledge",
+				"guardian",
+				"occultExperience",
+				"strangeDisappearance"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": ["cursed", "haunted", "nightmares", "repressedMemories", "stalker", "wanted"],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"parkour",
+				"accessTheDarkNet",
+				"keen-eyed",
+				"hacker",
+				"prepared",
+				"enhancedAwareness",
+				"stubborn",
+				"endureTrauma"
+			],
+			"relations": [
+				"You entrusted one of the characters with a secret, which could put you away in prison.",
+				"One of the characters helped you with your investigations. Take +1 Relation with them.",
+				"You look up to one of the characters. Take +1 Relation with them.",
+				"One of the characters saved your life. Take +1 Relation with them.",
+				"You have discovered one of the characters in the act of something criminal, obscene, or extremely shameful.",
+				"You befriended one of the characters in the process of assisting them with some supernatural trouble. Give her +1 Relation with you.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	},
+	{
+		"name": "veteran",
+		"label": "The Veteran",
+    "group": "archetypes",
+		"description": "The Veteran has seen death up close. She has spent a major part of her life in combat, weapon in hand, and adrenaline coursing through her veins. She might be an infantry soldier crouching in an Afghanistan foxhole, a SWAT officer carrying out frequent missions against heavily armed criminals, or a civilian from a country devastated by war, now a refugee but still tortured by memories of the conflict.",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"Special agent",
+				"Military soldier",
+				"Street soldier",
+				"Mercenary",
+				"MMA fighter",
+				"Military officer",
+				"Security guard",
+				"Body guard",
+				"Hitman",
+				"War refugee",
+				"Military police",
+				"Retiree",
+				"Homeless vet"
+			],
+			"darkSecrets": [
+				"guiltyOfCrime",
+				"returnedFromTheOtherSide",
+				"victimOfCrime",
+				"victimOfMedicalExperiments",
+				"visitations"
+			],
+			"disadvantages": {
+				"count": 2,
+				"list": [
+					"drugAddict",
+					"haunted",
+					"nightmares",
+					"phobia",
+					"repressedMemories",
+					"stalker",
+					"wanted"
+				],
+				"automaticallyReceived": []
+			},
+			"advantages": [
+				"hunter",
+				"instinct",
+				"survivalist",
+				"voiceOfPain",
+				"martialArtsExpert",
+				"officer",
+				"deadShot",
+				"hardened"
+			],
+			"relations": [
+				"One of the characters assisted you when you were in need. Take +1 Relation with them.",
+				"One of the characters abandoned you when you needed them most.",
+				"One of the characters followed you into battle. Take +1 Relation with each other.",
+				"One of the characters listened to your war stories.",
+				"One of the characters has seen you lose control.",
+				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
+			]
+		}
+	}
 ]

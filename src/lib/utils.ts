@@ -34,3 +34,37 @@ export function imageUrlToImg(text: string, maxWidthClass = "w-96"): string {
 
   return formattedText
 }
+
+export function convertDataToFieldJson(data: [], fieldType = "tag", group = ""): string {
+
+  let fields = []
+  const fieldParamsStatic = ["name", "label", "description"]
+
+  data.forEach(item => {
+    let field = {
+      name: "",
+      label: "",
+      group: group,
+      description: "",
+      type: fieldType,
+      weight: 1,
+      value: "",
+      data: {}
+    }
+
+    Object.keys(item).forEach(key => {
+      if (fieldParamsStatic.includes(key)) {
+        field[key] = item[key]
+      }
+      else {
+        field.data[key] = item[key]
+      }
+    })
+    field["type"] = "tag"
+    field["weight"] = 1
+    field["value"] = ""
+    fields = [...fields, field]
+  })
+
+  return JSON.stringify(fields)
+}
