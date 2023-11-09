@@ -5,6 +5,7 @@
 	import type { CharactersResponse } from '$lib/pocketbase-types';
 	import K4eSkillsTab from './K4eSkillsTab.svelte';
 	import K4eGeneralTab from './K4eGeneralTab.svelte';
+	import K4eTraitsTab from './K4eTraitsTab.svelte';
   
   export let matches: boolean
   export let compactVersion: boolean = false
@@ -14,10 +15,6 @@
   export let editMode: boolean = false
   export let character: CharactersResponse
 </script>
-
-<!-- {#each Object.keys(tabs) as tabName}
-  <CharacterSheetTab {character} on:fieldRemove on:fieldUpdate on:fieldAdd tab={tabs[tabName]} fields={[...tabsContent[tabName]]} bind:activeTabName={activeTabName} {compactVersion} {matches} {editMode} />
-{/each} -->
 
 <!-- General Tab -->
 <!-- Archetype(tag) Occupation(tag), Appearance(text) -->
@@ -36,8 +33,18 @@
 <!-- Conditions -->
 <!-- Stability(counter), Serous Wounds (section), Critical Wounds (section) -->
 
-<!-- Relative Merits -->
+<!-- Traits -->
 <!-- Advantages (section, tags), Disadvantages (section, tags) -->
+<K4eTraitsTab bind:activeTabName={activeTabName}
+  {compactVersion}
+  {matches}
+  {editMode}
+  {character}
+  fields={[...tabsContent["traits"]]}
+  tab={tabs["traits"]}
+  on:fieldRemove
+  on:fieldUpdate
+  on:fieldAdd />
 
 <!-- Skills -->
 <!-- Skill tree, counterNum modified -->

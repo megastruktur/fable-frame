@@ -5,7 +5,7 @@
   // @ts-ignore
 	import Icon from "svelte-icons-pack";
 	import BsPlus from "svelte-icons-pack/bs/BsPlus";
-	import CircleAddCompendiumModal from "./CircleAddFieldModal.svelte";
+	import CircleAddFieldModal from "./CircleAddFieldModal.svelte";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
 	import { createEventDispatcher } from "svelte";
 
@@ -13,6 +13,7 @@
   export let rpgSystemName: string
   export let compendiumName: string
   export let classes: string = ""
+  export let modalComponent: any = CircleAddFieldModal
 
   const modalStore = getModalStore();
   const dispatch = createEventDispatcher()
@@ -26,7 +27,7 @@
 
         type: 'component',
         component: {
-          ref: CircleAddCompendiumModal,
+          ref: modalComponent,
           props: {
             fields: data
           },

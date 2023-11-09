@@ -14,6 +14,8 @@
 	import CircleAddField from '$lib/components/circle-add/CircleAddField.svelte';
 	import { loadRpgSystemData } from '$models/rpg_system';
 	import { convertDataToFieldJson } from '$lib/utils';
+	import Ke4ArchetypeAddModal from './modals/Ke4ArchetypeAddModal.svelte';
+	import Ke4DarkSecretsAddModal from './modals/Ke4DarkSecretsAddModal.svelte';
 
   export let fields: Field[]
   export let tab: Field
@@ -28,7 +30,6 @@
 
   const flipDurationMs: number = 300
   const addButtonClasses: string = "p-1"
-  const dispatch = createEventDispatcher()
 
   let appearance: Field = getFieldByNameFromList(fields, 'appearance')
   let occupations: Field[] = getFieldsByGroup("occupations", fields)
@@ -70,14 +71,7 @@
     occupationList = getOccupationFieldList()
     darkSecrets = getFieldsByGroup("darkSecrets", fields)
     dramaticHooks = getFieldsByGroup("dramaticHooks", fields)
-  }
-
-  // onMount(async () => {
-  //   const data = (await loadRpgSystemData("kult4e", "dark-secrets")).default
-
-  //   console.log(convertDataToFieldJson(data, "tag", "darkSecrets"))
-  // })
-  
+  }  
 
 </script>
 
@@ -100,7 +94,7 @@
         <h4 class="h4">Archetype</h4>
 
         {#if editMode}
-          <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="archetypes" classes={addButtonClasses} />
+          <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="archetypes" classes={addButtonClasses} modalComponent={Ke4ArchetypeAddModal} />
         {/if}
       </div>
 
@@ -133,7 +127,7 @@
         <h4 class="h4">Dark Secrets</h4>
         
         {#if editMode}
-          <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="dark-secrets" classes={addButtonClasses} />
+          <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="dark-secrets" classes={addButtonClasses} modalComponent={Ke4DarkSecretsAddModal} />
         {/if}
       </div>
 

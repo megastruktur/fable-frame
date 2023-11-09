@@ -1,0 +1,152 @@
+[
+  {
+    "name": "unarmed",
+    "label": "Unarmed",
+    "description": "Unarmed strike or kick with bare hands",
+    "type": "melee",
+    "distance": "arm",
+    "attacks": [
+      "Punch, kick, and tear [1]",
+      "Lock [0] [you are in control of the target until they break free]",
+      "Shift [0] [you create distance between yourself and the target through a throw, body check, or push]",
+      "Disarm [0] [you remove an object your opponent held in their hand]",
+      "Excessive force [2] [focus entirely on killing your target, disregarding your own safety]"
+    ],
+    "ammo": ""
+  },
+  {
+    "name": "edgedWeapons",
+    "label": "Edged Weapons",
+    "description": "knife, stiletto, dagger.",
+    "type": "melee",
+    "distance": "arm",
+    "attacks": [
+      "Cut, slice, and stab [2]",
+      "Edge at the throat [0] [you are in control of the target until they break free]"
+    ],
+    "ammo": ""
+  },
+  {
+    "name": "crushingWeapons",
+    "label": "Crushing Weapons",
+    "description": "baseball bat, hammer, crowbar.",
+    "type": "melee",
+    "distance": "arm",
+    "attacks": [
+      "Pummel, maul, and crush [2]",
+      "Knock down [1] [the target falls to the ground]",
+      "Knock out [1] [target is knocked out; PCs must successfully Endure Injury to avoid getting knocked out]"
+    ],
+    "ammo": ""
+  },
+  {
+    "name": "choppingWeapons",
+    "label": "Chopping Weapons",
+    "description": "machete, axe, sword.",
+    "type": "melee",
+    "distance": "arm",
+    "attacks": [
+      "Hack, slash, and chop [2]",
+      "Momentum [1] [may hit one additional target]"
+    ],
+    "ammo": ""
+  },
+  {
+    "name": "handgun",
+    "label": "Handgun",
+    "description": "Beretta M92FS, Colt M1911A1, CZ P-10 C, FN Five seveN, Glock 19, Glock 23, H&K USP45, H&K VP9, S&W Model 10, S&W MP40 Shield, SIG-Sauer P226, Walther P99.",
+    "type": "ranged",
+    "distance": "arm/room",
+    "attacks": [
+      "Combat shooting [2] [-1 Ammo]",
+      "Overkill [3] [-2 Ammo]",
+      "Multiple targets [2] [hit up to one additional target] [-3 Ammo]"
+    ],
+    "ammo": "●●●●"
+  },
+  {
+    "name": "magnumHandgun",
+    "label": "Magnum Handgun",
+    "description": "Colt Python, FA Model 83, IMI Desert Eagle, Ruger GP100, Ruger New Model Super Blackhawk, Ruger Super Redhawk, S&W M586, S&W Model S&W500, Taurus Raging Bull.",
+    "type": "ranged",
+    "distance": "arm/room",
+    "attacks": [
+      "Combat shooting [3] [-1 Ammo]",
+      "Overkill [4] [-3 Ammo]"
+    ],
+    "ammo": "●●●"
+  },
+  {
+    "name": "smg",
+    "label": "Submachine Gun (SMG)",
+    "description": "FN P90, Glock 18, H&K MP5, H&K MP7, H&K UMP45, IMI Uzi, Ingram MAC-10, KRISS Vector, Skorpion vz.61, Steyr AUG A3 Para XS.",
+    "type": "ranged",
+    "distance": "room",
+    "attacks": [
+      "Short bursts [2] [-1 Ammo]",
+      "Focused full auto [3] [-2 Ammo]",
+      "Spray and pray [2] [hit up to two additional targets] [-3 Ammo]"
+    ],
+    "ammo": "●●●"
+  },
+  {
+    "name": "assaultRifle",
+    "label": "Assault Rifle",
+    "description": "AK-47/AKM/AK-103, Colt M4A1, FAMAS, FN SCAR-L, H&K G36, HK416, IWI Tavor TAR-21, QBZ-95-1, SA80, Steyr AUG.",
+    "type": "ranged",
+    "distance": "room/field",
+    "attacks": [
+      "Controlled fire [3] [-1 Ammo]",
+      "Mow down [4] [-2 Ammo]",
+      "Empty the mag [3] [hit up to two additional targets] [-4 Ammo]"
+    ],
+    "ammo": "●●●●●●"
+  },
+  {
+    "name": "machineGun",
+    "label": "Machine Gun",
+    "description": "FN MAG, M249, M60, MG5, RPK-74.",
+    "type": "ranged",
+    "distance": "room/field",
+    "attacks": [
+      "Burst fire [3] [-1 Ammo]",
+      "Sustained fire [3] [hit up to three additional targets] [-3 Ammo]"
+    ],
+    "ammo": "●●●●●●"
+  },
+  {
+    "name": "rifle",
+    "label": "Rifle",
+    "description": "Various hunting rifles, marksman rifles (like FN SCAR-H, Mk 14 EBR, SVD, etc.), and sniper rifles (like AI Arctic Warfare, H&K PSG-1, McMillan TAC-338, etc.)",
+    "type": "ranged",
+    "distance": "room/field/horizon",
+    "attacks": [
+      "Aim & fire [3] [-1 Ammo]"
+    ],
+    "ammo": "●●●"
+  },
+  {
+    "name": "combatShotgun",
+    "label": "Combat Shotgun",
+    "description": "Benelli M3 Super 90, Franchi SPAS-12, Mossberg 500, Remington M870, Saiga-12, Winchester M1300.",
+    "type": "ranged",
+    "distance": "room/field",
+    "attacks": [
+      "Snapshots [3/1]* [-1 Ammo]",
+      "Pellet storm [3/1]* [small close group all hit at once] [-2 Ammo]",
+      "Base Harm is 3 against target(s) at Room distance, and 1 if beyond."
+    ],
+    "ammo": "●●●"
+  },
+  {
+    "name": "explosives",
+    "label": "Explosives",
+    "description": "Hand grenade, demolition charge, bomb.",
+    "type": "ranged",
+    "distance": "room/field",
+    "attacks": [
+      "Detonation [4] [hits several targets] [-1 Ammo]"
+    ],
+    "ammo": "●"
+  }
+]

@@ -43,8 +43,8 @@
       {
         "description": "Advantages and Disadvantages",
         "group": "general",
-        "label": "Relative Merits",
-        "name": "relative-merits",
+        "label": "Traits",
+        "name": "traits",
         "type": "tab",
         "value": "",
 				"removable": false,
