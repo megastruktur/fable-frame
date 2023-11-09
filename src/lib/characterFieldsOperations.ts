@@ -1,6 +1,7 @@
 import type { Field } from "./types.d";
 import type { CharactersResponse } from "./pocketbase-types";
 import { v4 as uuidv4 } from 'uuid'
+import { getCharacter, updateCharacterWithHash } from "$models/character";
 
 export function getFieldFromListByName(name: string, fields: Field[]): Field {
   const returnedField = fields.find(field => field.name === name);
@@ -114,6 +115,19 @@ export function updateCharacterField(character: CharactersResponse, field: Field
     throw new Error(`Field ${field.id} not found in character`)
   }
 
+}
+
+export async function updateSaveCharacterField(characterId: string, field: Field) {
+
+  try {
+    const character = await getCharacter(characterId)
+    console.log(character)
+    updateCharacterField(character, field)
+    updateCharacterWithHash(characterId, character)
+  }
+  catch (error) {
+    console.error(error)
+  }
 }
 
 export function getFieldByNameFromList(list: Field[], name: string): Field {

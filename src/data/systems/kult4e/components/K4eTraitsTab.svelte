@@ -1,19 +1,14 @@
 <script lang="ts">
 	import FieldRender from '$lib/components/field-renders/FieldRender.svelte';
-	import CircleQuickAddField from '$lib/components/circle-add/CircleQuickAddField.svelte';
 	import type { Field } from "$lib/types";
 	import type { ObjectType, QueryArray } from "svelte-media-queries/components/MediaQuery.types";
+  import TraitField from './fields/TraitField.svelte';
   import {flip} from "svelte/animate"
 
-  // @ts-ignore
-	import { createEventDispatcher, onMount } from "svelte";
 	import type { CharactersResponse } from '$lib/pocketbase-types';
 	import CharacterSheetTabWrapper from '$lib/components/tabs/CharacterSheetTabWrapper.svelte';
 	import CircleAddCompendium from '$lib/components/circle-add/CircleAddCompendium.svelte';
-	import { getFieldByNameFromList, getFieldsByGroup } from '$lib/characterFieldsOperations';
-	import CircleAddField from '$lib/components/circle-add/CircleAddField.svelte';
-	import { loadRpgSystemData } from '$models/rpg_system';
-	import { convertDataToFieldJson } from '$lib/utils';
+	import K4eTraitsAddModal from './modals/K4eTraitsAddModal.svelte';
 
   export let fields: Field[]
   export let tab: Field
@@ -42,7 +37,7 @@
       <div class="flex items-center justify-between">
         <h4 class="h4">Advantages</h4>
         {#if editMode}
-          <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="advantages" classes={addButtonClasses} />
+          <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="advantages" classes={addButtonClasses} modalComponent={K4eTraitsAddModal} />
         {/if}
       </div>
       <div class="">
@@ -50,6 +45,8 @@
           {#if field?.data?.type === "advantage"}
             <FieldRender
               on:fieldRemove field={field} {editMode} editable={true}
+              fieldComponent={TraitField}
+              characterId={character.id}
               classes="w-full"
             />
           {/if}
@@ -61,7 +58,7 @@
       <div class="flex items-center justify-between">
         <h4 class="h4">Disadvantages</h4>
         {#if editMode}
-          <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="disadvantages" classes={addButtonClasses} />
+          <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="disadvantages" classes={addButtonClasses} modalComponent={K4eTraitsAddModal} />
         {/if}
       </div>
       <div class="">
@@ -69,6 +66,8 @@
           {#if field?.data?.type === "disadvantage"}
             <FieldRender
               on:fieldRemove field={field} {editMode} editable={true}
+              characterId={character.id}
+              fieldComponent={TraitField}
               classes="w-full"
             />
           {/if}

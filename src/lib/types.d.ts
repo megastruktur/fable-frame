@@ -75,7 +75,7 @@ type DieRollChat = {
 export type K4eRollResult = {
   type: "success" | "partial" | "failure"
   description: string
-  choice?: string[]
+  options?: string[]
 }
 
 export type K4ePlayerMove = {

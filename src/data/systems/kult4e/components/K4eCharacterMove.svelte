@@ -19,7 +19,7 @@
         {
           type: "partial",
           description: "You avoid the worst of it, but:",
-          choice: [
+          options: [
             "You end up in a bad spot",
             "You lose something",
             "You partially sustain Harm",
@@ -28,7 +28,7 @@
         {
           type: "failure",
           description: "You were too slow to react or you made a bad judgment call. <b>The GM makes a Move</b>.",
-          choice: [
+          options: [
             "You didn't avoid any Harm at all",
             "you ended up in an even worse spot than before",
           ]
@@ -53,7 +53,7 @@
         {
           type: "partial",
           description: "You are still standing, but the GM picks one condition:",
-          choice: [
+          options: [
             "The injury throws you off balance.",
             "You lose something",
             "You receive a <b>Serious Wound</b>.",
@@ -62,7 +62,7 @@
         {
           type: "failure",
           description: "The injury is overwhelming. <b>You choose</b> if you:",
-          choice: [
+          options: [
             "Are knocked out (the GM may also choose to inflict a <b>Serious Wound</b>).",
             "Receive a <b>Critical Wound</b>, but may continue to act (if you already have a <b>Critical Wound</b>, you may not choose this option again).",
             "Die"
@@ -84,7 +84,7 @@
         {
           type: "partial",
           description: "The effort to resist instills a condition, which remains with you until you have had time to recuperate. You <b>get -1</b> in situations where this condition would be a hindrance to you. Choose one:",
-          choice: [
+          options: [
             "You become angry (<b>-1 Stability</b>)",
             "You become sad (<b>-1 Stability</b>)",
             "You become scared (<b>-1 Stability</b>)",
@@ -97,7 +97,7 @@
         {
           type: "failure",
           description: "The strain is too much for your mind to handle. <b>The GM chooses</b> your reaction:",
-          choice: [
+          options: [
             "Cower powerless in the threat's presence",
             "Panic with no control of your actions",
             "Suffer emotional trauma (<b>-2 Stability</b>)",
@@ -120,14 +120,14 @@
         {
           type: "partial",
           description: "You do it, but hesitate, are delayed, or must deal with a complication:",
-          choice: [
-            "The GM reveals an unexpected outcome, a high price, or a difficult choice.",
+          options: [
+            "The GM reveals an unexpected outcome, a high price, or a difficult options.",
           ]
         },
         {
           type: "failure",
           description: "There are serious consequences. The <b>GM makes a Move</b>.",
-          choice: [
+          options: [
             "You make a mistake",
             "You're exposed to the danger",
           ]
@@ -148,7 +148,7 @@
         {
           type: "partial",
           description: "You inflict damage (<i>see your weapon details</i>), but at a cost. <b>The GM chooses one</b>:",
-          choice: [
+          options: [
             "You're subjected to a counterattack.",
             "You do less damage than intended.",
             "You lose something important.",
@@ -160,7 +160,7 @@
         {
           type: "failure",
           description: "Your attack doesn't go as anticipated. <b>The GM makes a Move</b>.",
-          choice: [
+          options: [
             "You might be subjected to bad luck",
             "You miss your target",
             "You pay a high price for your assault",
@@ -182,7 +182,7 @@
         {
           type: "partial",
           description: "She does what you ask, but <b>the GM chooses one</b>:",
-          choice: [
+          options: [
             "She demands better compensation.",
             "Complications will arise at a future time.",
             "She gives in for the moment, but will change her mind and regret it later."
@@ -233,7 +233,7 @@
         {
           type: "failure",
           description: "You get to <b>ask one question</b> anyway, but you get <b>no bonus for it</b>. <b>The GM makes a Move</b>.",
-          choice: [
+          options: [
             "You miss something.",
             "You attract unwanted attention.",
             "You expose yourself to danger.",
@@ -255,7 +255,7 @@
         {
           type: "partial",
           description: "You may ask <b>one question</b>. The information comes at a cost. Will you do what it takes?",
-          choice: [
+          options: [
             "You require someone or something for the answer.",
             "You expose yourself to danger.",
             "You need to expend extra time or resources.",
@@ -264,7 +264,7 @@
         {
           type: "failure",
           description: "You may <b>get some information</b> anyway, but you pay a price for it. <b>The GM makes a Move</b>.",
-          choice: [
+          options: [
             "You expose yourself to danger.",
             "You need to expend extra time or resources.",
           ]
@@ -285,7 +285,7 @@
         {
           type: "partial",
           description: "You see Reality, but you also affect the Illusion. <b>The GM chooses one</b>:",
-          choice: [
+          options: [
             "Something senses you.",
             "The Illusions tears around you.",
           ]

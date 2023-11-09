@@ -15,12 +15,12 @@
     <span>{@html rollResult.description}</span>
   </p>
 
-  {#if rollResult.choice !== undefined}
+  {#if rollResult.options !== undefined}
   <ul class="list pl-3">
-    {#each rollResult.choice as choice}
+    {#each rollResult.options as option}
     <li>
       <span class="text-primary-900 text-xs font-bold">◇</span>
-      <span class="flex-auto">{@html choice}</span>
+      <span class="flex-auto">{@html option}</span>
     </li>
     {/each}
   </ul>

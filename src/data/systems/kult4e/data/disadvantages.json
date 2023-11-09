@@ -4,7 +4,7 @@
 		"label": "Bad Reputation",
 		"group": "traits",
 		"description": "For some reason, you have attracted the public's disapproval - even animosity. Perhaps you've been spotlighted in the tabloids as a pedophile or murderer, falsely or otherwise. In the first game session and whenever you attract the public's attention, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -36,7 +36,7 @@
 		"label": "Broken",
 		"group": "traits",
 		"description": "Some experience in your past has broken your psyche so badly you've been unable to recuperate from it. As a result, your Stability can never increase beyond Distressed (6).",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -47,7 +47,7 @@
 		"label": "Competitor",
 		"group": "traits",
 		"description": "You have a competitor in the criminal underworld, whose business niche is similar to yours. Whenever you neglect to protect your interests or are distracted elsewhere, roll +0 to see if your competitor managed to damage your business:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -79,7 +79,7 @@
 		"label": "Condemned",
 		"group": "traits",
 		"description": "Time: ○○○○○○○○○○. Your fate has already been sealed. Perhaps you're dying from a disease, been promised as the sacrificial offering to a forgotten god, or you've sold your soul to some entity, waiting to drag you off to hell when your time is up. At the start of every game session, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -113,7 +113,7 @@
 		"label": "Cursed",
 		"group": "traits",
 		"description": "You are cursed. In the first session and whenever you're confronted by the supernatural, roll +0 to see how strongly the curse influences you:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -141,7 +141,7 @@
 		"label": "Depression",
 		"group": "traits",
 		"description": "You are constantly struggling with depression, which is only worsened by dejection and discouragement. Whenever facing personal setbacks, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -169,7 +169,7 @@
 		"label": "Drug Addict",
 		"group": "traits",
 		"description": "You are addicted to hard drugs; name at least one. In the first game session and whenever you have been using, or have the opportunity to use, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -197,7 +197,7 @@
 		"label": "Experiment Gone Wrong",
 		"group": "traits",
 		"description": "You have carried out a scientific experiment, which went horribly awry. The experiment gave rise to something unnatural, which escaped and disappeared without a trace. Recently, the 'results' of your experiment tracked you down, reappearing in your life, and forcing you to either escape or confront it. In the first session and whenever things seem in control, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -225,7 +225,7 @@
 		"label": "Fanatic",
 		"group": "traits",
 		"description": "You are a fervent adherent of an ideology. You interpret the whole world in accordance with your ideology, which must not be questioned. Whenever someone questions your ideology, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -253,7 +253,7 @@
 		"label": "Greedy",
 		"group": "traits",
 		"description": "You are driven by an unquenchable desire for money and wealth, and are prepared to sacrifice your health, family, and friends to fill the emptiness inside. When an opportunity to increase your wealth arises, roll +0 to see if you are in control of your desire:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -281,7 +281,7 @@
 		"label": "Guilt",
 		"group": "traits",
 		"description": "You carry heavy guilt for your past sins, having harmed one or several people through your actions or inaction. In the first game session and whenever everything appears okay, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -313,7 +313,7 @@
 		"label": "Harassed",
 		"group": "traits",
 		"description": "For some reason, personal or otherwise, people tend to harass you; the authorities in particular. In the first game session and whenever you draw attention to yourself, roll +0 to see if you're harassed:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -341,7 +341,7 @@
 		"label": "Haunted",
 		"group": "traits",
 		"description": "You are haunted by supernatural forces. With the GM's assistance, determine the nature of what you believe is haunting you. In the first session and whenever you are distracted or weakened, roll +0 to see if the entity gains power over you:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -365,7 +365,7 @@
 		"label": "Infirm",
 		"group": "traits",
 		"description": "You suffer from a dangerous physical disease or condition, such as heart disease, hypertension, morbid obesity, or serious gastric ulcer. Whenever you are subjected to major physical or psychological stress, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -393,7 +393,7 @@
 		"label": "Involuntary Medium",
 		"group": "traits",
 		"description": "You are an open vessel for any spirits or demonic entities who desire a medium to speak through or need a corporeal body to use for their purposes. Whenever you encounter spiritual entities or haunted places, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -421,7 +421,7 @@
 		"label": "Jealousy",
 		"group": "traits",
 		"description": "There is someone who has the life you want to have, and you would do anything to possess it. Whenever you encounter the subject of your jealousy or their life's trappings (possessions, family, friends, etc), roll +0 to see if you can keep your cool:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -453,7 +453,7 @@
 		"label": "Liar",
 		"group": "traits",
 		"description": "You're a compulsive liar, who invents stories at every opportunity, especially when it's beneficial for you. At the start of every session, roll +0 to see what trouble your lies have gotten you into this time:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -481,7 +481,7 @@
 		"label": "Lost Identity",
 		"group": "traits",
 		"description": "Your true identity has been lost to a military or private-run secret agent program. You do not remember anything about your pre-employment life. Recently, memories of your true identity have started coming back to you. In the first game session and whenever you encounter something from your repressed past, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -513,7 +513,7 @@
 		"label": "Marked",
 		"group": "traits",
 		"description": "You are marked by the darkness. The mark can take the shape of a full-body tattoo, a demonic body part such as a vestigial arm, an extra eye or mouth, machine parts integrated with your flesh, or similar manifestations. Whenever you consciously Harm someone, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -541,7 +541,7 @@
 		"label": "Mental Compulsion",
 		"group": "traits",
 		"description": "You are fixated on a particular idea or action, to the point of it strongly impacting your life. Choose a compulsion from the list below when you take this Disadvantage. In situations where you could be distracted by your compulsion, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -585,7 +585,7 @@
 		"label": "Nemesis",
 		"group": "traits",
 		"description": "Through some terrible act you have made an enemy, who does everything in their power to take revenge. Decide who your nemesis is and what you have done to earn their vengeance. In the first game session and whenever you let your guard down, roll +0 to see if your nemesis moves against you:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -616,7 +616,7 @@
 		"label": "Nightmares",
 		"group": "traits",
 		"description": "You suffer from recurring nightmares, probably connected to your Dark Secrets. During any scene when you sleep, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -643,7 +643,7 @@
 		"label": "Oath of Revenge",
 		"group": "traits",
 		"description": "You have sworn to avenge an unforgivable injustice. Decide who is the subject of your vengeance and what they have done to you. It could be a single individual, people who share a certain trait, or members of an organization. Whenever the target of your vengeance (or someone/something associated with them) appears, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -674,7 +674,7 @@
 		"label": "Object of Desire",
 		"group": "traits",
 		"description": "There is just something special about you. You ignite deep unhealthy desires in others, which they are unable to keep in check. At the first game session and whenever you meet one or more new people, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -705,7 +705,7 @@
 		"label": "Obsession",
 		"group": "traits",
 		"description": "You have discovered a conspiracy or supernatural phenomenon, and you can't stop yourself from getting to the bottom of it. At the first game session and whenever you encounter something associated with your obsession, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -736,7 +736,7 @@
 		"label": "Owned",
 		"group": "traits",
 		"description": "You used to be a dangerous person's private property, willingly or not. Since your escape, your former owner has been looking for you. Decide who your former owner is. In the first game session and whenever you draw attention to yourself in public, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -763,7 +763,7 @@
 		"label": "Phobia",
 		"group": "traits",
 		"description": "You harbor an overpowering fear of something. Choose the stimulus that frightens you. Whenever you're confronted by the object of your phobia, you must Keep it Together.",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -774,7 +774,7 @@
 		"label": "Rationalist",
 		"group": "traits",
 		"description": "You refuse to believe in anything not confirmed as fact by modern science, even when it is right in front of you. In addition to the standard effects, whenever you See Through the Illusion and whenever the Illusion shatters, the GM may choose one option:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -795,7 +795,7 @@
 		"label": "Repressed Memories",
 		"group": "traits",
 		"description": "You have repressed a particularly unpleasant event from your past, but the memory of it sometimes rises to the surface. It could be a crime or some horrible thing you have done, been subjected to, or witnessed. The GM decides the nature of your repressed memory, usually based on your Dark Secrets. In situations associated with your repressed memories, roll +0 to determine if the memories resurface:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -826,7 +826,7 @@
 		"label": "Rival",
 		"group": "traits",
 		"description": "You have an ambitious rival, who will do anything to be in your shoes. Choose who the rival is. In the first game session and whenever you make a mistake or let down your guard, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -857,7 +857,7 @@
 		"label": "Schizophrenia",
 		"group": "traits",
 		"description": "You struggle with recurring psychotic episodes and terrifying hallucinations. In the first game session and whenever you go through difficult experiences, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -884,7 +884,7 @@
 		"label": "Sexual Neurosis",
 		"group": "traits",
 		"description": "Your sexuality is a destructive, controlling force in your life. You compulsively seek out superficial sexual encounters and are willing to perform degrading acts - or even commit crimes - to satisfy your fantasies. Whenever you have the opportunity to have consensual sex or take advantage of someone vulnerable to your advances, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -915,7 +915,7 @@
 		"label": "Stalker",
 		"group": "traits",
 		"description": "You are hunted by a faceless enemy. Anyone you meet could be one of their minions - or even the stalker themselves. No one can be trusted. You must constantly change your address and be vigilant at all times to avoid leaving any tracks they can follow. In the first game session and whenever you expose your current location, roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -942,7 +942,7 @@
 		"label": "Victim of Passion",
 		"group": "traits",
 		"description": "You have an overwhelming passion for someone or something, seeking to possess it at any cost. In the first game session and whenever you encounter the subject of your passions (or anything resembling it), roll +0:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
@@ -969,7 +969,7 @@
 		"label": "Wanted",
 		"group": "traits",
 		"description": "You are wanted by the authorities - local, state, or federal - for crimes you have committed. Whenever you attract attention to yourself or forget to keep your head down, roll +0 to see if you've been discovered:",
-		"type": "tag",
+		"type": "trait",
 		"weight": 1,
 		"value": "",
 		"data": {
