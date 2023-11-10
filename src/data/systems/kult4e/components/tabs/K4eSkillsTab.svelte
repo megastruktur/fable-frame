@@ -4,7 +4,7 @@
 	import type { ObjectType, QueryArray } from "svelte-media-queries/components/MediaQuery.types";
 	import CharacterSheetTabWrapper from '$lib/components/tabs/CharacterSheetTabWrapper.svelte';
 
-	import K4eSkillsTree from './K4eSkillsTree.svelte';
+	import K4eSkillsTree from '../parts/K4eSkillsTree.svelte';
 
   export let fields: Field[]
   export let tab: Field

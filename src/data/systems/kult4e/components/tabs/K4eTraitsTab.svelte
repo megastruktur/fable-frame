@@ -2,13 +2,13 @@
 	import FieldRender from '$lib/components/field-renders/FieldRender.svelte';
 	import type { Field } from "$lib/types";
 	import type { ObjectType, QueryArray } from "svelte-media-queries/components/MediaQuery.types";
-  import TraitField from './fields/TraitField.svelte';
+  import TraitField from '../fields/TraitField.svelte';
   import {flip} from "svelte/animate"
 
 	import type { CharactersResponse } from '$lib/pocketbase-types';
 	import CharacterSheetTabWrapper from '$lib/components/tabs/CharacterSheetTabWrapper.svelte';
 	import CircleAddCompendium from '$lib/components/circle-add/CircleAddCompendium.svelte';
-	import K4eAddItemModal from './modals/K4eAddItemModal.svelte';
+	import K4eAddItemModal from '../modals/K4eAddItemModal.svelte';
 	import { getFieldsByGroup } from '$lib/characterFieldsOperations';
 
   export let fields: Field[]
@@ -49,7 +49,7 @@
   <div class="mt-3">
 
     <div>
-      <h4 class="h4 text-center">Advantages</h4>
+      <h3 class="h3 text-center">Advantages</h3>
 
       {#if advantages.length > 0}
         {#each advantages as field(field.name)}
@@ -71,7 +71,7 @@
     </div>
 
     <div class="mt-3">
-      <h4 class="h4 text-center">Disadvantages</h4>
+      <h3 class="h3 text-center">Disadvantages</h3>
 
       {#if disadvantages.length > 0}
         {#each disadvantages as field(field.name)}

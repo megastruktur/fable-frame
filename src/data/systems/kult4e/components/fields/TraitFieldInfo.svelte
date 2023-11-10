@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { updateSaveCharacterField } from "$lib/characterFieldsOperations";
 	import type { Field } from "$lib/types";
-  import K4eRollResult from "../K4eRollResult.svelte";
+  import K4eRollResult from "../parts/K4eRollResult.svelte";
 
   export let field: Field
   export let characterId: string = ""

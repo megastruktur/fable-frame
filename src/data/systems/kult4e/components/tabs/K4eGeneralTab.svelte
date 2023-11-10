@@ -10,7 +10,7 @@
 	import CircleAddCompendium from '$lib/components/circle-add/CircleAddCompendium.svelte';
 	import { getFieldByNameFromList, getFieldsByGroup } from '$lib/characterFieldsOperations';
 	import CircleAddField from '$lib/components/circle-add/CircleAddField.svelte';
-	import K4eAddItemModal from './modals/K4eAddItemModal.svelte';
+	import K4eAddItemModal from '../modals/K4eAddItemModal.svelte';
 
   export let fields: Field[]
   export let tab: Field
@@ -84,7 +84,7 @@
     <!-- Archetype -->
     <div class="mt-3">
 
-      <h4 class="h4 text-center">Archetype</h4>
+      <h3 class="h3 text-center">Archetype</h3>
 
       {#if archetype !== undefined && archetype}
         <FieldRender on:fieldRemove classes="bg-secondary-900 w-full" field={archetype} {editMode} editable={false} />
@@ -102,7 +102,7 @@
     <!-- Occupation -->
     <div class="mt-3">
         
-        <h4 class="h4 text-center">Occupation</h4>
+        <h3 class="h3 text-center">Occupation</h3>
 
         {#if occupation !== undefined && occupation}
           <FieldRender on:fieldRemove classes="bg-secondary-900 w-full" field={occupation} {editMode} editable={occupation.name === "(Custom)"} />
@@ -119,7 +119,7 @@
     <!-- Dark Secrets -->
     <div class="mt-3">
       
-      <h4 class="h4 text-center">Dark Secrets</h4>
+      <h3 class="h3 text-center">Dark Secrets</h3>
 
       {#if darkSecrets.length > 0}
         {#each darkSecrets as darkSecret(darkSecret.name)}
@@ -137,7 +137,7 @@
     <!-- Dramatic Hooks -->
     <div class="mt-3">
 
-      <h4 class="h4 text-center">Dramatic Hooks</h4>
+      <h3 class="h3 text-center">Dramatic Hooks</h3>
 
       {#if dramaticHooks.length > 0}
         {#each dramaticHooks as dramaticHook(dramaticHook.id)}

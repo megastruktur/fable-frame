@@ -3,9 +3,9 @@
 	import CircleAdd from '$lib/components/circle-add/CircleAdd.svelte';
 	import type { Field } from "$lib/types";
 	import type { CharactersResponse } from '$lib/pocketbase-types';
-	import K4eSkillsTab from './K4eSkillsTab.svelte';
-	import K4eGeneralTab from './K4eGeneralTab.svelte';
-	import K4eTraitsTab from './K4eTraitsTab.svelte';
+	import K4eSkillsTab from './tabs/K4eSkillsTab.svelte';
+	import K4eGeneralTab from './tabs/K4eGeneralTab.svelte';
+	import K4eTraitsTab from './tabs/K4eTraitsTab.svelte';
   
   export let matches: boolean
   export let compactVersion: boolean = false
