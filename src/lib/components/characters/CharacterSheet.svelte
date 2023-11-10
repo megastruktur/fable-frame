@@ -159,6 +159,7 @@
       console.log(`Resetting character, loading from DB`)
       character = await getCharacterWithSystemAndCampaign(character.id)
       characterTabsPrepare()
+      characterName = character.name
     }
 
     editMode = !editMode

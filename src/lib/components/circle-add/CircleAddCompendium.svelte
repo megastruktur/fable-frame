@@ -14,6 +14,7 @@
   export let compendiumName: string
   export let classes: string = ""
   export let modalComponent: any = CircleAddFieldModal
+  export let title: string = "Select an option below"
 
   const modalStore = getModalStore();
   const dispatch = createEventDispatcher()
@@ -29,7 +30,8 @@
         component: {
           ref: modalComponent,
           props: {
-            fields: data
+            fields: data.sort((a: Field, b: Field) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)),
+            title: title
           },
         },
 

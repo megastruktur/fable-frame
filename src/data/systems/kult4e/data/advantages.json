@@ -19,7 +19,7 @@
 		}
 	},
 	{
-		"name": "AtAnyCost",
+		"name": "atAnyCost",
 		"label": "At any Cost",
 		"group": "traits",
 		"description": "Whenever you truly desire something, you may take +2 to a roll by decreasing Stability (-2).",

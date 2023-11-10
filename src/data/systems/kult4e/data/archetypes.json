@@ -1174,5 +1174,27 @@
 				"Additional Relations: One neutral (0), one meaningful (+1), and one vital (+2)."
 			]
 		}
+	},
+	{
+		"name": "(custom)",
+		"label": "(Custom)",
+    "group": "archetypes",
+		"description": "",
+		"type": "tag",
+		"weight": 1,
+		"value": "",
+		"data": {
+			"occupation": [
+				"(Custom)"
+			],
+			"darkSecrets": [],
+			"disadvantages": {
+				"count": 2,
+				"list": [],
+				"automaticallyReceived": []
+			},
+			"advantages": [],
+			"relations": []
+		}
 	}
 ]

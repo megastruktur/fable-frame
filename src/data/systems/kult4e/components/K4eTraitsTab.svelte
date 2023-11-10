@@ -8,7 +8,8 @@
 	import type { CharactersResponse } from '$lib/pocketbase-types';
 	import CharacterSheetTabWrapper from '$lib/components/tabs/CharacterSheetTabWrapper.svelte';
 	import CircleAddCompendium from '$lib/components/circle-add/CircleAddCompendium.svelte';
-	import K4eTraitsAddModal from './modals/K4eTraitsAddModal.svelte';
+	import K4eAddItemModal from './modals/K4eAddItemModal.svelte';
+	import { getFieldsByGroup } from '$lib/characterFieldsOperations';
 
   export let fields: Field[]
   export let tab: Field
@@ -21,58 +22,72 @@
   export let sortable: boolean = false
   export let character: CharactersResponse
 
+  let advantages: Field[] = getTraits("advantage", fields)
+  let disadvantages: Field[] = getTraits("disadvantage", fields)
+
   const flipDurationMs: number = 300
-  const addButtonClasses: string = "p-1"  
+  const addButtonClasses: string = "p-1 w-full"
+
+  function getTraits(type: string, fields: Field[]): Field[] {
+    return fields.filter(field => field.data?.type === type) || []
+  }
+
+  $: {
+    advantages = getTraits("advantage", fields)
+    disadvantages = getTraits("disadvantage", fields)
+  }
 
 </script>
 
 <CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
   removable={false} {editMode} {tab} on:fieldRemove >
+
   <h2 class="h2 text-center mb-3">{tab.label}</h2>
   <hr />
 
   <div class="mt-3">
 
     <div>
-      <div class="flex items-center justify-between">
-        <h4 class="h4">Advantages</h4>
-        {#if editMode}
-          <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="advantages" classes={addButtonClasses} modalComponent={K4eTraitsAddModal} />
-        {/if}
-      </div>
-      <div class="">
-        {#each fields as field(field.name)}
-          {#if field?.data?.type === "advantage"}
-            <FieldRender
-              on:fieldRemove field={field} {editMode} editable={true}
-              fieldComponent={TraitField}
-              characterId={character.id}
-              classes="w-full"
-            />
-          {/if}
+      <h4 class="h4 text-center">Advantages</h4>
+
+      {#if advantages.length > 0}
+        {#each advantages as field(field.name)}
+          <FieldRender
+            on:fieldRemove field={field} {editMode} editable={true}
+            fieldComponent={TraitField}
+            characterId={character.id}
+            classes="w-full bg-success-900"
+          />
         {/each}
-      </div>
+      {:else if !editMode}
+        <div class="text-center">-</div>
+      {/if}
+
+      {#if editMode}
+        <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="advantages" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Select Advantage" />
+      {/if}
+
     </div>
 
-    <div>
-      <div class="flex items-center justify-between">
-        <h4 class="h4">Disadvantages</h4>
-        {#if editMode}
-          <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="disadvantages" classes={addButtonClasses} modalComponent={K4eTraitsAddModal} />
-        {/if}
-      </div>
-      <div class="">
-        {#each fields as field(field.name)}
-          {#if field?.data?.type === "disadvantage"}
-            <FieldRender
-              on:fieldRemove field={field} {editMode} editable={true}
-              characterId={character.id}
-              fieldComponent={TraitField}
-              classes="w-full"
-            />
-          {/if}
+    <div class="mt-3">
+      <h4 class="h4 text-center">Disadvantages</h4>
+
+      {#if disadvantages.length > 0}
+        {#each disadvantages as field(field.name)}
+          <FieldRender
+            on:fieldRemove field={field} {editMode} editable={true}
+            characterId={character.id}
+            fieldComponent={TraitField}
+            classes="w-full bg-error-900"
+          />
         {/each}
-      </div>
+      {:else if !editMode}
+        <div class="text-center">-</div>
+      {/if}
+
+      {#if editMode}
+        <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="disadvantages" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Select disadvantage" />
+      {/if}
     </div>
 
   </div>

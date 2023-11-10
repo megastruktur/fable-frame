@@ -19,12 +19,10 @@
 
 <CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
   removable={false} editMode={false} {tab} on:fieldRemove >
-  {#if editable && editMode}
-  <input type="text" class="input h2 text-center" bind:value={tab.label} />
-  {:else}
+  
   <h2 class="h2 text-center mb-3">{tab.label}</h2>
   <hr />
-  {/if}
+
   <div class="mt-3">
     <K4eSkillsTree {fields} {editMode} />
   </div>
