@@ -14,6 +14,8 @@
   export let tabs: {[key: string]: Field}
   export let editMode: boolean = false
   export let character: CharactersResponse
+
+  const tabWidth: string = "w-96"
 </script>
 
 <!-- General Tab -->
@@ -26,6 +28,7 @@
   {character}
   fields={[...tabsContent["general"]]}
   tab={tabs["general"]}
+  {tabWidth}
   on:fieldRemove
   on:fieldUpdate
   on:fieldAdd />
@@ -42,13 +45,21 @@
   {character}
   fields={[...tabsContent["traits"]]}
   tab={tabs["traits"]}
+  {tabWidth}
   on:fieldRemove
   on:fieldUpdate
   on:fieldAdd />
 
 <!-- Skills -->
 <!-- Skill tree, counterNum modified -->
-<K4eSkillsTab on:fieldRemove on:fieldUpdate on:fieldAdd tab={tabs["skills"]} fields={[...tabsContent["skills"]]} bind:activeTabName={activeTabName} {compactVersion} {matches} {editMode} />
+<K4eSkillsTab on:fieldRemove on:fieldUpdate on:fieldAdd
+  {tabWidth}
+  tab={tabs["skills"]}
+  fields={[...tabsContent["skills"]]}
+  bind:activeTabName={activeTabName}
+  {compactVersion}
+  {matches}
+  {editMode} />
 
 <!-- Story -->
 <!-- Dark Secrets (section + tags) Relations (section + counters++), Dramatic Hooks (section, text) -->

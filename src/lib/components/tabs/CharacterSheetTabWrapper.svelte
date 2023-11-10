@@ -9,6 +9,7 @@
   export let tab: Field
   export let removable: boolean = true
   export let editMode: boolean
+  export let width: string = "w-80"
 
   const dispatch = createEventDispatcher();
 
@@ -20,7 +21,7 @@
 
 </script>
 
-<section class="w-80 mb-3 relative mx-2 {(matches || compactVersion) && activeTabName !== tab.name ? "hidden" : ""}">
+<section class="{width} mb-3 relative mx-2 {(matches || compactVersion) && activeTabName !== tab.name ? "hidden" : ""}">
 
 
   {#if removable && editMode}

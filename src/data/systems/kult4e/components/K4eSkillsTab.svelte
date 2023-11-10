@@ -14,11 +14,12 @@
   export let matches: boolean | QueryArray | ObjectType<any> = true
   export let editMode: boolean = false
   export let editable: boolean = true
+  export let tabWidth: string
 
 </script>
 
 <CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
-  removable={false} editMode={false} {tab} on:fieldRemove >
+  removable={false} editMode={false} {tab} width={tabWidth} on:fieldRemove >
   
   <h2 class="h2 text-center mb-3">{tab.label}</h2>
   <hr />

@@ -22,6 +22,7 @@
   export let editable: boolean = true
   export let sortable: boolean = false
   export let character: CharactersResponse
+  export let tabWidth: string
 
   const flipDurationMs: number = 300
   const addButtonClasses: string = "p-1 w-full"
@@ -69,7 +70,7 @@
 </script>
 
 <CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
-  removable={false} {editMode} {tab} on:fieldRemove >
+  removable={false} {editMode} {tab} on:fieldRemove width={tabWidth} >
   
   <h2 class="h2 text-center mb-3">{tab.label}</h2>
   <hr />
