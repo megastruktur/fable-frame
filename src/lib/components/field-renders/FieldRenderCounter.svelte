@@ -138,10 +138,16 @@
 
 </script>
 
-<div class="{classes} flex items-center cursor-pointer" on:keypress on:click={openDescriptionModal}>
+<div class="{classes} {editMode ? "px-6 border-2 border-secondary-500" : "px-3 "} py-1 flex items-center cursor-pointer justify-between relative w-full chip" on:keypress on:click={openDescriptionModal}>
 
   {#if !isMinValue && editable && editMode}
-    <button type="button" on:click={fieldDecrement} class="btn-icon btn-icon-sm variant-filled mr-1">-</button>
+    <button type="button" on:click={fieldDecrement}
+      class="h-full absolute left-0 variant-filled-secondary w-5">-</button>
+  {/if}
+
+  {#if !isMaxValue && editable && editMode}
+    <button type="button" on:click={fieldIncrement}
+      class="h-full absolute right-0 variant-filled-secondary w-5">+</button>
   {/if}
 
   {#if fullEditable && editable && editMode}
@@ -155,9 +161,9 @@
     <p class="flex mr-3 text-xl {labelStyle}">{field.label}</p>
   {/if}
 
-  <div class="flex">
+  <div class="flex flex-wrap">
     {#each Array(field.value.length) as _, i}
-      <span class="flex mr-1 {valueStyle}">
+      <span class="flex mr-1 mb-1 {valueStyle}">
         {#if field.value.charAt(i) === "+"}
           <Icon src={BsCircleFill} />
         {:else}
@@ -166,7 +172,5 @@
       </span>
     {/each}
   </div>
-  {#if !isMaxValue && editable && editMode}
-    <button type="button" on:click={fieldIncrement} class="btn-icon btn-icon-sm variant-filled ml-1">+</button>
-  {/if}
+
 </div>

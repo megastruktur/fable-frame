@@ -40,7 +40,7 @@ import type { Field } from "$lib/types";
           <svelte:fragment slot="content">
             <TraitFieldInfo {field} classes="" showTitle={false} />
             <button
-              class="btn variant-filled-secondary"
+              class="btn w-full variant-filled-secondary"
               on:click={() => addField(field)}
               >{buttonText}</button>
               

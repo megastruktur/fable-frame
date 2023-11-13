@@ -168,7 +168,7 @@
           <FieldRender
             on:fieldRemove field={relation} {editMode} editable={true}
             fullEditable={true}
-            classes="w-full chip m-1 {editMode ? "border-2 border-secondary-600" : "bg-secondary-600"}"
+            classes="m-1 {!editMode ? "bg-secondary-600" : ""}"
             />
         {/each}
       {:else if !editMode}
