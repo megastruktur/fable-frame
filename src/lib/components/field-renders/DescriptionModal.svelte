@@ -13,6 +13,6 @@
   </div>
 
   <button
-    class="btn variant-filled-secondary"
+    class="btn variant-filled-secondary w-full"
     on:click={() => modalStore.close()}>Close</button>
 </div>

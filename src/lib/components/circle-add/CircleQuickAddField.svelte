@@ -19,6 +19,8 @@
   export let type: string
   export let character: CharactersResponse
   export let classes: string = ""
+  export let value: string = ""
+  export let fullEditable: boolean = false
 
   const dispatch = createEventDispatcher()
 
@@ -28,6 +30,7 @@
       type: "text",
       label: name ?? "Text",
       group: group,
+      value: value,
       icon: BsTextCenter,
       description: description ?? "A text field",
       weight: 1
@@ -36,6 +39,7 @@
       name: name,
       type: "tag",
       label: name ?? "Tag",
+      value: value,
       group: group,
       icon: BsHash,
       description: description ?? "A tag field. The Value will be displayed on character sheet without the label.",
@@ -45,6 +49,7 @@
       name: name,
       type: "counter",
       label: name ?? "Counter",
+      value: value,
       group: group,
       icon: BsThreeDots,
       description: description ?? "To use it set the value to +++ where each + represents max count.",
@@ -54,6 +59,7 @@
       name: name,
       type: "counterNum",
       label: name ?? "Counter Num",
+      value: value,
       group: group,
       icon: Bs123,
       description: description ?? "DnD Skill as example",
@@ -63,6 +69,7 @@
       name: name,
       type: "section",
       label: name ?? "Section",
+      value: value,
       group: group,
       icon: BsFileMinus,
       description: description ?? "Section title within tab",
@@ -72,6 +79,7 @@
       name: name,
       type: "datatable",
       label: name ?? "Table",
+      value: value,
       group: group,
       icon: BsTable,
       description: description ?? "Section title within tab",

@@ -217,33 +217,6 @@
         "type": "section",
 				"removable": false,
         "weight": 2
-      },
-      {
-        "description": "Character Story",
-        "group": "general",
-        "label": "Story",
-        "name": "character-story",
-        "type": "tab",
-				"removable": false,
-        "weight": 1
-      },
-      {
-        "description": "Character relations",
-        "group": "character-story",
-        "label": "Relations",
-        "name": "character-relations",
-        "type": "section",
-				"removable": false,
-        "weight": 0
-      },
-      {
-        "description": "Dramatic hooks",
-        "group": "character-story",
-        "label": "Dramatic Hooks",
-        "name": "dramatic-hooks",
-        "type": "section",
-				"removable": false,
-        "weight": 3
       }
 		],
 		"compendium": [

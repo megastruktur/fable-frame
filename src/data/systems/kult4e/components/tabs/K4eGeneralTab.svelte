@@ -33,6 +33,7 @@
   let archetype: Field = getFieldsByGroup("archetypes", fields)[0]
   let darkSecrets: Field[] = getFieldsByGroup("darkSecrets", fields)
   let dramaticHooks: Field[] = getFieldsByGroup("dramaticHooks", fields)
+  let relations: Field[] = getFieldsByGroup("relations", fields)
 
   function getOccupationFieldList() {
     if (editMode && archetype !== undefined) {
@@ -65,6 +66,7 @@
     occupationList = getOccupationFieldList()
     darkSecrets = getFieldsByGroup("darkSecrets", fields)
     dramaticHooks = getFieldsByGroup("dramaticHooks", fields)
+    relations = getFieldsByGroup("relations", fields)
   }  
 
 </script>
@@ -152,6 +154,36 @@
 
       {#if editMode}
         <CircleQuickAddField {character} type="tag" group="dramaticHooks" name="Dramatic Hook" description="Hook Description" on:fieldAdd classes={addButtonClasses} />
+      {/if}
+      
+    </div>
+
+    <!-- Relations -->
+    <div class="mt-3">
+
+      <h3 class="h3 text-center">Relations</h3>
+
+      {#if relations.length > 0}
+        {#each relations as relation(relation.id)}
+          <FieldRender
+            on:fieldRemove field={relation} {editMode} editable={true}
+            fullEditable={true}
+            classes="w-full chip m-1 {editMode ? "border-2 border-secondary-600" : "bg-secondary-600"}"
+            />
+        {/each}
+      {:else if !editMode}
+        <div class="text-center">-</div>
+      {/if}
+
+      {#if editMode}
+        <CircleQuickAddField
+          {character}
+          type="counter"
+          group="relations"
+          name="Relations"
+          description="Relation Description"
+          value="--"
+          on:fieldAdd classes={addButtonClasses} />
       {/if}
       
     </div>

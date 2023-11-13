@@ -13,6 +13,7 @@
   export let classes: string = ""
   export let editableClasses: string = ""
   export let editable: boolean = true
+  export let fullEditable: boolean = false
   export let editMode: boolean = false
   export let labelStyle: string = ""
   export let valueStyle: string = ""
@@ -36,19 +37,19 @@
 {/if}
 
 {#if renderAs === "text"}
-  <FieldRenderText {editable} {classes} {labelStyle} {valueStyle} field={field} on:fieldUpdate {editMode} />
+  <FieldRenderText {editable} {classes} {labelStyle} {valueStyle} {field} on:fieldUpdate {editMode} />
 {:else if renderAs === "counter"}
-  <FieldRenderCounter {editable} {classes} {labelStyle} {valueStyle} field={field} on:fieldUpdate {editMode} />
+  <FieldRenderCounter {editable} {classes} {labelStyle} {valueStyle} {field} on:fieldUpdate {editMode} {fullEditable} />
 {:else if renderAs === "counterNum"}
-  <FieldRenderCounterNum {editable} {classes} field={field} on:fieldUpdate {editMode} />
+  <FieldRenderCounterNum {editable} {classes} {field} on:fieldUpdate {editMode} />
 {:else if renderAs === "tag"}
-  <FieldRenderTag {editable} {classes} {editableClasses} field={field} on:fieldUpdate {editMode} />
+  <FieldRenderTag {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode} />
 {:else if renderAs === "section"}
-  <FieldRenderSection {editable} {classes} field={field} on:fieldUpdate {editMode} />
+  <FieldRenderSection {editable} {classes} {field} on:fieldUpdate {editMode} />
 {:else if renderAs === "datatable"}
-  <FieldRenderDatatable {editable} {classes} field={field} on:fieldUpdate {editMode} />
+  <FieldRenderDatatable {editable} {classes} {field} on:fieldUpdate {editMode} />
 {:else if fieldComponent !== null}
-  <svelte:component this={fieldComponent} {characterId} {editable} {classes} {editableClasses} field={field} on:fieldUpdate {editMode}
+  <svelte:component this={fieldComponent} {characterId} {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode}
   />
 {/if}
 
