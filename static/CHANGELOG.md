@@ -1,4 +1,5 @@
-### 0.7.3
+### 0.8.0
+- Feature: Kult: Divinity Lost 4e TTRPG added
 - Feature: Adds Important Notes Section to campaign
 - Bugfix: Tab add and remove fix after refactoring
 - Bugfix: Reorder fields fix after refactoring
