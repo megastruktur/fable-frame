@@ -2,6 +2,7 @@
 	import type { Field } from "$lib/types.d"
 	import { createEventDispatcher } from "svelte"
 	import { type ModalSettings, getModalStore } from "@skeletonlabs/skeleton"
+  import DescriptionModal from "$lib/components/field-renders/DescriptionModal.svelte"
 
   export let field: Field
   export let classes: string = ""
@@ -39,9 +40,14 @@
     if (!editMode && field.description !== undefined) {
 
       const descriptionModal: ModalSettings = {
-        type: 'alert',
+        type: "component",
         title: "Description",
-        body: field.description,
+        component: {
+          ref: DescriptionModal,
+          props: {
+            description: field.description
+          }
+        }
       }
 
       modalStore.trigger(descriptionModal)

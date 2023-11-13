@@ -49,7 +49,7 @@
 <div class="{classes}">
 
   {#if showTitle}
-    <h2 class="h2">{field.label}</h2>
+    <h2 class="h2 mb-3">{field.label}</h2>
   {/if}
 
   <div class="blockquote">{@html field.description}</div>
