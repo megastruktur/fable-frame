@@ -8,6 +8,7 @@
 
   import { createEventDispatcher } from "svelte"
 	import { onMount } from "svelte";
+	import { updateSaveCharacterField } from "$lib/characterFieldsOperations";
 
   export let field: Field
   export let classes: string = ""
@@ -19,6 +20,9 @@
   export let color: string = "variant-filled-secondary"
   export let colorEdit: string = "border-secondary-500"
   export let colorButtons: string = ""
+  export let characterId: string = ""
+  export let editableClasses: string = ""
+  export let updateWithoutEditMode: boolean = false
 
   // Validate field
   if (!validateField()) {
@@ -48,7 +52,8 @@
   function validateField() {
     let valid = true
     
-    if (field.data === undefined
+    if (characterId === ""
+      || field.data === undefined
       || field.data.min === undefined
       || field.data.max === undefined
       || field.data.counterValues === undefined) {
@@ -60,26 +65,23 @@
 
   function fieldIncrement() {
 
-    const dispatched = fieldUpdate("increment")
 
-    if (dispatched) {
-      field.value = (parseInt(field.value) + 1).toString()
+    field.value = (parseInt(field.value) + 1).toString()
 
-      console.log(field.value)
-      setIsMin()
-      setIsMax()
-    }
+    console.log(field.value)
+    setIsMin()
+    setIsMax()
+
+    fieldUpdate("increment")
   }
 
   function fieldDecrement() {
+    
+    field.value = (parseInt(field.value) - 1).toString()
+    setIsMin()
+    setIsMax()
 
-    const dispatched = fieldUpdate("decrement")
-
-    if (dispatched) {
-      field.value = (parseInt(field.value) - 1).toString()
-      setIsMin()
-      setIsMax()
-    }
+    fieldUpdate("decrement")
   }
 
   function setIsMin() {
@@ -96,29 +98,29 @@
       field: field
     }
 
-    return dispatch("fieldUpdate", dispatchData, { cancelable: true })
-  }
+    dispatch("fieldUpdate", dispatchData, { cancelable: true })
 
-  function fieldUpdateHandler() {
-    fieldUpdate()
+    if (updateWithoutEditMode) {
+      updateSaveCharacterField(characterId, field)
+    }
   }
 
 </script>
 
 <div class="{classes} py-3 px-3 relative w-full rounded-md {editMode ? "px-6 border-2 " + colorEdit : color}">
 
-  {#if !isMinValue && editable && editMode}
+  {#if !isMinValue && ((editable && editMode) || updateWithoutEditMode)}
     <button type="button" on:click={fieldDecrement}
       class="absolute left-0 top-0 {colorButtons} w-5 h-full">-</button>
   {/if}
 
-  {#if !isMaxValue && editable && editMode}
+  {#if !isMaxValue && ((editable && editMode) || updateWithoutEditMode)}
     <button type="button" on:click={fieldIncrement}
       class="absolute right-0 top-0 {colorButtons} w-5 h-full">+</button>
   {/if}
 
   <div class="">
-    <h4 class="h4 text-center pb-2 {labelStyle}">{field.label}</h4>
+    <h3 class="h3 text-center pb-2 {labelStyle}">{field.label}</h3>
   
     <div class="flex flex-wrap justify-center mb-3">
       {#each values as v}

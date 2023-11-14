@@ -8,9 +8,7 @@
 	import type { CharactersResponse } from '$lib/pocketbase-types';
 	import CharacterSheetTabWrapper from '$lib/components/tabs/CharacterSheetTabWrapper.svelte';
 	import CircleAddCompendium from '$lib/components/circle-add/CircleAddCompendium.svelte';
-	import { getFieldByNameFromList, getFieldsByGroup } from '$lib/characterFieldsOperations';
-	import CircleAddField from '$lib/components/circle-add/CircleAddField.svelte';
-	import K4eAddItemModal from '../modals/K4eAddItemModal.svelte';
+	import { getFieldByNameFromList } from '$lib/characterFieldsOperations';
 
   export let fields: Field[]
   export let tab: Field
@@ -27,10 +25,24 @@
   const flipDurationMs: number = 300
   const addButtonClasses: string = "p-1 w-full"
 
-  let stability = getFieldByNameFromList(fields, "stability")
+  let stability: Field
+  let seriousWound1: Field
+  let seriousWound2: Field
+  let seriousWound3: Field
+  let seriousWound4: Field
+  let criticalWound: Field
+
+  function updateFieldRenders() {
+    stability = getFieldByNameFromList(fields, "stability")
+    seriousWound1 = getFieldByNameFromList(fields, "serious-wound-1")
+    seriousWound2 = getFieldByNameFromList(fields, "serious-wound-2")
+    seriousWound3 = getFieldByNameFromList(fields, "serious-wound-3")
+    seriousWound4 = getFieldByNameFromList(fields, "serious-wound-4")
+    criticalWound = getFieldByNameFromList(fields, "critical-wound")
+  }
 
   $: {
-    stability = getFieldByNameFromList(fields, "stability")
+    updateFieldRenders()
   }  
 
 </script>
@@ -42,16 +54,86 @@
   <hr />
 
   <div class="mt-3">
-    <FieldRender
-    on:fieldRemove field={stability} {editMode} editable={true}
-    fullEditable={true}
-    classes="m-1"
-    color=""
-    colorEdit="border-tertiary-600"
-    colorButtons="variant-filled-tertiary"
-    />
+
+    <h3 class="h3 text-center mb-3">Stability</h3>
+    <hr />
+
+    <div class="mt-3">
+      <FieldRender
+        on:fieldRemove field={stability} {editMode} editable={true}
+        fullEditable={true}
+        classes="m-1"
+        color=""
+        characterId={character.id}
+        updateWithoutEditMode={true}
+        colorEdit="border-tertiary-600"
+        colorButtons="variant-filled-surface"
+        labelStyle="hidden"
+        />
+    </div>
 
   </div>
+
+  <div class="mt-3">
+    <h3 class="h3 text-center mb-3">Wounds</h3>
+    <hr />
+
+    <h4 class="my-3 text-center text-sm">Serious Wounds (<b>-1 ongoing</b>)</h4>
+
+    <div class="">
+      <FieldRender
+        on:fieldRemove field={seriousWound1} {editMode} editable={true}
+        characterId={character.id}
+        fullEditable={true}
+        classes="mb-3"
+        color=""
+        colorEdit="border-tertiary-600"
+        colorButtons="variant-filled-surface"
+        />
+      <FieldRender
+        on:fieldRemove field={seriousWound2} {editMode} editable={true}
+        characterId={character.id}
+        fullEditable={true}
+        classes="mb-3"
+        color=""
+        colorEdit="border-tertiary-600"
+        colorButtons="variant-filled-surface"
+        />
+      <FieldRender
+        on:fieldRemove field={seriousWound3} {editMode} editable={true}
+        characterId={character.id}
+        fullEditable={true}
+        classes="mb-3"
+        color=""
+        colorEdit="border-tertiary-600"
+        colorButtons="variant-filled-surface"
+        />
+      <FieldRender
+        on:fieldRemove field={seriousWound4} {editMode} editable={true}
+        characterId={character.id}
+        fullEditable={true}
+        classes="mb-3"
+        color=""
+        colorEdit="border-tertiary-600"
+        colorButtons="variant-filled-surface"
+        />
+    </div>
+
+    <h4 class="my-3 text-center text-sm">Critical Wound (<b>-1 ongoing</b>)</h4>
+
+    <div>
+      <FieldRender
+        on:fieldRemove field={criticalWound} {editMode} editable={true}
+        characterId={character.id}
+        fullEditable={true}
+        classes="mb-3"
+        color=""
+        colorEdit="border-tertiary-600"
+        colorButtons="variant-filled-surface"
+        />
+    </div>
+  </div>
+
 </CharacterSheetTabWrapper>
 
 

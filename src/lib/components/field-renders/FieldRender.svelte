@@ -8,6 +8,7 @@
 	import FieldRenderDatatable from "./FieldRenderDatatable.svelte";
 	import { createEventDispatcher } from "svelte";
 	import FieldRenderCounterProgress from "./FieldRenderCounterProgress.svelte";
+	import FieldRenderCheckbox from "./FieldRenderCheckbox.svelte";
 
   export let field: Field
   export let renderAs: string = field.type
@@ -23,6 +24,7 @@
   export let color: string = ""
   export let colorEdit: string = ""
   export let colorButtons: string = ""
+  export let updateWithoutEditMode: boolean = false
 
   let removable: boolean = (field.removable !== undefined) ? field.removable : true
 
@@ -60,6 +62,9 @@
   else if (renderAs === "counterProgress") {
     fieldRenderComponent = FieldRenderCounterProgress
   }
+  else if (renderAs === "checkbox") {
+    fieldRenderComponent = FieldRenderCheckbox
+  }
 
 </script>
 
@@ -67,5 +72,5 @@
 <button class="btn-icon" on:click={removeField}>✕</button>
 {/if}
 
-<svelte:component this={fieldRenderComponent} {characterId} {labelStyle} {valueStyle} {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode} {color} {colorEdit} {colorButtons}
+<svelte:component this={fieldRenderComponent} {characterId} {labelStyle} {valueStyle} {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode} {color} {colorEdit} {colorButtons} {updateWithoutEditMode}
 />

@@ -191,6 +191,51 @@
         "weight": 1
       },
       {
+        "name": "serious-wound-1",
+        "label": "",
+        "type": "checkbox",
+        "description": "",
+        "group": "conditions",
+        "value": "0",
+        "weight": 1
+      },
+      {
+        "name": "serious-wound-2",
+        "label": "",
+        "type": "checkbox",
+        "description": "",
+        "group": "conditions",
+        "value": "0",
+        "weight": 1
+      },
+      {
+        "name": "serious-wound-3",
+        "label": "",
+        "type": "checkbox",
+        "description": "",
+        "group": "conditions",
+        "value": "0",
+        "weight": 1
+      },
+      {
+        "name": "serious-wound-4",
+        "label": "",
+        "type": "checkbox",
+        "description": "",
+        "group": "conditions",
+        "value": "0",
+        "weight": 1
+      },
+      {
+        "name": "critical-wound",
+        "label": "",
+        "type": "checkbox",
+        "description": "",
+        "group": "conditions",
+        "value": "0",
+        "weight": 1
+      },
+      {
         "name": "stability",
         "label": "Stability",
         "type": "counterProgress",
