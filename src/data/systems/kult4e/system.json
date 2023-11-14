@@ -61,16 +61,6 @@
         "weight": 1
       },
       {
-        "description": "Stability",
-        "group": "conditions",
-        "label": "Stability",
-        "name": "stability",
-        "type": "counter",
-        "value": "++++++++++",
-				"removable": false,
-        "weight": 1
-      },
-      {
         "description": "keep it together",
         "group": "skills",
         "label": "Willpower",
@@ -201,22 +191,70 @@
         "weight": 1
       },
       {
-        "description": "-1 ongoing",
+        "name": "stability",
+        "label": "Stability",
+        "type": "counterProgress",
+        "description": "Character Stability",
         "group": "conditions",
-        "label": "Serious Wounds",
-        "name": "serious-wounds",
-        "type": "section",
-				"removable": false,
-        "weight": 1
-      },
-      {
-        "description": "-1 ongoing",
-        "group": "conditions",
-        "label": "Critical wounds",
-        "name": "critical-wounds",
-        "type": "section",
-				"removable": false,
-        "weight": 2
+        "value": "0",
+        "weight": 1,
+        "data": {
+          "min": 0,
+          "max": 9,
+          "counterValues": {
+            "0": {
+              "label": "Composed",
+              "description": "Composed",
+              "value": ""
+            },
+            "1": {
+              "label": "Uneasy",
+              "description": "Moderate stress",
+              "value": "[-1] to Disadvantage rolls"
+            },
+            "2": {
+              "label": "Unfocused",
+              "description": "Moderate stress",
+              "value": "[-1] to Disadvantage rolls"
+            },
+            "3": {
+              "label": "Shaken",
+              "description": "Serious stress",
+              "value": "[-1] <b>Keep it Together</b>, [-2] to Disadvantage rolls"
+            },
+            "4": {
+              "label": "Distressed",
+              "description": "Serious stress",
+              "value": "[-1] <b>Keep it Together</b>, [-2] to Disadvantage rolls"
+            },
+            "5": {
+              "label": "Neurotic",
+              "description": "Serious stress",
+              "value": "[-1] <b>Keep it Together</b>, [-2] to Disadvantage rolls"
+            },
+            "6": {
+              "label": "Anxious",
+              "description": "Critical stress",
+              "value": "[-2] <b>Keep it Together</b>, [-3] to Disadvantage rolls, [+1] <b>See Through the Illusion</b>"
+            },
+            "7": {
+              "label": "Irrational",
+              "description": "Critical stress",
+              "value": "[-2] <b>Keep it Together</b>, [-3] to Disadvantage rolls, [+1] <b>See Through the Illusion</b>"
+            },
+            "8": {
+              "label": "Unhinged",
+              "description": "Critical stress",
+              "value": "[-2] <b>Keep it Together</b>, [-3] to Disadvantage rolls, [+1] <b>See Through the Illusion</b>"
+            },
+            "9": {
+              "label": "Broken",
+              "description": "Broken",
+              "value": "<b>The GM makes a move</b>"
+            }
+          }
+        }
+
       }
 		],
 		"compendium": [

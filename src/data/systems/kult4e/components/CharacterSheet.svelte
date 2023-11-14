@@ -6,6 +6,7 @@
 	import K4eSkillsTab from './tabs/K4eSkillsTab.svelte';
 	import K4eGeneralTab from './tabs/K4eGeneralTab.svelte';
 	import K4eTraitsTab from './tabs/K4eTraitsTab.svelte';
+	import K4eConditionsTab from './tabs/K4eConditionsTab.svelte';
   
   export let matches: boolean
   export let compactVersion: boolean = false
@@ -35,6 +36,17 @@
 
 <!-- Conditions -->
 <!-- Stability(counter), Serous Wounds (section), Critical Wounds (section) -->
+<K4eConditionsTab bind:activeTabName={activeTabName}
+  {compactVersion}
+  {matches}
+  {editMode}
+  {character}
+  fields={[...tabsContent["conditions"]]}
+  tab={tabs["conditions"]}
+  {tabWidth}
+  on:fieldRemove
+  on:fieldUpdate
+  on:fieldAdd />
 
 <!-- Traits -->
 <!-- Advantages (section, tags), Disadvantages (section, tags) -->

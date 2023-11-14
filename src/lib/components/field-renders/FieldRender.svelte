@@ -7,6 +7,7 @@
 	import FieldRenderSection from "./FieldRenderSection.svelte";
 	import FieldRenderDatatable from "./FieldRenderDatatable.svelte";
 	import { createEventDispatcher } from "svelte";
+	import FieldRenderCounterProgress from "./FieldRenderCounterProgress.svelte";
 
   export let field: Field
   export let renderAs: string = field.type
@@ -19,6 +20,9 @@
   export let valueStyle: string = ""
   export let fieldComponent: any = null
   export let characterId: string = ""
+  export let color: string = ""
+  export let colorEdit: string = ""
+  export let colorButtons: string = ""
 
   let removable: boolean = (field.removable !== undefined) ? field.removable : true
 
@@ -30,27 +34,38 @@
     })
   }
 
+  let fieldRenderComponent: any = null
+
+  if (fieldComponent !== null) {
+    fieldRenderComponent = fieldComponent
+  }
+  else if (renderAs === "text") {
+    fieldRenderComponent = FieldRenderText
+  }
+  else if (renderAs === "section") {
+    fieldRenderComponent = FieldRenderSection
+  }
+  else if (renderAs === "datatable") {
+    fieldRenderComponent = FieldRenderDatatable
+  }
+  else if (renderAs === "tag") {
+    fieldRenderComponent = FieldRenderTag
+  }
+  else if (renderAs === "counter") {
+    fieldRenderComponent = FieldRenderCounter
+  }
+  else if (renderAs === "counterNum") {
+    fieldRenderComponent = FieldRenderCounterNum
+  }
+  else if (renderAs === "counterProgress") {
+    fieldRenderComponent = FieldRenderCounterProgress
+  }
+
 </script>
 
 {#if removable && editMode}
 <button class="btn-icon" on:click={removeField}>✕</button>
 {/if}
 
-{#if renderAs === "text"}
-  <FieldRenderText {editable} {classes} {labelStyle} {valueStyle} {field} on:fieldUpdate {editMode} />
-{:else if renderAs === "counter"}
-  <FieldRenderCounter {editable} {classes} {labelStyle} {valueStyle} {field} on:fieldUpdate {editMode} {fullEditable} />
-{:else if renderAs === "counterNum"}
-  <FieldRenderCounterNum {editable} {classes} {field} on:fieldUpdate {editMode} />
-{:else if renderAs === "tag"}
-  <FieldRenderTag {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode} />
-{:else if renderAs === "section"}
-  <FieldRenderSection {editable} {classes} {field} on:fieldUpdate {editMode} />
-{:else if renderAs === "datatable"}
-  <FieldRenderDatatable {editable} {classes} {field} on:fieldUpdate {editMode} />
-{:else if fieldComponent !== null}
-  <svelte:component this={fieldComponent} {characterId} {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode}
-  />
-{/if}
-
-<!-- For Tag it is remove the tag -->
+<svelte:component this={fieldRenderComponent} {characterId} {labelStyle} {valueStyle} {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode} {color} {colorEdit} {colorButtons}
+/>
