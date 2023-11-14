@@ -89,6 +89,7 @@
         color=""
         colorEdit="border-tertiary-600"
         colorButtons="variant-filled-surface"
+        labelStyle="text-xl"
         />
       <FieldRender
         on:fieldRemove field={seriousWound2} {editMode} editable={true}
@@ -98,6 +99,7 @@
         color=""
         colorEdit="border-tertiary-600"
         colorButtons="variant-filled-surface"
+        labelStyle="text-xl"
         />
       <FieldRender
         on:fieldRemove field={seriousWound3} {editMode} editable={true}
@@ -107,6 +109,7 @@
         color=""
         colorEdit="border-tertiary-600"
         colorButtons="variant-filled-surface"
+        labelStyle="text-xl"
         />
       <FieldRender
         on:fieldRemove field={seriousWound4} {editMode} editable={true}
@@ -116,6 +119,7 @@
         color=""
         colorEdit="border-tertiary-600"
         colorButtons="variant-filled-surface"
+        labelStyle="text-xl"
         />
     </div>
 
@@ -130,6 +134,7 @@
         color=""
         colorEdit="border-tertiary-600"
         colorButtons="variant-filled-surface"
+        labelStyle="text-xl"
         />
     </div>
   </div>
