@@ -107,7 +107,7 @@
 
 </script>
 
-<div class="{classes} py-3 px-3 relative w-full rounded-md {editMode ? "px-6 border-2 " + colorEdit : color}">
+<div class="{classes} py-3 px-6 relative w-full rounded-md {editMode ? "border-2 " + colorEdit : color}">
 
   {#if !isMinValue && ((editable && editMode) || updateWithoutEditMode)}
     <button type="button" on:click={fieldDecrement}

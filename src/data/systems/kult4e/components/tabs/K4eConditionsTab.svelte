@@ -56,7 +56,6 @@
   <div class="mt-3">
 
     <h3 class="h3 text-center mb-3">Stability</h3>
-    <hr />
 
     <div class="mt-3">
       <FieldRender
@@ -76,7 +75,6 @@
 
   <div class="mt-3">
     <h3 class="h3 text-center mb-3">Wounds</h3>
-    <hr />
 
     <h4 class="my-3 text-center text-sm">Serious Wounds (<b>-1 ongoing</b>)</h4>
 

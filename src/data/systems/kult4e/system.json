@@ -197,7 +197,8 @@
         "description": "",
         "group": "conditions",
         "value": "0",
-        "weight": 1
+        "weight": 1,
+        "removable": false
       },
       {
         "name": "serious-wound-2",
@@ -206,7 +207,8 @@
         "description": "",
         "group": "conditions",
         "value": "0",
-        "weight": 1
+        "weight": 1,
+        "removable": false
       },
       {
         "name": "serious-wound-3",
@@ -215,7 +217,8 @@
         "description": "",
         "group": "conditions",
         "value": "0",
-        "weight": 1
+        "weight": 1,
+        "removable": false
       },
       {
         "name": "serious-wound-4",
@@ -224,7 +227,8 @@
         "description": "",
         "group": "conditions",
         "value": "0",
-        "weight": 1
+        "weight": 1,
+        "removable": false
       },
       {
         "name": "critical-wound",
@@ -233,7 +237,8 @@
         "description": "",
         "group": "conditions",
         "value": "0",
-        "weight": 1
+        "weight": 1,
+        "removable": false
       },
       {
         "name": "stability",
@@ -243,6 +248,7 @@
         "group": "conditions",
         "value": "0",
         "weight": 1,
+        "removable": false,
         "data": {
           "min": 0,
           "max": 9,
