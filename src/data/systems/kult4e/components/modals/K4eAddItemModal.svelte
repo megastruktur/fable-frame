@@ -8,6 +8,7 @@ import type { Field } from "$lib/types";
   export let fields: Field[]
   export let title: string
   export let buttonText: string = "Select"
+  export let itemDescriptionComponent: any = TraitFieldInfo
 
   let filteredFields: Field[] = fields
 
@@ -38,7 +39,9 @@ import type { Field } from "$lib/types";
         <AccordionItem>
           <svelte:fragment slot="summary">{field.label}</svelte:fragment>
           <svelte:fragment slot="content">
-            <TraitFieldInfo {field} classes="" showTitle={false} />
+            <svelte:component this={itemDescriptionComponent}
+              {field} classes="" showTitle={false}
+            />
             <button
               class="btn w-full variant-filled-secondary"
               on:click={() => addField(field)}

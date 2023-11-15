@@ -56,11 +56,11 @@
 
 </script>
 
-<div class="{classes} {!editMode || !editable ? "chip whitespace-normal m-1" : editClasses}" on:click={openDescriptionModal} on:keyup>
+<button class="{classes} {!editMode || !editable ? "chip whitespace-normal m-1" : editClasses}" on:click={openDescriptionModal}>
   {#if editable && editMode}
     <input class="input" type="text" bind:value={fieldLabel} on:focusout={fieldEdit} />
     <textarea class="textarea resize-none mt-3 mb-3" rows="5" bind:value={field.description} on:focusout={fieldEdit}></textarea>
   {:else}
     <h4 class="h4">{field.label ?? ""}</h4>
   {/if}
-</div>
+</button>

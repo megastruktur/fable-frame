@@ -95,7 +95,7 @@
       {/if}
 
       {#if editMode && (archetype === undefined || !archetype)}
-        <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="archetypes" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Take one of the Archetypes below" />
+        <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="archetypes" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Take one Archetype" />
       {/if}
 
     </div>
@@ -183,6 +183,7 @@
           name="Relations"
           description="Relation Description"
           value="--"
+          fullEditable={true}
           on:fieldAdd classes={addButtonClasses} />
       {/if}
       

@@ -14,13 +14,14 @@
   export let compendiumName: string
   export let classes: string = ""
   export let modalComponent: any = CircleAddFieldModal
+  export let descriptionComponent: any
   export let title: string = "Select an option below"
 
   const modalStore = getModalStore();
   const dispatch = createEventDispatcher()
 
   async function openCompendiumModal() {
-    const data = (await loadRpgSystemData(rpgSystemName, compendiumName)).default
+    const data = await loadRpgSystemData(rpgSystemName, compendiumName)
 
     if (data !== undefined && data.length > 0) {
 
@@ -30,6 +31,7 @@
         component: {
           ref: modalComponent,
           props: {
+            itemDescriptionComponent: descriptionComponent,
             fields: data.sort((a: Field, b: Field) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)),
             title: title
           },

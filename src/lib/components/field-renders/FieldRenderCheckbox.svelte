@@ -15,6 +15,7 @@
   export let colorButtons: string = ""
   export let characterId: string = ""
   export let editableClasses: string = ""
+  export let updateWithoutEditMode: boolean = false
 
   const inactiveClasses: string = "line-through opacity-25"
 

@@ -68,3 +68,34 @@ export function convertDataToFieldJson(data: [], fieldType = "tag", group = ""):
 
   return JSON.stringify(fields)
 }
+
+export function convertGearDataToFieldJson(data: [], fieldType = "k4e-gear", group = "gear"): string {
+
+  let fields = []
+  const fieldParamsStatic = ["name", "label", "description", "icon"]
+
+  data.forEach(item => {
+    let field = {
+      name: "",
+      label: "",
+      group: group,
+      description: "",
+      type: fieldType,
+      weight: 1,
+      value: "",
+      data: {}
+    }
+
+    Object.keys(item).forEach(key => {
+      if (fieldParamsStatic.includes(key)) {
+        field[key] = item[key]
+      }
+      else {
+        field.data[key] = item[key]
+      }
+    })
+    fields = [...fields, field]
+  })
+
+  return JSON.stringify(fields)
+}

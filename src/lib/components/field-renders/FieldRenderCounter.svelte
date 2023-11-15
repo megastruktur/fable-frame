@@ -135,10 +135,9 @@
       modalStore.trigger(descriptionModal)
     }
   }
-
 </script>
 
-<div class="{classes} {editMode ? "px-6 border-2 border-secondary-500" : "px-3 "} py-1 flex items-center cursor-pointer justify-between relative w-full chip" on:keypress on:click={openDescriptionModal}>
+<button class="{classes} {editMode ? "px-6 border-2 border-secondary-500" : "px-3 "} py-1 flex items-center cursor-pointer justify-between relative w-full chip" on:click={openDescriptionModal}>
 
   {#if !isMinValue && editable && editMode}
     <button type="button" on:click={fieldDecrement}
@@ -173,4 +172,4 @@
     {/each}
   </div>
 
-</div>
+</button>

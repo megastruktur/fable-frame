@@ -7,6 +7,7 @@
 	import K4eGeneralTab from './tabs/K4eGeneralTab.svelte';
 	import K4eTraitsTab from './tabs/K4eTraitsTab.svelte';
 	import K4eConditionsTab from './tabs/K4eConditionsTab.svelte';
+	import K4eGearTab from './tabs/K4eGearTab.svelte';
   
   export let matches: boolean
   export let compactVersion: boolean = false
@@ -18,6 +19,21 @@
 
   const tabWidth: string = "w-96"
 </script>
+
+<!-- Gear -->
+<!-- Weapons, Armor, other gear -->
+<K4eGearTab
+  bind:activeTabName={activeTabName}
+  {compactVersion}
+  {matches}
+  {editMode}
+  {character}
+  fields={[...tabsContent["gear"]]}
+  tab={tabs["gear"]}
+  {tabWidth}
+  on:fieldRemove
+  on:fieldUpdate
+  on:fieldAdd />
 
 <!-- General Tab -->
 <!-- Archetype(tag) Occupation(tag), Appearance(text) -->
@@ -72,6 +88,3 @@
   {compactVersion}
   {matches}
   {editMode} />
-
-<!-- Story -->
-<!-- Dark Secrets (section + tags) Relations (section + counters++), Dramatic Hooks (section, text) -->
