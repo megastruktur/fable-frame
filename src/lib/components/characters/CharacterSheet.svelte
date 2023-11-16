@@ -14,7 +14,7 @@
 	import MediaQuery, { createMediaStore } from "svelte-media-queries";
 	import { getCampaignImage } from "$models/campaign";
 	import { currentUser } from "$lib/pocketbase";
-	import { addCharacterField, removeCharacterField, updateCharacterField } from "$lib/characterFieldsOperations";
+	import { addCharacterField, removeCharacterField, updateCharacterField, createCharacterField } from "$lib/characterFieldsOperations";
 
   // @ts-ignore
   import MdNote from 'svelte-icons/md/MdNote.svelte'
@@ -242,7 +242,7 @@
     console.log("On Field Remove")
   }
 
-  async function fieldAdd({detail: {field}} : {detail: {field: Field}}) {
+  async function fieldAdd({detail: {field, saveField}} : {detail: {field: Field, saveField: boolean | undefined}}) {
     character = addCharacterField(character, field)
 
     if (field.group !== undefined) {
@@ -258,6 +258,10 @@
         tabsContent[field.name] = []
         tabs[field.name] = field
       }
+    }
+
+    if (saveField !== undefined && saveField) {
+      await createCharacterField(character.id, field)
     }
     console.log("On Field Add")
   }

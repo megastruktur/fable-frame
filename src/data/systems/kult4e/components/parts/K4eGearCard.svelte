@@ -62,7 +62,7 @@
 
 </script>
 
-<div class="{classes} card card-hover h-full variant-glass-secondary">
+<div class="{classes} card h-full variant-glass-secondary">
 
   {#if showTitle}
     <h2 class="h2 mb-3 text-center">{@html field.label}</h2>

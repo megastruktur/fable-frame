@@ -130,6 +130,19 @@ export async function updateSaveCharacterField(characterId: string, field: Field
   }
 }
 
+export async function createCharacterField(characterId: string, field: Field) {
+
+  try {
+    const character = await getCharacter(characterId)
+    console.log(character)
+    addCharacterField(character, field)
+    updateCharacterWithHash(characterId, character)
+  }
+  catch (error) {
+    console.error(error)
+  }
+}
+
 export function getFieldByNameFromList(list: Field[], name: string): Field {
   const field = list.find(field => field.name === name)
 

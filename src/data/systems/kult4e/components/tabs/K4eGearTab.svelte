@@ -91,21 +91,8 @@
         {/each}
       {/if}
 
-      {#if editMode}
-        <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="gear" classes={addButtonClasses} modalComponent={K4eAddGearModal} descriptionComponent={K4eGearCard} title="Pick a weapon" />
-      {/if}
-
-      <!-- <h3 class="h3 text-center">Archetype</h3>
-
-      {#if archetype !== undefined && archetype}
-        <FieldRender on:fieldRemove classes="bg-secondary-900 w-full" field={archetype} {editMode} editable={false} />
-      {:else if !editMode}
-        <div class="text-center">-</div>
-      {/if}
-
-      {#if editMode && (archetype === undefined || !archetype)}
-        <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="archetypes" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Take one of the Archetypes below" />
-      {/if} -->
+      <CircleAddCompendium
+        on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="gear" classes={addButtonClasses} modalComponent={K4eAddGearModal} descriptionComponent={K4eGearCard} title="Pick a weapon" saveField={true} />
 
     </div>
 

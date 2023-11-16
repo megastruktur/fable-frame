@@ -12,6 +12,8 @@
   export let character: CharactersResponse
   export let fields: Field[]
   export let classes: string = ""
+  // Add field to character immediately.
+  export let saveField: boolean = false
 
   const modalStore = getModalStore();
   const dispatch = createEventDispatcher()
@@ -26,7 +28,8 @@
         component: {
           ref: CircleAddCompendiumModal,
           props: {
-            fields: fields
+            fields: fields,
+            saveField: saveField,
           },
         },
 

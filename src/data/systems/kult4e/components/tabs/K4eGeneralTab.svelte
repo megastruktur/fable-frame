@@ -94,8 +94,8 @@
         <div class="text-center">-</div>
       {/if}
 
-      {#if editMode && (archetype === undefined || !archetype)}
-        <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="archetypes" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Take one Archetype" />
+      {#if (archetype === undefined || !archetype)}
+        <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="archetypes" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Take one Archetype" saveField={true} />
       {/if}
 
     </div>
@@ -112,8 +112,8 @@
           <div class="text-center">-</div>
         {/if}
 
-        {#if editMode && (occupation === undefined || !occupation)}
-          <CircleAddField on:fieldAdd {character} fields={occupationList}  classes={addButtonClasses} />
+        {#if (occupation === undefined || !occupation)}
+          <CircleAddField on:fieldAdd {character} fields={occupationList}  classes={addButtonClasses} saveField={true}/>
         {/if}
 
     </div>
@@ -131,9 +131,8 @@
         <div class="text-center">-</div>
       {/if}
 
-      {#if editMode}
-        <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="dark-secrets" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Select Dark Secret" />
-      {/if}
+      <CircleAddCompendium
+        on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="dark-secrets" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Select Dark Secret" saveField={true} />
     </div>
 
     <!-- Dramatic Hooks -->

@@ -8,14 +8,18 @@
 	import CircleAddFieldModal from "./CircleAddFieldModal.svelte";
 	import type { CharactersResponse } from "$lib/pocketbase-types";
 	import { createEventDispatcher } from "svelte";
+	import TraitFieldInfo from "$data/systems/kult4e/components/fields/TraitFieldInfo.svelte";
 
   export let character: CharactersResponse
   export let rpgSystemName: string
   export let compendiumName: string
   export let classes: string = ""
   export let modalComponent: any = CircleAddFieldModal
-  export let descriptionComponent: any
+  export let descriptionComponent: any = TraitFieldInfo
   export let title: string = "Select an option below"
+
+  // Save field to the database
+  export let saveField: boolean = false
 
   const modalStore = getModalStore();
   const dispatch = createEventDispatcher()
@@ -49,7 +53,8 @@
 
   function addField(field: Field) {
     dispatch("fieldAdd", {
-      field: field
+      field: field,
+      saveField: saveField,
     })
   }
 </script>
