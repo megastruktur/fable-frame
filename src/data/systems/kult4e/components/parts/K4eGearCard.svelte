@@ -16,12 +16,15 @@
 
 	import { updateSaveCharacterField } from "$lib/characterFieldsOperations";
 	import type { Field } from "$lib/types";
+	import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
   import K4eRollResult from "../parts/K4eRollResult.svelte";
 
   export let field: Field
   export let characterId: string = ""
   export let classes: string = "card p-4 w-80"
   export let showTitle: boolean = true
+  export let selected: boolean = false
+  console.log(selected)
 
 
   // async function deselectOption(option: string) {
@@ -62,7 +65,7 @@
 
 </script>
 
-<div class="{classes} card h-full variant-glass-secondary">
+<div class="{classes} card h-full variant-glass-secondary {selected ? "border-red-500 border" : "border border-transparent"}">
 
   {#if showTitle}
     <h2 class="h2 mb-3 text-center">{@html field.label}</h2>
@@ -74,7 +77,7 @@
     </div>
   {/if}
 
-  {#if field.data?.ammo !== undefined}
+  {#if field.data?.ammo !== undefined && field.data?.ammo}
     <div class="text-center mb-3">
       <h4 class="h4">Ammo</h4>
       <span>{field.data.ammo}</span>
@@ -86,15 +89,24 @@
   <!-- Attacks - for Weapons only -->
   {#if field.data?.attacks !== undefined && field.data?.attacks.length > 0}
     <div class="mt-3">
-      <h4 class="h4 text-center mb-3">Attacks</h4>
-      <ul class="list pl-3 text-sm">
-        {#each field.data.attacks as attack}
-          <li class="text-left">
-            <span>◆</span>
-            <span>{@html attack}</span>
-          </li>
-        {/each}
-      </ul>
+      <Accordion
+        regionCaret="hidden"
+        rounded="md">
+        <AccordionItem>
+          <svelte:fragment slot="summary"><div class="text-center">Attacks</div></svelte:fragment>
+          <svelte:fragment slot="content">
+            <ul class="list pl-3 text-sm">
+              {#each field.data.attacks as attack}
+                <li class="text-left">
+                  <span>◆</span>
+                  <span>{@html attack}</span>
+                </li>
+              {/each}
+            </ul>
+          </svelte:fragment>
+        </AccordionItem>
+      </Accordion>
+      
     </div>
   {/if}
   

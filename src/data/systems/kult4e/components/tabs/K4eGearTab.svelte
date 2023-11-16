@@ -8,14 +8,11 @@
 	import type { CharactersResponse } from '$lib/pocketbase-types';
 	import CharacterSheetTabWrapper from '$lib/components/tabs/CharacterSheetTabWrapper.svelte';
 	import CircleAddCompendium from '$lib/components/circle-add/CircleAddCompendium.svelte';
-	import { getFieldByNameFromList, getFieldsByGroup } from '$lib/characterFieldsOperations';
-	import CircleAddField from '$lib/components/circle-add/CircleAddField.svelte';
-	import K4eAddItemModal from '../modals/K4eAddItemModal.svelte';
+	import { getFieldsByGroup } from '$lib/characterFieldsOperations';
 	import K4eGearCard from '../parts/K4eGearCard.svelte';
-	import { convertGearDataToFieldJson } from '$lib/utils';
-	import { loadRpgSystemData } from '$models/rpg_system';
-	import { onMount } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import K4eAddGearModal from '../modals/K4eAddGearModal.svelte';
+  import {dndzone, type Options} from "svelte-dnd-action"
 
   export let fields: Field[]
   export let tab: Field
@@ -31,43 +28,40 @@
 
   const flipDurationMs: number = 300
   const addButtonClasses: string = "p-1 w-full"
+  const dispatch = createEventDispatcher()
 
   let gear: Field[] = getFieldsByGroup("gear", fields)
+  
+  let options: Options
 
-  // function getOccupationFieldList() {
-  //   if (editMode && archetype !== undefined) {
+  // Reorder fields
+    function handleDndConsider(e: any) {
+    fields = e.detail.items
+  }
 
-  //     let occupationFields: Field[] = []
-  //     if (archetype?.data?.occupation !== undefined) {
-        
+  function handleDndFinalize(e: any) {
+    let counter = 0
+    e.detail.items.forEach((field: Field) => {
+      field.weight = counter
+      counter++
+      dispatch("fieldUpdate", {
+        field: field,
+        operation: "reorder",
+      })
+    })
+    fields = e.detail.items
 
-  //       archetype.data.occupation.forEach((occupation: string) => {
-  //         occupationFields.push({
-  //           name: occupation,
-  //           label: occupation,
-  //           type: "tag",
-  //           group: "occupations",
-  //           description: "",
-  //           weight: 1,
-  //           value: "",
-  //           id: ""
-  //         })
-  //       })
-  //     }
-  //     return occupationFields
-  //   }
-  //   return []
-  // }
-
-  // onMount(async () => {
-  //   const data = await loadRpgSystemData("kult4e", "armor")
-  //   console.log(convertGearDataToFieldJson(data))
-  // })
-
-  // console.log(gear)
+    console.log({fields})
+    console.log("Fields reordered")
+  }
 
   $: {
     gear = getFieldsByGroup("gear", fields)
+
+    options = {
+      items: fields,
+      dragDisabled: !editMode,
+    }
   }
 
 </script>
@@ -84,11 +78,16 @@
     <div class="mt-3">
 
       {#if gear !== undefined}
-        {#each gear as g}
-          <div class="mx-auto w-80 mb-3">
-            <K4eGearCard field={g} />
-          </div>
-        {/each}
+      <div
+        use:dndzone={options}
+        on:consider={handleDndConsider} on:finalize={handleDndFinalize}>
+          {#each gear as g(g.id)}
+            <div class="mx-auto w-80 mb-3">
+              <FieldRender field={g} fieldComponent={K4eGearCard} {editMode}
+                on:fieldRemove classes="card p-4 w-80" />
+            </div>
+          {/each}
+      </div>
       {/if}
 
       <CircleAddCompendium

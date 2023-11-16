@@ -24,19 +24,17 @@
   export let character: CharactersResponse
   export let tabWidth: string
 
-  const flipDurationMs: number = 300
   const addButtonClasses: string = "p-1 w-full"
 
   let appearance: Field = getFieldByNameFromList(fields, 'appearance')
   let occupation: Field = getFieldsByGroup("occupations", fields)[0]
-  let occupationList: Field[] = []
   let archetype: Field = getFieldsByGroup("archetypes", fields)[0]
   let darkSecrets: Field[] = getFieldsByGroup("darkSecrets", fields)
   let dramaticHooks: Field[] = getFieldsByGroup("dramaticHooks", fields)
   let relations: Field[] = getFieldsByGroup("relations", fields)
 
   function getOccupationFieldList() {
-    if (editMode && archetype !== undefined) {
+    if (archetype !== undefined) {
 
       let occupationFields: Field[] = []
       if (archetype?.data?.occupation !== undefined) {
@@ -45,7 +43,7 @@
         archetype.data.occupation.forEach((occupation: string) => {
           occupationFields.push({
             name: occupation,
-            label: occupation,
+            label: occupation || "",
             type: "tag",
             group: "occupations",
             description: "",
@@ -55,7 +53,8 @@
           })
         })
       }
-      return occupationFields
+      // sort by label
+      return occupationFields.sort((a, b) => a.label.localeCompare(b.label))
     }
     return []
   }
@@ -63,7 +62,6 @@
   $: {
     archetype = getFieldsByGroup("archetypes", fields)[0]
     occupation = getFieldsByGroup("occupations", fields)[0]
-    occupationList = getOccupationFieldList()
     darkSecrets = getFieldsByGroup("darkSecrets", fields)
     dramaticHooks = getFieldsByGroup("dramaticHooks", fields)
     relations = getFieldsByGroup("relations", fields)
@@ -80,7 +78,10 @@
   <div class="mt-3">
 
     {#if editMode || appearance.value !== ""}
-      <FieldRender on:fieldRemove field={appearance} {editMode} editable={true} classes="text-center" />
+      <FieldRender
+        on:fieldRemove field={appearance} {editMode} editable={true} classes="text-center"
+        placeholder="Appearance"
+        />
     {/if}
 
     <!-- Archetype -->
@@ -90,13 +91,12 @@
 
       {#if archetype !== undefined && archetype}
         <FieldRender on:fieldRemove classes="bg-secondary-900 w-full" field={archetype} {editMode} editable={false} />
-      {:else if !editMode}
-        <div class="text-center">-</div>
+      {:else}
+        {#if (archetype === undefined || !archetype)}
+          <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="archetypes" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Take one Archetype" saveField={true} />
+        {/if}
       {/if}
 
-      {#if (archetype === undefined || !archetype)}
-        <CircleAddCompendium on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="archetypes" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Take one Archetype" saveField={true} />
-      {/if}
 
     </div>
 
@@ -108,13 +108,12 @@
 
         {#if occupation !== undefined && occupation}
           <FieldRender on:fieldRemove classes="bg-secondary-900 w-full" field={occupation} {editMode} editable={occupation.name === "(Custom)"} />
-        {:else if !editMode}
-          <div class="text-center">-</div>
+        {:else}
+          {#if (occupation === undefined || !occupation)}
+            <CircleAddField on:fieldAdd {character} fields={getOccupationFieldList()} classes={addButtonClasses} saveField={true}/>
+          {/if}
         {/if}
 
-        {#if (occupation === undefined || !occupation)}
-          <CircleAddField on:fieldAdd {character} fields={occupationList}  classes={addButtonClasses} saveField={true}/>
-        {/if}
 
     </div>
 
@@ -127,12 +126,11 @@
         {#each darkSecrets as darkSecret(darkSecret.name)}
           <FieldRender on:fieldRemove classes="bg-surface-400 w-full" field= {darkSecret} {editMode} />
         {/each}
-      {:else if !editMode}
-        <div class="text-center">-</div>
+      {:else}
+        <CircleAddCompendium
+          on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="dark-secrets" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Select Dark Secret" saveField={true} />
       {/if}
 
-      <CircleAddCompendium
-        on:fieldAdd {character} rpgSystemName="kult4e" compendiumName="dark-secrets" classes={addButtonClasses} modalComponent={K4eAddItemModal} title="Select Dark Secret" saveField={true} />
     </div>
 
     <!-- Dramatic Hooks -->

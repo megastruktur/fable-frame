@@ -25,6 +25,9 @@
   export let colorEdit: string = ""
   export let colorButtons: string = ""
   export let updateWithoutEditMode: boolean = false
+  export let showTitle: boolean = true
+  export let placeholder: string = field.type || ""
+  export let placeholderArea: string = field.description || ""
 
   let removable: boolean = (field.removable !== undefined) ? field.removable : true
 
@@ -68,9 +71,11 @@
 
 </script>
 
-{#if removable && editMode}
-<button class="btn-icon" on:click={removeField}>✕</button>
-{/if}
-
-<svelte:component this={fieldRenderComponent} {characterId} {labelStyle} {valueStyle} {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode} {color} {colorEdit} {colorButtons} {updateWithoutEditMode} {fullEditable}
-/>
+<div>
+  {#if removable && editMode}
+    <button class="btn-icon" on:click={removeField}>✕</button>
+  {/if}
+  
+  <svelte:component this={fieldRenderComponent} {characterId} {labelStyle} {valueStyle} {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode} {color} {colorEdit} {colorButtons} {updateWithoutEditMode} {fullEditable} {showTitle} {placeholder} {placeholderArea}
+  />
+</div>

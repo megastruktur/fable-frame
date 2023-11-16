@@ -16,6 +16,8 @@
   export let characterId: string = ""
   export let editableClasses: string = ""
   export let updateWithoutEditMode: boolean = false
+  export let placeholder: string = ""
+  export let placeholderArea: string = ""
 
   const inactiveClasses: string = "line-through opacity-25"
 
@@ -64,5 +66,9 @@
     on:click={checkboxEditHandler}
     >{field.label ? field.label : "-"}</button>
 {:else}
-  <input class="input w-full" type="text" bind:value={field.label} on:focusout={fieldEditHandler} />
+  <input
+    class="input w-full" type="text"
+    bind:value={field.label} on:focusout={fieldEditHandler}
+    placeholder="{placeholder}"
+    />
 {/if}

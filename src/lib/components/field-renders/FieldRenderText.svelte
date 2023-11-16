@@ -9,6 +9,7 @@
   export let editMode: boolean = false
   export let labelStyle = ""
   export let valueStyle = ""
+  export let placeholder: string = ""
 
   const modalStore = getModalStore()
 
@@ -51,7 +52,7 @@
 <label class="{classes} label" on:click={openDescriptionModal} on:keyup>
   <h4 class="h4 {labelStyle}">{field.label}</h4>
   {#if editable && editMode}
-    <input class="input" type="text" bind:value={fieldValue} on:focusout={fieldEdit} />
+    <input class="input" type="text" bind:value={fieldValue} on:focusout={fieldEdit} placeholder="{placeholder}" />
   {:else}
     <p class="{valueStyle}">{field.value ?? ""}</p>
   {/if}

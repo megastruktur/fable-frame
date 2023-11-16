@@ -87,6 +87,7 @@
         color=""
         colorEdit="border-tertiary-600"
         colorButtons="variant-filled-surface"
+        placeholder="Serious Wound"
         labelStyle="text-xl"
         />
       <FieldRender
@@ -97,6 +98,7 @@
         color=""
         colorEdit="border-tertiary-600"
         colorButtons="variant-filled-surface"
+        placeholder="Serious Wound"
         labelStyle="text-xl"
         />
       <FieldRender
@@ -107,6 +109,7 @@
         color=""
         colorEdit="border-tertiary-600"
         colorButtons="variant-filled-surface"
+        placeholder="Serious Wound"
         labelStyle="text-xl"
         />
       <FieldRender
@@ -117,6 +120,7 @@
         color=""
         colorEdit="border-tertiary-600"
         colorButtons="variant-filled-surface"
+        placeholder="Serious Wound"
         labelStyle="text-xl"
         />
     </div>
@@ -132,6 +136,7 @@
         color=""
         colorEdit="border-tertiary-600"
         colorButtons="variant-filled-surface"
+        placeholder="Critical Wound"
         labelStyle="text-xl"
         />
     </div>

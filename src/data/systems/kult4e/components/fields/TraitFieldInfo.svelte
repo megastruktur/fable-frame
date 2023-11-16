@@ -5,7 +5,7 @@
 
   export let field: Field
   export let characterId: string = ""
-  export let classes: string = "card p-4 w-96"
+  export let classes: string = "card p-4"
   export let showTitle: boolean = true
 
   async function deselectOption(option: string) {
@@ -49,7 +49,7 @@
 <div class="{classes}">
 
   {#if showTitle}
-    <h2 class="h2 mb-3">{field.label}</h2>
+    <h2 class="h2 mb-3 text-center">{field.label}</h2>
   {/if}
 
   <div class="blockquote">{@html field.description}</div>

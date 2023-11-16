@@ -24,7 +24,7 @@ import type { Field } from "$lib/types";
 
 </script>
 
-<div class="card w-96">
+<div class="card w-96 p-3">
 
   <h3 class="h3 my-3 text-center">{title}</h3>
 
@@ -53,5 +53,8 @@ import type { Field } from "$lib/types";
   
     </Accordion>
   </div>
-
+  <button
+    class="btn variant-filled-secondary w-full mt-3"
+    on:click={() => modalStore.close()}
+    >Close</button>
 </div>

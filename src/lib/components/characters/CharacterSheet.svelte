@@ -343,7 +343,7 @@
             <div class="flex flex-wrap justify-center mb-2">
               {#each Object.keys(tabs) as tabName}
               <button
-                class="btn btn-sm {tabName === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
+                class="btn btn-sm rounded-none {tabName === activeTabName ? "tab-active variant-filled-tertiary" : "variant-ghost-tertiary"}"
                 on:click|preventDefault={() => activeTabName = tabName}
                 >{tabs[tabName].label}</button>
               {/each}

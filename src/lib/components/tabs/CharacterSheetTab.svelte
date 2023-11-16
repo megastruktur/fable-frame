@@ -32,7 +32,6 @@
   // Reorder fields
   $: options = {
     items: fields,
-    flipDurationMs: flipDurationMs,
     dragDisabled: !editMode,
   }
 
