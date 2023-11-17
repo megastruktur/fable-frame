@@ -18,6 +18,8 @@
   export let updateWithoutEditMode: boolean = false
   export let placeholder: string = ""
   export let placeholderArea: string = ""
+  export let fullEditable: boolean = false
+  export let showTitle: boolean = true
 
   const inactiveClasses: string = "line-through opacity-25"
 

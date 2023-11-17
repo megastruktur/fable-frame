@@ -23,6 +23,9 @@
   export let characterId: string = ""
   export let editableClasses: string = ""
   export let updateWithoutEditMode: boolean = false
+  export let showTitle: boolean = true
+  export let placeholder: string = ""
+  export let placeholderArea: string = ""
 
   // Validate field
   if (!validateField()) {

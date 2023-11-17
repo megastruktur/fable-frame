@@ -33,6 +33,9 @@
   let dramaticHooks: Field[] = getFieldsByGroup("dramaticHooks", fields)
   let relations: Field[] = getFieldsByGroup("relations", fields)
 
+  let initialArchetype: Field = archetype
+  let occupationList: Field[] = []
+
   function getOccupationFieldList() {
     if (archetype !== undefined) {
 
@@ -61,6 +64,14 @@
 
   $: {
     archetype = getFieldsByGroup("archetypes", fields)[0]
+
+    // Load the Occupation List only in case when archetype was changed.
+    if (archetype !== undefined
+      && archetype.name !== initialArchetype?.name) {
+      initialArchetype = archetype
+      occupationList = getOccupationFieldList()
+    }
+
     occupation = getFieldsByGroup("occupations", fields)[0]
     darkSecrets = getFieldsByGroup("darkSecrets", fields)
     dramaticHooks = getFieldsByGroup("dramaticHooks", fields)
@@ -110,7 +121,7 @@
           <FieldRender on:fieldRemove classes="bg-secondary-900 w-full" field={occupation} {editMode} editable={occupation.name === "(Custom)"} />
         {:else}
           {#if (occupation === undefined || !occupation)}
-            <CircleAddField on:fieldAdd {character} fields={getOccupationFieldList()} classes={addButtonClasses} saveField={true}/>
+            <CircleAddField on:fieldAdd {character} fields={occupationList} classes={addButtonClasses} saveField={true}/>
           {/if}
         {/if}
 

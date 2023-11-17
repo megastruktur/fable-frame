@@ -24,6 +24,7 @@
   import MdCancel from 'svelte-icons/md/MdCancel.svelte'
   // @ts-ignore
 	import FaPencilAlt from 'svelte-icons/fa/FaPencilAlt.svelte'
+	import { getRpgSystemImage } from "$models/rpg_system";
 
   const toastStore = getToastStore()
 
@@ -48,14 +49,20 @@
   
   async function getData() {
 
+    // Set BG image
+    let backgoundImage: string = ""
     if (character.expand?.campaign !== undefined) {
 
       campaign = character.expand.campaign
-      let campaignImage = getCampaignImage(campaign)
+      backgoundImage = getCampaignImage(campaign)
 
-      if (campaignImage !== "") {
-        headerBanner.set(campaignImage)
-      }
+    }
+    else if (rpgSystem !== undefined) {
+      backgoundImage = getRpgSystemImage(rpgSystem)
+    }
+
+    if (backgoundImage !== "") {
+      headerBanner.set(backgoundImage)
     }
 
     characterName = character.name

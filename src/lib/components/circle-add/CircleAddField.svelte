@@ -28,8 +28,7 @@
         component: {
           ref: CircleAddCompendiumModal,
           props: {
-            fields: fields,
-            saveField: saveField,
+            fields: fields
           },
         },
 
@@ -45,7 +44,8 @@
 
   function addField(field: Field) {
     dispatch("fieldAdd", {
-      field: field
+      field: field,
+      saveField: saveField,
     })
   }
 </script>

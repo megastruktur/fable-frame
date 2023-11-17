@@ -1,30 +1,25 @@
 <script lang="ts">
 
-// {
-//   "name": "handgun",
-//   "label": "Handgun",
-//   "description": "Beretta M92FS, Colt M1911A1, CZ P-10 C, FN Five seveN, Glock 19, Glock 23, H&K USP45, H&K VP9, S&W Model 10, S&W MP40 Shield, SIG-Sauer P226, Walther P99.",
-//   "type": "weaponRanged",
-//   "distance": "arm/room",
-//   "attacks": [
-//     "Combat shooting [2] [-1 Ammo]",
-//     "Overkill [3] [-2 Ammo]",
-//     "Multiple targets [2] [hit up to one additional target] [-3 Ammo]"
-//   ],
-//   "ammo": "●●●●"
-// },
-
-	import { updateSaveCharacterField } from "$lib/characterFieldsOperations";
 	import type { Field } from "$lib/types";
 	import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
-  import K4eRollResult from "../parts/K4eRollResult.svelte";
 
   export let field: Field
-  export let characterId: string = ""
   export let classes: string = "card p-4 w-80"
   export let showTitle: boolean = true
   export let selected: boolean = false
-  console.log(selected)
+  export let characterId: string = ""
+  export let color: string = ""
+  export let colorEdit: string = ""
+  export let colorButtons: string = ""
+  export let updateWithoutEditMode: string = ""
+  export let placeholder: string = ""
+  export let placeholderArea: string = ""
+  export let editableClasses: string = ""
+  export let editable: boolean = true
+  export let editMode: boolean = false
+  export let labelStyle: string = ""
+  export let valueStyle: string = ""
+  export let fullEditable: boolean = false
 
 
   // async function deselectOption(option: string) {

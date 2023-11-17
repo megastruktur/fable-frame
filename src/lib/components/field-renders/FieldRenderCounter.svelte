@@ -18,6 +18,15 @@
   export let labelStyle = ""
   export let valueStyle = "text-white"
   export let fullEditable: boolean = false
+  export let color: string = ""
+  export let colorEdit: string = ""
+  export let colorButtons: string = ""
+  export let updateWithoutEditMode: string = ""
+  export let showTitle: boolean = true
+  export let placeholder: string = ""
+  export let placeholderArea: string = ""
+  export let characterId: string = ""
+  export let editableClasses: string = ""
 
   let isMinValue: boolean = false
   let isMaxValue: boolean = false

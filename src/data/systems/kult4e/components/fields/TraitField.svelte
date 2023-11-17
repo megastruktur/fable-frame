@@ -10,6 +10,17 @@
   export let editMode: boolean = false
   export let editableClasses: string = ""
   export let characterId: string = ""
+  export let labelStyle: string = ""
+  export let valueStyle: string = ""
+  export let color: string = ""
+  export let colorEdit: string = ""
+  export let colorButtons: string = ""
+  export let updateWithoutEditMode: string = ""
+  export let fullEditable: string = ""
+  export let showTitle: boolean = true
+  export let placeholder: string = ""
+  export let placeholderArea: string = ""
+
   const editableClassesConst = "border-2 rounded-md p-2 border-surface-500"
 
   const editClasses = editableClasses + " " + editableClassesConst
