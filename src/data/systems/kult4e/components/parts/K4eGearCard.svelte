@@ -11,7 +11,7 @@
   export let color: string = ""
   export let colorEdit: string = ""
   export let colorButtons: string = ""
-  export let updateWithoutEditMode: string = ""
+  export let updateWithoutEditMode: boolean = false
   export let placeholder: string = ""
   export let placeholderArea: string = ""
   export let editableClasses: string = ""

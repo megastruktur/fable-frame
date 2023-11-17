@@ -15,13 +15,13 @@
   export let color: string = ""
   export let colorEdit: string = ""
   export let colorButtons: string = ""
-  export let updateWithoutEditMode: string = ""
+  export let updateWithoutEditMode: boolean = false
   export let fullEditable: string = ""
   export let showTitle: boolean = true
   export let placeholder: string = ""
   export let placeholderArea: string = ""
 
-  const editableClassesConst = "border-2 rounded-md p-2 border-surface-500"
+  const editableClassesConst = "border-2 rounded-md px-3 border-surface-500"
 
   const editClasses = editableClasses + " " + editableClassesConst
 
@@ -50,11 +50,12 @@
 <Accordion
   regionCaret="{!editMode || !editable ? "hidden" : ""}"
   rounded="md"
-  regionControl="{classes} {!editMode || !editable ? "chip whitespace-normal m-1" : editClasses}">
+  padding=""
+  class="{classes} {!editMode || !editable ? "chip whitespace-normal m-1" : editClasses}">
   <AccordionItem>
     <svelte:fragment slot="summary">
       {#if editable && editMode}
-        <input class="input" type="text" bind:value={fieldLabel} on:focusout={fieldEdit} />
+        <input class="input border-b-0" type="text" bind:value={fieldLabel} on:focusout={fieldEdit} />
       {:else}
         <h4 class="h4 text-center">{field.label ?? ""}</h4>
       {/if}

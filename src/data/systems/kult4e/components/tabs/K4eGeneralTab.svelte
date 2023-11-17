@@ -171,29 +171,32 @@
 
       <h3 class="h3 text-center">Relations</h3>
 
-      {#if relations.length > 0}
-        {#each relations as relation(relation.id)}
-          <FieldRender
-            on:fieldRemove field={relation} {editMode} editable={true}
-            fullEditable={true}
-            classes="m-1 {!editMode ? "bg-secondary-600" : ""}"
-            />
-        {/each}
-      {:else if !editMode}
-        <div class="text-center">-</div>
-      {/if}
+      <div class="mb-3">
+        {#if relations.length > 0}
+          {#each relations as relation(relation.id)}
+            <FieldRender
+              on:fieldRemove on:fieldUpdate field={relation} {editMode} editable={true}
+              fullEditable={true}
+              colorButtons="variant-glass-success"
+              updateWithoutEditMode={true}
+              classes="{!editMode ? "bg-secondary-600" : ""}"
+              />
+          {/each}
+        {:else if !editMode}
+          <div class="text-center">-</div>
+        {/if}
+      </div>
 
-      {#if editMode}
-        <CircleQuickAddField
-          {character}
-          type="counter"
-          group="relations"
-          name="Relations"
-          description="Relation Description"
-          value="--"
-          fullEditable={true}
-          on:fieldAdd classes={addButtonClasses} />
-      {/if}
+      <CircleQuickAddField
+        {character}
+        type="counter"
+        group="relations"
+        name="(Edit character to change)"
+        description="Relation Description"
+        value="--"
+        fullEditable={true}
+        saveField={true}
+        on:fieldAdd classes={addButtonClasses} />
       
     </div>
 

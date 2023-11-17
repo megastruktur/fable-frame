@@ -117,13 +117,14 @@ export function updateCharacterField(character: CharactersResponse, field: Field
 
 }
 
-export async function updateSaveCharacterField(characterId: string, field: Field) {
+export async function updateSaveCharacterField(characterId: string, field: Field): Promise<CharactersResponse> {
 
   try {
     const character = await getCharacter(characterId)
     console.log(character)
     updateCharacterField(character, field)
     updateCharacterWithHash(characterId, character)
+    return character
   }
   catch (error) {
     console.error(error)

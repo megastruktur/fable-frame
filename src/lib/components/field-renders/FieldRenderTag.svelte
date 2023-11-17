@@ -13,7 +13,7 @@
   export let color: string = ""
   export let colorEdit: string = ""
   export let colorButtons: string = ""
-  export let updateWithoutEditMode: string = ""
+  export let updateWithoutEditMode: boolean = false
   export let showTitle: boolean = true
   export let characterId: string = ""
   export let labelStyle: string = ""
@@ -47,10 +47,12 @@
 </script>
 
 <Accordion
+  regionControl="hover:!bg-transparent"
   regionCaret="{!editMode || !editable ? "hidden" : ""}"
   rounded="md"
-  regionControl="{classes} {!editMode || !editable ? "chip whitespace-normal m-1" : editClasses}">
-  <AccordionItem>
+  padding=""
+  class="{classes} {!editMode || !editable ? "chip whitespace-normal" : editClasses}">
+  <AccordionItem class="w-full">
     <svelte:fragment slot="summary">
       {#if editable && editMode}
         <input class="input" type="text"

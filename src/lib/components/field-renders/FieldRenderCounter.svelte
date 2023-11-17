@@ -8,7 +8,7 @@
 
   import { createEventDispatcher } from "svelte"
 	import { onMount } from "svelte";
-	import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+	import { Accordion, AccordionItem, getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
   import DescriptionModal from "$lib/components/field-renders/DescriptionModal.svelte"
 
   export let field: Field
@@ -20,8 +20,8 @@
   export let fullEditable: boolean = false
   export let color: string = ""
   export let colorEdit: string = ""
-  export let colorButtons: string = ""
-  export let updateWithoutEditMode: string = ""
+  export let colorButtons: string = "variant-filled-secondary"
+  export let updateWithoutEditMode: boolean = false
   export let showTitle: boolean = true
   export let placeholder: string = ""
   export let placeholderArea: string = ""
@@ -33,6 +33,8 @@
 
   const dispatch = createEventDispatcher()
   const modalStore = getModalStore()
+  const editableClassesConst = "border-2 rounded-md border-surface-500 px-3"
+  const editClasses = editableClasses + " " + editableClassesConst
 
   onMount(() => {
     setIsMax()
@@ -115,7 +117,8 @@
   function fieldUpdate(operation: string = "") {
     const dispatchData = {
       operation: operation,
-      field: field
+      field: field,
+      saveField: updateWithoutEditMode,
     }
 
     return dispatch("fieldUpdate", dispatchData, { cancelable: true })
@@ -146,39 +149,57 @@
   }
 </script>
 
-<button class="{classes} {editMode ? "px-6 border-2 border-secondary-500" : "px-3 "} py-1 flex items-center cursor-pointer justify-between relative w-full chip" on:click={openDescriptionModal}>
+<Accordion
+  regionCaret="{editMode && editable ? "" : "hidden"}"
+  regionControl="hover:!bg-transparent"
+  padding=""
+  class="{classes} relative {!editMode || !editable ? "chip whitespace-normal m-1" : editClasses}">
+  <AccordionItem class="w-full {editMode && editable ? "py-2" : ""}">
+    <svelte:fragment slot="summary">
 
-  {#if !isMinValue && editable && editMode}
-    <button type="button" on:click={fieldDecrement}
-      class="h-full absolute left-0 variant-filled-secondary w-5">-</button>
-  {/if}
+      {#if !isMinValue && (!editable || !editMode)}
+        <button type="button" on:click|stopPropagation={fieldDecrement}
+          class="h-full rounded-l-md absolute top-0 left-0 {colorButtons} w-5">-</button>
+      {/if}
 
-  {#if !isMaxValue && editable && editMode}
-    <button type="button" on:click={fieldIncrement}
-      class="h-full absolute right-0 variant-filled-secondary w-5">+</button>
-  {/if}
+      {#if !isMaxValue && (!editable || !editMode)}
+        <button type="button" on:click|stopPropagation={fieldIncrement}
+          class="h-full rounded-r-md absolute top-0 right-0 {colorButtons} w-5">+</button>
+      {/if}
 
-  {#if fullEditable && editable && editMode}
-    <div class="flex flex-col">
-      <input class="input mr-3 text-xl" bind:value={field.label}
-        on:focusout={fieldUpdateHandler} />
-      
-      <textarea class="textarea resize-none mt-3 mb-3" bind:value={field.description} on:focusout={fieldUpdateHandler}></textarea>
-    </div>
-  {:else}
-    <p class="flex mr-3 text-xl {labelStyle}">{field.label}</p>
-  {/if}
-
-  <div class="flex flex-wrap">
-    {#each Array(field.value.length) as _, i}
-      <span class="flex mr-1 mb-1 {valueStyle}">
-        {#if field.value.charAt(i) === "+"}
-          <Icon src={BsCircleFill} />
+      <div class="flex justify-between items-center w-full px-6">
+        {#if editable && editMode}
+          <input class="input text-center border-b-0" type="text"
+            bind:value={field.label} on:focusout={fieldUpdateHandler}
+            placeholder="{placeholder}"
+            />
         {:else}
-          <Icon src={BsCircle} />
+          <h4 class="h4 text-center">{field.label ?? ""}</h4>
         {/if}
-      </span>
-    {/each}
-  </div>
+        
+        {#if !editMode || !editable}
+          <div class="flex items-center flex-wrap ml-2 text-lg">
+            {#each Array(field.value.length) as _, i}
+              <span class="flex mr-1 {valueStyle}">
+                {#if field.value.charAt(i) === "+"}
+                  <Icon src={BsCircleFill} />
+                {:else}
+                  <Icon src={BsCircle} />
+                {/if}
+              </span>
+            {/each}
+          </div>
+        {/if}
+      </div>
 
-</button>
+    </svelte:fragment>
+
+    <svelte:fragment slot="content">
+      {#if editable && editMode}
+        <textarea class="textarea resize-none mt-3 mb-3" rows="5" bind:value={field.description} on:focusout={fieldUpdateHandler} placeholder="{placeholderArea}"></textarea>
+      {:else}
+        {field.description}
+      {/if}
+    </svelte:fragment>
+  </AccordionItem>
+</Accordion>

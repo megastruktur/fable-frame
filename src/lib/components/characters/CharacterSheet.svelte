@@ -14,7 +14,7 @@
 	import MediaQuery, { createMediaStore } from "svelte-media-queries";
 	import { getCampaignImage } from "$models/campaign";
 	import { currentUser } from "$lib/pocketbase";
-	import { addCharacterField, removeCharacterField, updateCharacterField, createCharacterField } from "$lib/characterFieldsOperations";
+	import { addCharacterField, removeCharacterField, updateCharacterField, createCharacterField, updateSaveCharacterField } from "$lib/characterFieldsOperations";
 
   // @ts-ignore
   import MdNote from 'svelte-icons/md/MdNote.svelte'
@@ -220,8 +220,14 @@
     drawerStore.open(characterNotesDrawerSettings)
   }
 
-  async function fieldUpdate({detail: {field}} : {detail: {field: Field}}) {
-    character = updateCharacterField(character, field)
+  async function fieldUpdate({detail: {field, saveField}} : {detail: {field: Field, saveField: boolean | undefined}}) {
+
+    if (saveField !== undefined && saveField) {
+      character = await updateSaveCharacterField(character.id, field)
+    }
+    else {
+      character = updateCharacterField(character, field)
+    }
     console.log("On Field Update")
   }
 

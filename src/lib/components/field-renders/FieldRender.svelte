@@ -71,7 +71,7 @@
 
 </script>
 
-<div>
+<div class="w-full">
   {#if removable && editMode}
     <button class="btn-icon" on:click={removeField}>✕</button>
   {/if}

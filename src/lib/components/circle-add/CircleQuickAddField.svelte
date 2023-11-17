@@ -21,6 +21,7 @@
   export let classes: string = ""
   export let value: string = ""
   export let fullEditable: boolean = false
+  export let saveField: boolean = false
 
   const dispatch = createEventDispatcher()
 
@@ -93,7 +94,8 @@
       let field: Field = fieldTypes[type]
       field.id = uuidv4(),
       dispatch("fieldAdd", {
-        field: fieldTypes[type]
+        field: fieldTypes[type],
+        saveField: saveField,
       })
     }
   }
