@@ -51,8 +51,9 @@
   regionCaret="{!editMode || !editable ? "hidden" : ""}"
   rounded="md"
   padding=""
+  regionControl="hover:!bg-transparent"
   class="{classes} {!editMode || !editable ? "chip whitespace-normal m-1" : editClasses}">
-  <AccordionItem>
+  <AccordionItem class="w-full">
     <svelte:fragment slot="summary">
       {#if editable && editMode}
         <input class="input border-b-0" type="text" bind:value={fieldLabel} on:focusout={fieldEdit} />
