@@ -9,7 +9,7 @@
 
 </script>
 
-<div class="py-3">
+<div class="py-3 text-left">
   <p>
     <span class="text-primary-600 font-bold">({rolledRange}) </span>
     <span>{@html rollResult.description}</span>
