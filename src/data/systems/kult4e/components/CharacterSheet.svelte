@@ -8,6 +8,7 @@
 	import K4eTraitsTab from './tabs/K4eTraitsTab.svelte';
 	import K4eConditionsTab from './tabs/K4eConditionsTab.svelte';
 	import K4eGearTab from './tabs/K4eGearTab.svelte';
+	import K4eRollButton from './parts/K4eRollButton.svelte';
   
   export let matches: boolean
   export let compactVersion: boolean = false
@@ -88,3 +89,5 @@
   on:fieldRemove
   on:fieldUpdate
   on:fieldAdd />
+
+<div class="fixed right-3 bottom-3 md:right-5"><K4eRollButton /></div>

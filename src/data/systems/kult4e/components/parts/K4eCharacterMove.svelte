@@ -306,7 +306,7 @@
 
   {#if playerMove !== undefined}
 
-    <h2 class="h2">{playerMove.label}</h2>
+    <h2 class="h2 mb-3">{playerMove.label}</h2>
     <div class="blockquote">{@html playerMove.description}</div>
 
     {#if playerMove.results !== undefined}

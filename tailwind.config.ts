@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config}*/
 import { join } from 'path';
+import { iconsPlugin, getIconCollections } from "@egoist/tailwindcss-icons";
 import type { Config } from 'tailwindcss'
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
@@ -25,6 +26,11 @@ const config = {
 	plugins: [
 		forms,
 		typography,
+		iconsPlugin({
+      // Select the icon collections you want to use
+      // You can also ignore this option to automatically discover all icon collections you have installed
+      collections: getIconCollections(),
+    }),
 		skeleton({
 			themes: {
 				preset: [{
