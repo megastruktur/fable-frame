@@ -65,11 +65,13 @@
 
     </svelte:fragment>
     <svelte:fragment slot="content">
-      {#if editable && editMode}
-        <textarea class="textarea resize-none mt-3 mb-3" rows="5" bind:value={field.description} on:focusout={fieldEdit} placeholder="{placeholderArea}"></textarea>
-      {:else}
-        {field.description}
-      {/if}
+      <div class="blockquote text-left">
+        {#if editable && editMode}
+          <textarea class="textarea resize-none mt-3 mb-3" rows="5" bind:value={field.description} on:focusout={fieldEdit} placeholder="{placeholderArea}"></textarea>
+        {:else}
+          {field.description}
+        {/if}
+      </div>
     </svelte:fragment>
   </AccordionItem>
 </Accordion>
