@@ -20,21 +20,6 @@
   const tabWidth: string = "w-96"
 </script>
 
-<!-- Gear -->
-<!-- Weapons, Armor, other gear -->
-<K4eGearTab
-  bind:activeTabName={activeTabName}
-  {compactVersion}
-  {matches}
-  {editMode}
-  {character}
-  fields={[...tabsContent["gear"]]}
-  tab={tabs["gear"]}
-  {tabWidth}
-  on:fieldRemove
-  on:fieldUpdate
-  on:fieldAdd />
-
 <!-- General Tab -->
 <!-- Archetype(tag) Occupation(tag), Appearance(text) -->
 <K4eGeneralTab
@@ -88,3 +73,18 @@
   {compactVersion}
   {matches}
   {editMode} />
+
+<!-- Gear -->
+<!-- Weapons, Armor, other gear -->
+<K4eGearTab
+  bind:activeTabName={activeTabName}
+  {compactVersion}
+  {matches}
+  {editMode}
+  {character}
+  fields={[...tabsContent["gear"]]}
+  tab={tabs["gear"]}
+  {tabWidth}
+  on:fieldRemove
+  on:fieldUpdate
+  on:fieldAdd />

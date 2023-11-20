@@ -211,7 +211,7 @@
     const characterNotesDrawerSettings: DrawerSettings = {
       id: "character-notes",
       position: "right",
-      width: "w-96",
+      width: "w-80",
       meta: {
         characterId: character.id,
       }
@@ -297,53 +297,59 @@
     <div
       out:fade={{ duration: 500 }}
       in:fade={{ duration: 500, delay: 500 }}
-      class="flex flex-col items-center mb-3 px-3"
+      class="mb-3 px-3"
       >
-      <div class="mt-3">
-        <CharacterAvatar characterName={character.name} characterId={character.id} avatarUrl={characterAvatarUrl} {editMode} on:avatarSet={avatarSetHandler} />
-      </div>
+      <div class="flex mt-3 w-96 mx-auto">
 
-      <div class="flex flex-wrap my-3 justify-around space-x-3">
-        {#if editMode}
-          <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
-        {:else}
-
-          <div class="h2 flex">
-            {#if compactVersion}
-              <a href="/characters/{character.id}">{characterName}</a>
-            {:else}
-              <span>{characterName}</span>
-            {/if}
-          </div>
-
-          {#if campaign !== undefined}
-            <a class="btn variant-ghost-tertiary" href="/campaigns/{campaign.id}">{campaign.name}</a>
-          {/if}
-
-        {/if}
-      </div>
-
-      {#if $currentUser.id === character.creator}
-        <div class="flex items-center justify-center mt-4">
-          <button class="btn w-10 h-10 p-3 uppercase {editMode ? "variant-filled-error" : "variant-filled-secondary"}" on:click={toggleEditMode}>
-            {#if editMode}
-              <MdCancel />
-            {:else}
-              <FaPencilAlt />
-            {/if}
-          </button>
-          <!-- cancel edit button -->
+        <!-- Avatar -->
+        <div class="">
+          <CharacterAvatar characterName={character.name} characterId={character.id} avatarUrl={characterAvatarUrl} {editMode} on:avatarSet={avatarSetHandler} />
+        </div>
+  
+        <!-- Name and Campaign -->
+        <div class="flex flex-col flex-wrap ml-3 justify-around">
           {#if editMode}
-            <button class="btn w-10 h-10 p-2 uppercase variant-filled-success ml-3" on:click={saveChanges}>
-              <MdSave />
-            </button>
+            <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
           {:else}
-            <button class="btn w-10 h-10 p-2 variant-filled-warning ml-3" on:click={openCharacterNotesDrawer}>
-              <MdNote />
-            </button>
+  
+            <div class="h2 flex">
+              {#if compactVersion}
+                <a href="/characters/{character.id}">{characterName}</a>
+              {:else}
+                <span>{characterName}</span>
+              {/if}
+            </div>
+  
+            {#if campaign !== undefined}
+              <a class="btn variant-ghost-tertiary" href="/campaigns/{campaign.id}">{campaign.name}</a>
+            {/if}
+  
+          {/if}
+          <!-- Controls -->
+          {#if $currentUser.id === character.creator}
+            <div class="flex flex-wrap mt-4 justify-around">
+              <button class="btn w-10 h-10 p-3 uppercase {editMode ? "variant-filled-error" : "variant-filled-secondary"}" on:click={toggleEditMode}>
+                {#if editMode}
+                  <MdCancel />
+                {:else}
+                  <FaPencilAlt />
+                {/if}
+              </button>
+              <!-- cancel edit button -->
+              {#if editMode}
+                <button class="btn w-10 h-10 p-2 uppercase variant-filled-success" on:click={saveChanges}>
+                  <MdSave />
+                </button>
+              {:else}
+                <button class="btn w-10 h-10 p-2 variant-filled-warning" on:click={openCharacterNotesDrawer}>
+                  <MdNote />
+                </button>
+              {/if}
+            </div>
           {/if}
         </div>
-      {/if}
+      </div>
+
 
       <!-- Character Sheet -->
       <!-- svelte-ignore a11y-no-static-element-interactions -->
