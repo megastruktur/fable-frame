@@ -25,7 +25,7 @@
   <hr />
 
   <div class="mt-3">
-    <K4eSkillsTree {fields} {editMode} />
+    <K4eSkillsTree {fields} {editMode} {activeTabName} />
   </div>
 </CharacterSheetTabWrapper>
 

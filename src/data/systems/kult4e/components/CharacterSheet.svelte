@@ -18,7 +18,7 @@
   export let editMode: boolean = false
   export let character: CharactersResponse
 
-  const tabWidth: string = "w-96"
+  const tabWidth: string = "md:w-96 w-full"
 </script>
 
 <!-- General Tab -->

@@ -28,7 +28,7 @@
     <button type="button"
       class="btn-icon btn-icon-sm variant-filled-error absolute -top-3 -right-3 z-10" on:click={removeTabEvent}>✕</button>
   {/if}
-  <div class="bg-neutral-900/90 py-3 px-4 drop-shadow-xl shadow-md h-auto">
+  <div class="bg-neutral-900/90 py-3 px-2 md:px-4 drop-shadow-xl shadow-md h-auto">
     <slot />
   </div>
 </section>

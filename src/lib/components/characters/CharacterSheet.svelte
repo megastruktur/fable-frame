@@ -299,7 +299,7 @@
       in:fade={{ duration: 500, delay: 500 }}
       class="mb-3 px-3"
       >
-      <div class="flex mt-3 w-96 mx-auto">
+      <div class="flex mt-3 w-80 mx-auto">
 
         <!-- Avatar -->
         <div class="">

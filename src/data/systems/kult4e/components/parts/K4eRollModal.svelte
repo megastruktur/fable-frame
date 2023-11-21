@@ -34,7 +34,7 @@
 
 </script>
 
-<div class="card text-3xl p-5 text-center w-72">
+<div class="rounded-xl bg-surface-700 bg-opacity-60 text-3xl p-5 text-center w-72">
   <div class="my-3">
     <div>2d10</div>
     <div>+</div>

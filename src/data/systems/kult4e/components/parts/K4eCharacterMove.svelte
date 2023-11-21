@@ -170,8 +170,8 @@
     },
     // Influence Other
     {
-      name: "influenceOther",
-      label: "Influence Other",
+      name: "influenceOthers",
+      label: "Influence Others",
       description: "When you influence an NPC through negotiation, argument, or from a position of power, roll <b>+Charisma</b>:",
       attribute: "charisma",
       results: [
