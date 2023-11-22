@@ -69,8 +69,8 @@
     }
 
     drawLine(seph1, seph2)
+    drawLine(seph1, seph10)
     drawLine(seph1, seph3)
-    drawLine(seph1, seph6)
     drawLine(seph2, seph3)
     drawLine(seph2, seph4)
     drawLine(seph2, seph6)
@@ -83,13 +83,11 @@
     drawLine(seph5, seph8)
     drawLine(seph6, seph7)
     drawLine(seph6, seph8)
-    drawLine(seph6, seph9)
     drawLine(seph7, seph8)
     drawLine(seph7, seph9)
     drawLine(seph7, seph10)
     drawLine(seph8, seph9)
     drawLine(seph8, seph10)
-    drawLine(seph9, seph10)
     
   }
 

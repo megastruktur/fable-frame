@@ -78,7 +78,7 @@
 
     <h4 class="my-3 text-center text-sm">Serious Wounds (<b>-1 ongoing</b>)</h4>
 
-    <div class="">
+    <div class="space-y-2">
       <FieldRender
         on:fieldRemove field={seriousWound1} {editMode} editable={true}
         characterId={character.id}

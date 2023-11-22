@@ -153,19 +153,25 @@
       <h3 class="h3 text-center">Dramatic Hooks</h3>
 
       {#if dramaticHooks.length > 0}
-        {#each dramaticHooks as dramaticHook(dramaticHook.id)}
-          <FieldRender
-            on:fieldRemove field={dramaticHook} {editMode} editable={true}
-            classes="bg-tertiary-900 w-full"
-            />
-        {/each}
-      {:else if !editMode}
-        <div class="text-center">-</div>
+        <div class="space-y-1">
+          {#each dramaticHooks as dramaticHook(dramaticHook.id)}
+            <FieldRender
+              on:fieldRemove field={dramaticHook} {editMode} editable={true}
+              classes="bg-tertiary-900 w-full"
+              />
+          {/each}
+        </div>
       {/if}
 
-      {#if editMode}
-        <CircleQuickAddField {character} type="tag" group="dramaticHooks" name="Dramatic Hook" description="Hook Description" on:fieldAdd classes={addButtonClasses} />
-      {/if}
+      <CircleQuickAddField
+        {character}
+        type="tag"
+        group="dramaticHooks"
+        name="(Edit character to change)"
+        description="Hook Description"
+        saveField={true}
+        on:fieldAdd
+        classes={addButtonClasses} />
       
     </div>
 
@@ -174,13 +180,13 @@
 
       <h3 class="h3 text-center">Relations</h3>
 
-      <div class="mb-3">
+      <div class="space-y-2">
         {#if relations.length > 0}
           {#each relations as relation(relation.id)}
             <FieldRender
               on:fieldRemove on:fieldUpdate field={relation} {editMode} editable={true}
               fullEditable={true}
-              colorButtons="variant-glass-success"
+              colorButtons="variant-filled-surface"
               updateWithoutEditMode={true}
               classes="{!editMode ? "bg-secondary-600" : ""}"
               />

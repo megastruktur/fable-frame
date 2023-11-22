@@ -153,18 +153,18 @@
   regionCaret="{editMode && editable ? "" : "hidden"}"
   regionControl="hover:!bg-transparent"
   padding=""
-  class="{classes} relative {!editMode || !editable ? "chip whitespace-normal m-1" : editClasses}">
+  class="{classes} relative {!editMode || !editable ? "chip whitespace-normal" : editClasses}">
   <AccordionItem class="w-full {editMode && editable ? "py-2" : ""}">
     <svelte:fragment slot="summary">
 
       {#if !isMinValue && (!editable || !editMode)}
         <button type="button" on:click|stopPropagation={fieldDecrement}
-          class="h-full rounded-l-md absolute top-0 left-0 {colorButtons} w-5">-</button>
+          class="h-full rounded-l-sm absolute top-0 left-0 {colorButtons} w-5">-</button>
       {/if}
 
       {#if !isMaxValue && (!editable || !editMode)}
         <button type="button" on:click|stopPropagation={fieldIncrement}
-          class="h-full rounded-r-md absolute top-0 right-0 {colorButtons} w-5">+</button>
+          class="h-full rounded-r-sm absolute top-0 right-0 {colorButtons} w-5">+</button>
       {/if}
 
       <div class="flex justify-between items-center w-full px-6">

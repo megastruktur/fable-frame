@@ -86,47 +86,45 @@
 
   <!-- Left Icons -->
   <div
-    class="fixed left-0 top-2/4 flex flex-col space-y-3 p-3
-      bg-surface-600/80 rounded-r-2xl shadow-md">
+    class="fixed bottom-0 w-full justify-center flex">
 
-    <!-- Campaign Notes -->
-    <button
-      class="btn btn-icon text-secondary-400"
-      on:click={openCampaignNotesDrawer}
-    >
-      <GiBookPile />
-    </button>
+    <div
+      class="justify-center flex space-x-3 p-3
+        bg-surface-600/80 rounded-t-2xl shadow-md">
+      <!-- Campaign Notes -->
+      <button
+        class="btn btn-icon text-secondary-400"
+        on:click={openCampaignNotesDrawer}
+      >
+        <GiBookPile />
+      </button>
+      
+      <!-- Chat -->
+      <button
+        class="btn btn-icon text-secondary-400"
+        on:click={openCampaignChatDrawer}
+      >
+        <MdChat />
+      </button>
     
-    <!-- Chat -->
-    <button
-      class="btn btn-icon text-secondary-400"
-      on:click={openCampaignChatDrawer}
-    >
-      <MdChat />
-    </button>
+      {#if isGM}
+        <ScenesManagerCaller
+          {campaign}
+          position="left"
+          classes="btn btn-icon text-secondary-400">
+          <GiSteelDoor />
+        </ScenesManagerCaller>
+      {/if}
   
-    {#if isGM}
-      <ScenesManagerCaller
-        {campaign}
-        position="left"
-        classes="btn btn-icon text-secondary-400">
-        <GiSteelDoor />
-      </ScenesManagerCaller>
-    {/if}
+      <!-- Characters -->
+      <button
+        class="btn btn-icon text-secondary-400"
+        on:click={openCharactersDrawer}
+      >
+        <PersonSimpleIcon />
+      </button>
+    </div>
 
-  </div>
-
-  <!-- Right icons -->
-  <div class="fixed right-0 top-1/4 flex flex-col space-y-3 p-3
-  bg-surface-600/80 rounded-l-2xl shadow-md">
-  
-    <!-- Characters -->
-    <button
-      class="btn btn-icon text-secondary-400"
-      on:click={openCharactersDrawer}
-    >
-      <PersonSimpleIcon />
-    </button>
   </div>
 
 

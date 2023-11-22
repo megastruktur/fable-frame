@@ -64,7 +64,7 @@
 
 {#if !editable || !editMode}
   <button
-    class="w-full chip mb-1 {checked ? inactiveClasses : ""} {colorButtons} {labelStyle}"
+    class="w-full chip {checked ? inactiveClasses : ""} {colorButtons} {labelStyle}"
     on:click={checkboxEditHandler}
     >{field.label ? field.label : "-"}</button>
 {:else}

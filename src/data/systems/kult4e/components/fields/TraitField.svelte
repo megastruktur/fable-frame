@@ -52,7 +52,7 @@
   rounded="md"
   padding=""
   regionControl="hover:!bg-transparent"
-  class="{classes} {!editMode || !editable ? "chip whitespace-normal m-1" : editClasses}">
+  class="{classes} {!editMode || !editable ? "chip whitespace-normal" : editClasses}">
   <AccordionItem class="w-full">
     <svelte:fragment slot="summary">
       {#if editable && editMode}

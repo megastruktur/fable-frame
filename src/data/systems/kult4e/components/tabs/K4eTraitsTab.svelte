@@ -52,14 +52,16 @@
       <h3 class="h3 text-center">Advantages</h3>
 
       {#if advantages.length > 0}
-        {#each advantages as field(field.name)}
-          <FieldRender
-            on:fieldRemove field={field} {editMode} editable={true}
-            fieldComponent={TraitField}
-            characterId={character.id}
-            classes="w-full bg-success-900"
-          />
-        {/each}
+        <div class="space-y-2">
+          {#each advantages as field(field.name)}
+            <FieldRender
+              on:fieldRemove field={field} {editMode} editable={true}
+              fieldComponent={TraitField}
+              characterId={character.id}
+              classes="w-full bg-success-900"
+            />
+          {/each}
+        </div>
       {:else if !editMode}
         <div class="text-center">-</div>
       {/if}
