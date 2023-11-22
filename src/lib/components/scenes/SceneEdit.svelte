@@ -33,17 +33,17 @@
       if (files !== undefined && files[0] !== undefined) {
         formData.set("image", files[0])
       }
+      try {
+        scene = await createScene(formData)
+        // @ts-ignore
+        $modalStore[0].response({scene: scene, action: "create"})
+        modalStore.close()
+      }
+      catch(error) {
+        console.log({error})
+      }
     }
     
-    try {
-      scene = await createScene(formData)
-      // @ts-ignore
-      $modalStore[0].response({scene: scene, action: "create"})
-      modalStore.close()
-    }
-    catch(error) {
-      console.log({error})
-    }
   }
 
   async function updateSceneHandler() {
@@ -100,7 +100,7 @@
   <form class="flex flex-col items-center mx-auto space-y-3 w-96">
     <input
       class="input"
-      type="text" bind:value={scene.name} placeholder="Scene name"/>
+      type="text" bind:value={scene.name} placeholder="Scene name" required/>
 
     {#if sceneEditImageSrc !== "" || previewImageSrc !== ""}
       <img src={previewImageSrc !== undefined ? previewImageSrc : sceneEditImageSrc} alt="{scene.name}" />

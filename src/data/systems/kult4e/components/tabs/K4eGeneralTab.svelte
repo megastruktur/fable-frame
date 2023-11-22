@@ -33,7 +33,6 @@
   let dramaticHooks: Field[] = getFieldsByGroup("dramaticHooks", fields)
   let relations: Field[] = getFieldsByGroup("relations", fields)
 
-  let initialArchetype: Field = archetype
   let occupationList: Field[] = []
 
   function getOccupationFieldList() {
@@ -57,7 +56,12 @@
         })
       }
       // sort by label
-      return occupationFields.sort((a, b) => a.label.localeCompare(b.label))
+      return occupationFields.sort((a, b) => {
+        if (a.label !== undefined && b.label!== undefined) {
+          return a.label.localeCompare(b.label)
+        }
+        return 1
+      })
     }
     return []
   }
@@ -67,8 +71,7 @@
 
     // Load the Occupation List only in case when archetype was changed.
     if (archetype !== undefined
-      && archetype.name !== initialArchetype?.name) {
-      initialArchetype = archetype
+      && (occupation === undefined || !occupation)) {
       occupationList = getOccupationFieldList()
     }
 

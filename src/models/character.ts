@@ -94,6 +94,13 @@ export async function getMyCharacters(queryParams: any = {}): Promise<Characters
   return await pb.collection("characters").getFullList(queryParams)
 }
 
+export async function getMyCharactersWithCampaign(): Promise<CharactersResponse[]> {
+  return await pb.collection("characters").getFullList({
+    expand: "campaign",
+    filter: `creator="${pb.authStore.model?.id}"`
+  })
+}
+
 /**
  * Get current user's characters
  * permissions are controlled by Pocketbase

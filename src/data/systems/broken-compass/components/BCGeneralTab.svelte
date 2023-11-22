@@ -96,9 +96,9 @@
       <!-- Tags -->
       <h3 class="h3 my-2 text-center">Tags</h3>
       <hr class="w-full mb-2" />
-      <div class="flex items-center my-3 space-y-3">
+      <div class="my-3 space-y-3">
         {#each tags as field(field.id)}
-          <FieldRender on:fieldRemove on:fieldUpdate classes="variant-filled-success" field={field} {editMode} editable={false} />
+          <FieldRender on:fieldRemove on:fieldUpdate classes="variant-filled-success w-full" field={field} {editMode} editable={false} />
         {/each}
       </div>
 
