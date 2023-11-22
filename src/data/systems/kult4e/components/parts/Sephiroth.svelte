@@ -67,8 +67,8 @@
 
 <style>
 	@keyframes rotation {
-		100%   { transform: rotate(0turn); }
-		0% { transform: rotate(1turn); }
+		0%   { transform: rotate(0turn); }
+		100% { transform: rotate(1turn); }
 	}
 	.seal {
 		position: relative;
@@ -100,7 +100,7 @@
 
     <button
       on:click={() => openMoveModal(field.data?.move)}
-      class="relative md:bg-surface-700 rounded-full">
+      class="relative bg-surface-700 rounded-full shadow-md shadow-black">
       <div
         class="seal" style="--size: {size}; --speed: {speed * 1000}ms; --font: {font}em">
         {#each array as char, index}

@@ -43,8 +43,7 @@
 <CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
   removable={false} {editMode} {tab} on:fieldRemove width={tabWidth} >
 
-  <h2 class="h2 text-center mb-3">{tab.label}</h2>
-  <hr />
+  <h2 class="h2 text-center mb-3 py-1 variant-filled-surface shadow-sm shadow-black">{tab.label}</h2>
 
   <div class="mt-3">
 

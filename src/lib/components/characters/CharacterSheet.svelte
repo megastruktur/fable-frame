@@ -15,15 +15,6 @@
 	import { getCampaignImage } from "$models/campaign";
 	import { currentUser } from "$lib/pocketbase";
 	import { addCharacterField, removeCharacterField, updateCharacterField, createCharacterField, updateSaveCharacterField } from "$lib/characterFieldsOperations";
-
-  // @ts-ignore
-  import MdNote from 'svelte-icons/md/MdNote.svelte'
-  // @ts-ignore
-  import MdSave from 'svelte-icons/md/MdSave.svelte'
-  // @ts-ignore
-  import MdCancel from 'svelte-icons/md/MdCancel.svelte'
-  // @ts-ignore
-	import FaPencilAlt from 'svelte-icons/fa/FaPencilAlt.svelte'
 	import { getRpgSystemImage } from "$models/rpg_system";
 
   const toastStore = getToastStore()
@@ -299,15 +290,15 @@
       in:fade={{ duration: 500, delay: 500 }}
       class="mb-3 px-3"
       >
-      <div class="flex mt-3 w-80 mx-auto">
+      <div class="flex flex-col mt-3 items-center">
 
         <!-- Avatar -->
         <div class="">
           <CharacterAvatar characterName={character.name} characterId={character.id} avatarUrl={characterAvatarUrl} {editMode} on:avatarSet={avatarSetHandler} />
         </div>
   
-        <!-- Name and Campaign -->
-        <div class="flex flex-col flex-wrap ml-3 justify-around">
+        <!-- Name -->
+        <div class="flex flex-col flex-wrap">
           {#if editMode}
             <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
           {:else}
@@ -319,35 +310,38 @@
                 <span>{characterName}</span>
               {/if}
             </div>
-  
-            {#if campaign !== undefined}
-              <a class="btn variant-ghost-tertiary" href="/campaigns/{campaign.id}">{campaign.name}</a>
-            {/if}
-  
-          {/if}
-          <!-- Controls -->
-          {#if $currentUser.id === character.creator}
-            <div class="flex flex-wrap mt-4 justify-around">
-              <button class="btn w-10 h-10 p-3 uppercase {editMode ? "variant-filled-error" : "variant-filled-secondary"}" on:click={toggleEditMode}>
-                {#if editMode}
-                  <MdCancel />
-                {:else}
-                  <FaPencilAlt />
-                {/if}
-              </button>
-              <!-- cancel edit button -->
-              {#if editMode}
-                <button class="btn w-10 h-10 p-2 uppercase variant-filled-success" on:click={saveChanges}>
-                  <MdSave />
-                </button>
-              {:else}
-                <button class="btn w-10 h-10 p-2 variant-filled-warning" on:click={openCharacterNotesDrawer}>
-                  <MdNote />
-                </button>
-              {/if}
-            </div>
           {/if}
         </div>
+
+        <!-- Campaign -->
+        {#if campaign !== undefined}
+          <a class="btn variant-ghost-tertiary" href="/campaigns/{campaign.id}">{campaign.name}</a>
+        {/if}
+
+        <!-- Controls -->
+        {#if $currentUser.id === character.creator}
+          <div class="flex flex-wrap mt-4 space-x-3">
+
+            <button class="btn btn-icon text-2xl {editMode ? "variant-filled-error" : "variant-filled-secondary"}" on:click={toggleEditMode}>
+              {#if editMode}
+                <span class="i-material-symbols-cancel"></span>
+              {:else}
+                <span class="i-fa-pencil"></span>
+              {/if}
+            </button>
+
+            <!-- cancel edit button -->
+            {#if editMode}
+              <button class="btn btn-icon text-2xl variant-filled-success" on:click={saveChanges}>
+                <span class="i-material-symbols-save"></span>
+              </button>
+            {:else}
+              <button class="btn btn-icon text-2xl variant-filled-warning" on:click={openCharacterNotesDrawer}>
+                <span class="i-material-symbols-note"></span>
+              </button>
+            {/if}
+          </div>
+        {/if}
       </div>
 
 
