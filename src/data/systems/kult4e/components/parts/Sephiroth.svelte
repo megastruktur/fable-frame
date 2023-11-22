@@ -66,11 +66,6 @@
 </script>
 
 <style>
-	:global(body) {
-		padding: 40px;
-		display: flex;
-		gap: 80px;
-	}
 	@keyframes rotation {
 		100%   { transform: rotate(0turn); }
 		0% { transform: rotate(1turn); }
