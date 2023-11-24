@@ -31,30 +31,9 @@
     gmCampaigns = await getGMCampaigns()
   }
 
-  function deleteCampaignPrompt() {
-
-    const campaign = gmCampaigns.find(c => c.id === operationsOnCampaignId)
-
-    if (campaign !== undefined) {
-
-      const modal: ModalSettings = {
-        type: 'confirm',
-        title: 'Please Confirm',
-        body: `Are you sure you want to remove campaign <span class="text-error-900">${campaign.name}</span>? This action cannot be undone.`,
-        response: async (r: boolean) => {
-          if (r === true) {
-  
-            await deleteCampaign(campaign.id)
-            gmCampaigns = gmCampaigns.filter(c => c.id !== campaign.id)
-            characterCampaigns = characterCampaigns.filter(c => c.id !== campaign.id)
-  
-            toastShow(`Campaign <span class="text-error-900">${campaign.name}</span> has been removed`, toastStore)
-  
-          }
-        }
-      };
-      modalStore.trigger(modal);
-    }
+  function campaignRemoveHandler({detail: { campaign }} : {detail: {campaign: CampaignsResponse}}) {
+    gmCampaigns = gmCampaigns.filter(c => c.id !== campaign.id)
+    characterCampaigns = characterCampaigns.filter(c => c.id !== campaign.id)
   }
 
 </script>
@@ -79,13 +58,6 @@
           >
             <CampaignCard campaign={gc} classes="m-3" />
 
-            <!-- Campaign Operations -->
-            <button
-              class="btn-icon variant-ghost-secondary absolute right-2 top-2"
-              on:click={() => operationsOnCampaignId = gc.id}
-              use:popup={campaignOperationsPopup}
-            >⋮</button>
-
           </div>
         {/each}
       {/if}
@@ -107,20 +79,10 @@
 					in:receive={{ key: cc.id }}
 					out:send={{ key: cc.id }}
           >
-          <CampaignCard campaign={cc} classes="m-3" />
+          <CampaignCard on:campaignRemove={campaignRemoveHandler} campaign={cc} classes="m-3" />
         </div>
         {/each}
       </div>
     {/if}
 	{/await}
-
-  <!-- Operations Popup -->
-  <div class="card w-48 shadow-xl py-2" data-popup="campaignOperationsPopup">
-    <ul class="list-nav px-2">
-      <li class="mb-2"><a href="/campaigns/{operationsOnCampaignId}/edit">Edit</a></li>
-      <li>
-        <a class="bg-error-900" href="/" on:click|preventDefault={deleteCampaignPrompt}>Remove</a></li>
-    </ul>
-    <div class="arrow bg-surface-100-800-token" />
-  </div>
 </div>

@@ -3,6 +3,7 @@ import { writable } from "svelte/store"
 import { env } from '$env/dynamic/public';
 
 export const pb = new Pocketbase(env.PUBLIC_POCKETBASE_URL);
+pb.autoCancellation(false);
 
 export const currentUser = writable(pb.authStore.model)
 
