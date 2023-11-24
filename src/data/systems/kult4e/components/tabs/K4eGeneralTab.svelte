@@ -190,8 +190,6 @@
               classes="{!editMode ? "bg-secondary-600" : ""}"
               />
           {/each}
-        {:else if !editMode}
-          <div class="text-center">-</div>
         {/if}
       </div>
 
