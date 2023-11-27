@@ -1,6 +1,4 @@
 <script lang="ts">
-	// @ts-ignore
-	import MdArrowDropDown from 'svelte-icons/md/MdArrowDropDown.svelte';
 	import type { Field } from '$lib/types';
 	import { createEventDispatcher } from 'svelte';
 	import { getModalStore, type ModalComponent, type ModalSettings } from '@skeletonlabs/skeleton';
@@ -116,16 +114,16 @@
       >
         <div class="flex">
           {#if editMode}
-            <button class="w-15 h-15 rotate-90" on:click={fieldDecrement}>
-              <MdArrowDropDown />
+            <button class="w-15 h-15" on:click={fieldDecrement}>
+							<div class="i-lets-icons-arrow-drop-left"></div>
             </button>
           {/if}
 
           {skillValue}
 
           {#if editMode}
-            <button class="w-15 h-15 -rotate-90" on:click={fieldIncrement}>
-              <MdArrowDropDown />
+            <button class="w-15 h-15" on:click={fieldIncrement}>
+              <div class="i-lets-icons-arrow-drop-right"></div>
             </button>
           {/if}
         </div>

@@ -151,26 +151,26 @@
 
       <h3 class="h3 text-center">Dramatic Hooks</h3>
 
-      {#if dramaticHooks.length > 0}
-        <div class="space-y-1">
+      <div class="space-y-2">
+        {#if dramaticHooks.length > 0}
           {#each dramaticHooks as dramaticHook(dramaticHook.id)}
             <FieldRender
               on:fieldRemove field={dramaticHook} {editMode} editable={true}
               classes="bg-tertiary-900 w-full"
               />
           {/each}
-        </div>
-      {/if}
-
-      <CircleQuickAddField
-        {character}
-        type="tag"
-        group="dramaticHooks"
-        name="(Edit character to change)"
-        description="Hook Description"
-        saveField={true}
-        on:fieldAdd
-        classes={addButtonClasses} />
+        {/if}
+  
+        <CircleQuickAddField
+          {character}
+          type="tag"
+          group="dramaticHooks"
+          name="(Edit character to change)"
+          description="Hook Description"
+          saveField={true}
+          on:fieldAdd
+          classes={addButtonClasses} />
+      </div>
       
     </div>
 
@@ -191,18 +191,18 @@
               />
           {/each}
         {/if}
+        <CircleQuickAddField
+          {character}
+          type="counter"
+          group="relations"
+          name="(Edit character to change)"
+          description="Relation Description"
+          value="--"
+          fullEditable={true}
+          saveField={true}
+          on:fieldAdd classes={addButtonClasses} />
       </div>
 
-      <CircleQuickAddField
-        {character}
-        type="counter"
-        group="relations"
-        name="(Edit character to change)"
-        description="Relation Description"
-        value="--"
-        fullEditable={true}
-        saveField={true}
-        on:fieldAdd classes={addButtonClasses} />
       
     </div>
 

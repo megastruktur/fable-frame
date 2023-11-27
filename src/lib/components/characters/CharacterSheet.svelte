@@ -51,6 +51,7 @@
     else if (rpgSystem !== undefined) {
       backgoundImage = getRpgSystemImage(rpgSystem)
     }
+    console.log(backgoundImage)
 
     if (backgoundImage !== "") {
       headerBanner.set(backgoundImage)

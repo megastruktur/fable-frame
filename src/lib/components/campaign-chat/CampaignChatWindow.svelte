@@ -4,8 +4,6 @@
 	import type { ChatMessage, DieRollChat } from "$lib/types";
 	import { createChatMessage, getCampaignChat, subscribeToCampaignChats } from "$models/campaign_chat";
 	import { onDestroy, onMount, tick } from "svelte";
-  // @ts-ignore
-  import FaAngleRight from 'svelte-icons/fa/FaAngleRight.svelte'
 	import CampaignChatMessage from "./CampaignChatMessage.svelte";
 	import DiceRoller from "../dice/DiceRoller.svelte";
   import { DiceRoll } from '@dice-roller/rpg-dice-roller';
@@ -156,7 +154,10 @@
       <textarea class="input resize-none" bind:value={chatMessage} placeholder="Type here"></textarea>
       <button type="submit"
         class="btn btn-icon btn-icon-sm variant-filled-tertiary h-6 w-6"
-      ><FaAngleRight class="text-secondary-600" /></button>
+      >
+
+      <div class="i-fa6-solid-angle-right text-2xl">
+    </button>
     </form>
     <!-- Dice -->
     <DiceRoller on:diceRoll={diceRollHandler} />

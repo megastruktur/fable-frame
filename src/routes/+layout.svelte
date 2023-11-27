@@ -25,9 +25,9 @@
 		import CampaignNotesDrawer from "$lib/components/campaign/CampaignNotesDrawer.svelte";
 		import { page } from "$app/stores";
 		import CampaignChatWindow from "$lib/components/campaign-chat/CampaignChatWindow.svelte";
-	import CharacterSheet from "$lib/components/characters/CharacterSheet.svelte";
 	import ScenesManager from "$lib/components/scenes/ScenesManager.svelte";
 	import CampaignRequests from "$lib/components/campaign/CampaignRequests.svelte";
+	import CampaignEditDrawer from "$lib/components/campaign/CampaignEditDrawer.svelte";
 
 		let fullscreen = false
 
@@ -80,6 +80,8 @@
 		<CampaignRequests characters={$drawerStore.meta.characters} campaignId={$drawerStore.meta.campaignId} />
 	{:else if $drawerStore.id === "campaign-chat"}
 		<CampaignChatWindow campaign={$drawerStore.meta.campaignWithCharacters} />
+	{:else if $drawerStore.id === "campaign-edit"}
+		<CampaignEditDrawer campaign={$drawerStore.meta.campaign} />
 	{/if}
 </Drawer>
 <!-- App Shell -->

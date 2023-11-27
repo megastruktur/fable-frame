@@ -3,10 +3,6 @@
 	import { getSceneImage } from "$models/scenes";
 	import { popup, type ModalComponent, type PopupSettings, type ModalSettings, getModalStore } from "@skeletonlabs/skeleton";
 	import { createEventDispatcher } from "svelte";
-  // @ts-ignore
-  import FaEye from 'svelte-icons/fa/FaEye.svelte'
-  // @ts-ignore
-  import FaRegEyeSlash from 'svelte-icons/fa/FaRegEyeSlash.svelte'
 	import SceneEdit from './SceneEdit.svelte';
 
   // BsCheckLg
@@ -90,9 +86,9 @@
 >
   <button type="button" class="btn btn-icon btn-icon-sm absolute top-2 right-2 {isAcivated ? "text-white" : "text-gray-400"}" on:click|stopPropagation={activateSceneHandler}>
     {#if isAcivated}
-    <FaEye />
+      <div class="i-fa6-solid-eye text-5xl"></div>
     {:else}
-    <FaRegEyeSlash />
+      <div class="i-fa6-solid-eye-slash text-5xl"></div>
     {/if}
   </button>
 

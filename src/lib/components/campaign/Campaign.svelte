@@ -8,16 +8,7 @@
 	import CampaignAlert from "$lib/components/campaign/CampaignAlert.svelte";
 	import ScenesManagerCaller from "../scenes/ScenesManagerCaller.svelte";
 
-  // @ts-ignore
-  import GiPlayButton from 'svelte-icons/gi/GiPlayButton.svelte'
-  // @ts-ignore
-  import MdShare from 'svelte-icons/md/MdShare.svelte'
-  // @ts-ignore
-	import FaPencilAlt from 'svelte-icons/fa/FaPencilAlt.svelte'
-  // @ts-ignore
-  import GiSteelDoor from 'svelte-icons/gi/GiSteelDoor.svelte'
 	import CampaignNotes from "./CampaignNotes.svelte";
-	import { activateScene } from "$models/scenes";
 
   const drawerStore = getDrawerStore()
 
@@ -49,8 +40,21 @@
         rpgSystem: rpgSystem,
         campaign: campaign,
       },
-      width: "w-96",
+      width: "w-auto",
       position: "right",
+    };
+
+    drawerStore.open(characterSheetDrawerSettings);
+  }
+
+  function openCampaignEditDrawerHandler(character: CharactersResponse) {
+    const characterSheetDrawerSettings: DrawerSettings = {
+      id: `campaign-edit`,
+      meta: {
+        campaign: campaign,
+      },
+      width: "w-auto",
+      position: "left",
     };
 
     drawerStore.open(characterSheetDrawerSettings);
@@ -118,19 +122,28 @@
 
   <div class="flex flex-wrap justify-center space-x-3">
     {#if campaign.creator === $currentUser?.id}
-      <a class="btn w-10 h-10 p-2 variant-ghost-warning" href="/campaigns/{campaign.id}/edit"><FaPencilAlt /></a>
+      <button
+        on:click={openCampaignEditDrawerHandler}
+        class="btn w-10 h-10 p-2 variant-ghost-warning"
+        >
+        <div class="text-5xl i-fa-pencil"></div>
+      </button>
       <button
         on:click={openCampaignRequestsDrawer}
-        class="btn w-10 h-10 p-2 variant-ghost-secondary"><MdShare /></button>
+        class="btn w-10 h-10 p-2 variant-ghost-secondary">
+        <div class="i-material-symbols-share text-5xl">
+      </button>
 
       <ScenesManagerCaller
         {campaign}
         classes="btn w-10 h-10 p-2 variant-ghost-success" >
-        <GiSteelDoor />
+        <div class="i-game-icons-steel-door text-5xl"></div>
       </ScenesManagerCaller>
     {/if}
     {#if campaign.activeScene !== undefined && campaign.activeScene !== ""}
-      <a class="btn w-10 h-10 p-2 variant-ghost-warning" href="/campaigns/{campaign.id}/game"><GiPlayButton /></a>
+      <a class="btn w-10 h-10 p-2 variant-ghost-warning" href="/campaigns/{campaign.id}/game">
+        <div class="i-mdi-play text-5xl">
+      </a>
     {/if}
   </div>
 

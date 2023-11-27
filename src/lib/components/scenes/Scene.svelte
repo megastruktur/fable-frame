@@ -3,17 +3,9 @@
 	import { getSceneImage } from "$models/scenes";
 	import { getDrawerStore, type DrawerSettings, ProgressBar } from "@skeletonlabs/skeleton";
 
-  // @ts-ignore
-  import GiBookPile from 'svelte-icons/gi/GiBookPile.svelte'
-  // @ts-ignore
-  import MdChat from 'svelte-icons/md/MdChat.svelte'
-  // @ts-ignore
-  import GiSteelDoor from 'svelte-icons/gi/GiSteelDoor.svelte'
-
 	import { currentUser } from "$lib/pocketbase";
 	import CampaignAlert from "../campaign/CampaignAlert.svelte";
 	import ScenesManagerCaller from "./ScenesManagerCaller.svelte";
-	import PersonSimpleIcon from "../icons/PersonSimpleIcon.svelte";
 	import { getCampaignAlerts } from "$models/campaign_notes";
 
   export let scene: ScenesResponse
@@ -41,7 +33,7 @@
       campaign: campaign,
       characters: isGM ? campaign.expand.characters : campaign.expand.characters.filter(c => c.creator === $currentUser?.id)
     },
-    width: "w-96",
+    width: "w-auto",
     position: "right",
   };
 
@@ -84,7 +76,7 @@
     </h2>
   </div>
 
-  <!-- Left Icons -->
+  <!-- Buttons -->
   <div
     class="fixed bottom-0 w-full justify-center flex">
 
@@ -96,7 +88,7 @@
         class="btn btn-icon text-secondary-400"
         on:click={openCampaignNotesDrawer}
       >
-        <GiBookPile />
+        <div class="i-game-icons-book-pile text-5xl"></div>
       </button>
       
       <!-- Chat -->
@@ -104,15 +96,16 @@
         class="btn btn-icon text-secondary-400"
         on:click={openCampaignChatDrawer}
       >
-        <MdChat />
+        <div class="i-material-symbols-chat text-5xl"></div>
       </button>
     
+      <!-- Scenes Manager -->
       {#if isGM}
         <ScenesManagerCaller
           {campaign}
           position="left"
           classes="btn btn-icon text-secondary-400">
-          <GiSteelDoor />
+          <div class="i-game-icons-steel-door text-5xl"></div>
         </ScenesManagerCaller>
       {/if}
   
@@ -121,7 +114,7 @@
         class="btn btn-icon text-secondary-400"
         on:click={openCharactersDrawer}
       >
-        <PersonSimpleIcon />
+        <div class="i-ph-person-fill text-5xl"></div>
       </button>
     </div>
 

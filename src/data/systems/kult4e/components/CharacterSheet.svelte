@@ -90,4 +90,6 @@
   on:fieldUpdate
   on:fieldAdd />
 
-<div class="fixed right-3 bottom-3 md:right-5"><K4eRollButton /></div>
+{#if !compactVersion}
+  <div class="fixed right-3 bottom-3 md:right-5"><K4eRollButton /></div>
+{/if}
