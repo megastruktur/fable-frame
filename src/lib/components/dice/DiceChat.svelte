@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ChatMessage, DieRollChat } from "$lib/types";
-	import { updateChatMessageWithSocket } from "$models/campaign_chat";
+	import { updateChatMessageCM } from "$models/campaign_chat";
 	import { popup, type PopupSettings } from "@skeletonlabs/skeleton";
 	import ColorPickerPopup from "../global/ColorPickerPopup.svelte";
 	import { currentUser } from "$lib/pocketbase";
@@ -42,7 +42,7 @@
     })]
     message.message = rollResultPrefix + JSON.stringify(dice)
     operationOnDieId = ""
-    await updateChatMessageWithSocket(message)
+    await updateChatMessageCM(message)
   }
 </script>
 

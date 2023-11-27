@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">fable-frame</string>
+    <string name="title_activity_main">fable-frame</string>
+    <string name="package_name">online.fableframe.app</string>
+    <string name="custom_url_scheme">online.fableframe.app</string>
+</resources>

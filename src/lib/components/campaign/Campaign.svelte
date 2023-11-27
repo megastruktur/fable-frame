@@ -27,7 +27,7 @@
   let isUserGm: boolean = campaign.creator === $currentUser?.id
 
   let characters: CharactersResponse[] = campaign.expand.characters
-  let campaignNotesAll: CampaignNotesResponse[] = campaign.expand["campaign_notes(campaign)"].sort((a, b) => {
+  let campaignNotesAll: CampaignNotesResponse[] = campaign.expand["campaign_notes(campaign)"]?.sort((a, b) => {
     return new Date(b.created).getTime() - new Date(a.created).getTime()
   })
 
@@ -77,7 +77,7 @@
     campaignNotes = []
     campaignNpc = []
 
-    campaignNotesAll.forEach(note => {
+    campaignNotesAll?.forEach(note => {
 
       let shouldReturn = true
       let isAlert = false
@@ -137,11 +137,13 @@
   <article class="mt-6 text-center">{campaign.description}</article>
 
   <div class="flex flex-wrap justify-center mb-3">
-    {#each characters as character}
-      <button class="btn" on:click|stopPropagation={() => openCharacterSheetDrawerHandler(character)}>
-        <CharacterItem {character} />
-      </button>
-    {/each}
+    {#if characters && characters.length > 0}
+      {#each characters as character}
+        <button class="btn" on:click|stopPropagation={() => openCharacterSheetDrawerHandler(character)}>
+          <CharacterItem {character} />
+        </button>
+      {/each}
+    {/if}
   </div>
 
   <div class="flex flex-wrap justify-evenly">

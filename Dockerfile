@@ -1,29 +1,14 @@
-# Use an official Node.js runtime as the base image
-FROM node:18
-
-# Set the working directory in the container
+FROM node:18 as base
 WORKDIR /app
-
-# Copy package.json and package-lock.json to the container
 COPY package*.json ./
-
-# Install the project dependencies
 RUN npm install
-
-# Copy the rest of the application code to the container
 COPY . .
-
-# Build the SvelteKit application
 RUN npm run build
 
-# Expose the port that the application will run on
-EXPOSE 3000
+FROM nginx:stable as application
+WORKDIR /usr/share/nginx/html
+COPY --from=base /app/build .
 
 # Env variables
 ARG PUBLIC_POCKETBASE_URL
 ENV PUBLIC_POCKETBASE_URL $PUBLIC_POCKETBASE_URL
-ARG PUBLIC_SOCKETIO_URL
-ENV PUBLIC_SOCKETIO_URL $PUBLIC_SOCKETIO_URL
-
-# Start the SvelteKit application
-ENTRYPOINT [ "node", "/app/build/server.js" ]

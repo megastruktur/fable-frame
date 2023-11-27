@@ -1,27 +1,7 @@
 <script lang="ts">
   import { page } from "$app/stores"
-	import type { CampaignsResponse } from "$lib/pocketbase-types";
-	import { getCampaignWithRpgSystemCharsAndNotes } from "$models/campaign"
-	import { ProgressBar } from "@skeletonlabs/skeleton"
-	import Campaign from "$lib/components/campaign/Campaign.svelte";
-
-  let campaign: CampaignsResponse
-
-  async function loadData() {
-
-    // @todo Investigate why there are so many calls (3 calls, 2 of them return 404)
-    try {
-      campaign = await getCampaignWithRpgSystemCharsAndNotes($page.params.campaignId)
-    }
-    catch (error) {
-      // console.error(error)
-    }
-  }
+	import CampaignPage from "$lib/components/pages/campaigns/CampaignPage.svelte";
 
 </script>
 
-{#await loadData()}
-  <ProgressBar />
-{:then}
-  <Campaign {campaign} />
-{/await}
+<CampaignPage campaignId={$page.params.campaignId} />

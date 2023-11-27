@@ -1,3 +1,6 @@
+### 0.9.0
+- Static HTML deployment + capacitor suppport
+
 ### 0.8.0
 - Feature: Kult: Divinity Lost 4e TTRPG added
 - Feature: Adds Important Notes Section to campaign

@@ -658,85 +658,6 @@
         }
     },
     {
-        "id": "szqd7d7vqb3qf0w",
-        "name": "campaign_chat",
-        "type": "base",
-        "system": false,
-        "schema": [
-            {
-                "system": false,
-                "id": "d7qxouet",
-                "name": "campaign",
-                "type": "relation",
-                "required": false,
-                "presentable": false,
-                "unique": false,
-                "options": {
-                    "collectionId": "qnlrhnmrrof1i0e",
-                    "cascadeDelete": true,
-                    "minSelect": null,
-                    "maxSelect": 1,
-                    "displayFields": null
-                }
-            },
-            {
-                "system": false,
-                "id": "mdh6x9gs",
-                "name": "character",
-                "type": "relation",
-                "required": false,
-                "presentable": false,
-                "unique": false,
-                "options": {
-                    "collectionId": "cfh703t0mjspxbr",
-                    "cascadeDelete": false,
-                    "minSelect": null,
-                    "maxSelect": 1,
-                    "displayFields": null
-                }
-            },
-            {
-                "system": false,
-                "id": "z9sbqhlo",
-                "name": "message",
-                "type": "text",
-                "required": false,
-                "presentable": false,
-                "unique": false,
-                "options": {
-                    "min": null,
-                    "max": null,
-                    "pattern": ""
-                }
-            },
-            {
-                "system": false,
-                "id": "7c1orut6",
-                "name": "creator",
-                "type": "relation",
-                "required": false,
-                "presentable": false,
-                "unique": false,
-                "options": {
-                    "collectionId": "_pb_users_auth_",
-                    "cascadeDelete": false,
-                    "minSelect": null,
-                    "maxSelect": 1,
-                    "displayFields": null
-                }
-            }
-        ],
-        "indexes": [
-            "CREATE INDEX `idx_6xoiGl3` ON `campaign_chat` (`campaign`)"
-        ],
-        "listRule": "@request.auth.id != \"\"",
-        "viewRule": "@request.auth.id != \"\"",
-        "createRule": "@request.auth.id != \"\"",
-        "updateRule": "@request.auth.id = creator || @request.auth.id = campaign.creator",
-        "deleteRule": "@request.auth.id = creator || @request.auth.id = campaign.creator",
-        "options": {}
-    },
-    {
         "id": "shh0f358w4655fm",
         "name": "campaign_notes",
         "type": "base",
@@ -837,6 +758,85 @@
         "createRule": "@request.auth.id = campaign.creator",
         "updateRule": "@request.auth.id = creator",
         "deleteRule": "@request.auth.id = creator",
+        "options": {}
+    },
+    {
+        "id": "szqd7d7vqb3qf0w",
+        "name": "campaign_chat",
+        "type": "base",
+        "system": false,
+        "schema": [
+            {
+                "system": false,
+                "id": "d7qxouet",
+                "name": "campaign",
+                "type": "relation",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "collectionId": "qnlrhnmrrof1i0e",
+                    "cascadeDelete": true,
+                    "minSelect": null,
+                    "maxSelect": 1,
+                    "displayFields": null
+                }
+            },
+            {
+                "system": false,
+                "id": "mdh6x9gs",
+                "name": "character",
+                "type": "relation",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "collectionId": "cfh703t0mjspxbr",
+                    "cascadeDelete": false,
+                    "minSelect": null,
+                    "maxSelect": 1,
+                    "displayFields": null
+                }
+            },
+            {
+                "system": false,
+                "id": "z9sbqhlo",
+                "name": "message",
+                "type": "text",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "min": null,
+                    "max": null,
+                    "pattern": ""
+                }
+            },
+            {
+                "system": false,
+                "id": "7c1orut6",
+                "name": "creator",
+                "type": "relation",
+                "required": false,
+                "presentable": false,
+                "unique": false,
+                "options": {
+                    "collectionId": "_pb_users_auth_",
+                    "cascadeDelete": false,
+                    "minSelect": null,
+                    "maxSelect": 1,
+                    "displayFields": null
+                }
+            }
+        ],
+        "indexes": [
+            "CREATE INDEX `idx_6xoiGl3` ON `campaign_chat` (`campaign`)"
+        ],
+        "listRule": "@request.auth.id != \"\" && @request.auth.id ?~ campaign.characters.creator",
+        "viewRule": "@request.auth.id != \"\" && @request.auth.id ?~ campaign.characters.creator",
+        "createRule": "@request.auth.id != \"\"",
+        "updateRule": "@request.auth.id = creator || @request.auth.id = campaign.creator",
+        "deleteRule": "@request.auth.id = creator || @request.auth.id = campaign.creator",
         "options": {}
     }
 ]

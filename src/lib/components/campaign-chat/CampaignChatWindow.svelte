@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { currentUser } from "$lib/pocketbase";
-	import type { CampaignsResponse, CharactersResponse } from "$lib/pocketbase-types";
+	import type { CampaignChatResponse, CampaignsResponse, CharactersResponse } from "$lib/pocketbase-types";
 	import type { ChatMessage, DieRollChat } from "$lib/types";
-	import { io } from '$lib/webSocketConnection';
-	import { createChatMessage, getCampaignChat } from "$models/campaign_chat";
+	import { createChatMessage, getCampaignChat, subscribeToCampaignChats } from "$models/campaign_chat";
 	import { onDestroy, onMount, tick } from "svelte";
   // @ts-ignore
   import FaAngleRight from 'svelte-icons/fa/FaAngleRight.svelte'
@@ -11,7 +10,8 @@
 	import DiceRoller from "../dice/DiceRoller.svelte";
   import { DiceRoll } from '@dice-roller/rpg-dice-roller';
   import { v4 as uuidv4 } from 'uuid'
-	import { getCharacterAvatarThumb } from "$models/character";
+	import { getCharacter, getCharacterAvatarThumb } from "$models/character";
+	import type { UnsubscribeFunc } from "pocketbase";
 
 
   export let campaign: CampaignsResponse
@@ -23,6 +23,7 @@
   let chatMessage: string
   let messages: ChatMessage[] = []
   let element: HTMLDivElement
+  let unsubscribeFromChat: UnsubscribeFunc
 
   async function scrollToBottom(node: HTMLDivElement) {
     node?.scroll({ top: node.scrollHeight, behavior: 'smooth' });
@@ -64,24 +65,49 @@
         character: myCharacter?.id || "",
         message: messageString
       })
-      const message: ChatMessage = {
-        campaignId: campaign.id,
-        characterName: characterName,
-        message: messageString,
-        messageId: campaignChatMessage.id,
-        creatorId: $currentUser?.id || "",
-        characterAvatar: characterAvatar,
-        idUpdatedString: campaignChatMessage.id + campaignChatMessage.updated,
-        time: new Date().toLocaleString(),
-      }
-      io.emit('campaignChat', message);
       chatMessage = ""
     }
   }
 
+  async function subscribeToChat({action, record}: {action: string, record: CampaignChatResponse}) {
+    console.log([action, record])
+
+  let characterMessaged = await getCharacter(record.character)
+
+  let message: ChatMessage = {
+    campaignId: campaign.id,
+    messageId: record.id,
+    characterName: characterMessaged.name,
+    message: record.message,
+    time: record.updated,
+    creatorId: record.creator,
+    isGm: record.creator === campaign.creator,
+    idUpdatedString: record.id + record.updated,
+    characterAvatar: getCharacterAvatarThumb(characterMessaged),
+  }
+
+  // create
+  if (action === "create") {
+
+    messages = [...messages, message];
+    await tick();
+    scrollToBottom(element)
+  }
+  // edit
+  else if (action === "update") {
+
+    messages = [...messages.map(m => {
+      if (m.messageId === record.id) {
+        return message
+      }
+      return m
+    })]
+  }
+  }
+
   onMount(async () => {
 
-    io.emit('create', `campaign-chat-room-${campaign.id}`);
+    unsubscribeFromChat = await subscribeToCampaignChats(subscribeToChat)
 
     messages = (await getCampaignChat(campaign.id)).map(message => {
       return {
@@ -97,31 +123,17 @@
       }
     })
 
-    io.on('campaignChatMessage', async (message: ChatMessage) => {
-        message.isGm = message.creatorId === campaign.creator
-        messages = [...messages, message];
-        await tick();
-        scrollToBottom(element)
-    });
-
-    // Replace message if edited.
-    io.on('campaignChatMessageEdited', async (message: ChatMessage) => {
-      messages = [...messages.map(m => {
-        if (m.messageId === message.messageId) {
-          return message
-        }
-        return m
-      })]
-    });
-
     // Wait for data to populate
     await tick();
     scrollToBottom(element)
   });
 
   onDestroy(() => {
-    io.off("campaignChatMessage")
-    io.off("campaignChatMessageEdited")
+    if (unsubscribeFromChat !== undefined) {
+      unsubscribeFromChat()
+    }
+    // io.off("campaignChatMessage")
+    // io.off("campaignChatMessageEdited")
   })
 
 </script>
