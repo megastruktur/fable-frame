@@ -11,6 +11,9 @@
 	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
 	import CharacterItem from '$lib/components/characters/CharacterItem.svelte';
 	import { receive, send } from '$lib/animation';
+	import { pageName } from '$lib/stores';
+
+	pageName.set("Characters")
 
 	const modalStore = getModalStore()
 	const toastStore = getToastStore()
@@ -70,8 +73,6 @@
 </script>
 
 <div class="flex flex-col" transition:fade>
-
-	<h1 class="text-3xl m-auto my-6">Your Characters</h1>
 
 	<!-- My Characters section -->
 	<div class="flex items-center justify-center flex-wrap">

@@ -323,7 +323,7 @@
         {#if $currentUser.id === character.creator}
           <div class="flex flex-wrap mt-4 space-x-3">
 
-            <button class="btn btn-icon text-2xl {editMode ? "variant-filled-error" : "variant-filled-secondary"}" on:click={toggleEditMode}>
+            <button class="btn btn-icon text-2xl {editMode ? "variant-ghost-error" : "variant-ghost-secondary"}" on:click={toggleEditMode}>
               {#if editMode}
                 <span class="i-material-symbols-cancel"></span>
               {:else}
@@ -333,11 +333,11 @@
 
             <!-- cancel edit button -->
             {#if editMode}
-              <button class="btn btn-icon text-2xl variant-filled-success" on:click={saveChanges}>
+              <button class="btn btn-icon text-2xl variant-ghost-success" on:click={saveChanges}>
                 <span class="i-material-symbols-save"></span>
               </button>
             {:else}
-              <button class="btn btn-icon text-2xl variant-filled-warning" on:click={openCharacterNotesDrawer}>
+              <button class="btn btn-icon text-2xl variant-ghost-warning" on:click={openCharacterNotesDrawer}>
                 <span class="i-material-symbols-note"></span>
               </button>
             {/if}

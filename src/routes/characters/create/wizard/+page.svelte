@@ -3,8 +3,11 @@
 	import { ProgressRadial } from "@skeletonlabs/skeleton";
 
 	import RpgSystemCard from "$lib/components/RpgSystemCard.svelte";
+	import { pageName } from "$lib/stores";
 
   const avaiableWizards = ["broken-compass"]
+
+	pageName.set("Character Wizard")
 </script>
 
 <div class="pt-3">

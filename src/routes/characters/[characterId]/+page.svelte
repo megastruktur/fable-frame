@@ -7,7 +7,9 @@
 	import { onMount } from "svelte";
 	import { getCharacterWithSystemAndCampaign } from "$models/character";
 	import { ProgressBar } from "@skeletonlabs/skeleton";
+	import { pageName } from "$lib/stores";
 
+	pageName.set("Character Sheet")
 
   onMount(() => {
     if ($currentUser === null) {

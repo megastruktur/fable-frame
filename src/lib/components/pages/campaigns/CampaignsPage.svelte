@@ -31,7 +31,6 @@
 </script>
 
 <div class="flex flex-col">
-	<h1 class="text-3xl m-auto my-6">Your Campaigns</h1>
 
 	{#await getData()}
     <div class="flex items-center">

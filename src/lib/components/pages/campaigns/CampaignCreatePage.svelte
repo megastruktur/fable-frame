@@ -34,11 +34,7 @@
 
 </script>
 
-<div class="flex flex-col">
-
-  <h1 class="h2 m-auto my-3">Create Campaign</h1>
-  
-  <hr />
+<div class="flex flex-col mx-3">
 
   <input bind:value={campaignName} class="input" type="text" placeholder="Campaign Name" />
 

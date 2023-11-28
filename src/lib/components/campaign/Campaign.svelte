@@ -124,29 +124,30 @@
   <h1 class="h2 mx-auto mt-6">{campaign.name}</h1>
   <h6 class="h6 mx-auto my-6">{rpgSystem.name}</h6>
 
+  <!-- Controls -->
   <div class="flex flex-wrap justify-center space-x-3">
     {#if campaign.creator === $currentUser?.id}
       <button
         on:click={openCampaignEditDrawerHandler}
-        class="btn w-10 h-10 p-2 variant-ghost-warning"
+        class="btn btn-icon variant-ghost-warning"
         >
-        <div class="text-5xl i-fa-pencil"></div>
+        <i class="text-2xl i-fa-pencil"></i>
       </button>
       <button
         on:click={openCampaignRequestsDrawer}
-        class="btn w-10 h-10 p-2 variant-ghost-secondary">
-        <div class="i-material-symbols-share text-5xl">
+        class="btn btn-icon variant-ghost-secondary">
+        <i class="i-material-symbols-share text-2xl"></i>
       </button>
 
       <ScenesManagerCaller
         {campaign}
-        classes="btn w-10 h-10 p-2 variant-ghost-success" >
-        <div class="i-game-icons-steel-door text-5xl"></div>
+        classes="btn btn-icon variant-ghost-success" >
+        <i class="i-game-icons-steel-door text-2xl"></i>
       </ScenesManagerCaller>
     {/if}
     {#if campaign.activeScene !== undefined && campaign.activeScene !== ""}
-      <a class="btn w-10 h-10 p-2 variant-ghost-warning" href="/campaigns/{campaign.id}/game">
-        <div class="i-mdi-play text-5xl">
+      <a class="btn btn-icon variant-ghost-warning" href="/campaigns/{campaign.id}/game">
+        <i class="i-mdi-play text-2xl"></i>
       </a>
     {/if}
   </div>

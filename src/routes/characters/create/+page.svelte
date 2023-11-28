@@ -1,7 +1,9 @@
 <script lang="ts">
   import barebones from "$lib/assets/barebones.webp"
   import wizard from "$lib/assets/wizard.webp"
+	import { pageName } from "$lib/stores";
 
+	pageName.set("Create Character")
 </script>
 
 <div class="pt-3">

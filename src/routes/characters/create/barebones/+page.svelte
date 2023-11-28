@@ -2,6 +2,7 @@
 	import { goto } from "$app/navigation";
 	import RpgSystemCard from "$lib/components/RpgSystemCard.svelte";
 import type { RpgSystemsResponse } from "$lib/pocketbase-types";
+	import { pageName } from "$lib/stores";
 	import { createNewCharacter } from "$models/character";
 	import { getAllRpgSystems } from "$models/rpg_system";
 	import { ProgressRadial, Step, Stepper } from "@skeletonlabs/skeleton";
@@ -9,6 +10,7 @@ import type { RpgSystemsResponse } from "$lib/pocketbase-types";
   let characterName: string = ""
   let selectedSystem: RpgSystemsResponse
 
+	pageName.set("Create Character")
 
 	async function createAndRedirect() {
 		const character = await createNewCharacter(selectedSystem.id, characterName);

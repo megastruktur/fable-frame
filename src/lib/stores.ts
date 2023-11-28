@@ -35,3 +35,5 @@ function createEditErrorsStore(initial: []) {
 export const fieldErrors = createEditErrorsStore([]);
 
 export const headerBanner = writable("");
+
+export const pageName = writable("");
