@@ -29,7 +29,7 @@ export async function getCampaignWithCharactersAndActiveSceneAndRpgSystem(id: st
   })
 }
 
-export async function updateCampaign(id: string, data: Partial<CampaignsRecord>): Promise<CampaignsResponse> {
+export async function updateCampaign(id: string, data: Partial<CampaignsRecord> | any): Promise<CampaignsResponse> {
   return await pb.collection("campaigns").update(id, data)
 }
 

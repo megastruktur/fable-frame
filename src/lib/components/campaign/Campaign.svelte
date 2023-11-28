@@ -30,8 +30,6 @@
 
   let rpgSystem: RpgSystemsResponse = campaign.expand.rpgSystem
 
-  headerBanner.set(getCampaignImage(campaign))
-
   function openCharacterSheetDrawerHandler(character: CharactersResponse) {
     const characterSheetDrawerSettings: DrawerSettings = {
       id: `campaign-character-list`,
@@ -111,6 +109,12 @@
       }
 
     })
+  }
+
+  $: {
+    if ($headerBanner !== getCampaignImage(campaign)) {
+      headerBanner.set(getCampaignImage(campaign))
+    }
   }
 
 </script>

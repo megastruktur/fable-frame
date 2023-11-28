@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'online.fableframe.app',
-  appName: 'fable-frame',
+  appName: 'FableFrame',
   webDir: 'build',
   server: {
     androidScheme: 'https'

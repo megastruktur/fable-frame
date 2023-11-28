@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import { getUploadedFileLocalSrc } from "$lib/getUploadedFileLocalSrc";
 	import type { ScenesResponse } from "$lib/pocketbase-types";
 	import { getScene, getSceneImage, createScene, updateScene } from "$models/scenes";
   import { FileDropzone, ProgressBar, getModalStore } from "@skeletonlabs/skeleton";
@@ -15,10 +16,7 @@
   let sceneEditImageSrc: string
 
   function fileSelectedHandler(e: any) {
-    // If no file was selected, empty the preview <img>
-    if(!e.target.files.length) return previewImageSrc = "";
-    // Set the <img>'s src to a reference URL to the selected file
-    return previewImageSrc = URL.createObjectURL(e.target.files.item(0))
+    previewImageSrc = getUploadedFileLocalSrc(e)
   }
 
   async function createSceneHandler() {

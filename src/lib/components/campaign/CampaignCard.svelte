@@ -62,11 +62,6 @@
         class="btn btn-icon btn-icon-sm text-xl variant-filled-error">
           <span class="i-streamline-recycle-bin-2-solid"></span>
       </button>
-      <a
-        href="/campaigns/{campaign.id}/edit"
-        class="btn btn-icon btn-icon-sm text-xl variant-filled-secondary">
-          <span class="i-fa-pencil"></span>
-      </a>
     </div>
   {/if}
 
