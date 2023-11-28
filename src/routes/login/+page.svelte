@@ -70,29 +70,29 @@
 
 <div class="flex flex-col items-center m-3">
 
-    {#if $currentUser}
-      <h1 class="h1 mx-auto text-center my-3 flex">Signed in as {$currentUser.email}</h1>
+  {#if $currentUser}
+    <h1 class="h1 mx-auto text-center my-3 flex">Signed in as {$currentUser.email}</h1>
 
     <button
       on:click={logout}
-      class="btn">
+      class="btn variant-filled-primary">
       <span class="h2">Logout</span>
       <i class="text-3xl i-material-symbols-logout"></i>
     </button>
-    {:else}
-    
-    
-        <h1 class="h1 m-auto my-3 flex">Login</h1>
 
-        <button class="btn variant-filled mt-3" on:click={googleLogin}><Icon src={BsGoogle} />oogle</button>
-        <div class="text-center text-2xl my-6">OR</div>
-        <form>
-            {#if errorText !== ""}
-                <p class="text-error-500">{errorText}</p>
-            {/if}
-            <input class="input mt-2" type="text" placeholder="Username" bind:value={username} />
-            <input class="input mt-2" type="password" placeholder="Password" bind:value={password} />
-            <button class="btn mt-2 variant-filled-secondary" on:click={login}>Login</button>
-        </form>
-    {/if}
+  {:else}
+  
+    <h1 class="h1 m-auto my-3 flex">Login</h1>
+
+    <button class="btn variant-filled mt-3" on:click={googleLogin}><Icon src={BsGoogle} />oogle</button>
+    <div class="text-center text-2xl my-6">OR</div>
+    <form>
+        {#if errorText !== ""}
+            <p class="text-error-500">{errorText}</p>
+        {/if}
+        <input class="input mt-2" type="text" placeholder="Username" bind:value={username} />
+        <input class="input mt-2" type="password" placeholder="Password" bind:value={password} />
+        <button class="btn mt-2 variant-filled-secondary" on:click={login}>Login</button>
+    </form>
+  {/if}
 </div>

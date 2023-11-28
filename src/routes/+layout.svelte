@@ -2,14 +2,13 @@
 	import "../app.postcss";
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
 	import { size } from '@floating-ui/dom';
-	import { initializeStores, storePopup, type DrawerSettings, Modal, Toast, getDrawerStore, Drawer, TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
+	import { initializeStores, storePopup, Modal, Toast, getDrawerStore, Drawer } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow, size });
 	// The ordering of these imports is critical to your app working properly
 	// import '@skeletonlabs/skeleton/themes/theme-crimson.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
-	import { goto } from "$app/navigation";
 	import { fade } from "svelte/transition"
 	import CharacterNotesDrawer from "$lib/components/character-notes/CharacterNotesDrawer.svelte";
 	import { headerBanner, pageName } from "$lib/stores"

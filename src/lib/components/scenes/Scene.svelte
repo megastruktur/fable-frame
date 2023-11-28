@@ -114,7 +114,7 @@
         class="btn btn-icon text-secondary-400"
         on:click={openCharactersDrawer}
       >
-        <div class="i-ph-person-fill text-5xl"></div>
+        <div class="i-ri-profile-line text-5xl"></div>
       </button>
     </div>
 
