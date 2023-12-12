@@ -92,7 +92,7 @@
 				</svelte:fragment>
 
 				<svelte:fragment slot="headline">
-					<h2 class="h2 md:hidden font-bold uppercase optima-regular">{routeName}</h2>
+					<h2 class="h2 md:hidden font-bold text-center uppercase optima-regular">{routeName}</h2>
 				</svelte:fragment>
 				<h2 class="h2 hidden md:block font-bold uppercase optima-regular">{routeName}</h2>
 				

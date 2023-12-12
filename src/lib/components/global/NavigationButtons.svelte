@@ -4,7 +4,7 @@
   const iconClasses = "text-4xl"
 </script>
 
-<div class="flex flex-wrap space-x-3">
+<div class="flex flex-wrap justify-center space-x-3">
   <a
     href="/"
     class="btn btn-icon">
