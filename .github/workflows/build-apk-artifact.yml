@@ -36,7 +36,8 @@ jobs:
           java-version: '17'
 
       - name: Build release APK
-        run: ./android/gradlew assembleRelease
+        run: ./gradlew assembleRelease
+        working-directory: ./android
 
       - name: Rename APK 
         run: mv ./android/app/build/outputs/bundle/release/app-release-unsigned.apk ./android/app/build/outputs/bundle/release/FableFrame.apk
