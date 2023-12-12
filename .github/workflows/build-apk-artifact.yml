@@ -1,0 +1,48 @@
+name: Build APK artifact
+
+on:
+  push:
+    branches: ['development']
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      -
+        name: use Node.js 21
+        uses: actions/setup-Node@v3
+        with:
+          node-version: 21
+          cache: npm
+      -
+        name: Install dependencies
+        id: install_code
+        run: npm ci
+
+      -
+        name: Build
+        id: build_code
+        run: npm run build
+
+      - name: Sync Android Code
+        id: sync_code
+        run: npx cap sync
+      - name: Setup java
+        uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: '17'
+
+      - name: Build release APK
+        run: ./android/gradlew assembleRelease
+
+      - name: Rename APK 
+        run: mv ./android/app/build/outputs/bundle/release/app-release-unsigned.apk ./android/app/build/outputs/bundle/release/FableFrame.apk
+
+      - name: Upload release bundle
+        uses: actions/upload-artifact@v3
+        with:
+          path: ./android/app/build/outputs/bundle/release/FableFrame.apk
+          if-no-files-found: error

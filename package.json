@@ -12,7 +12,8 @@
 		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"android": "npm run build && npx cap sync"
+		"build-apk": "android/gradlew assembleRelease",
+		"capacitor-sync": "npx cap sync"
 	},
 	"devDependencies": {
 		"@achamaro/tailwindcss-iconify-icon": "^0.2.0",
