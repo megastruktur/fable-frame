@@ -39,11 +39,8 @@ jobs:
         run: ./gradlew assembleRelease
         working-directory: ./android
 
-      - name: Rename APK 
-        run: mv ./android/app/build/outputs/bundle/release/app-release-unsigned.apk ./android/app/build/outputs/bundle/release/FableFrame.apk
-
       - name: Upload release bundle
         uses: actions/upload-artifact@v3
         with:
-          path: ./android/app/build/outputs/bundle/release/FableFrame.apk
-          if-no-files-found: error
+          name: FableFrame
+          path: ./android/app/build/outputs/bundle/release/*.apk
