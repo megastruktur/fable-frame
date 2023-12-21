@@ -27,7 +27,7 @@
   {:else}
     <FileDropzone name="image" bind:files={files} on:change={onChangeHandler}>
       <svelte:fragment slot="lead">
-        <span class="i-material-symbols-upload text-6xl"></span>
+        <span class="i-[material-symbols--upload] text-6xl"></span>
       </svelte:fragment>
       <svelte:fragment slot="message">Upload a file</svelte:fragment>
       <svelte:fragment slot="meta">PNG, JPG and GIF allowed</svelte:fragment>

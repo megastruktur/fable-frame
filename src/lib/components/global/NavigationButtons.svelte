@@ -8,36 +8,36 @@
   <a
     href="/"
     class="btn btn-icon">
-    <i class="{iconClasses} i-ph-question"></i>
+    <i class="i-[ph--question] {iconClasses}"></i>
   </a>
   {#if $currentUser}
     <a
       href="/login"
       class="btn btn-icon">
-      <i class="{iconClasses} i-iconamoon-profile"></i>
+      <i class="i-[iconamoon--profile] {iconClasses}"></i>
     </a>
     <a
       href="/campaigns"
       class="btn btn-icon">
-      <i class="{iconClasses} i-ph-path"></i>
+      <i class="i-[ph--path] {iconClasses}"></i>
     </a>
     <a
       href="/characters/create"
       class="btn btn-icon relative">
-      <i class="{iconClasses} text-success-900 i-ri-profile-line"></i>
-      <i class="text-xl i-ph-plus absolute bottom-0 right-0"></i>
+      <i class="i-[ri--profile-line] {iconClasses} text-success-900"></i>
+      <i class="i-[ph--plus] text-xl absolute bottom-0 right-0"></i>
     </a>
     <a
       href="/characters"
       class="btn btn-icon">
-      <i class="{iconClasses} i-ri-profile-line"></i>
+      <i class="i-[ri--profile-line] {iconClasses}"></i>
     </a>
 
   {:else}
     <a
       href="/login"
       class="btn btn-icon">
-      <i class="{iconClasses} i-material-symbols-login"></i>
+      <i class="i-[material-symbols--login] {iconClasses}"></i>
     </a>
   {/if}
 </div>

@@ -21,5 +21,5 @@
 <button
   on:click={openRollModal}
   class="btn btn-icon variant-ghost-warning hover:bg-surface-800">
-  <span class="i-fa6-solid-dice text-3xl"></span>
+  <span class="i-[fa6-solid--dice] text-3xl"></span>
 </button>

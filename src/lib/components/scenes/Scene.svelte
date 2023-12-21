@@ -88,7 +88,7 @@
         class="btn btn-icon text-secondary-400"
         on:click={openCampaignNotesDrawer}
       >
-        <div class="i-game-icons-book-pile text-5xl"></div>
+        <div class="i-[game-icons--book-pile] text-5xl"></div>
       </button>
       
       <!-- Chat -->
@@ -96,7 +96,7 @@
         class="btn btn-icon text-secondary-400"
         on:click={openCampaignChatDrawer}
       >
-        <div class="i-material-symbols-chat text-5xl"></div>
+        <div class="i-[material-symbols--chat] text-5xl"></div>
       </button>
     
       <!-- Scenes Manager -->
@@ -105,7 +105,7 @@
           {campaign}
           position="left"
           classes="btn btn-icon text-secondary-400">
-          <div class="i-game-icons-steel-door text-5xl"></div>
+          <div class="i-[game-icons--steel-door] text-5xl"></div>
         </ScenesManagerCaller>
       {/if}
   
@@ -114,7 +114,7 @@
         class="btn btn-icon text-secondary-400"
         on:click={openCharactersDrawer}
       >
-        <div class="i-ri-profile-line text-5xl"></div>
+        <div class="i-[ri--profile-line] text-5xl"></div>
       </button>
     </div>
 

@@ -325,20 +325,20 @@
 
             <button class="btn btn-icon text-2xl {editMode ? "variant-ghost-error" : "variant-ghost-secondary"}" on:click={toggleEditMode}>
               {#if editMode}
-                <span class="i-material-symbols-cancel"></span>
+                <span class="i-[material-symbols--cancel]"></span>
               {:else}
-                <span class="i-fa-pencil"></span>
+                <span class="i-[fa--pencil]"></span>
               {/if}
             </button>
 
             <!-- cancel edit button -->
             {#if editMode}
               <button class="btn btn-icon text-2xl variant-ghost-success" on:click={saveChanges}>
-                <span class="i-material-symbols-save"></span>
+                <span class="i-[material-symbols--save]"></span>
               </button>
             {:else}
               <button class="btn btn-icon text-2xl variant-ghost-warning" on:click={openCharacterNotesDrawer}>
-                <span class="i-material-symbols-note"></span>
+                <span class="i-[material-symbols--note]"></span>
               </button>
             {/if}
           </div>

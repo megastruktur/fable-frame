@@ -60,7 +60,7 @@
       <button
         on:click|preventDefault={deleteCampaignPrompt}
         class="btn btn-icon btn-icon-sm text-xl variant-filled-error">
-          <span class="i-streamline-recycle-bin-2-solid"></span>
+          <span class="i-[streamline--recycle-bin-2-solid]"></span>
       </button>
     </div>
   {/if}

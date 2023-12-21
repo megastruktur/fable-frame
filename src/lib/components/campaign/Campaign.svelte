@@ -131,23 +131,23 @@
         on:click={openCampaignEditDrawerHandler}
         class="btn btn-icon variant-ghost-warning"
         >
-        <i class="text-2xl i-fa-pencil"></i>
+        <i class="i-[fa--pencil] text-2xl"></i>
       </button>
       <button
         on:click={openCampaignRequestsDrawer}
         class="btn btn-icon variant-ghost-secondary">
-        <i class="i-material-symbols-share text-2xl"></i>
+        <i class="i-[material-symbols--share] text-2xl"></i>
       </button>
 
       <ScenesManagerCaller
         {campaign}
         classes="btn btn-icon variant-ghost-success" >
-        <i class="i-game-icons-steel-door text-2xl"></i>
+        <i class="i-[game-icons--steel-door] text-2xl"></i>
       </ScenesManagerCaller>
     {/if}
     {#if campaign.activeScene !== undefined && campaign.activeScene !== ""}
       <a class="btn btn-icon variant-ghost-warning" href="/campaigns/{campaign.id}/game">
-        <i class="i-mdi-play text-2xl"></i>
+        <i class="i-[mdi--play] text-2xl"></i>
       </a>
     {/if}
   </div>

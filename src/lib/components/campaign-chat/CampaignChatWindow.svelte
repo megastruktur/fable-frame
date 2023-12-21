@@ -156,7 +156,7 @@
         class="btn btn-icon btn-icon-sm variant-filled-tertiary h-6 w-6"
       >
 
-      <div class="i-fa6-solid-angle-right text-2xl">
+      <div class="i-[fa6-solid--angle-right] text-2xl">
     </button>
     </form>
     <!-- Dice -->

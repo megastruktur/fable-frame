@@ -86,9 +86,9 @@
 >
   <button type="button" class="btn btn-icon btn-icon-sm absolute top-2 right-2 {isAcivated ? "text-white" : "text-gray-400"}" on:click|stopPropagation={activateSceneHandler}>
     {#if isAcivated}
-      <div class="i-fa6-solid-eye text-5xl"></div>
+      <div class="i-[fa6-solid--eye] text-5xl"></div>
     {:else}
-      <div class="i-fa6-solid-eye-slash text-5xl"></div>
+      <div class="i-[fa6-solid--eye-slash] text-5xl"></div>
     {/if}
   </button>
 

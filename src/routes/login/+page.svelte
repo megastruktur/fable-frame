@@ -77,7 +77,7 @@
       on:click={logout}
       class="btn variant-filled-primary">
       <span class="h2">Logout</span>
-      <i class="text-3xl i-material-symbols-logout"></i>
+      <i class="i-[material-symbols--logout] text-3xl"></i>
     </button>
 
   {:else}

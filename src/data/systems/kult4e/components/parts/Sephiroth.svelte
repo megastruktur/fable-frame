@@ -115,7 +115,7 @@
         <div class="flex">
           {#if editMode}
             <button class="w-15 h-15" on:click={fieldDecrement}>
-							<div class="i-lets-icons-arrow-drop-left"></div>
+							<div class="i-[lets-icons--arrow-drop-left]"></div>
             </button>
           {/if}
 
@@ -123,7 +123,7 @@
 
           {#if editMode}
             <button class="w-15 h-15" on:click={fieldIncrement}>
-              <div class="i-lets-icons-arrow-drop-right"></div>
+              <div class="i-[lets-icons--arrow-drop-right]"></div>
             </button>
           {/if}
         </div>

@@ -44,7 +44,7 @@
       <button
         on:click={() => bonusAmount--}
         class="btn btn-icon variant-outline-primary">
-        <span class="i-gridicons-minus"></span>
+        <span class="i-[gridicons--minus]"></span>
       </button>
       
       <span>{bonusAmount}</span>
@@ -52,7 +52,7 @@
       <button
         on:click={() => bonusAmount++}
         class="btn btn-icon variant-outline-primary">
-        <span class="i-gridicons-plus"></span>
+        <span class="i-[gridicons--plus]"></span>
       </button>
 
     </div>
@@ -62,7 +62,7 @@
     <button
       on:click={roll}
       class="btn w-full variant-ghost-warning">
-      <span class="i-fa6-solid-dice text-3xl"></span>
+      <span class="i-[fa6-solid--dice] text-3xl"></span>
     </button>
   </div>
 </div>

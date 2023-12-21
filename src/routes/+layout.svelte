@@ -87,7 +87,7 @@
 				>
 				<svelte:fragment slot="lead">
 					<button class="btn btn-sm" on:click={nav_back}>
-						<i class="text-3xl i-material-symbols-arrow-back"></i>
+						<i class="i-[material-symbols--arrow-back] text-3xl"></i>
 					</button>
 				</svelte:fragment>
 
