@@ -25,6 +25,8 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          build-args: |
+            "PUBLIC_POCKETBASE_URL=${{ vars.PUBLIC_POCKETBASE_URL }}"
           push: true
           tags: ${{ steps.meta.outputs.tags }}, ${{ secrets.DOCKERHUB_USERNAME }}/fable-frame:latest
           labels: ${{ steps.meta.outputs.labels }}
