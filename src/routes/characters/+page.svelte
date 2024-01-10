@@ -80,7 +80,7 @@
 					in:receive={{ key: character.id }}
 					out:send={{ key: character.id }}
 					class="flex justify-between items-center relative">
-					<a class="" href="/characters/{character.id}">
+					<a class="card card-hover" href="/characters/{character.id}">
 						<CharacterItem character={character} />
 					</a>
 
