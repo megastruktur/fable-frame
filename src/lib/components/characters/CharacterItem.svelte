@@ -1,25 +1,48 @@
 <script lang="ts">
 	import type { CharactersResponse } from "$lib/pocketbase-types";
 	import { getCharacterAvatar } from "$models/character";
-	import { Avatar } from "@skeletonlabs/skeleton";
+	import { getRpgSystemImage } from "$models/rpg_system";
 
   export let character: CharactersResponse
   export let classes: string = ""
+
+  let bgCharacterImage = getBgCharacterImage()
+
+  // Get the Avatar. If Avatar is not set - take Campaign image.
+  function getBgCharacterImage(): string {
+
+    let image: string = ""
+
+    image = getCharacterAvatar(character)
+    if (image === "") {
+      image = getRpgSystemImage(character.expand.rpgSystem)
+    }
+
+    return image
+  }
   
 </script>
 
-<div class="flex flex-row {classes}">
-  <Avatar
-    initials={character.name.charAt(0)}
-    border="border-4 border-surface-300-600-token mr-3"
-    src={getCharacterAvatar(character)} />
-  <span class="flex flex-col justify-center">
-    <h3 class="h3 flex">{character.name}</h3>
-    {#if character.expand && character.expand.rpgSystem}
-      <article class="flex">{character.expand.rpgSystem.name}</article>
-    {/if}
-    {#if character.expand?.campaign !== undefined}
-      <span>Campaign: <a href="/campaigns/{character.expand.campaign.id}">{character.expand.campaign.name}</a></span>
-    {/if}
-  </span>
+<div
+  class="card w-72 h-72 bg-cover bg-no-repeat bg-center relative overflow-hidden {classes}"
+  style="background-image: url('{bgCharacterImage}');"
+  >
+  
+  <div class="absolute w-full h-full bottom-0 left-0 bg-surface-900/70 flex flex-col justify-center">
+      <section class="p-4">
+        <h2 class="h2 text-center">{character.name}</h2>
+        {#if character.expand && character.expand.rpgSystem}
+          <p class="text-center italic text-sm">{character.expand.rpgSystem.name}</p>
+        {/if}
+      </section>
+    
+      <footer class="card-footer text-center">
+
+        {#if character.expand?.campaign !== undefined}
+          <article>
+            <a class="btn variant-ghost-warning" href="/campaigns/{character.expand.campaign.id}">{character.expand.campaign.name}</a>
+          </article>
+        {/if}
+      </footer>
+  </div>
 </div>

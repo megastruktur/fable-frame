@@ -68,6 +68,7 @@
 
   $: {
     archetype = getFieldsByGroup("archetypes", fields)[0]
+    occupation = getFieldsByGroup("occupations", fields)[0]
 
     // Load the Occupation List only in case when archetype was changed.
     if (archetype !== undefined
@@ -75,7 +76,6 @@
       occupationList = getOccupationFieldList()
     }
 
-    occupation = getFieldsByGroup("occupations", fields)[0]
     darkSecrets = getFieldsByGroup("darkSecrets", fields)
     dramaticHooks = getFieldsByGroup("dramaticHooks", fields)
     relations = getFieldsByGroup("relations", fields)

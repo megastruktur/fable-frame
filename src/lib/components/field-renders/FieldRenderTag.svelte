@@ -65,7 +65,7 @@
 
     </svelte:fragment>
     <svelte:fragment slot="content">
-      <div class="blockquote text-left">
+      <div class="blockquote text-left py-3 my-3">
         {#if editable && editMode}
           <textarea class="textarea resize-none mt-3 mb-3" rows="5" bind:value={field.description} on:focusout={fieldEdit} placeholder="{placeholderArea}"></textarea>
         {:else}

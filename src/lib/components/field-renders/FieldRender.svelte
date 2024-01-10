@@ -73,7 +73,9 @@
 
 <div class="w-full">
   {#if removable && editMode}
-    <button class="btn-icon" on:click={removeField}>✕</button>
+    <button class="btn w-10 h-8 p-0 variant-soft-error rounded-b-none border-b-0 ml-3" on:click={removeField}>
+      <i class="i-[material-symbols--delete] text-xl" />
+    </button>
   {/if}
   
   <svelte:component this={fieldRenderComponent} {characterId} {labelStyle} {valueStyle} {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode} {color} {colorEdit} {colorButtons} {updateWithoutEditMode} {fullEditable} {showTitle} {placeholder} {placeholderArea}

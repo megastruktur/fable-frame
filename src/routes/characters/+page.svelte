@@ -6,47 +6,40 @@
 	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, getModalStore, getToastStore } from '@skeletonlabs/skeleton';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
-	// @ts-ignore
-	import Icon from 'svelte-icons-pack';
-	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
 	import CharacterItem from '$lib/components/characters/CharacterItem.svelte';
 	import { receive, send } from '$lib/animation';
 	import { pageName } from '$lib/stores';
+	import SearchFilter from '$lib/components/SearchFilter.svelte';
 
 	pageName.set("Characters")
 
 	const modalStore = getModalStore()
 	const toastStore = getToastStore()
 
-	const charOperationsMenu: PopupSettings = {
-		event: 'focus-click',
-		target: 'charOperationsPopup',
-		placement: 'bottom',
-		closeQuery: '.list-option'
-	};
-
-
 	// Async load Characters and store in variable.
 	let myCharacters: CharactersResponse[]
+	let myCharactersFiltered: CharactersResponse[]
+
 	async function loadMyCharacters() {
 		myCharacters = await getMyCharacters({
 			expand: 'rpgSystem,campaign'
 		})
+		myCharactersFiltered = myCharacters
 	}
 
 	// Character Operations
-	let operationsOnCharacterId: string
-	async function cloneSelectedCharacter() {
-		const character = await cloneCharacter(operationsOnCharacterId)
+	async function cloneSelectedCharacter(characterId: string) {
+		const character = await cloneCharacter(characterId)
 
 		toastShow(`Character <span class="text-secondary-100">${character.name}</span> has been cloned`, toastStore)
 
 		myCharacters = [...myCharacters, character]
+		myCharactersFiltered = myCharacters
 	}
 
-  function deleteCharacterPrompt() {
+  function deleteCharacterPrompt(characterId: string) {
 
-		const character = myCharacters.find(c => c.id === operationsOnCharacterId)
+		const character = myCharacters.find(c => c.id === characterId)
 
 		if (character) {
 			const modal: ModalSettings = {
@@ -62,7 +55,7 @@
 
 						// Update reactively so the element refreshes.
 						myCharacters = myCharacters.filter(c => c.id!== character.id)
-
+						myCharactersFiltered = myCharacters
 					}
 				}
 			};
@@ -79,39 +72,38 @@
 		{#await loadMyCharacters()}
 			<ProgressRadial value={undefined} />
 		{:then _}
-			<ul class="list-nav">
-				{#each myCharacters as character(character.id)}
-				<li
+			<SearchFilter class="mb-6" items={myCharacters} bind:filteredItems={myCharactersFiltered} />
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+				{#each myCharactersFiltered as character(character.id)}
+				<div
 					animate:flip
 					in:receive={{ key: character.id }}
 					out:send={{ key: character.id }}
-					class="flex justify-between items-center">
-					<a class="list-option w-full" href="/characters/{character.id}">
+					class="flex justify-between items-center relative">
+					<a class="" href="/characters/{character.id}">
 						<CharacterItem character={character} />
 					</a>
-					<span>
-						<button
-							class="btn-icon btn-icon-sm"
-							on:click={() => operationsOnCharacterId = character.id}
-							use:popup={charOperationsMenu}
-							>⋮</button>
-					</span>
-				</li>
+
+
+					<div class="p-2 absolute top-0">
+						<div class="flex space-x-2">
+							<button class="btn btn-icon btn-icon-sm variant-ghost-warning" on:click={() => cloneSelectedCharacter(character.id)}>
+								<i class="i-[la--clone-solid] text-3xl" />
+							</button>
+							<button class="btn btn-icon btn-icon-sm variant-ghost-error" on:click={() => deleteCharacterPrompt(character.id)}>
+								<i class="i-[material-symbols--delete] text-3xl" />
+							</button>
+						</div>
+						<div class="arrow bg-surface-100-800-token" />
+					</div>
+				</div>
 				{/each}
-				<li>
-					<a class="btn btn-circle hover:bg-surface-800 w-full" href="/characters/create">
-						<Icon size="40" color="" src={BsPlus} />
-					</a>
-				</li>
-			</ul>
+				<a class="card card-hover w-72 h-72 overflow-hidden bg-surface-800 flex items-center justify-center"
+					href="/characters/create">
+					<i class="i-[gridicons--plus] text-6xl" />
+				</a>
+			</div>
 		{/await}
 	</div>
 </div>
 
-<div class="card w-48 shadow-xl py-2" data-popup="charOperationsPopup">
-	<ul class="list-nav px-2">
-		<li class="list-option" on:keyup on:click={cloneSelectedCharacter}>Clone</li>
-		<li class="list-option bg-error-900" on:keyup on:click={deleteCharacterPrompt}>Remove</li>
-	</ul>
-	<div class="arrow bg-surface-100-800-token" />
-</div>
