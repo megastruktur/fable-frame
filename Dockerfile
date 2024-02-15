@@ -5,6 +5,7 @@ RUN npm install
 COPY . .
 # Execute ./build_config/create_env_file.sh
 RUN chmod 755 build_config/create_env_file.sh && ./build_config/create_env_file.sh
+RUN npm run sync
 
 RUN npm run build
 
