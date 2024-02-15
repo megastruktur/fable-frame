@@ -3,7 +3,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run sync
 RUN npm run build
 
 # Env variables
@@ -16,3 +15,7 @@ COPY --from=base /app/build .
 # COPY --from=base /app/build_config/nginx_templates /etc/nginx/templates
 
 EXPOSE 80
+
+# Env variables
+ARG PUBLIC_POCKETBASE_URL
+ENV PUBLIC_POCKETBASE_URL $PUBLIC_POCKETBASE_URL
