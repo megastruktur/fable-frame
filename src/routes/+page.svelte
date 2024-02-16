@@ -44,7 +44,7 @@
 		<figure class="w-72">
 			{@html logo}
 		</figure>
-		<span class="text-red-800">v0.9.0</span>
+		<span class="text-red-800">v0.9.1</span>
 		<!-- <h2 class="h2">Welcome!</h2> -->
 		<p class="">
 			Fable Frame is a simple project that allows you to create <span class="text-primary-400">Tabletop RPG Character sheets</span> online and use them during your game.

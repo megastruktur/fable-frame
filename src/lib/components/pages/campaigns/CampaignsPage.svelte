@@ -1,21 +1,21 @@
 <!-- Campaigns Page -->
 <script lang="ts">
 	import { receive, send } from '$lib/animation';
+	import SearchFilter from '$lib/components/SearchFilter.svelte';
 	import CampaignCard from '$lib/components/campaign/CampaignCard.svelte';
   import type { CampaignsResponse } from '$lib/pocketbase-types';
 	import { toastShow } from '$lib/toast';
 	import { getGMCampaigns, getCharacterCampaigns } from '$models/campaign';
 	import { getToastStore, ProgressBar } from '@skeletonlabs/skeleton';
-  // @ts-ignore
-  import Icon from "svelte-icons-pack";
-  
-	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
 	import { flip } from 'svelte/animate';
+	import { fade } from 'svelte/transition';
 
   const toastStore = getToastStore()
 
   let gmCampaigns: CampaignsResponse[]
+  let gmCampaignsFiltered: CampaignsResponse[]
   let characterCampaigns: CampaignsResponse[]
+  let characterCampaignsFiltered: CampaignsResponse[]
 
   async function getData() {
     characterCampaigns = await getCharacterCampaigns()
@@ -30,49 +30,55 @@
 
 </script>
 
-<div class="flex flex-col">
+<div class="flex flex-col" transition:fade>
 
 	{#await getData()}
     <div class="flex items-center">
       <ProgressBar />
     </div>
 	{:then}
-    <h2 class="h2 text-center my-6">Game Master in</h2>
-    <div class="flex flex-wrap justify-center">
-      {#if gmCampaigns.length > 0}
-
-        {#each gmCampaigns as gc(gc.id)}
-          <div class="relative"
-            animate:flip
-            in:receive={{ key: gc.id }}
-            out:send={{ key: gc.id }}
-          >
-            <CampaignCard campaign={gc} classes="m-3" />
-
-          </div>
-        {/each}
-      {/if}
-      <a
-        class="card w-96 shadow-xl card-hover overflow-hidden bg-contain h-96 m-3 flex items-center justify-center"
-        href="/campaigns/create">
-        <Icon className="flex" size="100" color="" src={BsPlus} />
-      </a>
+    <div class="flex items-center justify-center flex-wrap">
+      <h2 class="h2 text-center my-6">Game Master in</h2>
+      <SearchFilter class="mb-6" items={gmCampaigns} bind:filteredItems={gmCampaignsFiltered} />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {#if gmCampaigns.length > 0}
+  
+          {#each gmCampaigns as gc(gc.id)}
+            <div class=""
+              animate:flip
+              in:receive={{ key: gc.id }}
+              out:send={{ key: gc.id }}
+            >
+              <CampaignCard campaign={gc} classes="m-3" />
+  
+            </div>
+          {/each}
+        {/if}
+        <a
+          class="card card-hover w-72 h-72 overflow-hidden bg-surface-800 flex items-center justify-center"
+          href="/campaigns/create">
+          <i class="i-[gridicons--plus] text-6xl" />
+        </a>
+      </div>
     </div>
-
-
+  
+  
     {#if characterCampaigns.length > 0}
-      <h2 class="h2 text-center my-6">Play in</h2>
-
-      <div class="flex flex-wrap justify-center">
-        {#each characterCampaigns as cc(cc.id)}
-        <div
-					animate:flip
-					in:receive={{ key: cc.id }}
-					out:send={{ key: cc.id }}
-          >
-          <CampaignCard on:campaignRemove={campaignRemoveHandler} campaign={cc} classes="m-3" />
+      <div class="flex items-center justify-center flex-wrap">
+        <h2 class="h2 text-center my-6">Play in</h2>
+        <SearchFilter class="mb-6" items={characterCampaigns} bind:filteredItems={characterCampaignsFiltered} />
+  
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {#each characterCampaigns as cc(cc.id)}
+          <div
+            animate:flip
+            in:receive={{ key: cc.id }}
+            out:send={{ key: cc.id }}
+            >
+            <CampaignCard on:campaignRemove={campaignRemoveHandler} campaign={cc} classes="m-3" />
+          </div>
+          {/each}
         </div>
-        {/each}
       </div>
     {/if}
 	{/await}

@@ -1,3 +1,6 @@
+### 0.9.1
+- Restyling
+
 ### 0.9.0
 - Static HTML deployment + capacitor suppport
 - Restyling

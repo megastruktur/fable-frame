@@ -99,3 +99,13 @@ export function convertGearDataToFieldJson(data: [], fieldType = "k4e-gear", gro
 
   return JSON.stringify(fields)
 }
+
+
+export function truncateText(text: string, length: number): string {
+  if (text.length > length) {
+    return text.substring(0, length) + "..."
+  }
+  else {
+    return text
+  }
+}

@@ -28,7 +28,7 @@
   style="background-image: url('{bgCharacterImage}');"
   >
   
-  <div class="absolute w-full h-full bottom-0 left-0 bg-surface-900/70 flex flex-col justify-center">
+  <div class="w-full h-full bg-surface-900/70 flex flex-col justify-center">
       <section class="p-4">
         <h2 class="h2 text-center">{character.name}</h2>
         {#if character.expand && character.expand.rpgSystem}
