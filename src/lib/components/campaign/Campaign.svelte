@@ -158,7 +158,7 @@
     {#if characters && characters.length > 0}
       {#each characters as character}
         <button class="btn" on:click|stopPropagation={() => openCharacterSheetDrawerHandler(character)}>
-          <CharacterItem {character} />
+          <CharacterItem {character} rpgSystem={rpgSystem} />
         </button>
       {/each}
     {/if}

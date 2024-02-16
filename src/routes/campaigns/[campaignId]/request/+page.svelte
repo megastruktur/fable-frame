@@ -68,7 +68,7 @@
   
     {@const isCharacterSelected = (characterSelected !== undefined && character.id === characterSelected.id ) }
     <button class="btn {isCharacterSelected ? "variant-filled" : ""}" on:click={() => characterSelected = character}>
-      <CharacterItem {character} />
+      <CharacterItem {character} {rpgSystem} />
     </button>
     {/each}
   </div>

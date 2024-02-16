@@ -1,5 +1,6 @@
 <!-- Characters Page -->
 <script lang="ts">
+	import { clipboard } from '@skeletonlabs/skeleton';
 	import type { CharactersResponse } from '$lib/pocketbase-types';
 	import { toastShow } from '$lib/toast';
 	import { cloneCharacter, deleteCharacter, getMyCharacters } from '$models/character';
@@ -63,6 +64,20 @@
 		}
 	}
 
+	function getCharacterJson(characterId: string): string {
+		const characterExport = myCharacters.find(c => c.id === characterId)
+
+		if (characterExport !== undefined) {
+			const exportObject = {
+				rpgSystem: characterExport.rpgSystem,
+				fields: characterExport.fields,
+			}
+
+			return JSON.stringify(exportObject)
+		}
+		return ""
+	}
+
 </script>
 
 <div class="flex flex-col" transition:fade>
@@ -81,7 +96,7 @@
 					out:send={{ key: character.id }}
 					class="flex justify-between items-center relative">
 					<a class="card card-hover" href="/characters/{character.id}">
-						<CharacterItem character={character} />
+						<CharacterItem character={character} rpgSystem={character.expand.rpgSystem} />
 					</a>
 
 
@@ -90,7 +105,14 @@
 							<button class="btn btn-icon btn-icon-sm variant-ghost-warning" on:click={() => cloneSelectedCharacter(character.id)}>
 								<i class="i-[la--clone-solid] text-3xl" />
 							</button>
-							<button class="btn btn-icon btn-icon-sm variant-ghost-error" on:click={() => deleteCharacterPrompt(character.id)}>
+							<button class="btn btn-icon btn-icon-sm variant-ghost-success"
+								on:click={() => toastShow("Character copied to clipboard", toastStore)}
+								use:clipboard={getCharacterJson(character.id)}>
+								<i class="i-[mdi--export] text-2xl" />
+							</button>
+							<button
+								class="btn btn-icon btn-icon-sm variant-ghost-error"
+								on:click={() => deleteCharacterPrompt(character.id)}>
 								<i class="i-[material-symbols--delete] text-3xl" />
 							</button>
 						</div>

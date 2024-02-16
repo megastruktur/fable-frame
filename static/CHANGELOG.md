@@ -1,5 +1,6 @@
 ### 0.9.1
 - Restyling
+- Character Export/Import functionality
 
 ### 0.9.0
 - Static HTML deployment + capacitor suppport

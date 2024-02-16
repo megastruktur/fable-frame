@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CreateCharacterChoiceCard from './../../../lib/components/characters/CreateCharacterChoiceCard.svelte';
   import barebones from "$lib/assets/barebones.webp"
   import wizard from "$lib/assets/wizard.webp"
 	import { pageName } from "$lib/stores";
@@ -12,29 +13,23 @@
 
   <div class="flex justify-around flex-wrap">
 
-    <a href="/characters/create/wizard" class="card w-80 p-4 mb-3 justify-center items-center bg-initial card-hover">
-      <header>
-        <img src="{wizard}" alt="wizard" />
-      </header>
-      <div>
-        <h2 class="h2 text-center">Wizard</h2>
-        <article>
-          <p class="text-center">Create character step by step. Limited systems.</p>
-        </article>
-      </div>
-    </a>
+    <CreateCharacterChoiceCard
+      typeId="wizard" image={wizard}
+      typeName="Wizard"
+      typeDescription="Create character step by step. Limited systems."
+      />
 
-    <a href="/characters/create/barebones" class="card w-80 p-4 mb-3 justify-center items-center bg-initial card-hover">
-      <header>
-        <img src="{barebones}" alt="barebones" />
-      </header>
-      <div>
-        <h2 class="h2 text-center">Barebones</h2>
-        <article>
-          <p class="text-center">Build character sheet with custom fields from scratch</p>
-        </article>
-      </div>
-    </a>
+    <CreateCharacterChoiceCard
+      typeId="barebones" image={barebones}
+      typeName="Barebones"
+      typeDescription="Build character sheet with custom fields from scratch"
+      />
+
+    <CreateCharacterChoiceCard
+      typeId="import"
+      typeName="Import"
+      typeDescription="Import the previously exported character"
+      />
 
   </div>
 </div>

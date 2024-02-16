@@ -1,9 +1,10 @@
 <script lang="ts">
-	import type { CharactersResponse } from "$lib/pocketbase-types";
+	import type { CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { getCharacterAvatar } from "$models/character";
 	import { getRpgSystemImage } from "$models/rpg_system";
 
   export let character: CharactersResponse
+  export let rpgSystem: RpgSystemsResponse
   export let classes: string = ""
 
   let bgCharacterImage = getBgCharacterImage()
@@ -15,7 +16,7 @@
 
     image = getCharacterAvatar(character)
     if (image === "") {
-      image = getRpgSystemImage(character.expand.rpgSystem)
+      image = getRpgSystemImage(rpgSystem)
     }
 
     return image
@@ -31,8 +32,8 @@
   <div class="w-full h-full bg-surface-900/70 flex flex-col justify-center">
       <section class="p-4">
         <h2 class="h2 text-center">{character.name}</h2>
-        {#if character.expand && character.expand.rpgSystem}
-          <p class="text-center italic text-sm">{character.expand.rpgSystem.name}</p>
+        {#if rpgSystem !== undefined}
+          <p class="text-center italic text-sm">{rpgSystem.name}</p>
         {/if}
       </section>
     
