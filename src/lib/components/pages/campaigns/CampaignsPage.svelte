@@ -54,11 +54,13 @@
             </div>
           {/each}
         {/if}
-        <a
-          class="card card-hover w-72 h-72 overflow-hidden bg-surface-800 flex items-center justify-center"
-          href="/campaigns/create">
-          <i class="i-[gridicons--plus] text-6xl" />
-        </a>
+        <div>
+          <a
+            class="card card-hover w-72 h-72 overflow-hidden bg-surface-800 flex items-center justify-center m-3"
+            href="/campaigns/create">
+            <i class="i-[gridicons--plus] text-6xl" />
+          </a>
+        </div>
       </div>
     </div>
   
