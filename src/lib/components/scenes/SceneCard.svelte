@@ -88,20 +88,20 @@
   >
   <svelte:fragment slot="actionButtons">
 
-    <button class="btn btn-icon btn-icon-sm {isAcivated ? "text-white" : "text-gray-400"}" on:click|stopPropagation={activateSceneHandler}>
+    <button class="btn btn-icon text-2xl {isAcivated ? "text-white variant-ghost-success" : "text-gray-400 variant-ghost-surface"}" on:click|stopPropagation={activateSceneHandler}>
       {#if isAcivated}
-        <i class="i-[fa6-solid--eye] text-5xl" />
+        <i class="i-[fa6-solid--eye]" />
       {:else}
-        <i class="i-[fa6-solid--eye-slash] text-5xl" />
+        <i class="i-[fa6-solid--eye-slash]" />
       {/if}
     </button>
 
-    <button class="btn btn-icon btn-icon-sm" on:click={sceneEditModalHandler}>
-      <i class="i-[fa--pencil] text-2xl" />
+    <button class="btn btn-icon variant-ghost-secondary text-2xl" on:click={sceneEditModalHandler}>
+      <i class="i-[fa--pencil]" />
     </button>
     
-    <button class="btn btn-icon btn-icon-sm"  on:click={deleteScenePromptHandler}>
-      <i class="i-[material-symbols--delete] text-2xl" />
+    <button class="btn btn-icon variant-ghost-error text-2xl"  on:click={deleteScenePromptHandler}>
+      <i class="i-[material-symbols--delete]" />
     </button>
 
   </svelte:fragment>
