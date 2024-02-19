@@ -39,7 +39,8 @@ export interface Options {
 }
 
 export function panzoom(canvas: HTMLCanvasElement, options: Options) {
-  const dpr = window.devicePixelRatio
+  // const dpr = window.devicePixelRatio
+  const dpr = 1
   const ctx = canvas.getContext('2d')!
   const rAF = requestAnimationFrame
 
