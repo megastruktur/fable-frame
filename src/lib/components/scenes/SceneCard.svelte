@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ScenesResponse } from "$lib/pocketbase-types"
 	import { getSceneImage } from "$models/scenes";
-	import { popup, type ModalComponent, type PopupSettings, type ModalSettings, getModalStore } from "@skeletonlabs/skeleton";
+	import { type ModalComponent, type PopupSettings, type ModalSettings, getModalStore } from "@skeletonlabs/skeleton";
 	import { createEventDispatcher } from "svelte";
 	import SceneEdit from './SceneEdit.svelte';
 	import SquareCard from "../global/SquareCard.svelte";
@@ -81,39 +81,30 @@
 </script>
 
 <SquareCard
+  classes={classes}
   link="/campaigns/{scene.campaign}/scenes/{scene.id}"
   title="{scene.name}"
   imageUrl="{sceneImage}"
-  width="w-40"
-  height="h-40"
   >
   <svelte:fragment slot="actionButtons">
 
-    <button type="button" class="btn btn-icon btn-icon-sm {isAcivated ? "text-white" : "text-gray-400"}" on:click|stopPropagation={activateSceneHandler}>
+    <button class="btn btn-icon btn-icon-sm {isAcivated ? "text-white" : "text-gray-400"}" on:click|stopPropagation={activateSceneHandler}>
       {#if isAcivated}
-        <div class="i-[fa6-solid--eye] text-5xl"></div>
+        <i class="i-[fa6-solid--eye] text-5xl" />
       {:else}
-        <div class="i-[fa6-solid--eye-slash] text-5xl"></div>
+        <i class="i-[fa6-solid--eye-slash] text-5xl" />
       {/if}
     </button>
 
-    <!-- Scene Operations Popup -->
-    <button
-      class="btn btn-icon btn-icon-sm variant-ghost-secondary"
-      use:popup={sceneOperationsPopup}
-    >⋮</button>
+    <button class="btn btn-icon btn-icon-sm" on:click={sceneEditModalHandler}>
+      <i class="i-[fa--pencil] text-2xl" />
+    </button>
+    
+    <button class="btn btn-icon btn-icon-sm"  on:click={deleteScenePromptHandler}>
+      <i class="i-[material-symbols--delete] text-2xl" />
+    </button>
+
   </svelte:fragment>
 </SquareCard>
 
 
-<!-- Operations Popup -->
-<div class="card shadow-xl py-2" data-popup="sceneOperationsPopup-{scene.id}">
-  <ul class="list-nav px-2">
-    <li class="mb-2">
-      <button on:click={sceneEditModalHandler}>Edit</button>
-    </li>
-    <li>
-      <a class="bg-error-900" href="/" on:click|preventDefault={deleteScenePromptHandler}>Remove</a></li>
-  </ul>
-  <div class="arrow bg-surface-100-800-token" />
-</div>

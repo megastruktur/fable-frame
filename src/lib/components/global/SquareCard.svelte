@@ -11,34 +11,33 @@
 
 </script>
 
-<a
-  class="card block {width} {height} bg-cover bg-no-repeat bg-center relative overflow-hidden {classes}"
+<div
   style="background-image: url('{imageUrl}')"
-  href={link}>
+  class="card shadow-sm card-hover {width} {height} bg-cover bg-no-repeat bg-center relative overflow-hidden {classes}">
 
-
+  <a href={link}>
   
-  <div class="w-full h-full bg-surface-900/70 flex flex-col {isAddButton ? "items-center" : ""} justify-center">
-    
-    {#if isAddButton}
-    
-      <i class="i-[gridicons--plus] text-6xl" />
-    
-    {:else}
-      <section class="p-4">
-        <h2 class="h2 text-center">{title}</h2>
-      </section>
-      <footer class="card-footer italic text-center">
-        <p class="mt-1 blo">{subtitle}</p>
-        <slot name="linkButtons"></slot>
-      </footer>
-    {/if}
-
-  </div>
+    <div class="w-full h-full bg-surface-900/70 flex flex-col {isAddButton ? "items-center" : ""} justify-center">
+      
+      {#if isAddButton}
+      
+        <i class="i-[gridicons--plus] text-6xl" />
+      
+      {:else}
+        <section class="p-4">
+          <h2 class="h2 text-center">{title}</h2>
+        </section>
+        <footer class="card-footer italic text-center">
+          <p class="mt-1 blo">{subtitle}</p>
+          <slot name="linkButtons"></slot>
+        </footer>
+      {/if}
   
+    </div>
+  </a>
+
   <div class="absolute w-full top-2 flex justify-between px-3">
     <slot name="actionButtons"></slot>
   </div>
+</div>
 
-
-</a>

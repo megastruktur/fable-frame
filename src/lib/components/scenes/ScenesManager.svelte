@@ -1,15 +1,13 @@
 <script lang="ts">
-	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
 	import type { CampaignsResponse, ScenesResponse } from '$lib/pocketbase-types';
 	import { activateScene, deactivateScene, deleteScene } from '$models/scenes';
 	import SceneCard from '$lib/components/scenes/SceneCard.svelte';
 	import { flip } from 'svelte/animate';
 	import { receive, send } from '$lib/animation';
-  // @ts-ignore
-  import Icon from "svelte-icons-pack";
 	import { getModalStore, getToastStore, type ModalComponent, type ModalSettings } from '@skeletonlabs/skeleton';
 	import { toastShow } from '$lib/toast';
 	import SceneEdit from './SceneEdit.svelte';
+	import SquareCard from '../global/SquareCard.svelte';
 
   export let scenes: ScenesResponse[] = []
   export let campaign: CampaignsResponse
@@ -84,9 +82,9 @@
 
 </script>
 
-<div class="flex flex-wrap">
+<div class="grid grid-cols-1 gap-4">
   {#each scenes as scene(scene.id)}
-    <div class="relative m-3"
+    <div class="mx-auto"
         animate:flip
         in:receive={{ key: scene.id }}
         out:send={{ key: scene.id }}
@@ -100,10 +98,15 @@
         />
     </div>
   {/each}
-  <button
-    class="card w-40 h-40 shadow-xl card-hover overflow-hidden bg-contain m-3 flex items-center justify-center"
-    on:click={createSceneModalHandler}
-    >
-    <Icon className="flex" size="100" color="" src={BsPlus} />
-  </button>
+
+  <div class="mx-auto">
+
+    <button
+      on:click={createSceneModalHandler}
+      >
+      <SquareCard
+        isAddButton={true}
+      />
+    </button>
+  </div>
 </div>

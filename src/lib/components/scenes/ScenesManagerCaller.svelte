@@ -19,7 +19,7 @@
         scenes: scenes,
         campaign: campaign,
       },
-      width: "w-96",
+      width: "w-80",
       position: position,
     };
 

@@ -20,7 +20,7 @@
 
     function render(ctx: CanvasRenderingContext2D, _t: number, _focus: Point) {
       ctx.shadowColor = "black";
-      ctx.shadowBlur = 6;
+      ctx.shadowBlur = 10;
       ctx.shadowOffsetX = 10;
       ctx.shadowOffsetY = 10;
       ctx.drawImage(image, 0, 0)
