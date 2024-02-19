@@ -77,7 +77,9 @@
 
 <div class="bg-contain bg-center bg-no-repeat overflow-hidden">
 
-  <ImageCanvasPan imageUrl={sceneImage} height={window.innerHeight * 0.8} />
+  <ImageCanvasPan
+    classes="absolute top-0 left-0 z-0"
+    imageUrl={sceneImage} height={window.innerHeight} />
 
   <!-- Buttons -->
   <div

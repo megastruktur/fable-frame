@@ -83,7 +83,7 @@
 	
 			<AppBar
 				background="bg-surface-800/40"
-				spacing="space-y-3 md:space-y-0 mb-3"
+				spacing="space-y-3 md:space-y-0 mb-3 z-10 relative"
 				>
 				<svelte:fragment slot="lead">
 					<button class="btn btn-sm" on:click={nav_back}>

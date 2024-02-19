@@ -2,6 +2,7 @@
 
   import { panzoom, type Options, type Point } from "$lib/panzoom"
 
+  export let classes: string = ""
   export let imageUrl: string
   export let width: number = window.innerWidth
   export let height: number = window.innerHeight
@@ -18,6 +19,10 @@
     image.src = imageUrl
 
     function render(ctx: CanvasRenderingContext2D, _t: number, _focus: Point) {
+      ctx.shadowColor = "black";
+      ctx.shadowBlur = 2;
+      ctx.shadowOffsetX = 6;
+      ctx.shadowOffsetY = 6;
       ctx.drawImage(image, 0, 0)
     }
   })
@@ -36,6 +41,7 @@
 
 {#await canvasDrawer then options}
   <canvas
+    class="{classes}"
     width={width}
     height={height}
     use:panzoom={options} />

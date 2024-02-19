@@ -87,8 +87,6 @@ export function panzoom(canvas: HTMLCanvasElement, options: Options) {
 
   const preloadAction = disablePreload(canvas)
   const resizeAction = resize(canvas, entry => {
-
-    console.log(entry)
     const rect = entry.contentRect
     const prev = toImageSpace({ x: view_width / 2, y: view_height / 2 })
     const transform = ctx.getTransform()
