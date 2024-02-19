@@ -4,6 +4,7 @@
 	import { popup, type ModalComponent, type PopupSettings, type ModalSettings, getModalStore } from "@skeletonlabs/skeleton";
 	import { createEventDispatcher } from "svelte";
 	import SceneEdit from './SceneEdit.svelte';
+	import SquareCard from "../global/SquareCard.svelte";
 
   // BsCheckLg
 
@@ -79,44 +80,40 @@
 
 </script>
 
-<div
-  class="block card w-40 h-40 shadow-xl card-hover overflow-hidden {classes} bg-cover bg-center relative bg-no-repeat"
-  
-  style="background-image: url('{sceneImage}')"
->
-  <button type="button" class="btn btn-icon btn-icon-sm absolute top-2 right-2 {isAcivated ? "text-white" : "text-gray-400"}" on:click|stopPropagation={activateSceneHandler}>
-    {#if isAcivated}
-      <div class="i-[fa6-solid--eye] text-5xl"></div>
-    {:else}
-      <div class="i-[fa6-solid--eye-slash] text-5xl"></div>
-    {/if}
-  </button>
+<SquareCard
+  link="/campaigns/{scene.campaign}/scenes/{scene.id}"
+  title="{scene.name}"
+  imageUrl="{sceneImage}"
+  width="w-40"
+  height="h-40"
+  >
+  <svelte:fragment slot="actionButtons">
 
-  <!-- Scene Operations Popup -->
-  <button
-    class="btn btn-icon btn-icon-sm variant-ghost-secondary absolute left-2 top-2"
-    use:popup={sceneOperationsPopup}
-  >⋮</button>
+    <button type="button" class="btn btn-icon btn-icon-sm {isAcivated ? "text-white" : "text-gray-400"}" on:click|stopPropagation={activateSceneHandler}>
+      {#if isAcivated}
+        <div class="i-[fa6-solid--eye] text-5xl"></div>
+      {:else}
+        <div class="i-[fa6-solid--eye-slash] text-5xl"></div>
+      {/if}
+    </button>
 
-  <a
-    class="block w-full h-full"
-    href="/campaigns/{scene.campaign}/scenes/{scene.id}">
-    <div class="bg-primary-900/70 w-full bottom-0 absolute h-1/4 flex items-center">
-      <h5 class="h5 text-center mx-auto">{scene.name}</h5>
-    </div>
-  </a>
+    <!-- Scene Operations Popup -->
+    <button
+      class="btn btn-icon btn-icon-sm variant-ghost-secondary"
+      use:popup={sceneOperationsPopup}
+    >⋮</button>
+  </svelte:fragment>
+</SquareCard>
 
 
-  <!-- Operations Popup -->
-  <div class="card shadow-xl py-2" data-popup="sceneOperationsPopup-{scene.id}">
-    <ul class="list-nav px-2">
-      <li class="mb-2">
-        <button on:click={sceneEditModalHandler}>Edit</button>
-      </li>
-      <li>
-        <a class="bg-error-900" href="/" on:click|preventDefault={deleteScenePromptHandler}>Remove</a></li>
-    </ul>
-    <div class="arrow bg-surface-100-800-token" />
-  </div>
-
+<!-- Operations Popup -->
+<div class="card shadow-xl py-2" data-popup="sceneOperationsPopup-{scene.id}">
+  <ul class="list-nav px-2">
+    <li class="mb-2">
+      <button on:click={sceneEditModalHandler}>Edit</button>
+    </li>
+    <li>
+      <a class="bg-error-900" href="/" on:click|preventDefault={deleteScenePromptHandler}>Remove</a></li>
+  </ul>
+  <div class="arrow bg-surface-100-800-token" />
 </div>

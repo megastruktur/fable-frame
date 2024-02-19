@@ -8,7 +8,8 @@ import { createCharacterNotes } from "./character_notes"
 import { getCampaign } from "./campaign"
 
 export async function createCharacter(data: Partial<CharactersRecord>): Promise<CharactersResponse> {
-  return await pb.collection("characters").create(data)
+  const character = await pb.collection("characters").create(data)
+  return await getCharacterWithSystemAndCampaign(character.id)
 }
 
 export async function getCharacter(id: string, queryParams: any = {}): Promise<CharactersResponse> {

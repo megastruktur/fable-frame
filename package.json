@@ -68,8 +68,10 @@
 		"marked": "^11.1.0",
 		"pocketbase": "^0.20.1",
 		"pocketbase-typegen": "^1.2.1",
+		"svelte-disable-preload": "^0.0.2",
 		"svelte-icons-pack": "^2.1.0",
 		"svelte-media-queries": "^1.6.2",
+		"svelte-resize-observer-action": "^0.0.3",
 		"uuid": "^9.0.1"
 	}
 }

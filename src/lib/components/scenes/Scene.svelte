@@ -7,6 +7,9 @@
 	import CampaignAlert from "../campaign/CampaignAlert.svelte";
 	import ScenesManagerCaller from "./ScenesManagerCaller.svelte";
 	import { getCampaignAlerts } from "$models/campaign_notes";
+	import { headerBanner, pageName } from "$lib/stores";
+	import ImageCanvasPan from "../global/ImageCanvasPan.svelte";
+	import { getCampaignImage } from "$models/campaign";
 
   export let scene: ScenesResponse
   export let campaign: CampaignsResponse
@@ -14,6 +17,8 @@
   let isGM = campaign.creator === $currentUser?.id || false
   let sceneImage = getSceneImage(scene)
   let campaignAlerts: CampaignNotesResponse[] = []
+
+	pageName.set(`Scene: ${scene.name}`)
 
   const drawerStore = getDrawerStore();
 
@@ -62,19 +67,17 @@
     campaignAlerts = await getCampaignAlerts(campaign.id)
   }
 
+  $: {
+    if ($headerBanner !== getCampaignImage(campaign)) {
+      headerBanner.set(getCampaignImage(campaign))
+    }
+  }
+
 </script>
 
+<div class="bg-contain bg-center bg-no-repeat overflow-hidden">
 
-<div class="h-full w-full bg-contain bg-center bg-no-repeat overflow-hidden"
-  style="background-image: url('{sceneImage}')">
-
-  
-  <div class="bg-surface-900/70 py-2">
-    <h2 class="h2 text-center flex justify-center space-x-3">
-      <p>{scene.name}</p>
-      <a class="btn btn-sm m-0 variant-ghost-secondary" href="/campaigns/{campaign.id}">{campaign.name}</a>
-    </h2>
-  </div>
+  <ImageCanvasPan imageUrl={sceneImage} height={window.innerHeight * 0.8} />
 
   <!-- Buttons -->
   <div

@@ -5,6 +5,7 @@
 	import { createEventDispatcher } from "svelte";
   import { type ModalSettings, getModalStore } from '@skeletonlabs/skeleton';
 	import { truncateText } from "$lib/utils";
+	import SquareCard from "../global/SquareCard.svelte";
 
   export let campaign: CampaignsResponse
   export let classes: string = ""
@@ -51,27 +52,20 @@
 
 </script>
 
-<a
-  class="card block w-72 h-72 bg-cover bg-no-repeat bg-center relative overflow-hidden {classes}"
-  style="background-image: url('{campaignImage}')"
-  href="/campaigns/{campaign.id}">
+<SquareCard
+  imageUrl={campaignImage}
+  title={truncateText(campaign.name, 25)}
+  subtitle={truncateText(campaign.description, 50)}
+  link="/campaigns/{campaign.id}"
+  >
 
-
-  <div class="w-full h-full bg-surface-900/70 flex flex-col justify-center">
-    <section class="p-4">
-      <h2 class="h2 text-center">{truncateText(campaign.name, 25)}</h2>
-    </section>
-    <footer class="card-footer italic text-center">
-      <p class="mt-1 blo">{truncateText(campaign.description, 50)}</p>
-    </footer>
-  </div>
-
-  {#if isGm}
-    <button
-      on:click|preventDefault={deleteCampaignPrompt}
-      class="btn btn-icon btn-icon-sm text-xl variant-ghost-error absolute top-2 left-2">
-        <i class="i-[material-symbols--delete] text-3xl" />
-    </button>
-  {/if}
-
-</a>
+  <fragment slot="actionButtons">
+    {#if isGm}
+      <button
+        on:click|preventDefault={deleteCampaignPrompt}
+        class="btn btn-icon btn-icon-sm text-xl variant-ghost-error absolute top-2 left-2">
+          <i class="i-[material-symbols--delete] text-3xl" />
+      </button>
+    {/if}
+  </fragment>
+</SquareCard>

@@ -3,6 +3,7 @@
 	import { receive, send } from '$lib/animation';
 	import SearchFilter from '$lib/components/SearchFilter.svelte';
 	import CampaignCard from '$lib/components/campaign/CampaignCard.svelte';
+	import SquareCard from '$lib/components/global/SquareCard.svelte';
   import type { CampaignsResponse } from '$lib/pocketbase-types';
 	import { toastShow } from '$lib/toast';
 	import { getGMCampaigns, getCharacterCampaigns } from '$models/campaign';
@@ -54,13 +55,10 @@
             </div>
           {/each}
         {/if}
-        <div>
-          <a
-            class="card card-hover w-72 h-72 overflow-hidden bg-surface-800 flex items-center justify-center m-3"
-            href="/campaigns/create">
-            <i class="i-[gridicons--plus] text-6xl" />
-          </a>
-        </div>
+        <SquareCard
+          link="/campaigns/create"
+          isAddButton={true}
+        />
       </div>
     </div>
   
