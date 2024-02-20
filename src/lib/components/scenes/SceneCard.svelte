@@ -5,6 +5,7 @@
 	import { createEventDispatcher } from "svelte";
 	import SceneEdit from './SceneEdit.svelte';
 	import SquareCard from "../global/SquareCard.svelte";
+	import CircleIconButton from "../global/CircleIconButton.svelte";
 
   // BsCheckLg
 
@@ -88,21 +89,24 @@
   >
   <svelte:fragment slot="actionButtons">
 
-    <button class="btn btn-icon text-2xl {isAcivated ? "text-white variant-ghost-success" : "text-gray-400 variant-ghost-surface"}" on:click|stopPropagation={activateSceneHandler}>
-      {#if isAcivated}
-        <i class="i-[fa6-solid--eye]" />
-      {:else}
-        <i class="i-[fa6-solid--eye-slash]" />
-      {/if}
-    </button>
+    <CircleIconButton
+      on:click={activateSceneHandler}
+      icon={isAcivated ? "i-[fa6-solid--eye]" : "i-[fa6-solid--eye-slash]"}
+      color={isAcivated? "text-white variant-ghost-success" : "text-gray-400 variant-ghost-surface"}
+    />
 
-    <button class="btn btn-icon variant-ghost-secondary text-2xl" on:click={sceneEditModalHandler}>
-      <i class="i-[fa--pencil]" />
-    </button>
-    
-    <button class="btn btn-icon variant-ghost-error text-2xl"  on:click={deleteScenePromptHandler}>
-      <i class="i-[material-symbols--delete]" />
-    </button>
+
+    <CircleIconButton
+      on:click={sceneEditModalHandler}
+      icon="i-[fa--pencil]"
+      color="variant-ghost-secondary"
+    />
+
+    <CircleIconButton
+      on:click={deleteScenePromptHandler}
+      icon="i-[material-symbols--delete]"
+      color="variant-ghost-error"
+    />
 
   </svelte:fragment>
 </SquareCard>

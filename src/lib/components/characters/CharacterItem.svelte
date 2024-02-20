@@ -4,9 +4,10 @@
 	import { getCharacterAvatar } from "$models/character";
 	import { getRpgSystemImage } from "$models/rpg_system";
 	import { clipboard, getToastStore } from "@skeletonlabs/skeleton";
-	import SquareCard from "../global/SquareCard.svelte";
 	import { createEventDispatcher } from "svelte";
 	import { truncateText } from "$lib/utils";
+	import SquareCard from "../global/SquareCard.svelte";
+	import CircleIconButton from "../global/CircleIconButton.svelte";
 
   const toastStore = getToastStore()
   const dispatch = createEventDispatcher()
@@ -65,19 +66,26 @@
   >
   <svelte:fragment slot="actionButtons">
     {#if renderActionButtons}
-      <button class="btn btn-icon btn-icon-sm variant-ghost-warning" on:click={cloneCharacterEvent}>
-        <i class="i-[la--clone-solid] text-3xl" />
-      </button>
-      <button class="btn btn-icon btn-icon-sm variant-ghost-success"
-        on:click={() => toastShow("Character copied to clipboard", toastStore)}
-        use:clipboard={getCharacterJson()}>
-        <i class="i-[mdi--export] text-2xl" />
-      </button>
+      <CircleIconButton
+        on:click={cloneCharacterEvent}
+        icon="i-[la--clone-solid]"
+        color="variant-ghost-warning"
+      />
       <button
-        class="btn btn-icon btn-icon-sm variant-ghost-error"
-        on:click={deleteCharacterPromptEvent}>
-        <i class="i-[material-symbols--delete] text-3xl" />
+        use:clipboard={getCharacterJson()}
+        >
+        <CircleIconButton
+          on:click={() => toastShow("Character copied to clipboard", toastStore)}
+          icon="i-[mdi--export]"
+          color="variant-ghost-success"
+        />
       </button>
+
+      <CircleIconButton
+        on:click={deleteCharacterPromptEvent}
+        icon="i-[material-symbols--delete]"
+        color="variant-ghost-error"
+      />
     {/if}
 
   </svelte:fragment>

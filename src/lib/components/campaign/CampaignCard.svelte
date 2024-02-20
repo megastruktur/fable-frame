@@ -6,6 +6,7 @@
   import { type ModalSettings, getModalStore } from '@skeletonlabs/skeleton';
 	import { truncateText } from "$lib/utils";
 	import SquareCard from "../global/SquareCard.svelte";
+	import CircleIconButton from "../global/CircleIconButton.svelte";
 
   export let campaign: CampaignsResponse
   export let classes: string = ""
@@ -61,11 +62,11 @@
 
   <fragment slot="actionButtons">
     {#if isGm}
-      <button
-        on:click|preventDefault={deleteCampaignPrompt}
-        class="btn btn-icon btn-icon-sm text-xl variant-ghost-error absolute top-2 left-2">
-          <i class="i-[material-symbols--delete] text-3xl" />
-      </button>
+      <CircleIconButton
+        icon="i-[material-symbols--delete]"
+        color="variant-ghost-error"
+        on:click={deleteCampaignPrompt}
+      />
     {/if}
   </fragment>
 </SquareCard>

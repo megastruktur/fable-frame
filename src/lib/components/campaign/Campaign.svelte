@@ -9,6 +9,7 @@
 	import ScenesManagerCaller from "../scenes/ScenesManagerCaller.svelte";
 
 	import CampaignNotes from "./CampaignNotes.svelte";
+	import CircleIconButton from "../global/CircleIconButton.svelte";
 
   const drawerStore = getDrawerStore()
 
@@ -127,28 +128,31 @@
   <!-- Controls -->
   <div class="flex flex-wrap justify-center space-x-3">
     {#if campaign.creator === $currentUser?.id}
-      <button
+    
+      <CircleIconButton
         on:click={openCampaignEditDrawerHandler}
-        class="btn btn-icon variant-ghost-warning"
-        >
-        <i class="i-[fa--pencil] text-2xl"></i>
-      </button>
-      <button
+        icon="i-[fa--pencil]"
+        color="variant-ghost-warning"
+      />
+
+      <CircleIconButton
         on:click={openCampaignRequestsDrawer}
-        class="btn btn-icon variant-ghost-secondary">
-        <i class="i-[material-symbols--share] text-2xl"></i>
-      </button>
+        icon="i-[material-symbols--share]"
+        color="variant-ghost-secondary"
+      />
 
       <ScenesManagerCaller
         {campaign}
         classes="btn btn-icon variant-ghost-success" >
-        <i class="i-[game-icons--steel-door] text-2xl"></i>
       </ScenesManagerCaller>
     {/if}
     {#if campaign.activeScene !== undefined && campaign.activeScene !== ""}
-      <a class="btn btn-icon variant-ghost-warning" href="/campaigns/{campaign.id}/game">
-        <i class="i-[mdi--play] text-2xl"></i>
-      </a>
+
+      <CircleIconButton
+        link="/campaigns/{campaign.id}/game"
+        icon="i-[mdi--play]"
+        color="variant-ghost-warning"
+      />
     {/if}
   </div>
 

@@ -1,8 +1,9 @@
 <script lang="ts">
-	import CreateCharacterChoiceCard from './../../../lib/components/characters/CreateCharacterChoiceCard.svelte';
+	import CreateCharacterChoiceCard from '$lib/components/characters/CreateCharacterChoiceCard.svelte';
   import barebones from "$lib/assets/barebones.webp"
   import wizard from "$lib/assets/wizard.webp"
 	import { pageName } from "$lib/stores";
+	import SquareCard from '$lib/components/global/SquareCard.svelte';
 
 	pageName.set("Create Character")
 </script>
@@ -13,22 +14,24 @@
 
   <div class="flex justify-around flex-wrap">
 
-    <CreateCharacterChoiceCard
-      typeId="wizard" image={wizard}
-      typeName="Wizard"
-      typeDescription="Create character step by step. Limited systems."
+    <SquareCard
+      title="Wizard"
+      subtitle="Create character step by step. Limited systems."
+      imageUrl={wizard}
+      link="/characters/create/wizard"
       />
 
-    <CreateCharacterChoiceCard
-      typeId="barebones" image={barebones}
-      typeName="Barebones"
-      typeDescription="Build character sheet with custom fields from scratch"
+    <SquareCard
+      title="Barebones"
+      subtitle="Build character sheet with custom fields from scratch"
+      imageUrl={barebones}
+      link="/characters/create/barebones"
       />
 
-    <CreateCharacterChoiceCard
-      typeId="import"
-      typeName="Import"
-      typeDescription="Import the previously exported character"
+    <SquareCard
+      title="Import"
+      subtitle="Import the previously exported character"
+      link="/characters/create/import"
       />
 
   </div>

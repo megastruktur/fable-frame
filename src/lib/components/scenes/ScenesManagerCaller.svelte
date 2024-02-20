@@ -2,6 +2,7 @@
 	import type { CampaignsResponse } from "$lib/pocketbase-types";
 	import { getCampaignScenes } from "$models/scenes";
 	import { getDrawerStore, type DrawerSettings } from "@skeletonlabs/skeleton";
+	import CircleIconButton from "../global/CircleIconButton.svelte";
 
 
   export let campaign: CampaignsResponse
@@ -27,6 +28,8 @@
   }
 </script>
 
-<button class={classes} on:click={openScenesManagerDrawer}>
-  <slot />
-</button>
+<CircleIconButton
+  on:click={openScenesManagerDrawer}
+  icon="i-[game-icons--steel-door]"
+  color={classes}
+  />

@@ -16,6 +16,7 @@
 	import { currentUser } from "$lib/pocketbase";
 	import { addCharacterField, removeCharacterField, updateCharacterField, createCharacterField, updateSaveCharacterField } from "$lib/characterFieldsOperations";
 	import { getRpgSystemImage } from "$models/rpg_system";
+	import CircleIconButton from "../global/CircleIconButton.svelte";
 
   const toastStore = getToastStore()
 
@@ -323,23 +324,25 @@
         {#if $currentUser.id === character.creator}
           <div class="flex flex-wrap mt-4 space-x-3">
 
-            <button class="btn btn-icon text-2xl {editMode ? "variant-ghost-error" : "variant-ghost-secondary"}" on:click={toggleEditMode}>
-              {#if editMode}
-                <span class="i-[material-symbols--cancel]"></span>
-              {:else}
-                <span class="i-[fa--pencil]"></span>
-              {/if}
-            </button>
+            <CircleIconButton
+              on:click={toggleEditMode}
+              icon={editMode ? "i-[material-symbols--cancel]" : "i-[fa--pencil]"}
+              color={editMode ? "variant-ghost-error" : "variant-ghost-secondary"}
+              />
 
             <!-- cancel edit button -->
             {#if editMode}
-              <button class="btn btn-icon text-2xl variant-ghost-success" on:click={saveChanges}>
-                <span class="i-[material-symbols--save]"></span>
-              </button>
+              <CircleIconButton
+                on:click={saveChanges}
+                icon="i-[material-symbols--save]"
+                color="variant-ghost-success"
+                />
             {:else}
-              <button class="btn btn-icon text-2xl variant-ghost-warning" on:click={openCharacterNotesDrawer}>
-                <span class="i-[material-symbols--note]"></span>
-              </button>
+              <CircleIconButton
+                on:click={openCharacterNotesDrawer}
+                icon="i-[material-symbols--note]"
+                color="variant-ghost-warning"
+                />
             {/if}
           </div>
         {/if}

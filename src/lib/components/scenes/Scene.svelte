@@ -109,8 +109,7 @@
         <ScenesManagerCaller
           {campaign}
           position="left"
-          classes="btn btn-icon text-secondary-400">
-          <div class="i-[game-icons--steel-door] text-5xl"></div>
+          classes="btn btn-icon text-secondary-400 text-5xl">
         </ScenesManagerCaller>
       {/if}
   
