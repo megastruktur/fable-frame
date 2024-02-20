@@ -58,6 +58,7 @@
 <SquareCard
   imageUrl={bgCharacterImage}
   title={character.name}
+  link="/characters/{character.id}"
   subtitle={rpgSystem !== undefined ? rpgSystem.name : ""}
   {classes}
   >
