@@ -15,7 +15,6 @@
   async function campaignUpdateHandler({action, record}: {action: string, record: CampaignsResponse}) {
     if (action === "update") {
       try {
-        console.log(record)
         campaign = await getCampaignWithRpgSystemCharsAndNotes(record.id)
       }
       catch (error) {

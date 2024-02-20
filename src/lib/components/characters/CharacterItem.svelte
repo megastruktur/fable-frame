@@ -6,6 +6,7 @@
 	import { clipboard, getToastStore } from "@skeletonlabs/skeleton";
 	import SquareCard from "../global/SquareCard.svelte";
 	import { createEventDispatcher } from "svelte";
+	import { truncateText } from "$lib/utils";
 
   const toastStore = getToastStore()
   const dispatch = createEventDispatcher()
@@ -83,8 +84,8 @@
 
   <svelte:fragment slot="linkButtons">
     {#if character.expand?.campaign !== undefined}
-      <article>
-        <a class="btn variant-ghost-warning" href="/campaigns/{character.expand.campaign.id}">{character.expand.campaign.name}</a>
+      <article class="mt-3">
+        <a class="btn variant-ghost-warning text-wrap" href="/campaigns/{character.expand.campaign.id}">{truncateText(character.expand.campaign.name, 25)}</a>
       </article>
     {/if}
   </svelte:fragment>
