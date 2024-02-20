@@ -25,6 +25,7 @@
         formData.append("image", uploadedImage)
       }
 
+      formData.append("name", campaign.name)
       formData.append("description", campaign.description)
 
       await updateCampaign(campaign.id, formData)
