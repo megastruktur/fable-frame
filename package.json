@@ -60,6 +60,7 @@
 		"@dice-roller/rpg-dice-roller": "^5.5.0",
 		"@egoist/tailwindcss-icons": "^1.7.1",
 		"@iconify/json": "^2.2.160",
+		"@neodrag/svelte": "^2.0.3",
 		"@sveltejs/adapter-static": "^3.0.1",
 		"@types/marked": "^5.0.2",
 		"cors": "^2.8.5",

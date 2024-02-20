@@ -10,6 +10,7 @@
 	import { headerBanner, pageName } from "$lib/stores";
 	import ImageCanvasPan from "../global/ImageCanvasPan.svelte";
 	import { getCampaignImage } from "$models/campaign";
+	import Draggable from "../global/Draggable.svelte";
 
   export let scene: ScenesResponse
   export let campaign: CampaignsResponse
@@ -75,7 +76,7 @@
 
 </script>
 
-<div class="bg-contain bg-center bg-no-repeat overflow-hidden">
+<div class="bg-contain bg-center bg-no-repeat">
 
   <ImageCanvasPan
     classes="absolute top-0 left-0 z-0"
@@ -127,13 +128,13 @@
 
   <!-- Alerts -->
   {#if isGM}
-    <div class="fixed right-3 bottom-3">
-      {#await getCampaignAlertsHandler()}
-        <ProgressBar />
-      {:then}
+    {#await getCampaignAlertsHandler()}
+      <ProgressBar />
+    {:then}
+      <Draggable title="Important">
         <CampaignAlert bind:campaignAlerts={campaignAlerts} campaignId={campaign.id} />
-      {/await}
-    </div>
+      </Draggable>
+    {/await}
   {/if}
 
 </div>

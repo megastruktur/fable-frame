@@ -3,9 +3,6 @@
 	import type { CampaignNotesResponse } from "$lib/pocketbase-types";
 	import { createCampaignAlert, deleteCampaignNote, toggleCampaignNoteActive } from "$models/campaign_notes";
 	import { flip } from "svelte/animate";
-  // @ts-ignore
-  import { TriangleWarningIcon } from "svelte-uicons/rounded/solid"
-
 
   export let campaignId: string
   export let campaignAlerts: CampaignNotesResponse[]
@@ -39,7 +36,7 @@
 
 </script>
 
-<div class="flex flex-col items-center w-80 bg-surface-900/70 pt-3 pb-4">
+<div class="flex flex-col items-center w-72 pt-3 pb-4">
 
   <form class="mb-3" on:submit|preventDefault={createCampaignAlertHandler}>
     <input class="input"
@@ -59,8 +56,8 @@
             class="{alert.active ? "" : "line-through opacity-25"} flex space-x-2"
             on:click={() => toggleCampaignAlertHandler(alert) }
             >
-            <div class="w-6 h-6 text-warning-900">
-              <TriangleWarningIcon />
+            <div class="w-6 h-6 text-warning-900 text-3xl">
+              <i class="i-[material-symbols--warning]" />
             </div>
             <div class="w-56">{alert.note}</div>
             
