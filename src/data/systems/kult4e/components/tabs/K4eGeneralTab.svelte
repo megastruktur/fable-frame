@@ -94,7 +94,6 @@
       <FieldRender
         on:fieldRemove field={appearance} {editMode} editable={true}
         isTextarea={true}
-        valueStyle="whitespace-pre-wrap"
         labelStyle="text-center w-full"
         placeholder="Appearance"
         />

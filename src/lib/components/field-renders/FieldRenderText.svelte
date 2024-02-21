@@ -72,6 +72,6 @@
       <input class="input" type="text" bind:value={fieldValue} on:focusout={fieldEdit} placeholder="{placeholder}" />
     {/if}
   {:else}
-    <p class="{valueStyle}">{field.value ?? ""}</p>
+    <p class="whitespace-pre-wrap {valueStyle}">{field.value ?? ""}</p>
   {/if}
 </div>
