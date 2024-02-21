@@ -12,8 +12,11 @@
 
     image.onload = () =>
       resolve({
-        width: image.width,
-        height: image.height,
+        // w and h are the default scale of the image
+        width: 1000,
+        height: 1000,
+        // width: image.width,
+        // height: image.height,
         render,
       })
     image.src = imageUrl

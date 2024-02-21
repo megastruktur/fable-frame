@@ -8,8 +8,10 @@
 	import { toastShow } from '$lib/toast';
 	import SceneEdit from './SceneEdit.svelte';
 	import SquareCard from '../global/SquareCard.svelte';
+	import SearchFilter from '../SearchFilter.svelte';
 
   export let scenes: ScenesResponse[] = []
+  export let scenesFiltered: ScenesResponse[] = scenes
   export let campaign: CampaignsResponse
   let campaignActiveScene: string = campaign.activeScene
 
@@ -53,6 +55,7 @@
 
   function onSceneUpdatedHandler({ detail: {scene } }: { detail: { scene: ScenesResponse } }) {
     scenes = scenes.map(s => s.id === scene.id ? scene : s)
+    scenesFiltered = [...scenes]
   }
 
   async function createSceneModalHandler() {
@@ -70,9 +73,11 @@
         if (scene !== undefined && scene !== null) {
           if (action === "update") {
             scenes = scenes.map(scene => scene.id === scene.id? scene : scene)
+            scenesFiltered = [...scenes]
           }
           else if (action === "create") {
             scenes = [...scenes, scene]
+            scenesFiltered = [...scenes]
           }
         }
       },
@@ -83,7 +88,8 @@
 </script>
 
 <div class="grid grid-cols-1 gap-4">
-  {#each scenes as scene(scene.id)}
+  <SearchFilter items={scenes} bind:filteredItems={scenesFiltered} />
+  {#each scenesFiltered as scene(scene.id)}
     <div class="mx-auto"
         animate:flip
         in:receive={{ key: scene.id }}

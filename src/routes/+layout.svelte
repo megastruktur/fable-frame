@@ -53,7 +53,7 @@
 
 <Modal />
 
-<Drawer>
+<Drawer rounded="rounded-none">
 	{#if $drawerStore.id === "character-notes"}
 		<CharacterNotesDrawer characterId={$drawerStore.meta.characterId} />
 	{:else if $drawerStore.id === "campaign-character-list"}
