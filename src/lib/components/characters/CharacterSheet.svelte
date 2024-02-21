@@ -324,7 +324,7 @@
 
         <!-- Campaign -->
         {#if campaign !== undefined}
-          <a class="btn variant-ghost-tertiary" href="/campaigns/{campaign.id}">{campaign.name}</a>
+          <a class="btn variant-ghost-tertiary text-wrap" href="/campaigns/{campaign.id}">{campaign.name}</a>
         {/if}
 
         <!-- Controls -->

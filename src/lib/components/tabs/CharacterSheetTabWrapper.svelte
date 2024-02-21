@@ -21,7 +21,7 @@
 
 </script>
 
-<section class="{width} mb-3 relative mx-2 {(matches || compactVersion) && activeTabName !== tab.name ? "hidden" : ""}">
+<section class="{width} mb-3 relative { !(matches && compactVersion) ? "mx-2" : "" } {(matches || compactVersion) && activeTabName !== tab.name ? "hidden" : ""}">
 
 
   {#if removable && editMode}

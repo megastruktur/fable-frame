@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { toastShow } from "$lib/toast";
-	import { getCharacterAvatar } from "$models/character";
-	import { getRpgSystemImage } from "$models/rpg_system";
+	import { getBgCharacterImage } from "$models/character";
 	import { clipboard, getToastStore } from "@skeletonlabs/skeleton";
 	import { createEventDispatcher } from "svelte";
 	import { truncateText } from "$lib/utils";
@@ -17,21 +16,7 @@
   export let classes: string = ""
   export let renderActionButtons: boolean = false
 
-  let bgCharacterImage = getBgCharacterImage()
-
-  // Get the Avatar. If Avatar is not set - take Campaign image.
-  function getBgCharacterImage(): string {
-
-    let image: string = ""
-
-    image = getCharacterAvatar(character)
-    if (image === "") {
-      image = getRpgSystemImage(rpgSystem)
-    }
-
-    return image
-  }
-
+  let bgCharacterImage = getBgCharacterImage(character, rpgSystem)
 
 	function getCharacterJson(): string {
 

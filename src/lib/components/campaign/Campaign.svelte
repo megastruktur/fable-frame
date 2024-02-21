@@ -10,6 +10,8 @@
 
 	import CampaignNotes from "./CampaignNotes.svelte";
 	import CircleIconButton from "../global/CircleIconButton.svelte";
+	import SquareCard from "../global/SquareCard.svelte";
+	import { getBgCharacterImage } from "$models/character";
 
   const drawerStore = getDrawerStore()
 
@@ -161,8 +163,13 @@
   <div class="flex flex-wrap justify-center mb-3">
     {#if characters && characters.length > 0}
       {#each characters as character}
+        {@const characterImage = getBgCharacterImage(character, rpgSystem)}
         <button class="btn" on:click|stopPropagation={() => openCharacterSheetDrawerHandler(character)}>
-          <CharacterItem {character} rpgSystem={rpgSystem} />
+          <SquareCard
+            imageUrl={characterImage}
+            title={character.name}
+            subtitle={rpgSystem !== undefined ? rpgSystem.name : ""}
+            />
         </button>
       {/each}
     {/if}

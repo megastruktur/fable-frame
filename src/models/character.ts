@@ -1,7 +1,7 @@
-import { getRpgSystem } from "$models/rpg_system"
+import { getRpgSystem, getRpgSystemImage } from "$models/rpg_system"
 import { pb } from "$lib/pocketbase"
 import type { SystemJSON, Field } from "$lib/types.d"
-import type { CharactersResponse, CharactersRecord } from "$lib/pocketbase-types.d"
+import type { CharactersResponse, CharactersRecord, RpgSystemsResponse } from "$lib/pocketbase-types.d"
 import getStringHash from "$lib/getStringHash"
 import { v4 as uuidv4 } from 'uuid'
 import { createCharacterNotes } from "./character_notes"
@@ -297,4 +297,16 @@ export async function getPlayerharacterFromCampaign(campaignId: string, userId: 
   return await pb.collection("characters").getFirstListItem(
     `creator="${userId}"&&campaign="${campaignId}"`
   )
+}
+
+export function getBgCharacterImage(character: CharactersResponse, rpgSystem: RpgSystemsResponse): string {
+
+  let image: string = ""
+
+  image = getCharacterAvatar(character)
+  if (image === "") {
+    image = getRpgSystemImage(rpgSystem)
+  }
+
+  return image
 }
