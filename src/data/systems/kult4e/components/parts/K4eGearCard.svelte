@@ -50,7 +50,7 @@
   {#if editMode && editable}
     <textarea class="textarea" bind:value={field.description} />
   {:else}
-    <div class="blockquote">{@html field.description}</div>
+    <div class="blockquote text-left">{@html field.description}</div>
   {/if}
 
   <!-- Attacks - for Weapons only -->
@@ -67,6 +67,30 @@
                 <li class="text-left">
                   <span>◆</span>
                   <span>{@html attack}</span>
+                </li>
+              {/each}
+            </ul>
+          </svelte:fragment>
+        </AccordionItem>
+      </Accordion>
+      
+    </div>
+  {/if}
+
+  <!-- Actions -->
+  {#if field.data?.actions !== undefined && field.data?.actions.length > 0}
+    <div class="mt-3">
+      <Accordion
+        regionCaret="hidden"
+        rounded="md">
+        <AccordionItem>
+          <svelte:fragment slot="summary"><div class="text-center">Actions</div></svelte:fragment>
+          <svelte:fragment slot="content">
+            <ul class="list pl-3 text-sm">
+              {#each field.data.actions as action}
+                <li class="text-left">
+                  <span>◆</span>
+                  <span>{@html action}</span>
                 </li>
               {/each}
             </ul>
