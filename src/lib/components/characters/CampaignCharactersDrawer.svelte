@@ -8,7 +8,7 @@
   export let campaign: CampaignsResponse
 </script>
 
-<div class="flex flex-col w-96 p-3">
+<div class="flex flex-col p-3">
 
   <Accordion
       regionControl=""

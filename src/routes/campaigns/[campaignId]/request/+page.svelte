@@ -2,9 +2,10 @@
 	import { goto } from "$app/navigation";
   import { page } from "$app/stores"
 	import CharacterItem from "$lib/components/characters/CharacterItem.svelte";
+	import SquareCard from "$lib/components/global/SquareCard.svelte";
 	import type { CampaignsResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { getCampaignWithRpgSystem } from "$models/campaign";
-	import { getMyCharactersForSystemNoCampaign, updateCharacter } from "$models/character";
+	import { getBgCharacterImage, getMyCharactersForSystemNoCampaign, updateCharacter } from "$models/character";
 	import { ProgressRadial, type ToastSettings, getToastStore } from "@skeletonlabs/skeleton";
 
   let rpgSystem: RpgSystemsResponse
@@ -66,10 +67,16 @@
   <div class="flex justify-center my-6 flex-wrap">
     {#each characters as character}
   
-    {@const isCharacterSelected = (characterSelected !== undefined && character.id === characterSelected.id ) }
-    <button class="btn {isCharacterSelected ? "variant-filled" : ""}" on:click={() => characterSelected = character}>
-      <CharacterItem {character} {rpgSystem} />
-    </button>
+      {@const isCharacterSelected = (characterSelected !== undefined && character.id === characterSelected.id ) }
+      {@const characterImage = getBgCharacterImage(character, rpgSystem)}
+      
+      <button class="btn {isCharacterSelected ? "variant-filled" : ""}" on:click={() => characterSelected = character}>
+        <SquareCard
+          imageUrl={characterImage}
+          title={character.name}
+          subtitle={rpgSystem !== undefined ? rpgSystem.name : ""}
+          />
+      </button>
     {/each}
   </div>
 

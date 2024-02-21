@@ -1,15 +1,16 @@
 <script lang="ts">
 
   import { page } from "$app/stores"
-	import type { CharactersResponse } from "$lib/pocketbase-types";
+	import type { CampaignsResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { type ToastSettings, getToastStore, clipboard } from "@skeletonlabs/skeleton";
-	import CharacterItem from "$lib/components/characters/CharacterItem.svelte";
-	import { addCharacterToCampaign } from "$models/character";
+	import { addCharacterToCampaign, getBgCharacterImage } from "$models/character";
 	import { toastShow } from "$lib/toast";
+	import SquareCard from "../global/SquareCard.svelte";
 
   // Result of getCampaignCharacterRequests function
   export let characters: CharactersResponse[]
-  export let campaignId: string
+  export let campaign: CampaignsResponse
+  export let rpgSystem: RpgSystemsResponse
   let characterSelected: CharactersResponse
 
   const toastStore = getToastStore()
@@ -19,7 +20,7 @@
     characterSelected.campaignStatus = 1
 
     try {
-      const updatedCharacter = await addCharacterToCampaign(characterSelected.id, campaignId)
+      const updatedCharacter = await addCharacterToCampaign(characterSelected.id, campaign.id)
       if (updatedCharacter !== undefined) {
         // Success Toast
         const t: ToastSettings = {
@@ -50,7 +51,7 @@
   <h1 class="h1 text-center my-6">Campaign requests</h1>
   
   <button class="btn variant-ghost-success mb-3"
-    use:clipboard={`${$page.url.origin}/campaigns/${campaignId}/request`}
+    use:clipboard={`${$page.url.origin}/campaigns/${campaign.id}/request`}
     on:click={() => toastShow("Invite link copied", toastStore)}>INVITE</button>
   
   
@@ -58,10 +59,16 @@
     <div class="flex justify-center my-6 flex-wrap">
       {#each characters as character(character.id)}
   
-      {@const isCharacterSelected = (characterSelected !== undefined && character.id === characterSelected.id ) }
-      <button class="btn {isCharacterSelected ? "variant-filled" : ""}" on:click={() => characterSelected = character}>
-        <CharacterItem {character} rpgSystem={character.expand.rpgSystem} />
-      </button>
+        {@const isCharacterSelected = (characterSelected !== undefined && character.id === characterSelected.id ) }
+        {@const characterImage = getBgCharacterImage(character, rpgSystem)}
+
+        <button class="btn {isCharacterSelected ? "variant-filled" : ""}" on:click={() => characterSelected = character}>
+          <SquareCard
+            imageUrl={characterImage}
+            title={character.name}
+            subtitle={rpgSystem !== undefined ? rpgSystem.name : ""}
+            />
+        </button>
       {/each}
     </div>
     <div class="flex justify-center">

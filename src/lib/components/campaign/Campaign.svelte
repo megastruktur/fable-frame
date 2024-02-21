@@ -3,7 +3,7 @@
 	import { currentUser } from "$lib/pocketbase";
 	import type { CampaignNotesResponse, CampaignsResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { headerBanner } from "$lib/stores";
-	import { getCampaignCharacterRequests, getCampaignImage } from "$models/campaign"
+	import { getCampaignCharacterRequests, getCampaignImage, getCampaignWithRpgSystemCharsAndNotes, subscribeToCampaign } from "$models/campaign"
 	import { type DrawerSettings, getDrawerStore } from "@skeletonlabs/skeleton"
 	import CampaignAlert from "$lib/components/campaign/CampaignAlert.svelte";
 	import ScenesManagerCaller from "../scenes/ScenesManagerCaller.svelte";
@@ -12,6 +12,11 @@
 	import CircleIconButton from "../global/CircleIconButton.svelte";
 	import SquareCard from "../global/SquareCard.svelte";
 	import { getBgCharacterImage } from "$models/character";
+	import { onDestroy, onMount } from "svelte";
+	import type { UnsubscribeFunc } from "pocketbase";
+
+
+  let unsubscribeFromCampaign: UnsubscribeFunc
 
   const drawerStore = getDrawerStore()
 
@@ -68,7 +73,8 @@
       id: `campaign-requests`,
       meta: {
         characters: characterRequests,
-        campaignId: campaign.id,
+        campaign: campaign,
+        rpgSystem: rpgSystem,
       },
       width: "w-96",
       position: "right",
@@ -113,6 +119,21 @@
 
     })
   }
+
+  async function campaignSub({action, record}: {action: string, record: any}) {
+
+    if (action === "update") {
+      campaign = await getCampaignWithRpgSystemCharsAndNotes(campaign.id)
+    }
+  }
+
+  onMount(async () => {
+    unsubscribeFromCampaign = await subscribeToCampaign(campaign.id, campaignSub)
+  })
+
+  onDestroy(() => {
+    unsubscribeFromCampaign()
+  })
 
   $: {
     if ($headerBanner !== getCampaignImage(campaign)) {
