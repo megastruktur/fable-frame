@@ -12,6 +12,7 @@
 
   export let field: Field
   export let renderAs: string = field.type
+  export let isTextarea: boolean = false
   export let classes: string = ""
   export let editableClasses: string = ""
   export let editable: boolean = true
@@ -71,13 +72,16 @@
 
 </script>
 
-<div class="w-full">
+<div class="w-full relative pt-8">
+  
+  <div>
+    <svelte:component this={fieldRenderComponent} {characterId} {labelStyle} {valueStyle} {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode} {color} {colorEdit} {colorButtons} {updateWithoutEditMode} {fullEditable} {showTitle} {placeholder} {placeholderArea} {isTextarea}
+    />
+  </div>
+
   {#if removable && editMode}
-    <button class="btn w-10 h-8 p-0 variant-soft-error rounded-b-none border-b-0 ml-3" on:click={removeField}>
-      <i class="i-[material-symbols--delete] text-xl" />
+    <button class="btn w-10 h-8 p-0 variant-soft-error rounded-b-none border-b-0 text-2xl absolute top-0 left-10" on:click={removeField}>
+      <i class="i-[material-symbols--delete] " />
     </button>
   {/if}
-  
-  <svelte:component this={fieldRenderComponent} {characterId} {labelStyle} {valueStyle} {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode} {color} {colorEdit} {colorButtons} {updateWithoutEditMode} {fullEditable} {showTitle} {placeholder} {placeholderArea}
-  />
 </div>

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import CharacterSheetTab from '$lib/components/tabs/CharacterSheetTab.svelte';
-	import CircleAdd from '$lib/components/circle-add/CircleAdd.svelte';
 	import type { Field } from "$lib/types";
 	import type { CharactersResponse } from '$lib/pocketbase-types';
 	import K4eSkillsTab from './tabs/K4eSkillsTab.svelte';

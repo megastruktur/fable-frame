@@ -9,8 +9,6 @@
   import BsFileMinus from "svelte-icons-pack/bs/BsFileMinus";
   import BsTable from "svelte-icons-pack/bs/BsTable";
 	import { createEventDispatcher } from "svelte";
-	import type { Field } from "$lib/types";
-  import { v4 as uuidv4 } from 'uuid'
 	import type { CharactersResponse } from "$lib/pocketbase-types";
 
   export let name: string = ""
@@ -91,8 +89,6 @@
   function fieldAdd() {
     if (type !== undefined && fieldTypes[type] !== undefined) {
 
-      let field: Field = fieldTypes[type]
-      field.id = uuidv4(),
       dispatch("fieldAdd", {
         field: fieldTypes[type],
         saveField: saveField,

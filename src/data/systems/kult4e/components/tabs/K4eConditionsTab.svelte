@@ -1,6 +1,5 @@
 <script lang="ts">
 	import FieldRender from '$lib/components/field-renders/FieldRender.svelte';
-	import CircleQuickAddField from '$lib/components/circle-add/CircleQuickAddField.svelte';
 	import type { Field } from "$lib/types";
 	import type { ObjectType, QueryArray } from "svelte-media-queries/components/MediaQuery.types";
   import {flip} from "svelte/animate"

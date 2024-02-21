@@ -19,6 +19,7 @@
   export let editableClasses: string = ""
   export let fullEditable: boolean = false
   export let showTitle: boolean = true
+  export let isTextarea: boolean = false
 
   const modalStore = getModalStore()
 
@@ -58,11 +59,19 @@
 
 </script>
 
-<label class="{classes} label" on:click={openDescriptionModal} on:keyup>
-  <h4 class="h4 {labelStyle}">{field.label}</h4>
+<div class="{classes}">
+  
+  <button on:click={openDescriptionModal}
+    class="h3 mb-3 {labelStyle}">{field.label}
+  </button>
+
   {#if editable && editMode}
-    <input class="input" type="text" bind:value={fieldValue} on:focusout={fieldEdit} placeholder="{placeholder}" />
+    {#if isTextarea}
+      <textarea class="textarea" bind:value={fieldValue} on:focusout={fieldEdit} placeholder="{placeholder}" />
+    {:else}
+      <input class="input" type="text" bind:value={fieldValue} on:focusout={fieldEdit} placeholder="{placeholder}" />
+    {/if}
   {:else}
     <p class="{valueStyle}">{field.value ?? ""}</p>
   {/if}
-</label>
+</div>

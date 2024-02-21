@@ -249,7 +249,18 @@
   }
 
   async function fieldAdd({detail: {field, saveField}} : {detail: {field: Field, saveField: boolean | undefined}}) {
-    character = addCharacterField(character, field)
+
+    console.log("Field Add")
+    
+    // Detach field from initial object
+    field = JSON.parse(JSON.stringify(field))
+
+    const characterUpdated = await createCharacterField(character.id, field, saveField)
+
+    if (characterUpdated !== undefined) {
+      const characterUpdatedFields = characterUpdated.fields
+      character.fields = [...characterUpdatedFields]
+    }
 
     if (field.group !== undefined) {
       if (field.type !== "tab") {
@@ -264,10 +275,6 @@
         tabsContent[field.name] = []
         tabs[field.name] = field
       }
-    }
-
-    if (saveField !== undefined && saveField) {
-      await createCharacterField(character.id, field)
     }
     console.log("On Field Add")
   }

@@ -8,7 +8,7 @@ import type { Field } from "$lib/types";
 
   export let fields: Field[]
   export let title: string
-  export let buttonText: string = "Select"
+  export let buttonText: string = "Take"
   export let itemDescriptionComponent: any = TraitFieldInfo
 
   let filteredFields: Field[] = fields
@@ -54,7 +54,7 @@ import type { Field } from "$lib/types";
         {#if selected}
            <button
             on:click={() => addField(field)}
-            class="btn outline-none rounded-r-none variant-filled-success absolute right-0 top-1/2">Take</button>
+            class="btn outline-none rounded-r-none variant-filled-success absolute right-0 top-1/2">{buttonText}</button>
         {/if}
       </button>
     {/each}

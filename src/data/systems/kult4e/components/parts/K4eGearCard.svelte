@@ -21,49 +21,17 @@
   export let valueStyle: string = ""
   export let fullEditable: boolean = false
 
-
-  // async function deselectOption(option: string) {
-
-  //   if (characterId !== "") {
-
-  //     if (field.data?.selectedOptions !== undefined) {
-  //       field.data.selectedOptions = field.data.selectedOptions.filter((o: string) => o !== option);
-  //     }
-  
-  //     if (field.data !== undefined) {
-  //       field.data.options = [option, ...field.data?.options]
-  //     }
-  
-  //     if (characterId !== undefined) {
-  //       updateSaveCharacterField(characterId, field)
-  //     }
-  //   }
-  // }
-
-  // async function selectOption(option: string) {
-
-  //   if (characterId !== "") {
-  //     if (field.data !== undefined && field.data.options !== undefined) {
-  //       field.data.options = field.data.options.filter((o: string) => o !== option);
-  //     }
-
-  //     if (field.data !== undefined) {
-  //       field.data.selectedOptions = [option, ...field.data.selectedOptions || []]
-  //     }
-
-  //     if (characterId !== undefined) {
-  //       updateSaveCharacterField(characterId, field)
-  //     }
-  //   }
-
-  // }
-
 </script>
 
 <div class="{classes} card h-full variant-glass-secondary {selected ? "border-red-500 border" : "border border-transparent"}">
 
   {#if showTitle}
-    <h2 class="h2 mb-3 text-center">{@html field.label}</h2>
+
+    {#if editMode && editable}
+      <input class="input" bind:value={field.label} />
+    {:else}
+      <h2 class="h2 mb-3 text-center">{@html field.label}</h2>
+    {/if}
   {/if}
 
   {#if field.icon !== undefined && field.icon !== ""}
@@ -79,7 +47,11 @@
     </div>
   {/if}
 
-  <div class="blockquote">{@html field.description}</div>
+  {#if editMode && editable}
+    <textarea class="textarea" bind:value={field.description} />
+  {:else}
+    <div class="blockquote">{@html field.description}</div>
+  {/if}
 
   <!-- Attacks - for Weapons only -->
   {#if field.data?.attacks !== undefined && field.data?.attacks.length > 0}

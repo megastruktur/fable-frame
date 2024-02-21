@@ -92,7 +92,10 @@
 
     {#if editMode || appearance.value !== ""}
       <FieldRender
-        on:fieldRemove field={appearance} {editMode} editable={true} classes="text-center"
+        on:fieldRemove field={appearance} {editMode} editable={true}
+        isTextarea={true}
+        valueStyle="whitespace-pre-wrap"
+        labelStyle="text-center w-full"
         placeholder="Appearance"
         />
     {/if}

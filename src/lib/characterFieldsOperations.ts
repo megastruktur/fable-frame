@@ -37,9 +37,15 @@ export function addCharacterField(character: CharactersResponse, field: Field): 
   }
   field.weight = 1
 
-  character.fields?.push(field)
-  return character
+  const validateFieldById = character.fields?.find((f: Field) => f.id === field.id)
 
+  if (validateFieldById === undefined) {
+    character.fields?.push(field)
+    return character
+  }
+  else {
+    throw new Error(`Field with id ${field.id} already exists`)
+  }
 }
 
 export function removeCharacterField(character: CharactersResponse, field: Field): CharactersResponse {
@@ -121,7 +127,7 @@ export async function updateSaveCharacterField(characterId: string, field: Field
 
   try {
     const character = await getCharacter(characterId)
-    console.log(character)
+    
     updateCharacterField(character, field)
     updateCharacterWithHash(characterId, character)
     return character
@@ -131,13 +137,16 @@ export async function updateSaveCharacterField(characterId: string, field: Field
   }
 }
 
-export async function createCharacterField(characterId: string, field: Field) {
+export async function createCharacterField(characterId: string, field: Field, saveToCharacter: boolean = false): Promise<CharactersResponse> {
 
   try {
-    const character = await getCharacter(characterId)
-    console.log(character)
-    addCharacterField(character, field)
-    updateCharacterWithHash(characterId, character)
+    let character = await getCharacter(characterId)
+    character = addCharacterField(character, field)
+
+    if (saveToCharacter) {
+      await updateCharacterWithHash(characterId, character)
+    }
+    return character
   }
   catch (error) {
     console.error(error)
