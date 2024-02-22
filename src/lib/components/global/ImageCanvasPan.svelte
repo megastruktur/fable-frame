@@ -6,6 +6,7 @@
   export let imageUrl: string
   export let width: number = window.innerWidth
   export let height: number = window.innerHeight
+  export let imageScale: number = 2
 
   const canvasDrawer = new Promise<Options>(resolve => {
     const image = new Image()
@@ -13,10 +14,8 @@
     image.onload = () =>
       resolve({
         // w and h are the default scale of the image
-        width: 1000,
-        height: 1000,
-        // width: image.width,
-        // height: image.height,
+        width: image.width * imageScale,
+        height: image.height * imageScale,
         render,
       })
     image.src = imageUrl
