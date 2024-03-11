@@ -66,7 +66,7 @@
 
 </script>
 
-<div class="card rounded-none p-3">
+<div class="card p-3 shadow-md">
 
   {#if !editMode}
     <div class="relative">
