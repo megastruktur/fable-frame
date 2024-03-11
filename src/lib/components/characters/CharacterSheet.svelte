@@ -297,7 +297,7 @@
     <div
       out:fade={{ duration: 500 }}
       in:fade={{ duration: 500, delay: 500 }}
-      class="mb-3 px-3"
+      class="mb-3"
       >
       <div class="flex flex-col mt-3 items-center">
 

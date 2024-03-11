@@ -66,7 +66,7 @@
 
 </script>
 
-<div class="card p-3 shadow-md">
+<div class=" bg-neutral-900/90 py-3 px-2 drop-shadow-xl shadow-md h-auto {isGmNote ? "opacity-50" : ""}">
 
   {#if !editMode}
     <div class="relative">
@@ -88,10 +88,17 @@
     </div>
   {:else}
     <textarea class="textarea my-6" bind:value={note}></textarea>
-    <div class="flex items-center">
-      <SlideToggle name="is-gm-note" bind:checked={isGmNote}>is GM-only?</SlideToggle>
-      <button class="ml-6 btn variant-outline-primary" on:click={() => editMode = false}>Cancel</button>
-      <button class="ml-6 btn variant-outline-success" on:click={updateNote}>Update</button>
+    <div class="flex items-center justify-around">
+      <CircleIconButton
+        on:click={() => editMode = false}
+        color="variant-ghost-error"
+        icon="i-[material-symbols--cancel]"
+      />
+      <CircleIconButton
+        on:click={updateNote}
+        color="variant-ghost-success"
+        icon="i-[material-symbols--save]"
+      />
     </div>
   {/if}
 

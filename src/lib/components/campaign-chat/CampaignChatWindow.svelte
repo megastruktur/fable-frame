@@ -10,6 +10,7 @@
   import { v4 as uuidv4 } from 'uuid'
 	import { getCharacter, getCharacterAvatarThumb } from "$models/character";
 	import type { UnsubscribeFunc } from "pocketbase";
+	import CircleIconButton from "../global/CircleIconButton.svelte";
 
 
   export let campaign: CampaignsResponse
@@ -149,15 +150,16 @@
     </div>
   </div>
 
-  <div class="my-3">
-    <form class="flex my-3 mx-2" on:submit|preventDefault={() => sendMessage(chatMessage)}>
-      <textarea class="input resize-none" bind:value={chatMessage} placeholder="Type here"></textarea>
-      <button type="submit"
-        class="btn btn-icon btn-icon-sm variant-filled-tertiary h-6 w-6"
-      >
+  <div class="mt-3 pb-3 bg-surface-700">
+    <form class="flex my-3 mx-2 space-x-3" on:submit|preventDefault={() => sendMessage(chatMessage)}>
+      <textarea class="textarea resize-none border-0" bind:value={chatMessage} placeholder="Type here"></textarea>
 
-      <div class="i-[fa6-solid--angle-right] text-2xl">
-    </button>
+      <button type="submit">
+        <CircleIconButton
+          icon="i-[fa6-solid--angle-right]"
+          color="variant-ghost-tertiary"
+        />
+      </button>
     </form>
     <!-- Dice -->
     <DiceRoller on:diceRoll={diceRollHandler} />
