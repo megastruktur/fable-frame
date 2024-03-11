@@ -7,6 +7,7 @@
 	import { truncateText } from "$lib/utils";
 	import SquareCard from "../global/SquareCard.svelte";
 	import CircleIconButton from "../global/CircleIconButton.svelte";
+  import { Base64 } from 'js-base64';
 
   const toastStore = getToastStore()
   const dispatch = createEventDispatcher()
@@ -18,14 +19,15 @@
 
   let bgCharacterImage = getBgCharacterImage(character, rpgSystem)
 
-	function getCharacterJson(): string {
+	function getCharacterExport(): string {
 
     const exportObject = {
       rpgSystem: character.rpgSystem,
       fields: character.fields,
     }
 
-    return JSON.stringify(exportObject)
+    // Base64 encode the JSON object
+    return Base64.encode(JSON.stringify(exportObject))
 	}
 
   function cloneCharacterEvent(): void {
@@ -57,7 +59,7 @@
         color="variant-ghost-warning"
       />
       <button
-        use:clipboard={getCharacterJson()}
+        use:clipboard={getCharacterExport()}
         >
         <CircleIconButton
           on:click={() => toastShow("Character copied to clipboard", toastStore)}

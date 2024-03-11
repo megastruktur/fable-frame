@@ -5,7 +5,7 @@
 	import type { Field } from "$lib/types";
 	import { createNewCharacterByCharacterData } from "$models/character";
 	import { getRpgSystem } from "$models/rpg_system";
-	import { Step, Stepper } from "@skeletonlabs/skeleton";
+  import { Base64 } from 'js-base64';
 
   let characterName: string = ""
   let selectedSystem: RpgSystemsResponse
@@ -28,7 +28,7 @@
   async function validateProceed(): Promise<boolean> {
     if (importedCharacter !== "" && characterName !== "") {
       try {
-        characterStub = JSON.parse(importedCharacter)
+        characterStub = JSON.parse(Base64.decode(importedCharacter))
 
         selectedSystem = await getImportCharacterRpgSystem(characterStub)
 
