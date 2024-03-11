@@ -22,7 +22,7 @@
   {/if}
 
   {#if campaignNotes !== undefined}
-    <div class="my-6">
+    <div class="my-6 space-y-3">
       {#each campaignNotes as campaignNote(campaignNote.id)}
         <CampaignNote {campaignNote} on:campaignNoteRemoved={campaignNoteRemovedHandler}/>
       {/each}

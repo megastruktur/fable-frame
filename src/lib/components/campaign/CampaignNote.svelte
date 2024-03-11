@@ -6,10 +6,7 @@
 	import { SlideToggle, getModalStore, type ModalSettings, getToastStore } from "@skeletonlabs/skeleton";
 	import { marked } from "marked";
 	import { createEventDispatcher } from "svelte";
-  // @ts-ignore
-	import Icon from "svelte-icons-pack";
-  import BsPencil from "svelte-icons-pack/bs/BsPencil";
-  import BsTrash from "svelte-icons-pack/bs/BsTrash";
+	import CircleIconButton from "../global/CircleIconButton.svelte";
 
   export let campaignNote: CampaignNotesResponse
 
@@ -57,16 +54,35 @@
     
   }
 
+  function togglePlayerVisilibility() {
+    if (isGmNote) {
+      isGmNote = false
+    }
+    else {
+      isGmNote = true
+    }
+    updateNote()
+  }
+
 </script>
 
-<div class="my-3">
+<div class="card rounded-none p-3">
 
   {#if !editMode}
-    <div>
+    <div class="relative">
+      {#if isCreator}
+        <CircleIconButton
+          on:click={togglePlayerVisilibility}
+          icon={!isGmNote ? "i-[fa6-solid--eye]" : "i-[fa6-solid--eye-slash]"}
+          color={!isGmNote ? "text-white variant-ghost-success" : "text-gray-400 variant-ghost-surface"}
+          classes="absolute top-0 right-0"
+        />
+      {/if}
+
       {#if imageUrl !== undefined && imageUrl !== null && imageUrl !== ""}
         <img src={imageUrl} alt="Note" />
       {/if}
-      <div class="blockquote not-italic prose prose-invert">
+      <div class="prose prose-invert">
         {@html marked.parse(note)}
       </div>
     </div>
@@ -80,14 +96,18 @@
   {/if}
 
   {#if isCreator && !editMode}
-
-    <div class="my-3">
-      <button class="btn btn-icon btn-sm" on:click={() => editMode = true}>
-        <Icon src={BsPencil} />
-      </button>
-      <button class="ml-3" on:click={deleteNoteModal}>
-        <Icon src={BsTrash} />
-      </button>
+    <hr />
+    <div class="my-3 flex justify-around">
+      <CircleIconButton
+        icon="i-[material-symbols--delete]"
+        color="variant-ghost-error"
+        on:click={deleteNoteModal}
+      />
+      <CircleIconButton
+        icon="i-[fa--pencil]"
+        color="variant-ghost-warning"
+        on:click={() => editMode = true}
+      />
     </div>
   {/if}
 </div>

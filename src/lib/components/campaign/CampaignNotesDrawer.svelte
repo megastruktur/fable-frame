@@ -37,9 +37,11 @@
         on:campaignNoteAdded={campaignNoteAddedHandler} />
     </div>
   {/if}
-  {#each campaignNotes as campaignNote(campaignNote.id)}
-    {#if !(!isUserGm && campaignNote.type.find(type => type === "gm") === undefined)}
-      <CampaignNote {campaignNote} />
-    {/if}
-  {/each}
+  <div class="space-y-3">
+    {#each campaignNotes as campaignNote(campaignNote.id)}
+      {#if !(!isUserGm && campaignNote.type.find(type => type === "gm") === undefined)}
+        <CampaignNote {campaignNote} />
+      {/if}
+    {/each}
+  </div>
 {/await}
