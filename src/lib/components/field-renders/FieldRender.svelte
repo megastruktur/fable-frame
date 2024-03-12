@@ -72,7 +72,7 @@
 
 </script>
 
-<div class="w-full relative pt-8">
+<div class="w-full relative">
   
   <div>
     <svelte:component this={fieldRenderComponent} {characterId} {labelStyle} {valueStyle} {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode} {color} {colorEdit} {colorButtons} {updateWithoutEditMode} {fullEditable} {showTitle} {placeholder} {placeholderArea} {isTextarea}
