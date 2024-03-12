@@ -7,6 +7,7 @@
 	import { marked } from "marked";
 	import { createEventDispatcher } from "svelte";
 	import CircleIconButton from "../global/CircleIconButton.svelte";
+	import ImageClickZoom from "../global/ImageClickZoom.svelte";
 
   export let campaignNote: CampaignNotesResponse
 
@@ -80,7 +81,7 @@
       {/if}
 
       {#if imageUrl !== undefined && imageUrl !== null && imageUrl !== ""}
-        <img src={imageUrl} alt="Note" />
+        <ImageClickZoom src={imageUrl} />
       {/if}
       <div class="prose prose-invert">
         {@html marked.parse(note)}
