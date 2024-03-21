@@ -74,7 +74,7 @@
 
 <div class="w-full relative">
   
-  <div>
+  <div class="{removable && editMode ? "pt-8" : ""}">
     <svelte:component this={fieldRenderComponent} {characterId} {labelStyle} {valueStyle} {editable} {classes} {editableClasses} {field} on:fieldUpdate {editMode} {color} {colorEdit} {colorButtons} {updateWithoutEditMode} {fullEditable} {showTitle} {placeholder} {placeholderArea} {isTextarea}
     />
   </div>
