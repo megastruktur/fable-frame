@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Field } from "$lib/types";
+  // @ts-ignore
   import Icon from "svelte-icons-pack/Icon.svelte"
 
   export let selectedField: Field

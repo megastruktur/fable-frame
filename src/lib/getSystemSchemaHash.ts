@@ -5,11 +5,13 @@ import { env } from "$env/dynamic/private"
 
 export default async function getSystemSchemaHash(systemId: string) {
 
-  const systemJsonPath = path.join(env.DATA_DIR, 'systems', systemId, 'system.json')
-  const fileBuffer = await fs.readFile(systemJsonPath, 'utf8')
-
-  const hashSum = crypto.createHash('sha256');
-  hashSum.update(fileBuffer);
-
-  return hashSum.digest('hex');
+  if (env.DATA_DIR !== undefined) {
+    const systemJsonPath = path.join(env.DATA_DIR, 'systems', systemId, 'system.json')
+    const fileBuffer = await fs.readFile(systemJsonPath, 'utf8')
+  
+    const hashSum = crypto.createHash('sha256');
+    hashSum.update(fileBuffer);
+  
+    return hashSum.digest('hex');
+  }
 }

@@ -1,5 +1,5 @@
-/** @type {import('tailwindcss').Config}*/
 import { join } from 'path';
+import { iconsPlugin, dynamicIconsPlugin } from "@egoist/tailwindcss-icons";
 import type { Config } from 'tailwindcss'
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
@@ -25,6 +25,8 @@ const config = {
 	plugins: [
 		forms,
 		typography,
+		iconsPlugin(),
+		dynamicIconsPlugin(),
 		skeleton({
 			themes: {
 				preset: [{

@@ -1,14 +1,28 @@
 <script lang="ts">
 	import type { Field } from "$lib/types.d"
 	import { createEventDispatcher } from "svelte"
-	import { type ModalSettings, getModalStore } from "@skeletonlabs/skeleton"
+	import { Accordion, AccordionItem } from "@skeletonlabs/skeleton"
 
   export let field: Field
   export let classes: string = ""
   export let editable: boolean = true
   export let editMode: boolean = false
+  export let editableClasses: string = ""
+  export let placeholder: string = field.type || ""
+  export let placeholderArea: string = field.description || ""
+  export let color: string = ""
+  export let colorEdit: string = ""
+  export let colorButtons: string = ""
+  export let updateWithoutEditMode: boolean = false
+  export let showTitle: boolean = true
+  export let characterId: string = ""
+  export let labelStyle: string = ""
+  export let valueStyle: string = ""
+  export let fullEditable: boolean = false
 
-  const modalStore = getModalStore()
+  const editableClassesConst = "border-2 rounded-md p-2 border-surface-500"
+
+  const editClasses = editableClasses + " " + editableClassesConst
 
   let fieldLabel: string = field.label || ""
 
@@ -30,26 +44,34 @@
     }
   }
 
-  function openDescriptionModal() {
-
-    if (!editMode && field.description !== undefined) {
-
-      const descriptionModal: ModalSettings = {
-        type: 'alert',
-        title: "Description",
-        body: field.description,
-      }
-
-      modalStore.trigger(descriptionModal)
-    }
-  }
-
 </script>
 
-<div class="{classes} {!editMode || !editable ? "chip m-1" : ""}" on:click={openDescriptionModal} on:keyup>
-  {#if editable && editMode}
-    <input class="input" type="text" bind:value={fieldLabel} on:focusout={fieldEdit} />
-  {:else}
-    <h4 class="h4">{field.label ?? ""}</h4>
-  {/if}
-</div>
+<Accordion
+  regionControl="hover:!bg-transparent"
+  regionCaret="{!editMode || !editable ? "hidden" : ""}"
+  rounded="md"
+  padding=""
+  class="{classes} {!editMode || !editable ? "chip whitespace-normal" : editClasses}">
+  <AccordionItem class="w-full">
+    <svelte:fragment slot="summary">
+      {#if editable && editMode}
+        <input class="input" type="text"
+          bind:value={fieldLabel} on:focusout={fieldEdit}
+          placeholder="{placeholder}"
+          />
+      {:else}
+        <h4 class="h4 text-center">{field.label ?? ""}</h4>
+      {/if}
+
+    </svelte:fragment>
+    <svelte:fragment slot="content">
+      <div>
+        {#if editable && editMode}
+          <textarea class="textarea resize-none mt-3 mb-3" rows="5" bind:value={field.description} on:focusout={fieldEdit} placeholder="{placeholderArea}"></textarea>
+        {:else}
+          <p class="blockquote text-left py-3 my-3 whitespace-pre-wrap">{field.description}</p>
+        {/if}
+      </div>
+    </svelte:fragment>
+  </AccordionItem>
+</Accordion>

@@ -6,6 +6,15 @@
   export let classes: string = ""
   export let editable: boolean = true
   export let editMode: boolean = false
+  export let color: string = ""
+  export let colorEdit: string = ""
+  export let colorButtons: string = ""
+  export let updateWithoutEditMode: boolean = false
+  export let showTitle: boolean = true
+  export let characterId: string = ""
+  export let labelStyle: string = ""
+  export let valueStyle: string = ""
+  export let fullEditable: boolean = false
 
   let fieldLabel: string = field.label || ""
 

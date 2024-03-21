@@ -1,10 +1,9 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
-import { webSocketServer } from './socketio/webSocketPluginVite.js';
 import path from "path"
 
 export default defineConfig({
-	plugins: [sveltekit(), webSocketServer],
+	plugins: [sveltekit()],
 	resolve: {
 		alias: {
 			"$lib": path.resolve("./lib"),
@@ -18,7 +17,7 @@ export default defineConfig({
 	server: {
 		port: 3000,
 		fs: {
-			allow: ['CHANGELOG.md']
+			allow: ['CHANGELOG.md', '*.json']
 		}
 	},
 	test: {

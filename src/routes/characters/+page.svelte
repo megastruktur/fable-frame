@@ -1,134 +1,111 @@
 <!-- Characters Page -->
 <script lang="ts">
+	import { clipboard } from '@skeletonlabs/skeleton';
 	import type { CharactersResponse } from '$lib/pocketbase-types';
 	import { toastShow } from '$lib/toast';
 	import { cloneCharacter, deleteCharacter, getMyCharacters } from '$models/character';
 	import { ProgressRadial, type PopupSettings, popup, type ModalSettings, getModalStore, getToastStore } from '@skeletonlabs/skeleton';
 	import { flip } from 'svelte/animate';
-	import { crossfade, fade } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
-	import Icon from 'svelte-icons-pack';
-	import BsPlus from 'svelte-icons-pack/bs/BsPlus';
+	import { fade } from 'svelte/transition';
 	import CharacterItem from '$lib/components/characters/CharacterItem.svelte';
+	import { receive, send } from '$lib/animation';
+	import { pageName } from '$lib/stores';
+	import SearchFilter from '$lib/components/SearchFilter.svelte';
+	import SquareCard from '$lib/components/global/SquareCard.svelte';
+
+	pageName.set("Characters")
 
 	const modalStore = getModalStore()
 	const toastStore = getToastStore()
 
-	const charOperationsMenu: PopupSettings = {
-		event: 'focus-click',
-		target: 'charOperationsPopup',
-		placement: 'bottom',
-		closeQuery: '.list-option'
-	};
-
-
 	// Async load Characters and store in variable.
 	let myCharacters: CharactersResponse[]
+	let myCharactersFiltered: CharactersResponse[]
+
 	async function loadMyCharacters() {
 		myCharacters = await getMyCharacters({
 			expand: 'rpgSystem,campaign'
 		})
+		myCharactersFiltered = myCharacters
 	}
 
 	// Character Operations
-	let operationsOnCharacterId: string
-	async function cloneSelectedCharacter() {
-		const character = await cloneCharacter(operationsOnCharacterId)
+	async function cloneSelectedCharacterHandler({detail: {characterId}} : {detail: {characterId: string}} | any) {
 
-		toastShow(`Character <span class="text-secondary-100">${character.name}</span> has been cloned`, toastStore)
-
-		myCharacters = [...myCharacters, character]
+		if (characterId !== undefined && characterId !== null) {
+			const character = await cloneCharacter(characterId)
+	
+			toastShow(`Character <span class="text-secondary-100">${character.name}</span> has been cloned`, toastStore)
+	
+			myCharacters = [...myCharacters, character]
+			myCharactersFiltered = myCharacters
+		}
 	}
 
-  function deleteCharacterPrompt() {
+  function deleteCharacterPromptHandler({detail: {characterId}} : {detail: {characterId: string}} | any) {
 
-		const character = myCharacters.find(c => c.id === operationsOnCharacterId)
+		if (characterId !== undefined && characterId !== null) {
+			const character = myCharacters.find(c => c.id === characterId)
 
-		if (character) {
-			const modal: ModalSettings = {
-				type: 'confirm',
-				title: 'Please Confirm',
-				body: `Are you sure you want to remove character <span class="text-error-900">${character.name}</span>? This action cannot be undone.`,
-				response: async (r: boolean) => {
-					if (r === true) {
+			if (character) {
+				const modal: ModalSettings = {
+					type: 'confirm',
+					title: 'Please Confirm',
+					body: `Are you sure you want to remove character <span class="text-error-900">${character.name}</span>? This action cannot be undone.`,
+					response: async (r: boolean) => {
+						if (r === true) {
 
-						await deleteCharacter(character.id)
+							await deleteCharacter(character.id)
 
-						toastShow(`Character <span class="text-error-900">${character.name}</span> has been removed`, toastStore)
+							toastShow(`Character <span class="text-error-900">${character.name}</span> has been removed`, toastStore)
 
-						// Update reactively so the element refreshes.
-						myCharacters = myCharacters.filter(c => c.id!== character.id)
-
+							// Update reactively so the element refreshes.
+							myCharacters = myCharacters.filter(c => c.id!== character.id)
+							myCharactersFiltered = myCharacters
+						}
 					}
-				}
-			};
-			modalStore.trigger(modal);
+				};
+				modalStore.trigger(modal);
+			}
 		}
 	}
-
-	// Animations
-	const [send, receive] = crossfade({
-		duration: (d) => Math.sqrt(d * 200),
-
-		fallback(node, params) {
-			const style = getComputedStyle(node);
-			const transform = style.transform === 'none' ? '' : style.transform;
-
-			return {
-				duration: 300,
-				easing: quintOut,
-				css: (t) => `
-					transform: ${transform} scale(${t});
-					opacity: ${t}
-				`
-			};
-		}
-	});
 
 </script>
 
 <div class="flex flex-col" transition:fade>
-
-	<h1 class="text-3xl m-auto my-6">Your Characters</h1>
 
 	<!-- My Characters section -->
 	<div class="flex items-center justify-center flex-wrap">
 		{#await loadMyCharacters()}
 			<ProgressRadial value={undefined} />
 		{:then _}
-			<ul class="list-nav">
-				{#each myCharacters as character(character.id)}
-				<li
-					animate:flip
-					in:receive={{ key: character.id }}
-					out:send={{ key: character.id }}
-					class="flex justify-between items-center">
-					<a class="list-option w-full" href="/characters/{character.id}">
-						<CharacterItem character={character} />
-					</a>
-					<span>
-						<button
-							class="btn-icon btn-icon-sm"
-							on:click={() => operationsOnCharacterId = character.id}
-							use:popup={charOperationsMenu}
-							>⋮</button>
-					</span>
-				</li>
+			<SearchFilter class="mb-6" items={myCharacters} bind:filteredItems={myCharactersFiltered} />
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+				{#each myCharactersFiltered as character(character.id)}
+
+					<div
+						animate:flip
+						in:receive={{ key: character.id }}
+						out:send={{ key: character.id }}
+						class="flex justify-between items-center relative">
+
+						<a class="card card-hover" href="/characters/{character.id}">
+							<CharacterItem
+								renderActionButtons={true}
+								on:cloneCharacter={cloneSelectedCharacterHandler}
+								on:deleteCharacter={deleteCharacterPromptHandler}
+								character={character} rpgSystem={character.expand.rpgSystem} />
+						</a>
+					</div>
+
 				{/each}
-				<li>
-					<a class="btn btn-circle hover:bg-surface-800 w-full" href="/characters/create">
-						<Icon size="40" color="" src={BsPlus} />
-					</a>
-				</li>
-			</ul>
+
+        <SquareCard
+          link="/characters/create"
+          isAddButton={true}
+        />
+			</div>
 		{/await}
 	</div>
 </div>
 
-<div class="card w-48 shadow-xl py-2" data-popup="charOperationsPopup">
-	<ul class="list-nav px-2">
-		<li class="list-option" on:keyup on:click={cloneSelectedCharacter}>Clone</li>
-		<li class="list-option bg-error-900" on:keyup on:click={deleteCharacterPrompt}>Remove</li>
-	</ul>
-	<div class="arrow bg-surface-100-800-token" />
-</div>

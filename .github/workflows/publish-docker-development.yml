@@ -1,0 +1,34 @@
+name: Publish Dev build to Dockerhub
+
+on:
+  push:
+    branches: ['development']
+
+jobs:
+  push_to_registry:
+    name: Push Docker image to Dockerhub
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_POCKETBASE_URL: ${{ vars.PUBLIC_POCKETBASE_URL }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Log in to Dockerhub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: megastruktur/fable-frame
+      - name: Build and push Docker image
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./Dockerfile
+          build-args: |
+            "PUBLIC_POCKETBASE_URL=${{ vars.PUBLIC_POCKETBASE_URL }}"
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}, ${{ secrets.DOCKERHUB_USERNAME }}/fable-frame:latest
+          labels: ${{ steps.meta.outputs.labels }}

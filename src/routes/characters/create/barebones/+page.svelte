@@ -2,6 +2,7 @@
 	import { goto } from "$app/navigation";
 	import RpgSystemCard from "$lib/components/RpgSystemCard.svelte";
 import type { RpgSystemsResponse } from "$lib/pocketbase-types";
+	import { pageName } from "$lib/stores";
 	import { createNewCharacter } from "$models/character";
 	import { getAllRpgSystems } from "$models/rpg_system";
 	import { ProgressRadial, Step, Stepper } from "@skeletonlabs/skeleton";
@@ -9,6 +10,7 @@ import type { RpgSystemsResponse } from "$lib/pocketbase-types";
   let characterName: string = ""
   let selectedSystem: RpgSystemsResponse
 
+	pageName.set("Create Character")
 
 	async function createAndRedirect() {
 		const character = await createNewCharacter(selectedSystem.id, characterName);
@@ -17,17 +19,18 @@ import type { RpgSystemsResponse } from "$lib/pocketbase-types";
 
 </script>
 
-<div class="flex flex-col">
+<div class="flex flex-col px-3">
 	<h1 class="text-3xl m-auto my-3">Create New Character</h1>
-	<hr />
   <div>
     <Stepper on:complete={createAndRedirect}>
       <!-- Select name -->
       <Step stepTerm="Pick a name" locked={!characterName}>
         <svelte:fragment slot="header">Pick a name</svelte:fragment>
-        <input class="input" type="text"
-        bind:value={characterName} placeholder="Character Name"
-        name="name" />
+        <input
+          class="input" type="text"
+          bind:value={characterName}
+          placeholder="Character Name"
+          name="name" />
       </Step>
       <!-- Select System -->
       <Step stepTerm="Select RPG System" locked={!selectedSystem}>

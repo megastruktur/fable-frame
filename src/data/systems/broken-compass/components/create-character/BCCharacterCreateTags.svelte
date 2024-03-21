@@ -13,7 +13,7 @@
   export let tagExperienceSelected: Field
   export let skillsAvailable: Field[]
 
-  export let tagsSelected: Field[] = []
+  export let tagsSelected: (Field | undefined)[] = []
 
   // Experience
   let tagExperienceSelectedName: string = tagExperienceSelected.name
@@ -61,7 +61,7 @@
   <h3 class="h3">Select up to 2 tags for your character</h3>
   <div class="flex justify-items-start flex-wrap">
     {#each tagsAvailable as tag}
-      {@const tagSelected = tagsSelected.find(ts =>  ts.name === tag.name)}
+      {@const tagSelected = tagsSelected?.find(ts =>  ts?.name === tag.name)}
       <button
         class="btn btn-xl m-2 {tagSelected !== undefined ? "variant-filled" : "variant-soft"}"
         on:click={() => selectTagEvent(tag.name)}
@@ -75,10 +75,10 @@
   <div class="flex flex-wrap justify-around">
     <!-- Add identifier for bind:group to work -->
     <!-- tes.tag can be undefined for expertise and when 2 selected it wont work -->
-    {#if tagsSelected}
-    {#each tagsSelected as ts(ts.name)}
+    {#if tagsSelected.length > 0}
+    {#each tagsSelected as ts(ts?.name)}
       {#if ts !== undefined && ts.group === "tag"}
-      {@const expertiseForTag = expertiseAvailable.filter(e => ts.data?.expertise.includes(e.name))}
+      {@const expertiseForTag = expertiseAvailable.filter(e => ts?.data?.expertise.includes(e.name))}
         <BcTagPanel
           tag={ts}
           {skillsAvailable}

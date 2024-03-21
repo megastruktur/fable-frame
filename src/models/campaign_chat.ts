@@ -1,7 +1,7 @@
 import { pb } from "$lib/pocketbase";
 import type { CampaignChatResponse } from "$lib/pocketbase-types";
 import type { ChatMessage } from "$lib/types";
-import { io } from '$lib/webSocketConnection';
+import type { RecordSubscription, UnsubscribeFunc } from "pocketbase";
 
 export async function getCampaignChat(campaignId: string): Promise<CampaignChatResponse[]> {
   return await pb.collection("campaign_chat").getFullList({
@@ -22,8 +22,10 @@ export async function updateChatMessage(messageId: string, data: Partial<Campaig
   return await pb.collection("campaign_chat").update(messageId, data);
 }
 
-export async function updateChatMessageWithSocket(message: ChatMessage) {
-  const updatedMessage: CampaignChatResponse = await updateChatMessage(message.messageId, {message: message.message})
-  message.idUpdatedString = updatedMessage.id + updatedMessage.updated
-  io.emit('campaignChatEdited', message);
+export async function updateChatMessageCM(message: ChatMessage) {
+  return await updateChatMessage(message.messageId, {message: message.message})
+}
+
+export async function subscribeToCampaignChats(callback: (data: RecordSubscription<Record>) => void): Promise<UnsubscribeFunc> {
+  return pb.collection("campaign_chat").subscribe("*", callback)
 }

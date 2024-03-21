@@ -5,7 +5,6 @@
   export let characterHeritage: string
   export let characterHomeland: string
   export let characterWorkplace: string
-  export let selectedExpertise: Field[] | undefined
 
 </script>
 <h2 class="h2">{characterName}</h2>

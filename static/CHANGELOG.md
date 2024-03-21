@@ -1,3 +1,24 @@
+### 0.9.1
+- Restyling
+- Character Export/Import functionality
+- Adds Character Field Roll functionality
+
+### 0.9.0
+- Static HTML deployment + capacitor suppport
+- Restyling
+
+### 0.8.0
+- Feature: Kult: Divinity Lost 4e TTRPG added
+- Feature: Adds Important Notes Section to campaign
+- Bugfix: Tab add and remove fix after refactoring
+- Bugfix: Reorder fields fix after refactoring
+- Feature: Adds image to campaign notes
+- UI/UX: Scene Manager design fix
+- UI/UX: Campaign add operation icons
+- UI/UX: Character Sheet icons and UI fixes and structure fixes
+- Feature: Upgrade libraries
+- UI/UX: Multuple refactoring
+
 ### 0.7.2
 - Bugfix: Character Add to campaign fix.
 

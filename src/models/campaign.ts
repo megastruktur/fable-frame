@@ -1,7 +1,7 @@
 import { pb } from "$lib/pocketbase"
 import type { CampaignsRecord, CampaignsResponse } from "$lib/pocketbase-types.d"
-import type { RecordSubscription, Record, UnsubscribeFunc } from "pocketbase"
-import { getAllCharacters, getMyCharacters, updateCharacter } from "./character"
+import type { RecordSubscription, UnsubscribeFunc } from "pocketbase"
+import { getAllCharacters, getMyCharactersWithCampaign, updateCharacter } from "./character"
 
 export async function createCampaign(data: Partial<CampaignsResponse>): Promise<CampaignsResponse> {
   return await pb.collection("campaigns").create(data)
@@ -23,7 +23,13 @@ export async function getCampaignWithCharactersAndActiveScene(id: string): Promi
   })
 }
 
-export async function updateCampaign(id: string, data: Partial<CampaignsRecord>): Promise<CampaignsResponse> {
+export async function getCampaignWithCharactersAndActiveSceneAndRpgSystem(id: string): Promise<CampaignsResponse> {
+  return await pb.collection("campaigns").getOne(id, {
+    expand: "characters,activeScene,rpgSystem",
+  })
+}
+
+export async function updateCampaign(id: string, data: Partial<CampaignsRecord> | any): Promise<CampaignsResponse> {
   return await pb.collection("campaigns").update(id, data)
 }
 
@@ -55,13 +61,13 @@ export async function getCharacterCampaigns(): Promise<CampaignsResponse[]> {
   const tCampaigns: {[id: string]: CampaignsResponse} = {}
 
   try {
-    const charactersCampaigns = await getMyCharacters({
-      expand: `campaign`
-    })
+    const charactersCampaigns = await getMyCharactersWithCampaign()
 
     // Distinct campaigns
     charactersCampaigns.forEach(character => {
-      if (character.expand.campaign !== undefined && character.expand.campaign !== null) {
+      if (character.expand !== undefined
+        && character.expand.campaign !== undefined
+        && character.expand.campaign !== null) {
         tCampaigns[character.expand.campaign.id] = character.expand.campaign
       }
     })
@@ -97,6 +103,12 @@ export async function getGMCampaigns(): Promise<CampaignsResponse[]> {
 
 export async function getCampaignWithRpgSystem(id: string): Promise<CampaignsResponse> {
   return await pb.collection("campaigns").getOne(id, { expand: "rpgSystem" })
+}
+
+export async function getCampaignWithRpgSystemCharsAndNotes(id: string): Promise<CampaignsResponse> {
+  return await pb.collection("campaigns").getOne(id, {
+    expand: "rpgSystem,characters,campaign_notes(campaign)"
+  })
 }
 
 export async function getCampaignCharacterRequests(campaignId: string) {

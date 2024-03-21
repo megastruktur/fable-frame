@@ -54,13 +54,16 @@ export type CampaignChatRecord = {
 export enum CampaignNotesTypeOptions {
 	"gm" = "gm",
 	"public" = "public",
+	"alert" = "alert",
+	"npc" = "npc",
 }
 export type CampaignNotesRecord = {
 	campaign: RecordIdString
 	creator: RecordIdString
 	image?: string
 	note: HTMLString
-	type: CampaignNotesTypeOptions
+	type: CampaignNotesTypeOptions[]
+	active: boolean
 }
 
 export type CampaignsRecord = {
@@ -75,6 +78,7 @@ export type CampaignsRecord = {
 	characters?: RecordIdString[]
 	expand?: {
 		"characters(campaign)": CharactersResponse[],
+		"campaign_notes(campaign)": CampaignNotesResponse[],
 		characters: CharactersResponse[],
 		rpgSystem: RpgSystemsResponse,
 		activeScene: ScenesResponse,

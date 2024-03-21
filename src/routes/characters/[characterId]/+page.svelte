@@ -7,7 +7,9 @@
 	import { onMount } from "svelte";
 	import { getCharacterWithSystemAndCampaign } from "$models/character";
 	import { ProgressBar } from "@skeletonlabs/skeleton";
+	import { pageName } from "$lib/stores";
 
+	pageName.set("Character Sheet")
 
   onMount(() => {
     if ($currentUser === null) {
@@ -21,6 +23,10 @@
   {#await getCharacterWithSystemAndCampaign($page.params.characterId)}
     <ProgressBar />
   {:then character}
-    <CharacterSheet {character} />
+    <CharacterSheet
+      {character}
+      rpgSystem={character.expand.rpgSystem}
+      campaign={character.expand.campaign}
+      />
   {/await}
 {/if}

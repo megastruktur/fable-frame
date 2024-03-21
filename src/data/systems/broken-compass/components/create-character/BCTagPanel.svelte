@@ -13,8 +13,8 @@
 
   let expertiseSelectedName: string = expertise[0].name
 
-  let fieldSkill = skillsAvailable?.find((skill) => skill.name === tag.data.field)
-  let backupFieldSkill = skillsAvailable?.find((skill) => skill.name === tag.data.backup_field)
+  let fieldSkill = skillsAvailable?.find((skill) => skill.name === tag.data?.field)
+  let backupFieldSkill = skillsAvailable?.find((skill) => skill.name === tag.data?.backup_field)
 
   function selectExpertise() {
     if (tag !== undefined) {
@@ -68,7 +68,7 @@
   {#if expertiseSelectedName !== undefined}
     {@const expertiseField = expertise.find(e => e.name === expertiseSelectedName)}
     {#if expertiseField !== undefined}
-      <article class="italic">{expertise.find(e => e.name === expertiseSelectedName).description}</article>
+      <article class="italic">{expertise.find(e => e.name === expertiseSelectedName)?.description}</article>
     {/if}
   {/if}
 

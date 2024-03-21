@@ -16,7 +16,6 @@
 
   async function campaignNotesLoad() {
     campaignNotes = await getCampaignNotes(campaignId)
-    console.log(campaignNotes)
     campaign = await getCampaign(campaignId)
     isUserGm = (campaign.creator === $currentUser?.id)
   }
@@ -32,11 +31,17 @@
 {:then}
 
   {#if isUserGm}
-    <CampaignNoteAdd campaignId={campaign.id} on:campaignNoteAdded={campaignNoteAddedHandler} />
+    <div class="px-3">
+      <CampaignNoteAdd
+        campaignId={campaign.id}
+        on:campaignNoteAdded={campaignNoteAddedHandler} />
+    </div>
   {/if}
-  {#each campaignNotes as campaignNote(campaignNote.id)}
-    {#if !(!isUserGm && campaignNote.type === "gm")}
-      <CampaignNote {campaignNote} />
-    {/if}
-  {/each}
+  <div class="space-y-3">
+    {#each campaignNotes as campaignNote(campaignNote.id)}
+      {#if !(!isUserGm && campaignNote.type.find(type => type === "gm") === undefined)}
+        <CampaignNote {campaignNote} />
+      {/if}
+    {/each}
+  </div>
 {/await}

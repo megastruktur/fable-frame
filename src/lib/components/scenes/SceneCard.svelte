@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type { ScenesResponse } from "$lib/pocketbase-types"
 	import { getSceneImage } from "$models/scenes";
-	import { popup, type PopupSettings } from "@skeletonlabs/skeleton";
+	import { type ModalComponent, type PopupSettings, type ModalSettings, getModalStore } from "@skeletonlabs/skeleton";
 	import { createEventDispatcher } from "svelte";
-  import FaEye from 'svelte-icons/fa/FaEye.svelte'
-  import FaRegEyeSlash from 'svelte-icons/fa/FaRegEyeSlash.svelte'
+	import SceneEdit from './SceneEdit.svelte';
+	import SquareCard from "../global/SquareCard.svelte";
+	import CircleIconButton from "../global/CircleIconButton.svelte";
 
   // BsCheckLg
 
@@ -13,6 +14,7 @@
   export let isAcivated = false
 
   const dispatch = createEventDispatcher()
+  const modalStore = getModalStore()
 
   let sceneImage = getSceneImage(scene)
 
@@ -49,45 +51,64 @@
     })
   }
 
+  async function sceneEditModalHandler() {
+    
+    const SceneEditModalComponent: ModalComponent = {
+      ref: SceneEdit,
+      props: {
+        campaignId: scene.campaign,
+        sceneId: scene.id
+      },
+    }
+    
+    const sceneEditModal: ModalSettings = {
+      type: 'component',
+      component: SceneEditModalComponent,
+      response: async ({scene, action}: {scene: ScenesResponse | null, action: string} = {scene: null, action: ""}) => {
+        if (scene !== undefined && scene !== null) {
+          if (action === "update") {
+            dispatch("updatedScene", {
+              scene: scene
+            })
+            sceneImage = getSceneImage(scene)
+          }
+        }
+      },
+    }
+    modalStore.trigger(sceneEditModal);
+  }
+
 
 </script>
 
-<div
-  class="block card w-96 h-96 shadow-xl card-hover overflow-hidden {classes} bg-cover bg-center relative bg-no-repeat"
-  
-  style="background-image: url('{sceneImage}')"
->
-  <button type="button" class="btn btn-icon absolute top-0 right-3 {isAcivated ? "text-white" : "text-gray-400"}" on:click|stopPropagation={activateSceneHandler}>
-    {#if isAcivated}
-    <FaEye />
-    {:else}
-    <FaRegEyeSlash />
-    {/if}
-  </button>
+<SquareCard
+  classes={classes}
+  link="/campaigns/{scene.campaign}/scenes/{scene.id}"
+  title="{scene.name}"
+  imageUrl="{sceneImage}"
+  >
+  <svelte:fragment slot="actionButtons">
 
-  <!-- Scene Operations Popup -->
-  <button
-    class="btn-icon variant-ghost-secondary absolute left-2 top-2"
-    use:popup={sceneOperationsPopup}
-  >⋮</button>
-
-  <a
-    class="block w-full h-full"
-    href="/campaigns/{scene.campaign}/scenes/{scene.id}">
-    <div class="p-4 bg-primary-900/70 w-full bottom-0 absolute h-1/4">
-      <h3 class="h3 text-center">{scene.name}</h3>
-    </div>
-  </a>
+    <CircleIconButton
+      on:click={activateSceneHandler}
+      icon={isAcivated ? "i-[fa6-solid--eye]" : "i-[fa6-solid--eye-slash]"}
+      color={isAcivated? "text-white variant-ghost-success" : "text-gray-400 variant-ghost-surface"}
+    />
 
 
-  <!-- Operations Popup -->
-  <div class="card w-48 shadow-xl py-2" data-popup="sceneOperationsPopup-{scene.id}">
-    <ul class="list-nav px-2">
-      <li class="mb-2"><a href="/campaigns/{scene.campaign}/scenes/{scene.id}/edit">Edit</a></li>
-      <li>
-        <a class="bg-error-900" href="/" on:click|preventDefault={deleteScenePromptHandler}>Remove</a></li>
-    </ul>
-    <div class="arrow bg-surface-100-800-token" />
-  </div>
+    <CircleIconButton
+      on:click={sceneEditModalHandler}
+      icon="i-[fa--pencil]"
+      color="variant-ghost-secondary"
+    />
 
-</div>
+    <CircleIconButton
+      on:click={deleteScenePromptHandler}
+      icon="i-[material-symbols--delete]"
+      color="variant-ghost-error"
+    />
+
+  </svelte:fragment>
+</SquareCard>
+
+

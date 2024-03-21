@@ -1,27 +1,30 @@
 <script lang="ts">
-	import type { CharactersResponse } from "$lib/pocketbase-types";
-	import { getCharacterWithSystemAndCampaign } from "$models/character";
-	import { ProgressBar } from "@skeletonlabs/skeleton";
+	import type { CampaignsResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
+	import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
 	import CharacterSheet from "./CharacterSheet.svelte";
 
-  export let characterIds: string[]
-
-  let characters: CharactersResponse[]
-
-  async function getCharacters() {
-    const requests = characterIds.map((characterId) => getCharacterWithSystemAndCampaign(characterId)
-    )
-
-    characters = await Promise.all(requests)
-  }
+  export let characters: CharactersResponse[]
+  export let rpgSystem: RpgSystemsResponse
+  export let campaign: CampaignsResponse
 </script>
 
-{#await getCharacters()}
-  <ProgressBar />
-{:then}
-  <div class="flex flex-col w-96">
+<div class="flex flex-col p-3">
+
+  <Accordion
+      regionControl=""
+    >
     {#each characters as character(character.id)}
-      <CharacterSheet {character} compactVersion={true} />
+
+      <AccordionItem open={characters.length === 1}>
+        <svelte:fragment slot="summary">{character.name}</svelte:fragment>
+        <svelte:fragment slot="content">
+          <CharacterSheet
+          {character}
+          {rpgSystem}
+          {campaign}
+          compactVersion={true} />
+        </svelte:fragment>
+      </AccordionItem>
     {/each}
-  </div>
-{/await}
+  </Accordion>
+</div>

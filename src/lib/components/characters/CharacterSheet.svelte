@@ -2,23 +2,28 @@
 <script lang="ts">
 	import { getCharacterAvatar, getCharacterTabs, getCharacterWithSystemAndCampaign, updateCharacterWithHash } from "$models/character";
 	import { onDestroy, onMount } from "svelte";
-  import { fieldErrors, headerBanner } from "$lib/stores"
-	import type { Field, FieldError } from "$lib/types";
+  import { characterRoll, fieldErrors, headerBanner } from "$lib/stores"
+	import type { FFRoll, Field, FieldError } from "$lib/types";
 
 	import { type DrawerSettings, ProgressBar, getDrawerStore, getToastStore } from "@skeletonlabs/skeleton";
 	import CharacterAvatar from "$lib/components/characters/CharacterAvatar.svelte";
-	import type { CampaignsResponse, CharactersResponse } from "$lib/pocketbase-types";
+	import type { CampaignsResponse, CharactersResponse, RpgSystemsResponse } from "$lib/pocketbase-types";
 	import { toastShowError } from "$lib/toast";
 
   import { fade } from "svelte/transition"
 	import MediaQuery, { createMediaStore } from "svelte-media-queries";
 	import { getCampaignImage } from "$models/campaign";
 	import { currentUser } from "$lib/pocketbase";
-	import { addCharacterField, removeCharacterField, updateCharacterField } from "$lib/characterFieldsOperations";
+	import { addCharacterField, removeCharacterField, updateCharacterField, createCharacterField, updateSaveCharacterField } from "$lib/characterFieldsOperations";
+	import { getRpgSystemImage, loadRpgSystemData } from "$models/rpg_system";
+	import CircleIconButton from "../global/CircleIconButton.svelte";
+	import { loadRoller, rollToChatWindow } from "$lib/utils";
 
   const toastStore = getToastStore()
 
   export let character: CharactersResponse
+  export let rpgSystem: RpgSystemsResponse
+  export let campaign: CampaignsResponse
   export let compactVersion: boolean = false
 
   let CharacterSheet: any
@@ -27,7 +32,6 @@
     [key: string]: Field[]
   } = {}
   let characterAvatarUrl: string = ""
-  let campaign: CampaignsResponse
 
   let activeTabName: string = "general"
   let tabsContent: { [key: string]: Field[] } = {general: []}
@@ -38,23 +42,30 @@
   
   async function getData() {
 
-    if (character.expand.campaign !== undefined) {
+    // Set BG image
+    let backgoundImage: string = ""
+    if (character.expand?.campaign !== undefined) {
 
       campaign = character.expand.campaign
-      let campaignImage = getCampaignImage(campaign)
+      backgoundImage = getCampaignImage(campaign)
 
-      if (campaignImage !== "") {
-        headerBanner.set(campaignImage)
-      }
+    }
+    else if (rpgSystem !== undefined) {
+      backgoundImage = getRpgSystemImage(rpgSystem)
+    }
+    console.log(backgoundImage)
+
+    if (backgoundImage !== "") {
+      headerBanner.set(backgoundImage)
     }
 
     characterName = character.name
 
     // Dynamically load component
-    if (character.expand.rpgSystem) {
-      CharacterSheet = (await import(`../../../data/systems/${character.expand.rpgSystem.identifier}/components/CharacterSheet.svelte`)).default
+    if (rpgSystem !== undefined) {
+      CharacterSheet = (await import(`../../../data/systems/${rpgSystem.identifier}/components/CharacterSheet.svelte`)).default
 
-      const compendiumFieldsRaw = character.expand.rpgSystem.data.fields.compendium
+      const compendiumFieldsRaw = rpgSystem.data.fields.compendium
 
       compendiumFieldsRaw.map((field: Field) => {
         if (!compendiumFields[field.type]) {
@@ -68,43 +79,80 @@
   }
 
   onMount(() => {
+    characterPrepare()
+  })
+
+
+
+  const characterRollUnsubscribe = characterRoll.subscribe(async (ffRoll: FFRoll) => {
+
+    // Import default function from data/systemms/SYSTEMNAME/roller.ts if it exists
+    if (rpgSystem !== undefined && (ffRoll.field !== undefined || ffRoll.roll !== undefined)) {
+
+      try {
+        const systemRoller = await loadRoller(rpgSystem.identifier)
+        if (systemRoller !== undefined) {
+          const rollResult = systemRoller(ffRoll, character, toastStore)
+
+          if (campaign !== undefined && campaign.id !== undefined) {
+            rollToChatWindow(ffRoll, rollResult, campaign.id, character.id)
+          }
+          
+          characterRoll.reset()
+        }
+
+      }
+      catch (error) {
+        characterRoll.reset()
+        console.log(error)
+      }
+
+    }
+  })
+
+
+  function characterPrepare() {
     console.log("-------- Character --------")
     console.log(character)
 
     if (character !== undefined) {
-      characterAvatarUrl = getCharacterAvatar(character)
-
-      tabs = getCharacterTabs(character)
-      tabsContent = {general: []}
-  
-      // Cleanup tabsContent and Create tabs placeholders
-      Object.keys(tabs).forEach((tabName: string) => {
-        tabsContent[tabName] = []
-      })
-  
-      character.fields.forEach((field: Field) => {
-        if (field.group && field.type !== "tab") {
-  
-          // If tab doens't exist add fields to "general" tab.
-          let tabExists = (tabs[field.group] !== undefined) ? true : false
-          let tabNameToAdd = "general"
-  
-          if (tabExists) {
-            tabNameToAdd = field.group
-          }
-
-          tabsContent[tabNameToAdd] = [...tabsContent[tabNameToAdd], field]
-        }
-      })
-
-      // Reorder all objects inside tabsContent by weight property.
-      Object.keys(tabsContent).forEach((key: string) => {
-        tabsContent[key].sort((a: Field, b: Field) => {
-          return a.weight - b.weight
-        })
-      })
+      characterTabsPrepare()
     }
-  })
+  }
+
+  function characterTabsPrepare() {
+    characterAvatarUrl = getCharacterAvatar(character)
+
+    tabs = getCharacterTabs(character)
+    tabsContent = {general: []}
+
+    // Cleanup tabsContent and Create tabs placeholders
+    Object.keys(tabs).forEach((tabName: string) => {
+      tabsContent[tabName] = []
+    })
+
+    character.fields.forEach((field: Field) => {
+      if (field.group && field.type !== "tab") {
+
+        // If tab doens't exist add fields to "general" tab.
+        let tabExists = (tabs[field.group] !== undefined) ? true : false
+        let tabNameToAdd = "general"
+
+        if (tabExists) {
+          tabNameToAdd = field.group
+        }
+
+        tabsContent[tabNameToAdd] = [...tabsContent[tabNameToAdd], field]
+      }
+    })
+
+    // Reorder all objects inside tabsContent by weight property.
+    Object.keys(tabsContent).forEach((key: string) => {
+      tabsContent[key].sort((a: Field, b: Field) => {
+        return a.weight - b.weight
+      })
+    })
+  }
 
 
   // Show errors.
@@ -125,6 +173,7 @@
     if (character && character.id) {
       try {
         await updateCharacterWithHash(character.id, character)
+        characterTabsPrepare()
       }
       catch (e) {
         console.error(e)
@@ -139,6 +188,8 @@
     if (editMode) {
       console.log(`Resetting character, loading from DB`)
       character = await getCharacterWithSystemAndCampaign(character.id)
+      characterTabsPrepare()
+      characterName = character.name
     }
 
     editMode = !editMode
@@ -172,6 +223,7 @@
   const matches = createMediaStore(query) //The type of the store will completely repeat the query
 
   onDestroy(() => {
+    characterRollUnsubscribe()
     matches.destroy()
     fieldErrors.reset()
   }) //Stop events for calculation
@@ -183,7 +235,7 @@
     const characterNotesDrawerSettings: DrawerSettings = {
       id: "character-notes",
       position: "right",
-      width: "w-96",
+      width: "w-80",
       meta: {
         characterId: character.id,
       }
@@ -192,23 +244,70 @@
     drawerStore.open(characterNotesDrawerSettings)
   }
 
-  async function fieldUpdate({detail: {field}} : {detail: {field: Field}}) {
-    character = updateCharacterField(character, field)
+  async function fieldUpdate({detail: {field, saveField}} : {detail: {field: Field, saveField: boolean | undefined}}) {
+
+    if (saveField !== undefined && saveField) {
+      character = await updateSaveCharacterField(character.id, field)
+    }
+    else {
+      character = updateCharacterField(character, field)
+    }
     console.log("On Field Update")
   }
 
   async function fieldRemove({detail: {field}} : {detail: {field: Field}}) {
     character = removeCharacterField(character, field)
+
+    if (field.type !== "tab") {
+      if (field.group !== undefined) {
+        let tabname = "general"
+        if (tabsContent[field.group] !== undefined) {
+          tabname = field.group
+        }
+        tabsContent[tabname] = tabsContent[tabname].filter((f: Field) => f.id !== field.id)
+      }
+    }
+    else {
+    // Move all nested fields to General tab
+      if (field.name !== "general") {
+        tabsContent["general"] = [...tabsContent["general"], ...tabsContent[field.name]]
+
+        delete tabsContent[field.name]
+        delete tabs[field.name]
+      }
+      }
     console.log("On Field Remove")
   }
 
-  async function fieldAdd({detail: {field}} : {detail: {field: Field}}) {
-    character = addCharacterField(character, field)
-    console.log("On Field Add")
-  }
+  async function fieldAdd({detail: {field, saveField}} : {detail: {field: Field, saveField: boolean | undefined}}) {
 
-  async function avatarSet({detail: {avatar}} : {detail: {avatar: string}}) {
-    character.avatar = avatar
+    console.log("Field Add")
+    
+    // Detach field from initial object
+    field = JSON.parse(JSON.stringify(field))
+
+    const characterUpdated = await createCharacterField(character.id, field, saveField)
+
+    if (characterUpdated !== undefined) {
+      const characterUpdatedFields = characterUpdated.fields
+      character.fields = [...characterUpdatedFields]
+    }
+
+    if (field.group !== undefined) {
+      if (field.type !== "tab") {
+        // If group is not a tabname - add to General tab.
+        let tabname = "general"
+        if (tabsContent[field.group] !== undefined) {
+          tabname = field.group
+        }
+        tabsContent[tabname] = [...tabsContent[tabname], field]
+      }
+      else {
+        tabsContent[field.name] = []
+        tabs[field.name] = field
+      }
+    }
+    console.log("On Field Add")
   }
 
   function avatarSetHandler({detail: {avatar}} : {detail: {avatar: string}}) {
@@ -229,33 +328,64 @@
     <div
       out:fade={{ duration: 500 }}
       in:fade={{ duration: 500, delay: 500 }}
-      class="flex flex-col items-center mb-3"
+      class="mb-3"
       >
-      <div class="mt-3">
-        <CharacterAvatar characterName={character.name} characterId={character.id} avatarUrl={characterAvatarUrl} {editMode} on:avatarSet={avatarSetHandler} />
+      <div class="flex flex-col mt-3 items-center">
+
+        <!-- Avatar -->
+        <div class="">
+          <CharacterAvatar characterName={character.name} characterId={character.id} avatarUrl={characterAvatarUrl} {editMode} on:avatarSet={avatarSetHandler} />
+        </div>
+  
+        <!-- Name -->
+        <div class="flex flex-col flex-wrap">
+          {#if editMode}
+            <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
+          {:else}
+  
+            <div class="h2 flex">
+              {#if compactVersion}
+                <a href="/characters/{character.id}">{characterName}</a>
+              {:else}
+                <span>{characterName}</span>
+              {/if}
+            </div>
+          {/if}
+        </div>
+
+        <!-- Campaign -->
+        {#if campaign !== undefined}
+          <a class="btn variant-ghost-tertiary text-wrap" href="/campaigns/{campaign.id}">{campaign.name}</a>
+        {/if}
+
+        <!-- Controls -->
+        {#if $currentUser.id === character.creator}
+          <div class="flex flex-wrap mt-4 space-x-3">
+
+            <CircleIconButton
+              on:click={toggleEditMode}
+              icon={editMode ? "i-[material-symbols--cancel]" : "i-[fa--pencil]"}
+              color={editMode ? "variant-ghost-error" : "variant-ghost-secondary"}
+              />
+
+            <!-- cancel edit button -->
+            {#if editMode}
+              <CircleIconButton
+                on:click={saveChanges}
+                icon="i-[material-symbols--save]"
+                color="variant-ghost-success"
+                />
+            {:else}
+              <CircleIconButton
+                on:click={openCharacterNotesDrawer}
+                icon="i-[material-symbols--note]"
+                color="variant-ghost-warning"
+                />
+            {/if}
+          </div>
+        {/if}
       </div>
 
-      <h1 class="h2 my-3 items-center flex">
-        {#if editMode}
-          <input type="text" class="input h2 text-center" bind:value={characterName} on:focusout={characterRename}/>
-        {:else}
-          <span>{characterName}</span>
-          {#if campaign !== undefined}
-            <a class="btn ml-3 variant-ghost-tertiary" href="/campaigns/{campaign.id}">{campaign.name}</a>
-          {/if}
-        {/if}
-      </h1>
-
-      {#if $currentUser.id === character.creator}
-        <div class="flex items-center justify-center mt-4">
-          <button class="btn uppercase {editMode ? "variant-filled-tertiary" : "variant-filled-secondary"}" on:click={toggleEditMode}>{editMode ? "cancel" : "edit"}</button>
-          <!-- cancel edit button -->
-          {#if editMode}
-            <button class="btn uppercase variant-filled-success ml-3" on:click={saveChanges}>save</button>
-          {/if}
-          <button class="btn variant-filled-warning ml-3" on:click={openCharacterNotesDrawer}>NOTES</button>
-        </div>
-      {/if}
 
       <!-- Character Sheet -->
       <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -268,7 +398,7 @@
             <div class="flex flex-wrap justify-center mb-2">
               {#each Object.keys(tabs) as tabName}
               <button
-                class="btn btn-sm {tabName === activeTabName ? "tab-active bg-neutral-900/90" : "bg-neutral-900/50"}"
+                class="btn btn-sm rounded-none {tabName === activeTabName ? "tab-active variant-filled-tertiary" : "variant-ghost-tertiary"}"
                 on:click|preventDefault={() => activeTabName = tabName}
                 >{tabs[tabName].label}</button>
               {/each}

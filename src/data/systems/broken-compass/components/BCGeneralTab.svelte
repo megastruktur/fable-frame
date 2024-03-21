@@ -42,9 +42,11 @@
 </script>
 
 <CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
-  {removable} {editMode}
-  tabName={tab.name}>
+  {removable} {editMode} {tab}>
+
   <h2 class="h2 text-center mb-3">{tab.label}</h2>
+  <hr />
+
   <!-- Draggable section -->
   <div
     class="mt-3"
@@ -55,10 +57,25 @@
       <h3 class="h3 my-2 text-center">Your Luck</h3>
       <hr class="w-full mb-2" />
       <div class="flex items-center mb-3">
-        <FieldRender on:fieldRemove on:fieldUpdate field={luck} {editMode} valueStyle={"gold"} />
+        <FieldRender
+          on:fieldRemove
+          on:fieldUpdate
+          field={luck}
+          {editMode}
+          colorButtons="variant-glass-success"
+          updateWithoutEditMode={true}
+          classes="{!editMode ? "variant-ghost-tertiary" : ""}"
+          valueStyle={"gold"} />
       </div>
       <div class="flex items-center mb-3">
-        <FieldRender on:fieldRemove on:fieldUpdate field={luckCoin} {editMode} valueStyle={"gold"} />
+        <FieldRender
+          on:fieldRemove on:fieldUpdate
+          field={luckCoin}
+          {editMode}
+          colorButtons="variant-glass-success"
+          updateWithoutEditMode={true}
+          classes="{!editMode ? "variant-ghost-tertiary" : ""}"
+          valueStyle={"gold"} />
       </div>
 
       <h3 class="h3 my-2 text-center">Info</h3>
@@ -79,18 +96,18 @@
       <!-- Tags -->
       <h3 class="h3 my-2 text-center">Tags</h3>
       <hr class="w-full mb-2" />
-      <div class="flex items-center my-3">
+      <div class="my-3 space-y-3">
         {#each tags as field(field.id)}
-          <FieldRender on:fieldRemove on:fieldUpdate classes="variant-filled" field={field} {editMode} editable={false} />
+          <FieldRender on:fieldRemove on:fieldUpdate classes="variant-filled-success w-full" field={field} {editMode} editable={false} />
         {/each}
       </div>
 
       <!-- Expertise -->
       <h3 class="h3 my-2 text-center">Expertise</h3>
       <hr class="w-full mb-2" />
-      <div class="flex flex-wrap my-3">
+      <div class="flex flex-wrap my-3 space-y-3">
         {#each expertise as field(field.id)}
-          <FieldRender on:fieldRemove on:fieldUpdate classes="variant-filled" field={field} {editMode} editable={false} />
+          <FieldRender on:fieldRemove on:fieldUpdate classes="variant-filled-secondary" field={field} {editMode} editable={false} />
         {/each}
       </div>
 

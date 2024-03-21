@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { Avatar, type ModalSettings, getModalStore } from "@skeletonlabs/skeleton";
-	import CampaignImageUploadModal from "./CampaignImageUploadModal.svelte";
   import BsPencil from "svelte-icons-pack/bs/BsPencil";
 	import type { CampaignsResponse } from "$lib/pocketbase-types";
 	import { getCampaignImage } from "$models/campaign";
-
-  const Icon = require("svelte-icons-pack").Icon
+  // @ts-ignore
+  import Icon from "svelte-icons-pack/Icon.svelte"
+	import ImageUploadModal from "../ImageUploadModal.svelte";
 
   export let campaign: CampaignsResponse
-
   export let imageUrl: string = getCampaignImage(campaign)
+  export let uploadedImage: File | null = null
 
   const modalStore = getModalStore()
+
 
   async function openModal() {
     
@@ -22,17 +23,13 @@
       // Pass the component registry key as a string:
       component: {
         // Pass a reference to your custom component
-        ref: CampaignImageUploadModal,
-        // Add the component properties as key/value pairs
-        props: {
-          campaign: campaign
-        },
+        ref: ImageUploadModal,
       },
-      response: (r: string) => {
+      response: (image: File) => {
 
-        if (r !== undefined) {
-          console.log(r)
-          imageUrl = r
+        if (image !== undefined) {
+          uploadedImage = image
+          imageUrl = URL.createObjectURL(image)
         }
       },
     };

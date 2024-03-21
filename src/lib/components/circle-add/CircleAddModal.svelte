@@ -27,9 +27,6 @@
   export let compendium: string = "";
   export let compendiumGroup: string = "";
 
-  // Modal parent.
-  export let parent: any;
-
   const modalStore = getModalStore()
 
   let validationFailed: boolean = true

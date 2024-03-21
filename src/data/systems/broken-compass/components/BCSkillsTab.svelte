@@ -9,6 +9,7 @@
   export let fields: Field[]
   export let editMode: boolean = false
   export let activeTabName: string = "skills"
+  export let tab: Field
   
   let action:Field = getFieldByNameFromList(fields, "action")
   let fight:Field = getFieldByNameFromList(fields, "fight")
@@ -39,12 +40,13 @@
 
 <!-- Skills -->
 <CharacterSheetTabWrapper {compactVersion} {matches} {activeTabName}
-  {editMode}
-  tabName="skill">
+  {editMode} {tab}>
 
   <!-- Action -->
-  <div class="mb-3">
-    <h2 class="flex text-3xl justify-center h2">Skills</h2>
+  <h2 class="h2 text-center mb-3">Skills</h2>
+  <hr />
+
+  <div class="mb-3 mt-3">
     <h3 class="h3 bc-field uppercase bg-tertiary-800 flex bg-base-100 p-3 mb-3">
       <DiamondSkill on:fieldUpdate skill={action} {editMode} />
     </h3>

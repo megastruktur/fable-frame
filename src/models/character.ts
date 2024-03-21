@@ -1,14 +1,15 @@
-import { getRpgSystem } from "$models/rpg_system"
+import { getRpgSystem, getRpgSystemImage } from "$models/rpg_system"
 import { pb } from "$lib/pocketbase"
 import type { SystemJSON, Field } from "$lib/types.d"
-import type { CharactersResponse, CharactersRecord } from "$lib/pocketbase-types.d"
+import type { CharactersResponse, CharactersRecord, RpgSystemsResponse } from "$lib/pocketbase-types.d"
 import getStringHash from "$lib/getStringHash"
 import { v4 as uuidv4 } from 'uuid'
 import { createCharacterNotes } from "./character_notes"
 import { getCampaign } from "./campaign"
 
 export async function createCharacter(data: Partial<CharactersRecord>): Promise<CharactersResponse> {
-  return await pb.collection("characters").create(data)
+  const character = await pb.collection("characters").create(data)
+  return await getCharacterWithSystemAndCampaign(character.id)
 }
 
 export async function getCharacter(id: string, queryParams: any = {}): Promise<CharactersResponse> {
@@ -92,6 +93,13 @@ export async function getAllCharacters(queryParams: any = {}): Promise<Character
 export async function getMyCharacters(queryParams: any = {}): Promise<CharactersResponse[]> {
   queryParams.filter = `creator="${pb.authStore.model?.id}"`
   return await pb.collection("characters").getFullList(queryParams)
+}
+
+export async function getMyCharactersWithCampaign(): Promise<CharactersResponse[]> {
+  return await pb.collection("characters").getFullList({
+    expand: "campaign",
+    filter: `creator="${pb.authStore.model?.id}"`
+  })
 }
 
 /**
@@ -291,46 +299,14 @@ export async function getPlayerharacterFromCampaign(campaignId: string, userId: 
   )
 }
 
-// export class Character {
-//   id: string
-//   name: string
-//   rpgSystem: string
-//   campaign?: string
-//   campaignStatus: number
-//   avatar?: string
-//   creator: string
-//   fields: Field[]
-//   hash: string
-//   created: string
-//   updated: string
+export function getBgCharacterImage(character: CharactersResponse, rpgSystem: RpgSystemsResponse): string {
 
-//   constructor(character: CharactersResponse) {
-//     this.id = character?.id
-//     this.name = character?.name
-//     this.rpgSystem = character?.rpgSystem
-//     this.campaign = character?.campaign
-//     this.campaignStatus = character?.campaignStatus
-//     this.avatar = character?.avatar
-//     this.creator = character?.creator
-//     this.fields = character?.fields
-//     this.hash = character?.hash
-//     this.created = character?.created
-//     this.updated = character?.updated
-//   }
+  let image: string = ""
 
-//   getField(fieldId: string): Field | undefined {
-//     return this.fields.find((field: Field) => field.id === fieldId)
-//   }
+  image = getCharacterAvatar(character)
+  if (image === "") {
+    image = getRpgSystemImage(rpgSystem)
+  }
 
-//   setField(field: Field) {
-//     this.fields = this.fields.map((f: Field) => {
-//       if (f.id === f.id) {
-//         return field
-//       }
-//       return f
-//     })
-//   }
-//   removeField(fieldId: string) {
-//     this.fields = this.fields.filter((field: Field) => field.id!== fieldId)
-//   }
-// }
+  return image
+}

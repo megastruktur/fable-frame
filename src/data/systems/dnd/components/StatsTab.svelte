@@ -15,8 +15,7 @@ import FieldRender from "$lib/components/field-renders/FieldRender.svelte";
 </script>
 
 <CharacterSheetTabWrapper {matches} {activeTabName}
-removable={false} {editMode}
-tabName={tab.name}>
+removable={false} {editMode} {tab} >
 
   <h2 class="h2 text-center mb-3">
     <span>{tab.label}</span>

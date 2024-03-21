@@ -3,6 +3,7 @@ import { writable } from "svelte/store"
 import { PUBLIC_POCKETBASE_URL } from '$env/static/public';
 
 export const pb = new Pocketbase(PUBLIC_POCKETBASE_URL);
+pb.autoCancellation(false);
 
 export const currentUser = writable(pb.authStore.model)
 
@@ -28,14 +29,29 @@ pb.beforeSend = function (url, options) {
   if (options.body !== undefined) {
 
     try {
-      const bodyJson = JSON.parse(options.body)
 
-      if (bodyJson && !bodyJson.creator && pb.authStore.model !== null) {
-        bodyJson.creator = pb.authStore.model.id
-        options.body = JSON.stringify(bodyJson)
+      if (options.body instanceof FormData) {
+        if (pb.authStore.model !== null) {
+          options.body.set("creator", pb.authStore.model.id)
+        }
+      }
+      if (typeof options.body === "string") {
+
+        const bodyJson = JSON.parse(options.body)
+  
+        if (bodyJson && !bodyJson.creator && pb.authStore.model !== null) {
+          bodyJson.creator = pb.authStore.model.id
+          options.body = JSON.stringify(bodyJson)
+        }
+      }
+      else {
+        if (options.body !== undefined && pb.authStore.model !== null) {
+          options.body.creator = pb.authStore.model.id
+        }
       }
     } catch (e) {
-      console.log("Not a JSON object")
+      console.log(options.body)
+      console.log("PB parse object error")
     } 
   }
 

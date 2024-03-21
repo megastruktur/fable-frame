@@ -1,24 +1,40 @@
 <script lang="ts">
 	import type { Field } from "$lib/types";
 
+  // @ts-ignore
   import Icon from "svelte-icons-pack/Icon.svelte"
   import BsCircleFill from 'svelte-icons-pack/bs/BsCircleFill';
   import BsCircle from 'svelte-icons-pack/bs/BsCircle';
 
   import { createEventDispatcher } from "svelte"
 	import { onMount } from "svelte";
+	import { Accordion, AccordionItem, getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+  import DescriptionModal from "$lib/components/field-renders/DescriptionModal.svelte"
 
   export let field: Field
   export let classes: string = ""
   export let editable: boolean = true
   export let editMode: boolean = false
   export let labelStyle = ""
-  export let valueStyle = "white"
+  export let valueStyle = "text-white"
+  export let fullEditable: boolean = false
+  export let color: string = ""
+  export let colorEdit: string = ""
+  export let colorButtons: string = "variant-filled-secondary"
+  export let updateWithoutEditMode: boolean = false
+  export let showTitle: boolean = true
+  export let placeholder: string = ""
+  export let placeholderArea: string = ""
+  export let characterId: string = ""
+  export let editableClasses: string = ""
 
   let isMinValue: boolean = false
   let isMaxValue: boolean = false
 
   const dispatch = createEventDispatcher()
+  const modalStore = getModalStore()
+  const editableClassesConst = "border-2 rounded-md border-surface-500 px-3"
+  const editClasses = editableClasses + " " + editableClassesConst
 
   onMount(() => {
     setIsMax()
@@ -27,12 +43,7 @@
 
   function fieldIncrement() {
 
-    const dispatchData = {
-      operation: "increment",
-      field: field
-    }
-
-    const dispatched = dispatch("fieldUpdate", dispatchData, { cancelable: true })
+    const dispatched = fieldUpdate("increment")
 
     if (dispatched) {
 
@@ -56,13 +67,8 @@
   }
 
   function fieldDecrement() {
-    
-    const dispatchData = {
-      operation: "decrement",
-      field: field
-    }
 
-    const dispatched = dispatch("fieldUpdate", dispatchData, { cancelable: true })
+    const dispatched = fieldUpdate("decrement")
 
     if (dispatched) {
 
@@ -108,23 +114,94 @@
     isMaxValue = count === 0;
   }
 
+  function fieldUpdate(operation: string = "") {
+    const dispatchData = {
+      operation: operation,
+      field: field,
+      saveField: updateWithoutEditMode,
+    }
+
+    return dispatch("fieldUpdate", dispatchData, { cancelable: true })
+  }
+
+  function fieldUpdateHandler() {
+    fieldUpdate()
+  }
+
+
+  function openDescriptionModal() {
+
+    if (!editMode && field.description !== undefined) {
+
+      const descriptionModal: ModalSettings = {
+        type: "component",
+        title: "Description",
+        component: {
+          ref: DescriptionModal,
+          props: {
+            description: field.description
+          }
+        }
+      }
+
+      modalStore.trigger(descriptionModal)
+    }
+  }
 </script>
 
-<div class="{classes} flex items-center">
-  {#if !isMinValue && editable && editMode}
-    <button type="button" on:click={fieldDecrement} class="btn-icon btn-icon-sm variant-filled mr-1">-</button>
-  {/if}
-  <p class="flex mr-3 text-xl {labelStyle}">{field.label}</p>
-  <div class="flex">
-    {#each Array(field.value.length) as _, i}
-      {#if field.value.charAt(i) === "+"}
-        <Icon color="{valueStyle}" src={BsCircleFill} />
-      {:else}
-        <Icon color="gray" src={BsCircle} />
+<Accordion
+  regionCaret="{editMode && editable ? "" : "hidden"}"
+  regionControl="hover:!bg-transparent"
+  padding=""
+  class="{classes} relative {!editMode || !editable ? "chip whitespace-normal" : editClasses}">
+  <AccordionItem class="w-full {editMode && editable ? "py-2" : ""}">
+    <svelte:fragment slot="summary">
+
+      {#if !isMinValue && (!editable || !editMode)}
+        <button type="button" on:click|stopPropagation={fieldDecrement}
+          class="h-full rounded-l-sm absolute top-0 left-0 {colorButtons} w-5">-</button>
       {/if}
-    {/each}
-  </div>
-  {#if !isMaxValue && editable && editMode}
-    <button type="button" on:click={fieldIncrement} class="btn-icon btn-icon-sm variant-filled ml-1">+</button>
-  {/if}
-</div>
+
+      {#if !isMaxValue && (!editable || !editMode)}
+        <button type="button" on:click|stopPropagation={fieldIncrement}
+          class="h-full rounded-r-sm absolute top-0 right-0 {colorButtons} w-5">+</button>
+      {/if}
+
+      <div class="flex justify-between items-center w-full px-6">
+        {#if editable && editMode}
+          <input class="input text-center border-b-0" type="text"
+            bind:value={field.label} on:focusout={fieldUpdateHandler}
+            placeholder="{placeholder}"
+            />
+        {:else}
+          <h4 class="h4 text-center">{field.label ?? ""}</h4>
+        {/if}
+        
+        {#if !editMode || !editable}
+          <div class="flex items-center flex-wrap ml-2 text-lg">
+            {#each Array(field.value.length) as _, i}
+              <span class="flex mr-1 {valueStyle}">
+                {#if field.value.charAt(i) === "+"}
+                  <Icon src={BsCircleFill} />
+                {:else}
+                  <Icon src={BsCircle} />
+                {/if}
+              </span>
+            {/each}
+          </div>
+        {/if}
+      </div>
+
+    </svelte:fragment>
+
+    <svelte:fragment slot="content">
+      <div class="blockquote text-left">
+        {#if editable && editMode}
+          <textarea class="textarea resize-none mt-3 mb-3" rows="5" bind:value={field.description} on:focusout={fieldUpdateHandler} placeholder="{placeholderArea}"></textarea>
+        {:else}
+          {field.description}
+        {/if}
+      </div>
+    </svelte:fragment>
+  </AccordionItem>
+</Accordion>

@@ -31,8 +31,12 @@ export async function getActiveRpgSystems(): Promise<RpgSystemsResponse[]> {
 
 export function getRpgSystemImage(rpgSystem: RpgSystemsResponse) {
   if (rpgSystem.image) {
-    return pb.files.getUrl(rpgSystem, rpgSystem.image, { thumb: '100x100' });
+    return pb.files.getUrl(rpgSystem, rpgSystem.image);
   } else {
     return "";
   }
+}
+
+export async function loadRpgSystemData(rpgSystemName: string, datafileName: string) {
+  return (await import(`$data/systems/${rpgSystemName}/data/${datafileName}.json`)).default
 }

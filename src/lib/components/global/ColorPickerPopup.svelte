@@ -2,7 +2,8 @@
 	import { ColorPicker, ColorPickerBg } from "$lib/enums";
 	import { createEventDispatcher } from "svelte";
   
-  const colorsKeys = Object.keys(ColorPicker)
+  type ColorPickerKeys = keyof typeof ColorPickerBg
+  const colorsKeys = Object.keys(ColorPicker) as ColorPickerKeys[]
   
   const dispatch = createEventDispatcher()
 
