@@ -2,8 +2,8 @@
 <script lang="ts">
 	import { getCharacterAvatar, getCharacterTabs, getCharacterWithSystemAndCampaign, updateCharacterWithHash } from "$models/character";
 	import { onDestroy, onMount } from "svelte";
-  import { fieldErrors, headerBanner } from "$lib/stores"
-	import type { Field, FieldError } from "$lib/types";
+  import { characterRoll, fieldErrors, headerBanner } from "$lib/stores"
+	import type { FFRoll, Field, FieldError } from "$lib/types";
 
 	import { type DrawerSettings, ProgressBar, getDrawerStore, getToastStore } from "@skeletonlabs/skeleton";
 	import CharacterAvatar from "$lib/components/characters/CharacterAvatar.svelte";
@@ -15,8 +15,9 @@
 	import { getCampaignImage } from "$models/campaign";
 	import { currentUser } from "$lib/pocketbase";
 	import { addCharacterField, removeCharacterField, updateCharacterField, createCharacterField, updateSaveCharacterField } from "$lib/characterFieldsOperations";
-	import { getRpgSystemImage } from "$models/rpg_system";
+	import { getRpgSystemImage, loadRpgSystemData } from "$models/rpg_system";
 	import CircleIconButton from "../global/CircleIconButton.svelte";
+	import { loadRoller, rollToChatWindow } from "$lib/utils";
 
   const toastStore = getToastStore()
 
@@ -80,6 +81,35 @@
   onMount(() => {
     characterPrepare()
   })
+
+
+
+  const characterRollUnsubscribe = characterRoll.subscribe(async (ffRoll: FFRoll) => {
+
+    // Import default function from data/systemms/SYSTEMNAME/roller.ts if it exists
+    if (rpgSystem !== undefined && (ffRoll.field !== undefined || ffRoll.roll !== undefined)) {
+
+      try {
+        const systemRoller = await loadRoller(rpgSystem.identifier)
+        if (systemRoller !== undefined) {
+          const rollResult = systemRoller(ffRoll, character, toastStore)
+
+          if (campaign !== undefined && campaign.id !== undefined) {
+            rollToChatWindow(ffRoll, rollResult, campaign.id, character.id)
+          }
+          
+          characterRoll.reset()
+        }
+
+      }
+      catch (error) {
+        characterRoll.reset()
+        console.log(error)
+      }
+
+    }
+  })
+
 
   function characterPrepare() {
     console.log("-------- Character --------")
@@ -193,6 +223,7 @@
   const matches = createMediaStore(query) //The type of the store will completely repeat the query
 
   onDestroy(() => {
+    characterRollUnsubscribe()
     matches.destroy()
     fieldErrors.reset()
   }) //Stop events for calculation

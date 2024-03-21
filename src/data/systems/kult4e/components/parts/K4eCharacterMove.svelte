@@ -1,12 +1,18 @@
 <script lang="ts">
-	import type { K4ePlayerMove } from "$lib/types";
+	import FieldRollButton from "$lib/components/global/FieldRollButton.svelte";
+  import type { K4ePlayerMove } from "$lib/types";
 	import K4eRollResult from "./K4eRollResult.svelte";
+  import { v4 as uuidv4 } from 'uuid'
 
   export let move: "avoidHarm" | "endureInjury" | "keepItTogether" | "actUnderPressure" | "engageInCombat" | "influenceOther" | "readAPerson" | "observeASituation" | "investigate" | "seeThroughTheIllusion"
 
   const moves: K4ePlayerMove[] = [
     // Avoid Harm
     {
+      id: uuidv4(),
+      weight: 1,
+      value: "",
+      type: "kult4e-move",
       name: "avoidHarm",
       label: "Avoid Harm",
       description: "When you dodge, parry, or block Harm, roll <b>+Reflexes</b>",
@@ -37,6 +43,10 @@
     },
     // Endure Injury
     {
+      id: uuidv4(),
+      weight: 1,
+      value: "",
+      type: "kult4e-move",
       name: "endureInjury",
       label: "Endure Injury",
       description: "When enduring an injury, roll <b>+Fortitude -Harm</b>. If you are wearing armor, add its rating to the roll:",
@@ -72,6 +82,10 @@
     },
     // Keep It Together
     {
+      id: uuidv4(),
+      weight: 1,
+      value: "",
+      type: "kult4e-move",
       name: "keepItTogether",
       label: "Keep it Together",
       description: "When you exercise self-control to keep from succumbing to stress, traumatic experiences, psychic influence, or supernatural forces, roll <b>+Willpower</b>:",
@@ -108,6 +122,10 @@
     },
     // Act Under Pressure
     {
+      id: uuidv4(),
+      weight: 1,
+      value: "",
+      type: "kult4e-move",
       name: "actUnderPressure",
       label: "Act Under Pressure",
       description: "When you do something risky, under time pressure, or try to avoid danger, the GM will explain what the consequence for failure is and you roll <b>+Coolness</b>:",
@@ -136,6 +154,10 @@
     },
     // Engage in Combat
     {
+      id: uuidv4(),
+      weight: 1,
+      value: "",
+      type: "kult4e-move",
       name: "engageInCombat",
       label: "Engage in Combat",
       description: "When you engage an able opponent in combat, explain how and roll <b>+Violence</b>:",
@@ -170,6 +192,10 @@
     },
     // Influence Other
     {
+      id: uuidv4(),
+      weight: 1,
+      value: "",
+      type: "kult4e-move",
       name: "influenceOthers",
       label: "Influence Others",
       description: "When you influence an NPC through negotiation, argument, or from a position of power, roll <b>+Charisma</b>:",
@@ -196,6 +222,10 @@
     },
     // Read a Person
     {
+      id: uuidv4(),
+      weight: 1,
+      value: "",
+      type: "kult4e-move",
       name: "readAPerson",
       label: "Read a Person",
       description: "When you read a person, roll +Intuition. On a success, you an <b>ask the GM/player questions about their character any time during this scene, while in conversation with their character</b>:",
@@ -217,6 +247,10 @@
     },
     // Observe a Situation
     {
+      id: uuidv4(),
+      weight: 1,
+      value: "",
+      type: "kult4e-move",
       name: "observeASituation",
       label: "Observe a Situation",
       description: "When you observe a situation, roll <b>+Perception</b>. On a success you may ask the GM questions about the current situation. <b>When you act on these answers, gain +1 to your rolls</b>:",
@@ -243,10 +277,14 @@
     },
     // Investigate
     {
+      id: uuidv4(),
+      weight: 1,
+      value: "",
+      type: "kult4e-move",
       name: "investigate",
       label: "Investigate",
       description: "When you investigate something, roll <b>+Reason</b>. On a success, you uncover all direct leads and may ask questions to get additional information:",
-      attribute: "perception",
+      attribute: "reasoning",
       results: [
         {
           type: "success",
@@ -273,6 +311,10 @@
     },
     // See Through the Illusion
     {
+      id: uuidv4(),
+      weight: 1,
+      value: "",
+      type: "kult4e-move",
       name: "seeThroughTheIllusion",
       label: "See Through the Illusion",
       description: "When you suffer shock, injuries, or distort your perception through drugs or rituals, roll <b>+Soul</b> to See Through the Illusion:",
@@ -307,7 +349,7 @@
   {#if playerMove !== undefined}
 
     <h2 class="h2 mb-3">{playerMove.label}</h2>
-    <div class="blockquote">{@html playerMove.description}</div>
+    <div class="blockquote">{@html playerMove.description} <FieldRollButton systemName="kult4e" field={playerMove} /></div>
 
     {#if playerMove.results !== undefined}
       {#each playerMove.results as rollResult(rollResult.type)}

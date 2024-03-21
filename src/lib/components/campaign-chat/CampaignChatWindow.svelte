@@ -11,6 +11,7 @@
 	import { getCharacter, getCharacterAvatarThumb } from "$models/character";
 	import type { UnsubscribeFunc } from "pocketbase";
 	import CircleIconButton from "../global/CircleIconButton.svelte";
+	import { sendCampaignChatMessage } from "$lib/utils";
 
 
   export let campaign: CampaignsResponse
@@ -59,11 +60,7 @@
   async function sendMessage(messageString: string = "") {
 
     if (messageString !== "") {
-      const campaignChatMessage = await createChatMessage({
-        campaign: campaign.id,
-        character: myCharacter?.id || "",
-        message: messageString
-      })
+      await sendCampaignChatMessage(messageString, campaign.id, myCharacter?.id)
       chatMessage = ""
     }
   }

@@ -1,5 +1,5 @@
 import { writable } from "svelte/store"
-import type { FieldError } from "./types";
+import type { FFRoll, Field, FieldError } from "./types";
 
 /**
  * Edit errors store. While it is not empty - won't allow to save.
@@ -37,3 +37,18 @@ export const fieldErrors = createEditErrorsStore([]);
 export const headerBanner = writable("");
 
 export const pageName = writable("");
+
+function createCharacterRollStore(initial: FFRoll) {
+
+  const { subscribe, set, update } = writable<FFRoll>(initial);
+
+  return {
+    subscribe,
+    set,
+    update,
+    reset: () => set({type: "general"})
+  };
+
+}
+
+export const characterRoll = createCharacterRollStore({type: "general"});

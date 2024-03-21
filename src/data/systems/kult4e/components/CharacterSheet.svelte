@@ -17,8 +17,8 @@
   export let character: CharactersResponse
 
   const tabWidth: string = "md:w-96 w-full"
+  
 </script>
-
 <!-- General Tab -->
 <!-- Archetype(tag) Occupation(tag), Appearance(text) -->
 <K4eGeneralTab

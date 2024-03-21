@@ -79,10 +79,22 @@ export type K4eRollResult = {
 }
 
 export type K4ePlayerMove = {
+  id: string
+  weight: number
+  type: string
+  value: string
   name: string
   label: string
   description: string
   attribute: "willpower" | "reflexes" | "fortitude" | "intuition" | "reasoning" | "perception" | "violence" | "coolness" | "charisma" | "soul"
   modificators?: string[]
   results?: K4eRollResult[]
+}
+
+
+export type FFRoll = {
+  systemName?: string
+  field?: Field // the field you want to roll. Optional.
+  type: "field" | "general"
+  roll?: string // the roll you want to perform. E.g. 2d6 + 4
 }

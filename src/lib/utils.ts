@@ -1,3 +1,8 @@
+import type { DiceRoll } from "@dice-roller/rpg-dice-roller";
+import type { DieRollChat, FFRoll } from "./types";
+import { v4 as uuidv4 } from 'uuid'
+import { createChatMessage } from "$models/campaign_chat";
+
 export function getImageUrlsFromText(text: string): (string | undefined)[] {
   const matches = text.match(/https?:\/\/\S+/g) || [];
 
@@ -108,4 +113,32 @@ export function truncateText(text: string, length: number): string {
   else {
     return text
   }
+}
+
+export async function loadRoller(rpgSystemName: string) {
+  return (await import(`$data/systems/${rpgSystemName}/roller.ts`)).default
+}
+
+export async function rollToChatWindow(ffRoll: FFRoll, roll, campaignId: string, characterId: string = "") {
+  
+  let message: string = ""
+  console.log(roll.output)
+
+  if (ffRoll.field !== undefined && ffRoll.field.label !== undefined) {
+    message = ffRoll.field.label + ": " + roll.output
+  }
+  else {
+    message = roll.output
+  }
+  message = `<b>${message}</b>`
+  sendCampaignChatMessage(message, campaignId, characterId)
+}
+
+export async function sendCampaignChatMessage(message: string, campaignId: string, characterId: string = "") {
+
+  return await createChatMessage({
+    campaign: campaignId,
+    character: characterId,
+    message: message
+  })
 }
