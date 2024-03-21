@@ -12,17 +12,14 @@ This is currently a **Work In Progress**. If you are interested - please follow 
 #### Characters List
 ![Example Screenshot](screenshots/CharactersList.png)
 
+#### Kult4e Character Sheet
+![Example Screenshot](screenshots/Kult4eCharSheet.png)
+
+#### Kult4e Character Edit
+![Example Screenshot](screenshots/Kult4ECharEdit.png)
+
 #### Broken Compass Character Sheet (WIP)
 ![Example Screenshot](screenshots/BCCharSheetWIP.png)
-
-#### Avatar Edit, character rename and delete:
-![Example Screenshot](screenshots/CharacterAvatar.png)
-
-#### Add Fields modal WIP
-![Example Screenshot](screenshots/AddFieldsModal.png)
-
-#### Counter Num field type example
-![Example Screenshot](screenshots/CounterNumField.png)
 
 ## Tools and Frameworks
 - Pocketbase (https://pocketbase.io)
