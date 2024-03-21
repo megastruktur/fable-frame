@@ -9,6 +9,8 @@ jobs:
   push_to_registry:
     name: Push Docker image to Dockerhub
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_POCKETBASE_URL: ${{ vars.PUBLIC_POCKETBASE_URL }}
     steps:
       - uses: actions/checkout@v3
       - name: Log in to Dockerhub
@@ -26,6 +28,8 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          build-args: |
+            "PUBLIC_POCKETBASE_URL=${{ vars.PUBLIC_POCKETBASE_URL }}"
           push: true
-          tags: ${{ steps.meta.outputs.tags }},latest
+          tags: ${{ steps.meta.outputs.tags }}, ${{ secrets.DOCKERHUB_USERNAME }}/fable-frame:latest
           labels: ${{ steps.meta.outputs.labels }}
